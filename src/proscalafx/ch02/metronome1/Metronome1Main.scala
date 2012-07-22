@@ -50,31 +50,23 @@ object Metronome1Main extends JFXApp {
           content = List(
             new Button {
               text = "Start"
-              onAction = (ae: ActionEvent) => {
-                anim.playFromStart
-              }
-              disable <== anim.status.isNotEqualTo(Status.STOPPED)
+              onAction = (ae: ActionEvent) => anim.playFromStart
+              disable <== (anim.status =!= Status.STOPPED)
             },
             new Button {
               text = "Pause"
-              onAction = (ae: ActionEvent) => {
-                anim.pause
-              }
-              disable <== anim.status.isNotEqualTo(Status.RUNNING)
+              onAction = (ae: ActionEvent) => anim.pause
+              disable <== (anim.status =!= Status.RUNNING)
             },
             new Button {
               text = "Resume"
-              onAction = (ae: ActionEvent) => {
-                anim.play
-              }
-              disable <== anim.status.isNotEqualTo(Status.PAUSED)
+              onAction = (ae: ActionEvent) => anim.play
+              disable <== (anim.status =!= Status.PAUSED)
             },
             new Button {
               text = "Stop"
-              onAction = (ae: ActionEvent) => {
-                anim.stop
-              }
-              disable <== anim.status.isEqualTo(Status.STOPPED)
+              onAction = (ae: ActionEvent) => anim.stop
+              disable <== (anim.status === Status.STOPPED)
             })
         })
     }
