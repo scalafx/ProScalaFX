@@ -1,21 +1,19 @@
 package proscalafx.ch02.metronome1
 
+import javafx.animation.Animation.Status
+import scalafx.Includes.actionEventClosureWrapper
 import scalafx.Includes._
 import scalafx.animation.Interpolator
-import javafx.animation.Animation.Status
-import scalafx.animation.KeyFrame
-import scalafx.animation.KeyValue
 import scalafx.animation.Timeline
 import scalafx.application.JFXApp
 import scalafx.beans.property.DoubleProperty
+import scalafx.event.ActionEvent
+import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
+import scalafx.scene.paint.Color
 import scalafx.scene.shape.Line
 import scalafx.scene.Scene
-import scalafx.scene.control.Button
-import scalafx.event._
 import scalafx.stage.Stage
-
-import scalafx.scene.paint.Color
 
 object Metronome1Main extends JFXApp {
 
