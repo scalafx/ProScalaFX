@@ -1,11 +1,12 @@
 package proscalafx.ch02.zenpong
 
+import javafx.animation.Animation.Status
+import javafx.scene.input.KeyCode
 import javafx.scene.{ input => jfxsi }
+import javafx.{ animation => jfxa }
 import javafx.{ event => jfxe }
 import scalafx.Includes._
-import scalafx.Includes.double2DoubleBinding
-import scalafx.Includes.integer2IntegerBinding
-import scalafx.Includes.jfxDuration2sfx
+import scalafx.animation.Animation
 import scalafx.animation.KeyFrame
 import scalafx.animation.Timeline
 import scalafx.application.JFXApp
@@ -18,6 +19,7 @@ import scalafx.scene.input.KeyEvent
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.paint.LinearGradient.sfxLinearGradient2jfx
 import scalafx.scene.paint.Color
+import scalafx.scene.paint.LinearGradient
 import scalafx.scene.shape.Rectangle.sfxRectangle2jfx
 import scalafx.scene.shape.Circle
 import scalafx.scene.shape.Rectangle
@@ -26,10 +28,8 @@ import scalafx.scene.Group
 import scalafx.scene.Scene
 import scalafx.stage.Stage
 import scalafx.util.Duration
-import scalafx.event.EventHandler
-import javafx.scene.input.KeyCode
-import scalafx.animation.Animation
-import javafx.animation.Animation.Status
+import scalafx.scene.paint.Stop
+import scalafx.scene.paint.CycleMethod
 
 object ZenPongMain extends JFXApp {
 
@@ -68,12 +68,6 @@ object ZenPongMain extends JFXApp {
     radius = 5.0
     fill = Color.WHITE
   }
-
-  /**
-   * The Group containing all of the walls, paddles, and ball.  This also allows
-   * us to requestFocus for KeyEvents on the Group
-   */
-  var pongComponents: Group = _
 
   /**
    * The left and right paddles
@@ -145,22 +139,43 @@ object ZenPongMain extends JFXApp {
   /**
    * The animation of the ball
    */
+  val keyFrame = KeyFrame(10 ms, onFinished = { event: jfxe.ActionEvent =>
+    checkForCollision
+    val horzPixels = if (movingRight) 1 else -1
+    val vertPixels = if (movingDown) 1 else -1
+    centerX() = centerX.value + horzPixels
+    centerY() = centerY.value + vertPixels
+  })
   val pongAnimation = new Timeline {
-    keyFrames = Seq(
-      KeyFrame(Duration(10.0) //          ,
-      //        onFinished: (ae: ActionEvent) => {})
-      ))
+    keyFrames = Seq(keyFrame)
   }
 
   var startButton: Button = new Button {
-    layoutX = 225
-    layoutY = 470
+    layoutX() = 225
+    layoutY() = 470
     text = "Start!"
     onAction = {
-      startVisible.set(false)
+      startVisible() = false
       pongAnimation.playFromStart
       pongComponents.requestFocus
     }
+  }
+
+  /**
+   * The Group containing all of the walls, paddles, and ball.  This also allows
+   * us to requestFocus for KeyEvents on the Group
+   */
+  var pongComponents: Group = new Group {
+    focusTraversable = true
+    children = List(
+      ball,
+      topWall,
+      leftWall,
+      rightWall,
+      bottomWall,
+      leftPaddle,
+      rightPaddle,
+      startButton)
   }
 
   /**
@@ -177,11 +192,11 @@ object ZenPongMain extends JFXApp {
    * Sets the initial starting positions of the ball and paddles
    */
   def initialize {
-    centerX <== 250
-    centerY <== 250
-    leftPaddleY <== 235.0
-    rightPaddleY <== 235
-    startVisible.set(true)
+    centerX() = 250
+    centerY() = 250
+    leftPaddleY() = 235.0
+    rightPaddleY() = 235
+    startVisible() = true
     pongComponents.requestFocus
   }
 
@@ -206,40 +221,36 @@ object ZenPongMain extends JFXApp {
 
   val keyEventHandler = (k: KeyEvent) => {
     if (k.code == KeyCode.SPACE && pongAnimation.status == Status.STOPPED) {
-      rightPaddleY.setValue(rightPaddleY.value - 6);
+      rightPaddleY() = rightPaddleY.value - 6
     } else if (k.code == KeyCode.L &&
       !rightPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
-      rightPaddleY.setValue(rightPaddleY.value - 6);
+      rightPaddleY() = rightPaddleY.value - 6
     } else if (k.code == KeyCode.COMMA &&
       !rightPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
-      rightPaddleY.setValue(rightPaddleY.value + 6);
+      rightPaddleY() = rightPaddleY.value + 6
     } else if (k.code == KeyCode.A &&
       !leftPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
-      leftPaddleY.setValue(leftPaddleY.value - 6);
+      leftPaddleY() = leftPaddleY.value - 6
     } else if (k.code == KeyCode.Z &&
       !leftPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
-      leftPaddleY.setValue(leftPaddleY.value + 6);
+      leftPaddleY() = leftPaddleY.value + 6
     }
   }
 
   stage = new Stage {
     width = 500
-    height = 500
+    height = 600
     title = "ZenPong Example"
     scene = new Scene {
-      // def apply(startX: Double, startY: Double, endX: Double, endY: Double, proportional: Boolean, cycleMethod: CycleMethod, stops: Stop*) {
-      //      fill = LinearGradient(0.0, 0.0, 0.0, 1.0, true, CycleMethod.NO_CYCLE,
-      //          Stop(0.0, Color.BLACK), Stop(0.0, Color.GRAY))
-      content = List(
-        ball,
-        topWall,
-        leftWall,
-        rightWall,
-        bottomWall,
-        leftPaddle,
-        rightPaddle,
-        startButton)
-//            onKeyPressed = keyEventHandler
+      fill = LinearGradient(
+        startX = 0.0,
+        startY = 0.0,
+        endX = 0.0,
+        endY = 1.0,
+        proportional = true,
+        cycleMethod = CycleMethod.NO_CYCLE,
+        stops = List(Stop(0.0, Color.BLACK), Stop(0.0, Color.GRAY)))
+      content = pongComponents
     }
   }
 
