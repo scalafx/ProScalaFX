@@ -148,16 +148,35 @@ object ZenPongMain extends JFXApp {
   })
   val pongAnimation = new Timeline {
     keyFrames = Seq(keyFrame)
+    cycleCount = Timeline.INDEFINITE
   }
 
   var startButton: Button = new Button {
     layoutX() = 225
     layoutY() = 470
     text = "Start!"
-    onAction = {
+    onAction = { event: jfxe.ActionEvent =>
       startVisible() = false
       pongAnimation.playFromStart
       pongComponents.requestFocus
+    }
+  }
+
+  val keyEventHandler = (k: KeyEvent) => {
+    if (k.code == KeyCode.SPACE && pongAnimation.status == Status.STOPPED) {
+      rightPaddleY() = rightPaddleY.value - 6
+    } else if (k.code == KeyCode.L &&
+      !rightPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
+      rightPaddleY() = rightPaddleY.value - 6
+    } else if (k.code == KeyCode.COMMA &&
+      !rightPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
+      rightPaddleY() = rightPaddleY.value + 6
+    } else if (k.code == KeyCode.A &&
+      !leftPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
+      leftPaddleY() = leftPaddleY.value - 6
+    } else if (k.code == KeyCode.Z &&
+      !leftPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
+      leftPaddleY() = leftPaddleY.value + 6
     }
   }
 
@@ -176,6 +195,7 @@ object ZenPongMain extends JFXApp {
       leftPaddle,
       rightPaddle,
       startButton)
+    //      onKeyPressed = keyEventHandler
   }
 
   /**
@@ -219,29 +239,9 @@ object ZenPongMain extends JFXApp {
     }
   }
 
-  val keyEventHandler = (k: KeyEvent) => {
-    if (k.code == KeyCode.SPACE && pongAnimation.status == Status.STOPPED) {
-      rightPaddleY() = rightPaddleY.value - 6
-    } else if (k.code == KeyCode.L &&
-      !rightPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
-      rightPaddleY() = rightPaddleY.value - 6
-    } else if (k.code == KeyCode.COMMA &&
-      !rightPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
-      rightPaddleY() = rightPaddleY.value + 6
-    } else if (k.code == KeyCode.A &&
-      !leftPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
-      leftPaddleY() = leftPaddleY.value - 6
-    } else if (k.code == KeyCode.Z &&
-      !leftPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
-      leftPaddleY() = leftPaddleY.value + 6
-    }
-  }
-
   stage = new Stage {
-    width = 500
-    height = 600
     title = "ZenPong Example"
-    scene = new Scene {
+    scene = new Scene(500, 500) {
       fill = LinearGradient(
         startX = 0.0,
         startY = 0.0,
@@ -253,5 +253,13 @@ object ZenPongMain extends JFXApp {
       content = pongComponents
     }
   }
+
+  ball.centerX <== centerX
+  ball.centerY <== centerY
+  leftPaddle.translateY <== leftPaddleY
+  rightPaddle.translateY <== rightPaddleY
+  startButton.visible <== startVisible
+
+  initialize
 
 }
