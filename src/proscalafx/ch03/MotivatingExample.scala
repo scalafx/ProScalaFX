@@ -1,12 +1,8 @@
 package proscalafx.ch03
 
-//import scalafx.beans.InvalidationListener
-import scalafx.beans.Observable
-import scalafx.beans.property.IntegerProperty
-//import scalafx.beans.property.SimpleIntegerProperty
-//import scalafx.beans.value.ChangeListener
-import scalafx.beans.value.ObservableValue
+import javafx.{ beans => jfxb }
 import scalafx.Includes._
+import scalafx.beans.property.IntegerProperty
 
 object MotivatingExample extends App {
 
@@ -22,8 +18,11 @@ object MotivatingExample extends App {
 
   def addAndRemoveInvalidationListener {
     println
-    val invalidationListener = (observable: Observable) => println("The observable has been invalidated: " + observable + ".")
-    intProperty.onInvalidate(invalidationListener)
+    // IMPLEMENTATION NOTE: It is necessary explicit the closure below as  
+    //JavaFX's InvalidationListener to allow its posterior remotion 
+    val invalidationListener: jfxb.InvalidationListener =
+      (observable: jfxb.Observable) => println("The observable has been invalidated: " + observable + ".")
+    intProperty.addListener(invalidationListener)
     println("Added invalidation listener.")
 
     println("Calling intProperty.set(2048).")
@@ -32,26 +31,48 @@ object MotivatingExample extends App {
     println("Calling intProperty.setValue(3072).")
     intProperty() = Integer.valueOf(3072)
 
-    System.err.println("SCALAFX LIMITATION: As it is configurated now, is not possible remove a function as invalidation listener")
+    intProperty.delegate.removeListener(invalidationListener)
+    System.out.println("Removed invalidation listener.")
 
-    //intProperty.delegate.removeListener(invalidationListener)         
-    //System.out.println("Removed invalidation listener.");     
-
-//    println("Calling intProperty.set(4096).")
-//    intProperty() = 4096
+    println("Calling intProperty.set(4096).")
+    intProperty() = 4096
   }
-  
+
   def addAndRemoveChangeListener {
     println
-    val changeListener = (observable: IntegerProperty, oldValue: Int, newValue: Any) => {
+    val changeListener = (observable: IntegerProperty, oldValue: Int, newValue: Int) => {
       println("The observableValue has changed: oldValue = " + oldValue + ", newValue = " + newValue)
     }
-    
-//    intProperty.onChange(changeListener)
+
+    //    intProperty.onChange(changeListener)
     println("Added change listener.")
+  }
+
+  def bindAndUnbindOnePropertyToAnother {
+    println
+    val otherProperty = IntegerProperty(0)
+    println("otherProperty.get = " + otherProperty.get)
+
+    println("Binding otherProperty to intProperty.")
+    otherProperty <== intProperty
+    println("otherProperty.get = " + otherProperty.get)
+
+    println("Calling intProperty.set(7168).")
+    intProperty() = 7168
+    println("otherProperty.get = " + otherProperty.get)
+
+    println("Unbinding otherProperty from intProperty.")
+    otherProperty.unbind
+    println("otherProperty.get = " + otherProperty.get)
+
+    println("Calling intProperty.set(8192).")
+    intProperty() = 8192
+    println("otherProperty.get = " + otherProperty.get);
   }
 
   createProperty
   addAndRemoveInvalidationListener
+  //  addAndRemoveChangeListener
+  bindAndUnbindOnePropertyToAnother
 
 }
