@@ -1,6 +1,7 @@
 package proscalafx.ch03
 
-import javafx.{ beans => jfxb }
+import javafx.{beans => jfxb}
+import jfxb.{value => jfxbv}
 import scalafx.Includes._
 import scalafx.beans.property.IntegerProperty
 
@@ -40,12 +41,22 @@ object MotivatingExample extends App {
 
   def addAndRemoveChangeListener {
     println
-    val changeListener = (observable: IntegerProperty, oldValue: Int, newValue: Int) => {
+    // IMPLEMENTATION NOTE: It is necessary explicit the closure below as  
+    //JavaFX's ChangeListener to allow its posterior remotion 
+    val changeListener: jfxbv.ChangeListener[_ >: Number] = (obs: jfxbv.ObservableValue[_ <: Number], oldValue: Number, newValue: Number) =>
       println("The observableValue has changed: oldValue = " + oldValue + ", newValue = " + newValue)
-    }
 
-    //    intProperty.onChange(changeListener)
+    intProperty.addListener(changeListener)
     println("Added change listener.")
+
+    println("Calling intProperty.set(5120).")
+    intProperty() = 5120
+
+    intProperty.removeListener(changeListener)
+    println("Removed change listener.")
+
+    println("Calling intProperty.set(6144).")
+    intProperty() = 6144
   }
 
   def bindAndUnbindOnePropertyToAnother {
@@ -72,7 +83,7 @@ object MotivatingExample extends App {
 
   createProperty
   addAndRemoveInvalidationListener
-  //  addAndRemoveChangeListener
+  addAndRemoveChangeListener
   bindAndUnbindOnePropertyToAnother
 
 }
