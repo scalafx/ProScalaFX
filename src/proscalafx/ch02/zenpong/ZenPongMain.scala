@@ -2,42 +2,34 @@ package proscalafx.ch02.zenpong
 
 import javafx.animation.Animation.Status
 import javafx.scene.input.KeyCode
-import javafx.scene.{ input => jfxsi }
-import javafx.{ animation => jfxa }
-import javafx.{ event => jfxe }
+import javafx.{event => jfxe}
 import scalafx.Includes._
-import scalafx.animation.Animation
 import scalafx.animation.KeyFrame
 import scalafx.animation.Timeline
 import scalafx.application.JFXApp
-import scalafx.beans.property.BooleanProperty.fromBoolean
-import scalafx.beans.property.BooleanProperty.sfxBooleanProperty2jfx
 import scalafx.beans.property.BooleanProperty
 import scalafx.beans.property.DoubleProperty
 import scalafx.scene.control.Button
 import scalafx.scene.input.KeyEvent
 import scalafx.scene.input.MouseEvent
-import scalafx.scene.paint.LinearGradient.sfxLinearGradient2jfx
 import scalafx.scene.paint.Color
+import scalafx.scene.paint.CycleMethod
 import scalafx.scene.paint.LinearGradient
-import scalafx.scene.shape.Rectangle.sfxRectangle2jfx
+import scalafx.scene.paint.Stop
 import scalafx.scene.shape.Circle
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.Cursor
 import scalafx.scene.Group
 import scalafx.scene.Scene
 import scalafx.stage.Stage
-import scalafx.util.Duration
-import scalafx.scene.paint.Stop
-import scalafx.scene.paint.CycleMethod
 
 object ZenPongMain extends JFXApp {
 
   /**
    * The center points of the moving ball
    */
-  val centerX = new DoubleProperty
-  val centerY = new DoubleProperty
+  val centerBallX = new DoubleProperty
+  val centerBallY = new DoubleProperty
 
   /**
    * The Y coordinate of the left paddle
@@ -56,6 +48,16 @@ object ZenPongMain extends JFXApp {
   var rightPaddleDragAnchorY: Double = _
 
   /**
+   * Controls whether the ball is moving right
+   */
+  var movingRight = true
+
+  /**
+   * Controls whether the ball is moving down
+   */
+  var movingDown = true
+
+  /**
    * The initial translateY property for the left and right paddles
    */
   var initLeftPaddleTranslateY: Double = _
@@ -64,67 +66,71 @@ object ZenPongMain extends JFXApp {
   /**
    * The moving ball
    */
-  var ball: Circle = new Circle {
+  val ball = new Circle {
     radius = 5.0
     fill = Color.WHITE
+    centerX <== centerBallX
+    centerY <== centerBallY
   }
 
   /**
    * The left and right paddles
    */
-  var leftPaddle: Rectangle = new Rectangle {
+  val leftPaddle: Rectangle = new Rectangle {
     x = 20
     width = 10
     height = 30
     fill = Color.LIGHTBLUE
     cursor = Cursor.HAND
+    translateY <== leftPaddleY
     onMousePressed = (me: MouseEvent) => {
       initLeftPaddleTranslateY = leftPaddle.translateY.get
       leftPaddleDragAnchorY = me.sceneY
     }
     onMouseDragged = (me: MouseEvent) => {
       val dragY = me.sceneY - leftPaddleDragAnchorY
-      leftPaddleY.setValue(initLeftPaddleTranslateY + dragY);
+      leftPaddleY() = initLeftPaddleTranslateY + dragY
     }
   }
-  var rightPaddle: Rectangle = new Rectangle {
+  val rightPaddle: Rectangle = new Rectangle {
     x = 470
     width = 10
     height = 30
     fill = Color.LIGHTBLUE
     cursor = Cursor.HAND
+    translateY <== rightPaddleY
     onMousePressed = (me: MouseEvent) => {
       initRightPaddleTranslateY = rightPaddle.getTranslateY
       rightPaddleDragAnchorY = me.getSceneY
     }
     onMouseDragged = (me: MouseEvent) => {
       val dragY = me.sceneY - rightPaddleDragAnchorY
-      rightPaddleY.setValue(initRightPaddleTranslateY + dragY)
+      rightPaddleY() = initRightPaddleTranslateY + dragY
     }
   }
 
   /**
    * The walls
    */
-  var topWall: Rectangle = new Rectangle {
+  val topWall = new Rectangle {
     x = 0
     y = 0
     width = 500
     height = 1
   }
-  var rightWall: Rectangle = new Rectangle {
+  val rightWall = new Rectangle {
     x = 500
     y = 0
     width = 1
     height = 500
   }
-  var leftWall: Rectangle = new Rectangle {
+  val leftWall = new Rectangle {
     x = 0
     y = 0
     width = 1
     height = 500
   }
-  var bottomWall: Rectangle = new Rectangle {
+  val bottomWall = new Rectangle {
     x = 0
     y = 500
     width = 500
@@ -143,18 +149,19 @@ object ZenPongMain extends JFXApp {
     checkForCollision
     val horzPixels = if (movingRight) 1 else -1
     val vertPixels = if (movingDown) 1 else -1
-    centerX() = centerX.value + horzPixels
-    centerY() = centerY.value + vertPixels
+    centerBallX() = centerBallX.value + horzPixels
+    centerBallY() = centerBallY.value + vertPixels
   })
   val pongAnimation = new Timeline {
     keyFrames = Seq(keyFrame)
     cycleCount = Timeline.INDEFINITE
   }
 
-  var startButton: Button = new Button {
+  val startButton = new Button {
     layoutX() = 225
     layoutY() = 470
     text = "Start!"
+    visible <== startVisible
     onAction = { event: jfxe.ActionEvent =>
       startVisible() = false
       pongAnimation.playFromStart
@@ -162,26 +169,8 @@ object ZenPongMain extends JFXApp {
     }
   }
 
-  val keyEventHandler = (k: KeyEvent) => {
-    if (k.code == KeyCode.SPACE && pongAnimation.status == Status.STOPPED) {
-      rightPaddleY() = rightPaddleY.value - 6
-    } else if (k.code == KeyCode.L &&
-      !rightPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
-      rightPaddleY() = rightPaddleY.value - 6
-    } else if (k.code == KeyCode.COMMA &&
-      !rightPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
-      rightPaddleY() = rightPaddleY.value + 6
-    } else if (k.code == KeyCode.A &&
-      !leftPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
-      leftPaddleY() = leftPaddleY.value - 6
-    } else if (k.code == KeyCode.Z &&
-      !leftPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
-      leftPaddleY() = leftPaddleY.value + 6
-    }
-  }
-
   /**
-   * The Group containing all of the walls, paddles, and ball.  This also allows
+   * The Group containing all of the walls, paddles, and ball. This also allows
    * us to requestFocus for KeyEvents on the Group
    */
   var pongComponents: Group = new Group {
@@ -195,25 +184,31 @@ object ZenPongMain extends JFXApp {
       leftPaddle,
       rightPaddle,
       startButton)
-    //      onKeyPressed = keyEventHandler
+    onKeyPressed = (k: KeyEvent) => {
+      if (k.code == KeyCode.SPACE && pongAnimation.status == Status.STOPPED) {
+        rightPaddleY() = rightPaddleY.value - 6
+      } else if (k.code == KeyCode.L &&
+        !rightPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
+        rightPaddleY() = rightPaddleY.value - 6
+      } else if (k.code == KeyCode.COMMA &&
+        !rightPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
+        rightPaddleY() = rightPaddleY.value + 6
+      } else if (k.code == KeyCode.A &&
+        !leftPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
+        leftPaddleY() = leftPaddleY.value - 6
+      } else if (k.code == KeyCode.Z &&
+        !leftPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
+        leftPaddleY() = leftPaddleY.value + 6
+      }
+    }
   }
-
-  /**
-   * Controls whether the ball is moving right
-   */
-  var movingRight = true
-
-  /**
-   * Controls whether the ball is moving down
-   */
-  var movingDown = true
 
   /**
    * Sets the initial starting positions of the ball and paddles
    */
   def initialize {
-    centerX() = 250
-    centerY() = 250
+    centerBallX() = 250
+    centerBallY() = 250
     leftPaddleY() = 235.0
     rightPaddleY() = 235
     startVisible() = true
@@ -231,11 +226,11 @@ object ZenPongMain extends JFXApp {
       initialize
     } else if (ball.intersects(bottomWall.getBoundsInLocal) ||
       ball.intersects(topWall.getBoundsInLocal)) {
-      movingDown = !movingDown;
+      movingDown = !movingDown
     } else if (ball.intersects(leftPaddle.getBoundsInParent) && !movingRight) {
-      movingRight = !movingRight;
+      movingRight = !movingRight
     } else if (ball.intersects(rightPaddle.getBoundsInParent) && movingRight) {
-      movingRight = !movingRight;
+      movingRight = !movingRight
     }
   }
 
@@ -253,12 +248,6 @@ object ZenPongMain extends JFXApp {
       content = pongComponents
     }
   }
-
-  ball.centerX <== centerX
-  ball.centerY <== centerY
-  leftPaddle.translateY <== leftPaddleY
-  rightPaddle.translateY <== rightPaddleY
-  startButton.visible <== startVisible
 
   initialize
 
