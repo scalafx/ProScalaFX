@@ -1,7 +1,9 @@
 package proscalafx.ch03
 
-import scalafx.Includes._
-import scalafx.beans.binding.NumberBinding
+import scalafx.Includes.jfxBooleanBinding2sfx
+import scalafx.Includes.when
+import scalafx.beans.binding.NumberBinding.sfxNumberBinding2jfx
+import scalafx.beans.property.DoubleProperty.sfxDoubleProperty2jfx
 import scalafx.beans.property.DoubleProperty
 
 object HeronsFormulaExample extends App {
