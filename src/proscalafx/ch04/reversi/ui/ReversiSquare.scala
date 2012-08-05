@@ -1,16 +1,27 @@
 package proscalafx.ch04.reversi.ui
 
+import javafx.geometry.HPos
+import javafx.geometry.VPos
+import javafx.scene.input.MouseEvent
+import javafx.scene.{layout => jfxsl}
 import proscalafx.ch04.reversi.model.ReversiModel
 import scalafx.Includes._
 import scalafx.animation.FadeTransition
 import scalafx.beans.property.StringProperty
-import scalafx.scene.layout.Region
-import scalafx.util.Duration
 import scalafx.scene.effect.Light
 import scalafx.scene.effect.Lighting
-import javafx.scene.input.MouseEvent
+import scalafx.scene.layout.Region
+import scalafx.util.Duration
 
 class ReversiSquare(val x: Int, val y: Int) extends Region {
+
+  override val delegate: jfxsl.Region = new jfxsl.Region {
+    getChildren().add(highlight)
+
+    protected override def layoutChildren {
+      layoutInArea(highlight, 0, 0, getWidth, getHeight, getBaselineOffset, HPos.CENTER, VPos.CENTER)
+    }
+  }
 
   private val highlight = new Region {
     opacity = 0
@@ -24,18 +35,6 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
     toValue = 1
   }
 
-  /*
-    getChildren().add(highlight);
-    addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
-      public void handle(MouseEvent t) {
-        if (model.legalMove(x, y).get()) {
-          highlightTransition.setRate(1);
-          highlightTransition.play();
-        }
-      }
-    });   
-    */
-
   style <== when(ReversiModel.legalMove(x, y)) then
     "-fx-background-color: derive(dodgerblue, -60%)" otherwise
     "-fx-background-color: burlywood"
@@ -47,8 +46,25 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
     }
   }
 
+  //    getChildren().add(highlight);
   prefHeight = 200
   prefWidth = 200
 
+  onMouseEntered = {
+    if (ReversiModel.legalMove(x, y).get) {
+      highlightTransition.rate() = 1
+      highlightTransition.play
+    }
+  }
+
+  onMouseExited = {
+    highlightTransition.rate = -1
+    highlightTransition.play
+  }
+
+  onMouseClicked = {
+    ReversiModel.play(x, y)
+    highlightTransition.rate() = -1
+  }
 
 }

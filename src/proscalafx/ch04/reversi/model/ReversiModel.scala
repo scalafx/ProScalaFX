@@ -11,7 +11,7 @@ import scalafx.beans.property.ObjectProperty
 
 object ReversiModel {
 
-  private val BOARD_SIZE = 8
+  val BOARD_SIZE = 8
 
   val turn = ObjectProperty[Owner](BLACK)
 
