@@ -4,16 +4,20 @@ import javafx.application.ConditionalFeature
 import javafx.application.Platform
 import javafx.geometry.Pos
 import javafx.scene.text.FontWeight
+import proscalafx.ch04.reversi.model.Owner
 import proscalafx.ch04.reversi.model.ReversiModel
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.event.ActionEvent
 import scalafx.scene.control.Button
+import scalafx.scene.effect.DropShadow
+import scalafx.scene.effect.InnerShadow
 import scalafx.scene.layout.GridPane
 import scalafx.scene.layout.Region
 import scalafx.scene.layout.StackPane
 import scalafx.scene.layout.TilePane
 import scalafx.scene.paint.Color
+import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.Font
 import scalafx.scene.text.Text
 import scalafx.scene.transform.Rotate
@@ -114,7 +118,6 @@ object Reversi extends JFXApp {
     if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
       val scale = new Scale(.45, .8, 1, 300, 60, 0)
       val translate = new Translate(75, -2, -150)
-      /*
       val xRot = new Rotate {
         angle = -40
         pivotX = 300
@@ -122,12 +125,130 @@ object Reversi extends JFXApp {
         pivotZ = 0
         axis = Rotate.XAxis
       }
-      val yRot = new Rotate(-5, 300, 150, 0, Rotate.Y_AXIS)
-      val zRot = new Rotate(-6, 300, 150, 0, Rotate.Z_AXIS)
-      */
+      val yRot = new Rotate {
+        angle = -5
+        pivotX = 300
+        pivotY = 150
+        pivotZ = 0
+        axis = Rotate.YAxis
+      }
+      val zRot = new Rotate {
+        angle = -6
+        pivotX = 300
+        pivotY = 150
+        pivotZ = 0
+        axis = Rotate.ZAxis
+      }
     }
 
     board
+  }
+
+  /*
+    Region background;
+    Ellipse piece;
+    Text score;
+    Text remaining;
+    StackPane stack = StackPaneBuilder.create()
+      .children(
+        background = RegionBuilder.create()
+          .style("-fx-background-color: " + owner.opposite().getColorStyle())
+          .build(),
+        FlowPaneBuilder.create()
+          .hgap(20)
+          .vgap(10)
+          .alignment(Pos.CENTER)
+          .children(
+            score = TextBuilder.create()
+              .font(Font.font(null, FontWeight.BOLD, 100))
+              .fill(owner.getColor())
+              .build(),
+            VBoxBuilder.create()
+              .alignment(Pos.CENTER)
+              .spacing(10)
+              .children(
+                piece = EllipseBuilder.create()
+                  .effect(DropShadowBuilder.create().color(Color.DODGERBLUE).spread(0.2).build())
+                  .radiusX(32)
+                  .radiusY(20)
+                  .fill(owner.getColor())
+                  .build(),
+                remaining = TextBuilder.create()
+                  .font(Font.font(null, FontWeight.BOLD, 12))
+                  .fill(owner.getColor())
+                  .build()
+              )
+              .build()
+          )
+          .build()
+        )
+      .build();
+    InnerShadow innerShadow = InnerShadowBuilder.create()
+      .color(Color.DODGERBLUE)
+      .choke(0.5)
+      .build();
+    background.effectProperty().bind(Bindings.when(model.turn.isEqualTo(owner))
+      .then(innerShadow)
+      .otherwise((InnerShadow) null));
+    DropShadow dropShadow = DropShadowBuilder.create()
+      .color(Color.DODGERBLUE)
+      .spread(0.2)
+      .build();
+    piece.effectProperty().bind(Bindings.when(model.turn.isEqualTo(owner))
+      .then(dropShadow)
+      .otherwise((DropShadow) null));
+    score.textProperty().bind(model.getScore(owner).asString());
+    remaining.textProperty().bind(model.getTurnsRemaining(owner).asString().concat(" turns remaining"));
+    return stack;
+       */
+  private def createScore(owner: Owner): Node = {
+    val shadow = new InnerShadow {
+      color = Color.DODGERBLUE;
+      choke = 0.5
+    }
+    val background = new Region {
+      style = "-fx-background-color: " + owner.opposite.colorStyle
+    }
+    /*
+- ambiguous reference to overloaded definition, both method then in class ConditionBuilder of type [T](thenExpression: 
+	 javafx.beans.value.ObservableStringValue)scalafx.Includes.StringConditionBuilder and method then in class ConditionBuilder of type [T](thenExpression: 
+	 String)scalafx.Includes.StringConditionBuilder match argument types (Null)
+	      */
+    //    background.effect <== when(ReversiModel.turn === owner) then shadow otherwise shadow
+
+    val dropShadow = new DropShadow {
+      color = Color.DODGERBLUE
+      spread = 0.2
+    }
+
+    val piece = new Ellipse {
+      effect = new DropShadow {
+        color = Color.DODGERBLUE
+        spread = 0.2
+      }
+      radiusX = 32
+      radiusY = 20
+      fill = owner.color
+    }
+
+    val stack = new StackPane {
+
+    }
+
+    stack
+  }
+
+  private def createScoreBoxes: Node = {
+    new TilePane {
+      snapToPixel = false
+      prefColumns = 2
+      /*
+      .children(
+        createScore(Owner.BLACK),
+        createScore(Owner.WHITE))
+    tiles.prefTileWidthProperty().bind(Bindings.selectDouble(tiles.parentProperty(), "width").divide(2));
+       */
+    }
   }
 
 }
