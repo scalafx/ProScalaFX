@@ -15,17 +15,17 @@ import scalafx.util.Duration
 
 class ReversiSquare(val x: Int, val y: Int) extends Region {
 
+  private val highlight = new Region {
+    opacity = 0
+    style = "-fx-border-width: 3; -fx-border-color: dodgerblue"
+  }
+
   override val delegate: jfxsl.Region = new jfxsl.Region {
     getChildren().add(highlight)
 
     protected override def layoutChildren {
       layoutInArea(highlight, 0, 0, getWidth, getHeight, getBaselineOffset, HPos.CENTER, VPos.CENTER)
     }
-  }
-
-  private val highlight = new Region {
-    opacity = 0
-    style = "-fx-border-width: 3; -fx-border-color: dodgerblue"
   }
 
   private val highlightTransition = new FadeTransition {

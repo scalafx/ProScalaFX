@@ -11,14 +11,17 @@ import scalafx.scene.layout.Region
 
 object ReversiPiece {
 
-  private[ui] val noneBackground = "radius 0"
-  private[ui] val whiteBackground = "-fx-background-color: radial-gradient(radius 100%, white .4, gray .9, darkgray 1)"
-  private[ui] val blackBackground = "-fx-background-color: radial-gradient(radius 100%, white .0, black .6)"
-  private[ui] val generalBackground = "; -fx-background-radius: 1000em; -fx-background-insets: 5"
+  private[ReversiPiece] val noneBackground = "radius 0"
+  private[ReversiPiece] val whiteBackground = "-fx-background-color: radial-gradient(radius 100%, white .4, gray .9, darkgray 1)"
+  private[ReversiPiece] val blackBackground = "-fx-background-color: radial-gradient(radius 100%, white .0, black .6)"
+  private[ReversiPiece] val generalBackground = "; -fx-background-radius: 1000em; -fx-background-insets: 5"
 
 }
 
-class ReversiPiece(_owner: Owner) extends Region {
+/*
+ * IMPLEMENTATION NOTE: Default added argument for mouseTransparent for use in example application.
+ */
+class ReversiPiece(_owner: Owner, mousetransparent: Boolean = true) extends Region {
 
   import ReversiPiece._
 
@@ -38,5 +41,5 @@ class ReversiPiece(_owner: Owner) extends Region {
 
   prefWidth = 180
   prefHeight = 180
-  mouseTransparent = true
+  mouseTransparent = mousetransparent
 }
