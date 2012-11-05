@@ -4,20 +4,19 @@ import javafx.geometry.Pos
 import javafx.scene.text.FontWeight
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.beans.binding.NumberBinding.sfxNumberBinding2jfx
+import scalafx.scene.Scene
 import scalafx.scene.layout.StackPane
 import scalafx.scene.layout.TilePane
 import scalafx.scene.paint.Color
 import scalafx.scene.text.Font
 import scalafx.scene.text.Text
-import scalafx.scene.Scene
 import scalafx.stage.Stage
 
 object AlignUsingStackAndTile extends JFXApp {
   val left = new StackPane {
     style = "-fx-background-color: black"
     content = new Text {
-      text = "JavaFX"
+      text = "ScalaFX"
       font = Font.font(null, FontWeight.BOLD, 18)
       fill = Color.WHITE
       alignment = Pos.CENTER_RIGHT
@@ -25,9 +24,7 @@ object AlignUsingStackAndTile extends JFXApp {
   }
 
   stage = new Stage {
-    height = 100
-    width = 400
-    scene = new Scene {
+    scene = new Scene(400, 100) {
       content = new TilePane {
         snapToPixel = false
         content = List(left, new Text {
