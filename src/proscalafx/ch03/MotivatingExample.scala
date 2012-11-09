@@ -1,29 +1,28 @@
 package proscalafx.ch03
 
-import javafx.{beans => jfxb}
-import jfxb.{value => jfxbv}
-import scalafx.Includes._
 import scalafx.beans.property.IntegerProperty
 
 object MotivatingExample extends App {
 
   var intProperty: IntegerProperty = _
 
-  def createProperty {
-    println
+
+  def createProperty() {
+    println()
     intProperty = IntegerProperty(1024)
-    println("intProperty = " + intProperty);
-    println("intProperty.get = " + intProperty.get);
-    println("intProperty.getValue = " + intProperty.getValue.intValue);
+    println("intProperty = " + intProperty)
+    println("intProperty.get = " + intProperty.get)
+    println("intProperty.getValue = " + intProperty.getValue.intValue)
+    println("intProperty() = " + intProperty())
   }
 
-  def addAndRemoveInvalidationListener {
-    println
-    // IMPLEMENTATION NOTE: It is necessary explicit the closure below as  
-    //JavaFX's InvalidationListener to allow its posterior remotion 
-    val invalidationListener: jfxb.InvalidationListener =
-      (observable: jfxb.Observable) => println("The observable has been invalidated: " + observable + ".")
-    intProperty.addListener(invalidationListener)
+
+  def addAndRemoveInvalidationListener() {
+    println()
+    val subscription = intProperty.onInvalidate {
+      observable => println("The observable has been invalidated: " + observable + ".")
+    }
+
     println("Added invalidation listener.")
 
     println("Calling intProperty.set(2048).")
@@ -32,35 +31,35 @@ object MotivatingExample extends App {
     println("Calling intProperty.setValue(3072).")
     intProperty() = Integer.valueOf(3072)
 
-    intProperty.delegate.removeListener(invalidationListener)
+    subscription.cancel()
     System.out.println("Removed invalidation listener.")
 
     println("Calling intProperty.set(4096).")
     intProperty() = 4096
   }
 
-  def addAndRemoveChangeListener {
-    println
-    // IMPLEMENTATION NOTE: It is necessary explicit the closure below as  
-    //JavaFX's ChangeListener to allow its posterior remotion 
-    val changeListener: jfxbv.ChangeListener[_ >: Number] = (obs: jfxbv.ObservableValue[_ <: Number], oldValue: Number, newValue: Number) =>
-      println("The observableValue has changed: oldValue = " + oldValue + ", newValue = " + newValue)
 
-    intProperty.addListener(changeListener)
+  def addAndRemoveChangeListener() {
+    println()
+    val subscription = intProperty.onChange {
+      (_, oldValue, newValue) =>
+        println("The observableValue has changed: oldValue = " + oldValue + ", newValue = " + newValue)
+    }
     println("Added change listener.")
 
     println("Calling intProperty.set(5120).")
     intProperty() = 5120
 
-    intProperty.removeListener(changeListener)
+    subscription.cancel()
     println("Removed change listener.")
 
     println("Calling intProperty.set(6144).")
     intProperty() = 6144
   }
 
-  def bindAndUnbindOnePropertyToAnother {
-    println
+
+  def bindAndUnbindOnePropertyToAnother() {
+    println()
     val otherProperty = IntegerProperty(0)
     println("otherProperty.get = " + otherProperty.get)
 
@@ -73,17 +72,18 @@ object MotivatingExample extends App {
     println("otherProperty.get = " + otherProperty.get)
 
     println("Unbinding otherProperty from intProperty.")
-    otherProperty.unbind
+    otherProperty.unbind()
     println("otherProperty.get = " + otherProperty.get)
 
     println("Calling intProperty.set(8192).")
     intProperty() = 8192
-    println("otherProperty.get = " + otherProperty.get);
+    println("otherProperty.get = " + otherProperty.get)
   }
 
-  createProperty
-  addAndRemoveInvalidationListener
-  addAndRemoveChangeListener
-  bindAndUnbindOnePropertyToAnother
+
+  createProperty()
+  addAndRemoveInvalidationListener()
+  addAndRemoveChangeListener()
+  bindAndUnbindOnePropertyToAnother()
 
 }

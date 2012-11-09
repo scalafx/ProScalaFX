@@ -3,37 +3,25 @@
  */
 package proscalafx.ch02.onthescene
 
-import javafx.scene.{ text => jfxst }
-import javafx.{ geometry => jfxg }
+import javafx.scene.Cursor
+import javafx.scene.{text => jfxst}
+import javafx.{geometry => jfxg}
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.beans.property.DoubleProperty.sfxDoubleProperty2jfx
-import scalafx.beans.property.ObjectProperty.sfxObjectProperty2jfx
-import scalafx.beans.property.ReadOnlyDoubleProperty.sfxReadOnlyDoubleProperty2jfx
-import scalafx.beans.property.StringProperty.sfxStringProperty2jfx
 import scalafx.beans.property.DoubleProperty
 import scalafx.beans.property.StringProperty
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
 import scalafx.geometry.Insets
-import scalafx.scene.control.ChoiceBox
-import scalafx.scene.control.Hyperlink
-import scalafx.scene.control.Label
-import scalafx.scene.control.RadioButton
-import scalafx.scene.control.Slider
-import scalafx.scene.control.ToggleGroup
-import scalafx.scene.layout.FlowPane.sfxFlowPane2jfx
+import scalafx.scene.Scene
+import scalafx.scene.control._
 import scalafx.scene.layout.FlowPane
 import scalafx.scene.layout.HBox
-import scalafx.scene.paint.Color.sfxColor2jfx
 import scalafx.scene.paint.Color
-import scalafx.scene.text.Text.sfxText2jfx
 import scalafx.scene.text.Font
 import scalafx.scene.text.Text
-import scalafx.scene.Cursor
-import scalafx.scene.Scene
 import scalafx.stage.Stage
-import scalafx.util.StringConverter
+
 
 /**
  * @author Rafael
@@ -58,7 +46,8 @@ object OnTheSceneMain extends JFXApp {
     Cursor.SW_RESIZE,
     Cursor.W_RESIZE,
     Cursor.NW_RESIZE,
-    Cursor.NONE)
+    Cursor.NONE
+  )
 
   val sliderRef = new Slider {
     min = 0
@@ -66,12 +55,14 @@ object OnTheSceneMain extends JFXApp {
     value = 255
     orientation = jfxg.Orientation.VERTICAL
   }
+
   val choiceRef = new ChoiceBox[Cursor] {
     items = cursors
     // XXX: String converter used to remove "[SFX]" in begin of toString. 
     //However in selected item the prefix "[SFX]" appears.
-    converter = StringConverter.toStringConverter((cursor: Cursor) => cursor.delegate.toString)
+    //    converter = StringConverter.toStringConverter((cursor: Cursor) => cursor.delegate.toString)
   }
+
   val textSceneX = new Text {
     styleClass = List("emphasized-text")
   }
@@ -91,9 +82,11 @@ object OnTheSceneMain extends JFXApp {
   val labelStageX = new Label {
     id = "stageX"
   }
+
   val labelStageY = new Label {
     id = "stageY"
   }
+
   val labelStageW = new Label
   val labelStageH = new Label
 
@@ -141,8 +134,7 @@ object OnTheSceneMain extends JFXApp {
 
   val sceneRef = new Scene(600, 250) {
     root = sceneRoot
-    stylesheets = List(this.getClass
-      .getResource("onTheScene.css").toExternalForm())
+    stylesheets = List(this.getClass.getResource("onTheScene.css").toExternalForm)
   }
 
   stage = new Stage {
@@ -161,9 +153,7 @@ object OnTheSceneMain extends JFXApp {
   labelStageY.text <== new StringProperty("Stage y: ") + sceneRef.window.get.y.asString
   labelStageW.text <== new StringProperty("Stage width: ") + sceneRef.window.get.width.asString
   labelStageH.text <== new StringProperty("Stage height: ") + sceneRef.window.get.height.asString
-  // TODO: Create bind between scene cursor and ChoiceBox
-  //  sceneRef.cursor <== choiceRef.selectionModel.value
-  //  .bind(choiceRef.value)
+  sceneRef.cursor <== choiceRef.value
   fillVals <== sliderRef.value
 
   // When fillVals changes, use that value as the RGB to fill the scene

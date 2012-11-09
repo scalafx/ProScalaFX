@@ -1,27 +1,25 @@
 package proscalafx.ch01.helloearthrise
 
 import javafx.geometry.VPos
+import javafx.scene.control.ScrollPane.ScrollBarPolicy
 import javafx.scene.text.FontWeight
 import javafx.scene.text.TextAlignment
-import scalafx.animation.TranslateTransition.sfxTranslateTransition2jfx
 import scalafx.animation.Interpolator
 import scalafx.animation.Timeline
 import scalafx.animation.TranslateTransition
 import scalafx.application.JFXApp
-import scalafx.scene.image.Image.sfxImage2jfx
-import scalafx.scene.image.Image
-import scalafx.scene.image.ImageView
-import scalafx.scene.paint.Color
-import scalafx.scene.shape.Rectangle
-import scalafx.scene.text.Font
-import scalafx.scene.text.Text
 import scalafx.scene.Group
 import scalafx.scene.Scene
-import scalafx.stage.Stage
-import scalafx.util.UtilIncludes.jfxDuration2sfx
-import scalafx.util.Duration
 import scalafx.scene.control.ScrollPane
-import javafx.scene.control.ScrollPane.ScrollBarPolicy
+import scalafx.scene.image.Image
+import scalafx.scene.image.Image.sfxImage2jfx
+import scalafx.scene.image.ImageView
+import scalafx.scene.paint.Color
+import scalafx.scene.text.Font
+import scalafx.scene.text.Text
+import scalafx.stage.Stage
+import scalafx.util.Duration
+import scalafx.util.UtilIncludes.jfxDuration2sfx
 
 object HelloScrollPaneMain extends JFXApp {
 
@@ -52,9 +50,7 @@ you on the good Earth." """.replace("\n", "")
 
   stage = new Stage {
     title = "Hello Earthrise"
-    width = 516
-    height = 387
-    scene = new Scene {
+    scene = new Scene(516, 387) {
       content = new Group {
         children = List(
           new ImageView {

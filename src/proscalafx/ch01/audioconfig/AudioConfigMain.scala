@@ -4,6 +4,7 @@ import javafx.geometry.VPos
 import javafx.scene.text.FontWeight
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.scene.Scene
 import scalafx.scene.control.CheckBox
 import scalafx.scene.control.ChoiceBox
 import scalafx.scene.control.Slider
@@ -14,7 +15,6 @@ import scalafx.scene.shape.Line
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Font
 import scalafx.scene.text.Text
-import scalafx.scene.Scene
 import scalafx.stage.Stage
 
 object AudioConfigMain extends JFXApp {
@@ -29,8 +29,6 @@ object AudioConfigMain extends JFXApp {
   }
 
   stage = new Stage {
-    width = 335
-    height = 343
     title = "Audio Configuration"
     scene = new Scene {
       content = List(
@@ -38,8 +36,13 @@ object AudioConfigMain extends JFXApp {
           width = 320
           height = 45
           fill = new LinearGradient(
-            endX = 0.0, endY = 1.0, stops = List(Stop(0, Color.web("0xAEBBCC")),
-              Stop(1, Color.web("0x6D84A3"))))
+            endX = 0.0,
+            endY = 1.0,
+            stops = List(
+              Stop(0, Color.web("0xAEBBCC")),
+              Stop(1, Color.web("0x6D84A3"))
+            )
+          )
         },
         new Text {
           layoutX = 65
@@ -123,6 +126,6 @@ object AudioConfigMain extends JFXApp {
   }
 
   acModel.genreSelectionModel = genreChoiceBox.selectionModel.get
-  acModel.addListenerToGenreSelectionModel
+  acModel.addListenerToGenreSelectionModel()
   acModel.genreSelectionModel.selectFirst
 }

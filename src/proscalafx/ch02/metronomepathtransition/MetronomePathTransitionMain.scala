@@ -6,22 +6,18 @@ package proscalafx.ch02.metronomepathtransition
 import javafx.animation.Animation.Status
 import javafx.animation.PathTransition.OrientationType
 import scalafx.Includes._
-import scalafx.animation.PathTransition.sfxPathTransition2jfx
 import scalafx.animation.Interpolator
 import scalafx.animation.PathTransition
 import scalafx.animation.Timeline
 import scalafx.application.JFXApp
-import scalafx.event.ActionEvent
+import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
 import scalafx.scene.paint.Color
-import scalafx.scene.shape.ArcTo.sfxArcTo2jfx
-import scalafx.scene.shape.MoveTo.sfxMoveTo2jfx
 import scalafx.scene.shape.ArcTo
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.shape.MoveTo
 import scalafx.scene.shape.Path
-import scalafx.scene.Scene
 import scalafx.stage.Stage
 import scalafx.util.Duration
 
@@ -53,10 +49,8 @@ object MetronomePathTransitionMain extends JFXApp {
   }
 
   stage = new Stage {
-    width = 400
-    height = 500
     title = "Metronome using PathTransition"
-    scene = new Scene {
+    scene = new Scene(400, 500) {
       content = List(
         ellipse,
         new HBox {
@@ -66,22 +60,22 @@ object MetronomePathTransitionMain extends JFXApp {
           content = List(
             new Button {
               text = "Start"
-              onAction = (ae: ActionEvent) => anim.playFromStart
+              onAction = anim.playFromStart
               disable <== (anim.status =!= Status.STOPPED)
             },
             new Button {
               text = "Pause"
-              onAction = (ae: ActionEvent) => anim.pause
+              onAction = anim.pause
               disable <== (anim.status =!= Status.RUNNING)
             },
             new Button {
               text = "Resume"
-              onAction = (ae: ActionEvent) => anim.play
+              onAction = anim.play
               disable <== (anim.status =!= (Status.PAUSED))
             },
             new Button {
               text = "Stop"
-              onAction = (ae: ActionEvent) => anim.stop
+              onAction = anim.stop()
               disable <== (anim.status === Status.STOPPED)
             })
         })

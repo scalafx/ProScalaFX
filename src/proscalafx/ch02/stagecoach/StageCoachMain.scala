@@ -8,9 +8,10 @@ import javafx.stage.StageStyle
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.beans.property.ReadOnlyDoubleProperty.sfxReadOnlyDoubleProperty2jfx
-import scalafx.beans.property.StringProperty.fromString
 import scalafx.beans.property.StringProperty
 import scalafx.geometry.Rectangle2D
+import scalafx.scene.Group
+import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.control.CheckBox
 import scalafx.scene.control.Label
@@ -18,15 +19,13 @@ import scalafx.scene.control.TextField
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.HBox
 import scalafx.scene.layout.VBox
-import scalafx.scene.paint.Color.sfxColor2jfx
 import scalafx.scene.paint.Color
+import scalafx.scene.paint.Color.sfxColor2jfx
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
-import scalafx.scene.Group
-import scalafx.scene.Scene
-import scalafx.stage.Stage.sfxStage2jfx
 import scalafx.stage.Screen
 import scalafx.stage.Stage
+
 
 /**
  * @author Rafael
@@ -39,8 +38,8 @@ object StageCoachMain extends JFXApp {
   val stageStyle = parameters.unnamed match {
     case Seq("transparent") => StageStyle.TRANSPARENT
     case Seq("undecorated") => StageStyle.UNDECORATED
-    case Seq("utility")     => StageStyle.UTILITY
-    case _                  => StageStyle.DECORATED
+    case Seq("utility") => StageStyle.UTILITY
+    case _ => StageStyle.DECORATED
   }
 
   lazy val textStageX = new Text {
@@ -72,11 +71,9 @@ object StageCoachMain extends JFXApp {
   }
 
   stage = new Stage {
-    width = 270
-    height = 390
-    resizable = true
+    resizable = false
     title <== titleProperty
-    scene = new Scene {
+    scene = new Scene(270, 370) {
       fill = Color.TRANSPARENT
       content = new Group {
         children = List(
@@ -142,8 +139,17 @@ object StageCoachMain extends JFXApp {
   textStageW.text <== new StringProperty("width: ") + stage.width.asString
   textStageH.text <== new StringProperty("height: ") + stage.height.asString
   textStageF.text <== new StringProperty("focused: ") + stage.focused.asString
-  checkBoxResizable.selected <==> stage.resizable
-  checkBoxFullScreen.onAction = { stage.fullScreen = checkBoxFullScreen.selected.get }
+  stage.resizable = false
+  // NOTE: Due to a bug in JavaFX (2.2.3) Stage.resizableProperty(), cannot directly use binding here,
+  // see http://javafx-jira.kenai.com/browse/RT-25942
+  // TODO: Revert to binding once JavaFX bug is corrected
+  //  stage.resizable <==> checkBoxResizable.selected
+  checkBoxResizable.selected.onChange {
+    // To avoid using resizableProperty, use delegate.setResizable()
+    // stage.resizable = checkBoxResizable.selected.get
+    stage.delegate.setResizable(checkBoxResizable.selected.get)
+  }
+  checkBoxFullScreen.onAction = {stage.fullScreen = checkBoxFullScreen.selected.get}
   stage.title <== titleTextField.text
 
   stage.initStyle(stageStyle)
