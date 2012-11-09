@@ -7,7 +7,6 @@ import javafx.scene.{layout => jfxsl}
 import proscalafx.ch04.reversi.model.ReversiModel
 import scalafx.Includes._
 import scalafx.animation.FadeTransition
-import scalafx.beans.property.StringProperty
 import scalafx.scene.effect.Light
 import scalafx.scene.effect.Lighting
 import scalafx.scene.layout.Region
@@ -21,9 +20,9 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
   }
 
   override val delegate: jfxsl.Region = new jfxsl.Region {
-    getChildren().add(highlight)
+    getChildren.add(highlight)
 
-    protected override def layoutChildren {
+    protected override def layoutChildren() {
       layoutInArea(highlight, 0, 0, getWidth, getHeight, getBaselineOffset, HPos.CENTER, VPos.CENTER)
     }
   }
@@ -46,25 +45,24 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
     }
   }
 
-  //    getChildren().add(highlight);
   prefHeight = 200
   prefWidth = 200
 
-  onMouseEntered = {
+  onMouseEntered = (e: MouseEvent) => {
     if (ReversiModel.legalMove(x, y).get) {
       highlightTransition.rate() = 1
       highlightTransition.play
     }
   }
 
-  onMouseExited = {
+  onMouseExited = (e: MouseEvent) => {
     highlightTransition.rate = -1
     highlightTransition.play
   }
 
-  onMouseClicked = {
+  onMouseClicked = (e: MouseEvent) => {
     ReversiModel.play(x, y)
     highlightTransition.rate() = -1
+    highlightTransition.play
   }
-
 }
