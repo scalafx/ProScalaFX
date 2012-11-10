@@ -33,12 +33,15 @@ object ObservableListExample extends App {
   // NOTE: There is a difference between meaning of the second argument of `remove` in JavaFX and ScalaFX.
   // In both the first argument is the index of the beginning of the range that should be removed.
   // In JavaFX the second argument is the end of the range. In ScalaFX the second argument is the count of the elements.
+  // ScalaFX uses meaning of argument the same as in scala.collection.mutable.Buffer.remove(n:Int, count:Int)
   println("Calling remove(2, 4): ")
   strings.remove(2, 2)
+
+  scala.collection.mutable.Buffer
 
   println( """Remove elements that contain letter "t"""")
   strings --= strings.filter(_.contains("t"))
 
-  println("""Calling removeAll("Third", "Fourth"): """)
+  println( """Calling removeAll("Third", "Fourth"): """)
   strings --= List("Third", "Fourth")
 }
