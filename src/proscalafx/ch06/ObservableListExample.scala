@@ -30,12 +30,11 @@ object ObservableListExample extends App {
   println("Calling addAll(3, list): ")
   strings.insertAll(3, list)
 
-  // NOTE: There is a difference between meaning of the second argument of `remove` in JavaFX and ScalaFX.
-  // In both the first argument is the index of the beginning of the range that should be removed.
-  // In JavaFX the second argument is the end of the range. In ScalaFX the second argument is the count of the elements.
-  // ScalaFX uses meaning of argument the same as in scala.collection.mutable.Buffer.remove(n:Int, count:Int)
+  // There is a difference between meaning of the second argument of `remove` in JavaFX and ScalaFX.
+  // ScalaFX `remove` corresponds to `scala.collection.mutable.Buffer.remove(n:Int, count:Int)`.
+  // Equivalent of JavaFX `remove` is renamed in ScalaFX to `removeRange`.
   println("Calling remove(2, 4): ")
-  strings.remove(2, 2)
+  strings.removeRange(2, 4)
 
   scala.collection.mutable.Buffer
 
