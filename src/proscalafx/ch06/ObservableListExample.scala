@@ -36,8 +36,6 @@ object ObservableListExample extends App {
   println("Calling remove(2, 4): ")
   strings.removeRange(2, 4)
 
-  scala.collection.mutable.Buffer
-
   println( """Remove elements that contain letter "t"""")
   strings --= strings.filter(_.contains("t"))
 
