@@ -400,14 +400,26 @@ object StarterAppMain extends JFXApp {
             (_, _, newValue) => println(newValue + " chosen in ChoiceBox")
           )
         },
-        // FIXME: implement MenuButton
-        //        new MenuButton("MenuButton") {
-        //          ...
-        //        },
-        // FIXME: implement SplitMenuButton
-        //        new SplitMenuButton("SplitMenuButton") {
-        //          ...
-        //        },
+        // NOTE: Using experimental implementation of MenuButton
+        new sfxext.scene.control.MenuButton("MenuButton") {
+          items = List(
+            new MenuItem("MenuItem A") {
+              onAction = {ae: ActionEvent => {println(ae.eventType + " occurred on Menu Item A")}}
+            },
+            new MenuItem("MenuItem B")
+          )
+        },
+        // NOTE: Using experimental implementation of SplitMenuButton
+        new sfxext.scene.control.SplitMenuButton {
+          text = "SplitMenuButton"
+          onAction = {ae: ActionEvent => {println(ae.eventType + " occurred on SplitMenuButton")}}
+          items = List(
+            new MenuItem("MenuItem A") {
+              onAction = {ae: ActionEvent => {println(ae.eventType + " occurred on Menu Item A")}}
+            },
+            new MenuItem("MenuItem B")
+          )
+        },
         new TextField {
           promptText = "Enter user name"
           prefColumnCount = 16
