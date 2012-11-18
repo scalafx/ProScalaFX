@@ -1,11 +1,4 @@
-/*
- * Copyright (c) 2000-$today.year Jarek Sacha. All Rights Reserved.
- *
- * Author's e-mail: jarek at ieee.org
- *
- */
 package proscalafx.ch06
-
 
 import scalafx.collections.ObservableMap.{Change, Remove, Replace, Add}
 import scalafx.collections.{ObservableMap, ObservableHashMap}
