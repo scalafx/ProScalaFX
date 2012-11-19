@@ -61,11 +61,11 @@ object MotivatingExample extends App {
   def bindAndUnbindOnePropertyToAnother() {
     println()
     val otherProperty = IntegerProperty(0)
-    println("otherProperty.get = " + otherProperty.get)
+    println("otherProperty() = " + otherProperty())
 
     println("Binding otherProperty to intProperty.")
     otherProperty <== intProperty
-    println("otherProperty.get = " + otherProperty.get)
+    println("otherProperty() = " + otherProperty())
 
     println("Calling intProperty.set(7168).")
     intProperty() = 7168
@@ -73,11 +73,11 @@ object MotivatingExample extends App {
 
     println("Unbinding otherProperty from intProperty.")
     otherProperty.unbind()
-    println("otherProperty.get = " + otherProperty.get)
+    println("otherProperty() = " + otherProperty())
 
     println("Calling intProperty.set(8192).")
     intProperty() = 8192
-    println("otherProperty.get = " + otherProperty.get)
+    println("otherProperty() = " + otherProperty())
   }
 
 

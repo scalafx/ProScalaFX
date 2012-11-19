@@ -10,7 +10,7 @@ object TriangleAreaExample extends App {
     x3: IntegerProperty, y3: IntegerProperty,
     area: NumberBinding) {
     println("For A(%d,%d), B(%d,%d), C(%d,%d), the area of triangle ABC is %1.1f".format(
-      x1.get, y1.get, x2.get, y2.get, x3.get, y3.get, area.value))
+      x1(), y1(), x2(), y2(), x3(), y3(), area()))
   }
 
   val x1 = IntegerProperty(0)

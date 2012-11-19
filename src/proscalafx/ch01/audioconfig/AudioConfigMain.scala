@@ -121,12 +121,11 @@ object AudioConfigMain extends JFXApp {
           text = "Genre"
           font = Font.font("SanSerif", FontWeight.BOLD, 18)
         },
-        genreChoiceBox
-      )
+        genreChoiceBox)
     }
   }
 
-  acModel.genreSelectionModel = genreChoiceBox.selectionModel()
-  acModel.addListenerToGenreSelectionModel()
+  acModel.genreSelectionModel = genreChoiceBox.selectionModel.get
+  acModel.addListenerToGenreSelectionModel
   acModel.genreSelectionModel.selectFirst
 }
