@@ -1,11 +1,10 @@
 package proscalafx.ch01.audioconfig
 
-import scalafx.beans.property.IntegerProperty
 import scalafx.beans.property.BooleanProperty
+import scalafx.beans.property.IntegerProperty
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.SingleSelectionModel
 
-//import scalafx.bo
 
 class AudioConfigModel {
 
@@ -37,18 +36,20 @@ class AudioConfigModel {
     "Cowbell",
     "Metal",
     "Polka",
-    "Rock")
+    "Rock"
+  )
 
   /**
    * A reference to the selection model used by the Slider
    */
   var genreSelectionModel: SingleSelectionModel[String] = _
 
+
   /**
    * Adds a change listener to the selection model of the ChoiceBox, and contains
    * code that executes when the selection in the ChoiceBox changes.
    */
-  def addListenerToGenreSelectionModel {
+  def addListenerToGenreSelectionModel() {
     this.genreSelectionModel.selectedIndex.onChange({
       selectedDBs.value = this.genreSelectionModel.selectedIndex.get match {
         case 0 => 80
