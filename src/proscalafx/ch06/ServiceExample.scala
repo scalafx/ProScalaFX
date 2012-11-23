@@ -2,7 +2,6 @@ package proscalafx.ch06
 
 import java.util.concurrent.atomic.AtomicBoolean
 import javafx.beans.{binding => jfxbb}
-import javafx.concurrent.Task
 import javafx.{concurrent => jfxc}
 import javafx.{geometry => jfxg}
 import scalafx.Includes._
@@ -60,7 +59,7 @@ object ServiceExample extends JFXApp {
     // delegate parameter (ScalaFX `Service` has no default constructor).
     object worker extends Service(new jfxc.Service[String]() {
 
-      protected def createTask(): Task[String] = new jfxc.Task[String] {
+      protected def createTask(): jfxc.Task[String] = new jfxc.Task[String] {
         protected def call(): String = {
           updateTitle("Example Task")
           updateMessage("Starting...")
@@ -82,7 +81,6 @@ object ServiceExample extends JFXApp {
 
           "Completed at " + System.currentTimeMillis
         }
-
       }
     })
 
