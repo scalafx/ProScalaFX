@@ -1,6 +1,5 @@
 package proscalafx.ch06
 
-import javafx.{geometry => jfxg}
 import scala.collection.JavaConversions
 import scalafx.Includes._
 import scalafx.application.JFXApp
