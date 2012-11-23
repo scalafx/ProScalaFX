@@ -5,6 +5,7 @@ import scala.collection.JavaConversions
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.collections.ObservableBuffer
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, TextArea, ListView}
 import scalafx.scene.layout.VBox
@@ -71,7 +72,7 @@ object JavaFXThreadsExample extends JFXApp {
     val scene = new Scene(440, 640) {
       root = new VBox {
         spacing = 10
-        padding = new jfxg.Insets(10)
+        padding = Insets(10)
         content = List(
           threadNames,
           stackTrace,

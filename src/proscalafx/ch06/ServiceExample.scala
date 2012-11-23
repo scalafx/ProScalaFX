@@ -10,6 +10,7 @@ import scalafx.application.JFXApp
 import scalafx.beans.property.IntegerProperty
 import scalafx.concurrent.Service
 import scalafx.event.ActionEvent
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.{TextField, Button, Label, ProgressBar}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
@@ -163,7 +164,7 @@ object ServiceExample extends JFXApp {
 
 
     val topPane = new HBox() {
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = progressBar
@@ -172,7 +173,7 @@ object ServiceExample extends JFXApp {
     val centerPane = new GridPane {
       hgap = 10
       vgap = 10
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       columnConstraints = List(new ColumnConstraints {
         halignment = jfxg.HPos.RIGHT
         minWidth = 65
@@ -203,7 +204,7 @@ object ServiceExample extends JFXApp {
       add(exception, 1, 8)
     }
     val buttonPane = new HBox {
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = List(
