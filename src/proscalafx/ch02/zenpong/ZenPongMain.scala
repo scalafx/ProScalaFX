@@ -2,13 +2,16 @@ package proscalafx.ch02.zenpong
 
 import javafx.animation.Animation.Status
 import javafx.scene.input.KeyCode
-import javafx.{event => jfxe}
 import scalafx.Includes._
 import scalafx.animation.KeyFrame
 import scalafx.animation.Timeline
 import scalafx.application.JFXApp
 import scalafx.beans.property.BooleanProperty
 import scalafx.beans.property.DoubleProperty
+import scalafx.event.ActionEvent
+import scalafx.scene.Cursor
+import scalafx.scene.Group
+import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.input.KeyEvent
 import scalafx.scene.input.MouseEvent
@@ -18,9 +21,6 @@ import scalafx.scene.paint.LinearGradient
 import scalafx.scene.paint.Stop
 import scalafx.scene.shape.Circle
 import scalafx.scene.shape.Rectangle
-import scalafx.scene.Cursor
-import scalafx.scene.Group
-import scalafx.scene.Scene
 import scalafx.stage.Stage
 
 object ZenPongMain extends JFXApp {
@@ -84,7 +84,7 @@ object ZenPongMain extends JFXApp {
     cursor = Cursor.HAND
     translateY <== leftPaddleY
     onMousePressed = (me: MouseEvent) => {
-      initLeftPaddleTranslateY = leftPaddle.translateY.get
+      initLeftPaddleTranslateY = leftPaddle.translateY()
       leftPaddleDragAnchorY = me.sceneY
     }
     onMouseDragged = (me: MouseEvent) => {
@@ -145,12 +145,13 @@ object ZenPongMain extends JFXApp {
   /**
    * The animation of the ball
    */
-  val keyFrame = KeyFrame(10 ms, onFinished = { event: jfxe.ActionEvent =>
-    checkForCollision
-    val horzPixels = if (movingRight) 1 else -1
-    val vertPixels = if (movingDown) 1 else -1
-    centerBallX() = centerBallX.value + horzPixels
-    centerBallY() = centerBallY.value + vertPixels
+  val keyFrame = KeyFrame(10 ms, onFinished = {
+    event: ActionEvent =>
+      checkForCollision()
+      val horzPixels = if (movingRight) 1 else -1
+      val vertPixels = if (movingDown) 1 else -1
+      centerBallX() = centerBallX.value + horzPixels
+      centerBallY() = centerBallY.value + vertPixels
   })
   val pongAnimation = new Timeline {
     keyFrames = Seq(keyFrame)
@@ -162,10 +163,11 @@ object ZenPongMain extends JFXApp {
     layoutY() = 470
     text = "Start!"
     visible <== startVisible
-    onAction = { event: jfxe.ActionEvent =>
-      startVisible() = false
-      pongAnimation.playFromStart
-      pongComponents.requestFocus
+    onAction = {
+      event: ActionEvent =>
+        startVisible() = false
+        pongAnimation.playFromStart
+        pongComponents.requestFocus
     }
   }
 
@@ -183,21 +185,22 @@ object ZenPongMain extends JFXApp {
       bottomWall,
       leftPaddle,
       rightPaddle,
-      startButton)
+      startButton
+    )
     onKeyPressed = (k: KeyEvent) => {
       if (k.code == KeyCode.SPACE && pongAnimation.status == Status.STOPPED) {
         rightPaddleY() = rightPaddleY.value - 6
       } else if (k.code == KeyCode.L &&
-        !rightPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
+        !rightPaddle.boundsInParent().intersects(topWall.boundsInLocal())) {
         rightPaddleY() = rightPaddleY.value - 6
       } else if (k.code == KeyCode.COMMA &&
-        !rightPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
+        !rightPaddle.boundsInParent().intersects(bottomWall.boundsInLocal())) {
         rightPaddleY() = rightPaddleY.value + 6
       } else if (k.code == KeyCode.A &&
-        !leftPaddle.getBoundsInParent().intersects(topWall.getBoundsInLocal())) {
+        !leftPaddle.boundsInParent().intersects(topWall.boundsInLocal())) {
         leftPaddleY() = leftPaddleY.value - 6
       } else if (k.code == KeyCode.Z &&
-        !leftPaddle.getBoundsInParent().intersects(bottomWall.getBoundsInLocal())) {
+        !leftPaddle.boundsInParent().intersects(bottomWall.boundsInLocal())) {
         leftPaddleY() = leftPaddleY.value + 6
       }
     }
@@ -206,7 +209,7 @@ object ZenPongMain extends JFXApp {
   /**
    * Sets the initial starting positions of the ball and paddles
    */
-  def initialize {
+  def initialize() {
     centerBallX() = 250
     centerBallY() = 250
     leftPaddleY() = 235.0
@@ -220,16 +223,16 @@ object ZenPongMain extends JFXApp {
    * topWall, or bottomWall.  If the ball hits the wall behind the paddles,
    * the game is over.
    */
-  def checkForCollision {
-    if (ball.intersects(rightWall.boundsInLocal.get) || ball.intersects(leftWall.boundsInLocal.get)) {
-      pongAnimation.stop
-      initialize
-    } else if (ball.intersects(bottomWall.getBoundsInLocal) ||
-      ball.intersects(topWall.getBoundsInLocal)) {
+  def checkForCollision() {
+    if (ball.intersects(rightWall.boundsInLocal()) || ball.intersects(leftWall.boundsInLocal())) {
+      pongAnimation.stop()
+      initialize()
+    } else if (ball.intersects(bottomWall.boundsInLocal()) ||
+      ball.intersects(topWall.boundsInLocal())) {
       movingDown = !movingDown
-    } else if (ball.intersects(leftPaddle.getBoundsInParent) && !movingRight) {
+    } else if (ball.intersects(leftPaddle.boundsInParent()) && !movingRight) {
       movingRight = !movingRight
-    } else if (ball.intersects(rightPaddle.getBoundsInParent) && movingRight) {
+    } else if (ball.intersects(rightPaddle.boundsInParent()) && movingRight) {
       movingRight = !movingRight
     }
   }
@@ -249,6 +252,5 @@ object ZenPongMain extends JFXApp {
     }
   }
 
-  initialize
-
+  initialize()
 }
