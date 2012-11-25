@@ -2,7 +2,6 @@ package proscalafx.ch06
 
 import java.util.concurrent.atomic.AtomicBoolean
 import javafx.beans.{binding => jfxbb}
-import javafx.concurrent.Task
 import javafx.{concurrent => jfxc}
 import javafx.{geometry => jfxg}
 import scalafx.Includes._
@@ -10,6 +9,7 @@ import scalafx.application.JFXApp
 import scalafx.beans.property.IntegerProperty
 import scalafx.concurrent.Service
 import scalafx.event.ActionEvent
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.{TextField, Button, Label, ProgressBar}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
@@ -59,7 +59,7 @@ object ServiceExample extends JFXApp {
     // delegate parameter (ScalaFX `Service` has no default constructor).
     object worker extends Service(new jfxc.Service[String]() {
 
-      protected def createTask(): Task[String] = new jfxc.Task[String] {
+      protected def createTask(): jfxc.Task[String] = new jfxc.Task[String] {
         protected def call(): String = {
           updateTitle("Example Task")
           updateMessage("Starting...")
@@ -81,7 +81,6 @@ object ServiceExample extends JFXApp {
 
           "Completed at " + System.currentTimeMillis
         }
-
       }
     })
 
@@ -163,7 +162,7 @@ object ServiceExample extends JFXApp {
 
 
     val topPane = new HBox() {
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = progressBar
@@ -172,7 +171,7 @@ object ServiceExample extends JFXApp {
     val centerPane = new GridPane {
       hgap = 10
       vgap = 10
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       columnConstraints = List(new ColumnConstraints {
         halignment = jfxg.HPos.RIGHT
         minWidth = 65
@@ -203,7 +202,7 @@ object ServiceExample extends JFXApp {
       add(exception, 1, 8)
     }
     val buttonPane = new HBox {
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = List(

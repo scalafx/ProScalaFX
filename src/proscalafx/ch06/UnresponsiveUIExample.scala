@@ -6,6 +6,7 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.{BorderPane, HBox}
@@ -77,7 +78,7 @@ object UnresponsiveUIExample extends JFXApp {
     val changeStrokeButton = new Button("Chang Stroke")
 
     val buttonHBox = new HBox {
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = List(
@@ -88,7 +89,7 @@ object UnresponsiveUIExample extends JFXApp {
 
     val scene = new Scene {
       root = new BorderPane {
-        padding = new jfxg.Insets(10, 10, 10, 10)
+        padding = Insets(10)
         center = rectangle
         bottom = buttonHBox
       }.delegate

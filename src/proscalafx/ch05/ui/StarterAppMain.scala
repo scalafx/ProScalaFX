@@ -11,6 +11,7 @@ import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.event.ActionEvent
+import scalafx.geometry.Insets
 import scalafx.scene.control._
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.KeyCombination
@@ -367,7 +368,7 @@ object StarterAppMain extends JFXApp {
   def createScrollMiscDemoNode(): Node = {
     val radioToggleGroup = new ToggleGroup()
     val variousControls = new VBox {
-      padding = new jfxg.Insets(10)
+      padding = Insets(10)
       spacing = 20
       content = List(
         new Button("Button") {
@@ -517,14 +518,7 @@ object StarterAppMain extends JFXApp {
         }
       }
       alignment = jfxg.Pos.CENTER
-      // NOTE: No ScalaFX to create create `Insets`, need to use JavaFX constructor.
-      //      margin = new Insets {
-      //        top = 10
-      //        right = 0
-      //        bottom = 10
-      //        left = 0
-      //      }
-      margin = new jfxg.Insets(10, 0, 10, 0)
+      margin = Insets(10, 0, 10, 0)
     }
 
     new BorderPane {
@@ -556,7 +550,7 @@ object StarterAppMain extends JFXApp {
           bottom = new Button("OK") {
             onAction = {e: ActionEvent => inner.hide}
             alignment = jfxg.Pos.CENTER
-            margin = new jfxg.Insets(10, 0, 10, 0)
+            margin = Insets(10, 0, 10, 0)
           }
         }
       )
