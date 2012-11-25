@@ -401,8 +401,7 @@ object StarterAppMain extends JFXApp {
             (_, _, newValue) => println(newValue + " chosen in ChoiceBox")
           )
         },
-        // NOTE: Using experimental implementation of MenuButton
-        new sfxext.scene.control.MenuButton("MenuButton") {
+        new MenuButton("MenuButton") {
           items = List(
             new MenuItem("MenuItem A") {
               onAction = {ae: ActionEvent => {println(ae.eventType + " occurred on Menu Item A")}}
@@ -410,8 +409,7 @@ object StarterAppMain extends JFXApp {
             new MenuItem("MenuItem B")
           )
         },
-        // NOTE: Using experimental implementation of SplitMenuButton
-        new sfxext.scene.control.SplitMenuButton {
+        new SplitMenuButton {
           text = "SplitMenuButton"
           onAction = {ae: ActionEvent => {println(ae.eventType + " occurred on SplitMenuButton")}}
           items = List(

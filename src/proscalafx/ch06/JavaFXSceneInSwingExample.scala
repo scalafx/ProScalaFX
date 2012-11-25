@@ -4,8 +4,8 @@ import java.awt.event.{ActionEvent, ActionListener}
 import java.awt.{BorderLayout, FlowLayout, Dimension}
 import javafx.embed.{swing => jfxes}
 import javafx.scene.{paint => jfxsp}
-import javafx.{application => jfxa}
 import javax.swing.{JButton, JPanel, JFrame}
+import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
@@ -43,7 +43,7 @@ object JavaFXSceneInSwingExample extends App {
       setPreferredSize(new Dimension(210, 210))
     }
     // Execute JavaFX code on JavaFX Application Thread.
-    sfxext.application.Platform.runLater {
+    Platform.runLater {
       val rectangle = new Rectangle {
         width = 200
         height = 200
@@ -79,14 +79,14 @@ object JavaFXSceneInSwingExample extends App {
   private class Controller(model: Model, view: View) {
     view.changeFillButton.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent) {
-        sfxext.application.Platform.runLater {
+        Platform.runLater {
           model.fill() = if (model.fill() == jfxsp.Color.LIGHTGRAY) jfxsp.Color.GRAY else jfxsp.Color.LIGHTGRAY
         }
       }
     })
     view.changeStrokeButton.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent) {
-        sfxext.application.Platform.runLater {
+        Platform.runLater {
           model.stroke() = if (model.stroke() == jfxsp.Color.DARKGRAY) jfxsp.Color.BLACK else jfxsp.Color.DARKGRAY
         }
       }

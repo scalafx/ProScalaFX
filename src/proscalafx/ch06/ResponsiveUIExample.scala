@@ -3,7 +3,7 @@ package proscalafx.ch06
 import javafx.scene.{paint => jfxsp}
 import javafx.{geometry => jfxg}
 import scalafx.Includes._
-import scalafx.application.JFXApp
+import scalafx.application.{Platform, JFXApp}
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
 import scalafx.geometry.Insets
@@ -38,7 +38,7 @@ object ResponsiveUIExample extends JFXApp {
           def run() {
             try {
               Thread.sleep(3000)
-              sfxext.application.Platform.runLater {
+              Platform.runLater {
                 val rect = view.rectangle
                 val newArcSize = if (rect.arcHeight() < 20) 30 else 0
                 rect.arcWidth() = newArcSize
