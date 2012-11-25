@@ -1,4 +1,4 @@
-package proscalafx.ch08
+package proscalafx.ch08.AudioPlayer1
 
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
@@ -7,6 +7,8 @@ import scalafx.stage.Stage
 
 
 /**
+ * A very simple application that plays an audio file.
+ *
  * @author Jarek Sacha 
  */
 object AudioPlayer1 extends JFXApp {
