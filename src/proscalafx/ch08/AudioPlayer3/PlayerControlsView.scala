@@ -5,7 +5,6 @@ import javafx.scene.layout.Priority
 import javafx.scene.media.MediaPlayer.Status
 import javafx.scene.{layout => jfxsl}
 import javafx.{application => jfxa}
-import javafx.{util => jfxu}
 import scalafx.Includes._
 import scalafx.event.ActionEvent
 import scalafx.event.subscriptions.Subscription
@@ -137,8 +136,8 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       onAction = (ae: ActionEvent) => {
         val mediaPlayer = songModel.mediaPlayer()
         val totalDuration = mediaPlayer.totalDuration()
-        val oneSecond = jfxu.Duration.seconds(1)
-        seekAndUpdatePosition(totalDuration - oneSecond)
+        // Duration of 1 second is constructed using suffix `s`
+        seekAndUpdatePosition(totalDuration - (1 s))
       }
     }
 
