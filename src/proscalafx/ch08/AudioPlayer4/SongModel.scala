@@ -12,7 +12,7 @@ import scalafx.scene.media.{Media, MediaPlayer}
  */
 class SongModel {
   private val DefaultImageURL = classOf[SongModel].getResource("resources/defaultAlbum.png").toString
-  private val DefaultImageCover = new Image(DefaultImageURL.toString)
+  private val DefaultImageCover = new Image(DefaultImageURL)
   val album = new StringProperty(this, "album")
   val artist = new StringProperty(this, "artist")
   val title = new StringProperty(this, "title")
