@@ -1,10 +1,9 @@
 package proscalafx.ch06
 
-import javafx.application.Platform
 import javafx.scene.{paint => jfxsp}
 import javafx.{geometry => jfxg}
 import scalafx.Includes._
-import scalafx.application.JFXApp
+import scalafx.application.{Platform, JFXApp}
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
 import scalafx.geometry.Insets

@@ -3,8 +3,6 @@ package proscalafx.ch08.AudioPlayer3
 import javafx.geometry.{VPos, HPos, Pos}
 import javafx.scene.layout.Priority
 import javafx.scene.media.MediaPlayer.Status
-import javafx.scene.{layout => jfxsl}
-import javafx.{application => jfxa}
 import scalafx.Includes._
 import scalafx.event.ActionEvent
 import scalafx.event.subscriptions.Subscription
@@ -16,6 +14,8 @@ import scalafx.scene.layout.{ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
+import scalafx.application.Platform
+
 
 /**
  * @author Jarek Sacha 
@@ -231,13 +231,13 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
 
   private def addListenersAndBindings(mp: MediaPlayer) {
     statusInvalidationSubscription = mp.status.onInvalidate {
-      fxRunLater {
+      Platform.runLater {
         updateStatus(songModel.mediaPlayer().status())
       }
     }
 
     currentTimeSubscription = mp.currentTime.onInvalidate {
-      fxRunLater {
+      Platform.runLater {
         val mediaPlayer = songModel.mediaPlayer()
         val currentTime = mediaPlayer.currentTime()
         currentTimeLabel.text = formatDuration(currentTime)
@@ -269,12 +269,4 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     }
   }
 
-  /**
-   * Schedule the given code to be executed on the JavaFX Application Thread.
-   *
-   * Returns immediately.
-   */
-  private def fxRunLater(op: => Unit) {
-    jfxa.Platform.runLater(runnable(op))
-  }
 }

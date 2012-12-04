@@ -4,13 +4,13 @@ import java.awt.event.{ActionEvent, ActionListener}
 import java.awt.{BorderLayout, FlowLayout, Dimension}
 import javafx.embed.{swing => jfxes}
 import javafx.scene.{paint => jfxsp}
-import javafx.{application => jfxa}
 import javax.swing.{JButton, JPanel, JFrame}
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
+import scalafx.application.Platform
 
 
 /**
@@ -43,7 +43,7 @@ object JavaFXSceneInSwingExample extends App {
       setPreferredSize(new Dimension(210, 210))
     }
     // Execute JavaFX code on JavaFX Application Thread.
-    fxRunLater {
+    Platform.runLater {
       val rectangle = new Rectangle {
         width = 200
         height = 200
@@ -79,14 +79,14 @@ object JavaFXSceneInSwingExample extends App {
   private class Controller(model: Model, view: View) {
     view.changeFillButton.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent) {
-        fxRunLater {
+        Platform.runLater {
           model.fill() = if (model.fill() == jfxsp.Color.LIGHTGRAY) jfxsp.Color.GRAY else jfxsp.Color.LIGHTGRAY
         }
       }
     })
     view.changeStrokeButton.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent) {
-        fxRunLater {
+        Platform.runLater {
           model.stroke() = if (model.stroke() == jfxsp.Color.DARKGRAY) jfxsp.Color.BLACK else jfxsp.Color.DARKGRAY
         }
       }
@@ -97,17 +97,4 @@ object JavaFXSceneInSwingExample extends App {
     }
   }
 
-
-  /**
-   * Schedule the given code to be executed on the JavaFX Application Thread.
-   *
-   * Returns immediately.
-   */
-  private def fxRunLater(op: => Unit) {
-    jfxa.Platform.runLater(new Runnable {
-      def run() {
-        op
-      }
-    })
-  }
 }
