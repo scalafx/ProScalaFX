@@ -86,12 +86,10 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     }
 
     GridPane.setValignment(openButton, VPos.BOTTOM)
-    // NOTE: There is setValignment but not setHalignment in ScalaFX  GridPane
-    jfxsl.GridPane.setHalignment(volHigh, HPos.RIGHT)
+    GridPane.setHalignment(volHigh, HPos.RIGHT)
     GridPane.setValignment(volumeSlider, VPos.TOP)
     statusLabel.alignment = Pos.TOP_RIGHT
-    // NOTE: There is setValignment but not setHalignment in ScalaFX  GridPane
-    jfxsl.GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
+    GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
 
     gp.add(openButton, 0, 0, 1, 3)
     gp.add(volLow, 1, 0)

@@ -63,7 +63,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     createSpectrumBars(gridPane)
     spectrumListener = new SpectrumListener(START_FREQ, mediaPlayer, spectrumBars)
     GridPane.setValignment(backButton, jfxg.VPos.BOTTOM)
-    jfxsl.GridPane.setHalignment(backButton, jfxg.HPos.CENTER)
+    GridPane.setHalignment(backButton, jfxg.HPos.CENTER)
     GridPane.setMargin(backButton, Insets(20, 0, 0, 0))
     gridPane.add(backButton, 0, 3)
   }
@@ -91,8 +91,8 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
         text = formatFrequency(band.getCenterFrequency)
         styleClass +=("mediaText", "eqLabel")
       }
-      jfxsl.GridPane.setHalignment(label, jfxg.HPos.CENTER)
-      jfxsl.GridPane.setHalignment(slider, jfxg.HPos.CENTER)
+      GridPane.setHalignment(label, jfxg.HPos.CENTER)
+      GridPane.setHalignment(slider, jfxg.HPos.CENTER)
       GridPane.setHgrow(slider, jfxsl.Priority.ALWAYS)
       gp.add(label, i, 1)
       gp.add(slider, i, 2)
@@ -115,7 +115,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     for (i <- 0 until spectrumBars.length) {
       spectrumBars(i) = new SpectrumBar(100, 20)
       spectrumBars(i).setMaxWidth(44)
-      jfxsl.GridPane.setHalignment(spectrumBars(i), jfxg.HPos.CENTER)
+      GridPane.setHalignment(spectrumBars(i), jfxg.HPos.CENTER)
       gridPane.add(spectrumBars(i), i, 0)
     }
   }
