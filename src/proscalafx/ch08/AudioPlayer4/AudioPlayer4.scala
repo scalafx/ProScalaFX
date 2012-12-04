@@ -10,7 +10,6 @@ import scalafx.scene.input.DragEvent
 import scalafx.scene.layout.{StackPane, BorderPane}
 import scalafx.scene.{Node, Scene}
 import scalafx.stage.Stage
-import sfxext.Includes._
 
 
 /**

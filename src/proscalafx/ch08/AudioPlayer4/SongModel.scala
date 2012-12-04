@@ -3,7 +3,7 @@ package proscalafx.ch08.AudioPlayer4
 import javafx.scene.{image => jfxsi}
 import javafx.{collections => jfxc}
 import scalafx.Includes._
-import scalafx.beans.property.{ObjectProperty, StringProperty}
+import scalafx.beans.property.{ReadOnlyObjectWrapper, ObjectProperty, StringProperty}
 import scalafx.scene.image.Image
 import scalafx.scene.media.{Media, MediaPlayer}
 
@@ -20,9 +20,7 @@ class SongModel {
   // NOTE: use of `javafx.scene.image.Image` instead of `scalafx.scene.image.Image`, this is required for binding in
   // MetadataView to compile.
   val albumCover = new ObjectProperty[jfxsi.Image](this, "albumCover")
-  // NOTE: the JavaFX example is using here ReadOnlyObjectWrapper, but it is missing in ScalaFX,
-  // we use a local implementation of the wrapper.
-  private val _mediaPlayer = new sfxext.bean.property.ReadOnlyObjectWrapper[MediaPlayer](this, "mediaPlayer")
+  private val _mediaPlayer = new ReadOnlyObjectWrapper[MediaPlayer](this, "mediaPlayer")
 
   resetProperties()
 

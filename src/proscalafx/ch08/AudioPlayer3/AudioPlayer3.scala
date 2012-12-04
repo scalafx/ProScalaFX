@@ -8,7 +8,6 @@ import scalafx.scene.Scene
 import scalafx.scene.input.DragEvent
 import scalafx.scene.layout.BorderPane
 import scalafx.stage.Stage
-import sfxext.Includes._
 
 
 /**
