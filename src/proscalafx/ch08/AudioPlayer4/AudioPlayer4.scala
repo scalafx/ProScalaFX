@@ -62,8 +62,6 @@ object AudioPlayer4 extends JFXApp {
 
 
   private def initSceneDragAndDrop(scene: Scene) {
-    // NOTE: implicit conversion to EventHandler does not work correctly for  `(event: DragEvent) => Unit` in ScalaFX.
-    // Here we relay on a patch in sfxext.Includes._
     scene.onDragOver = (event: DragEvent) => {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {
@@ -73,8 +71,6 @@ object AudioPlayer4 extends JFXApp {
       event.consume()
     }
 
-    // NOTE: implicit conversion to EventHandler does not work correctly for  `(event: DragEvent) => Unit` in ScalaFX.
-    // Here we relay on a patch in sfxext.Includes._
     scene.onDragDropped = (event: DragEvent) => {
       val db = event.dragboard
       val url = if (db.hasFiles) {
