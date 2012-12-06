@@ -11,7 +11,6 @@ import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
-import scalafx.application.Platform
 
 
 /**
