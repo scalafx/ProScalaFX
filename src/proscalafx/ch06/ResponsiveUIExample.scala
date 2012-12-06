@@ -38,14 +38,12 @@ object ResponsiveUIExample extends JFXApp {
           def run() {
             try {
               Thread.sleep(3000)
-              Platform.runLater(new Runnable() {
-                def run() {
-                  val rect = view.rectangle
-                  val newArcSize = if (rect.arcHeight() < 20) 30 else 0
-                  rect.arcWidth() = newArcSize
-                  rect.arcHeight() = newArcSize
-                }
-              })
+              Platform.runLater {
+                val rect = view.rectangle
+                val newArcSize = if (rect.arcHeight() < 20) 30 else 0
+                rect.arcWidth() = newArcSize
+                rect.arcHeight() = newArcSize
+              }
             } catch {
               case e: InterruptedException => {/* Properly handle exception */}
             }
