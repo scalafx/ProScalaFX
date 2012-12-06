@@ -52,9 +52,7 @@ object StarterAppMain extends JFXApp {
       new Menu("File") {
         items = List(
           new MenuItem("New...") {
-            graphic = new ImageView {
-              image = new Image(this, "images/paper.png")
-            }.delegate
+            graphic = new ImageView(new Image(this, "images/paper.png"))
             accelerator = KeyCombination.keyCombination("Ctrl +N")
             onAction = {e: ActionEvent => println(e.eventType + " occurred on MenuItem New")}
           },
@@ -78,12 +76,8 @@ object StarterAppMain extends JFXApp {
       content = List(
         new Button {
           id = "newButton"
-          graphic = new ImageView {
-            image = new Image(this, "images/paper.png")
-          }
-          tooltip = new Tooltip {
-            text = "New Document... Ctrl+N"
-          }
+          graphic = new ImageView(new Image(this, "images/paper.png"))
+          tooltip = Tooltip("New Document... Ctrl+N")
           onAction = println("New toolbar button clicked")
         },
         new Button {
@@ -401,14 +395,24 @@ object StarterAppMain extends JFXApp {
             (_, _, newValue) => println(newValue + " chosen in ChoiceBox")
           )
         },
-        // FIXME: implement MenuButton
-        //        new MenuButton("MenuButton") {
-        //          ...
-        //        },
-        // FIXME: implement SplitMenuButton
-        //        new SplitMenuButton("SplitMenuButton") {
-        //          ...
-        //        },
+        new MenuButton("MenuButton") {
+          items = List(
+            new MenuItem("MenuItem A") {
+              onAction = {ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")}
+            },
+            new MenuItem("MenuItem B")
+          )
+        },
+        new SplitMenuButton {
+          text = "SplitMenuButton"
+          onAction = {ae: ActionEvent => println(ae.eventType + " occurred on SplitMenuButton")}
+          items = List(
+            new MenuItem("MenuItem A") {
+              onAction = {ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")}
+            },
+            new MenuItem("MenuItem B")
+          )
+        },
         new TextField {
           promptText = "Enter user name"
           prefColumnCount = 16

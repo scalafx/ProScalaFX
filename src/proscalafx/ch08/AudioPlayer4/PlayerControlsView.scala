@@ -156,7 +156,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     val playUrl = getClass.getResource("resources/play.png")
     playImg = new Image(playUrl.toString)
 
-    playPauseIcon = new ImageView {image = playImg}
+    playPauseIcon = new ImageView(playImg)
 
     new Button {
       graphic = playPauseIcon
@@ -165,7 +165,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
           case jffxsm.MediaPlayer.Status.PLAYING => mediaPlayer.pause()
-          case _                                 => mediaPlayer.play()
+          case _ => mediaPlayer.play()
         }
       }
     }

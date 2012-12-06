@@ -182,15 +182,15 @@ object ServiceExample extends JFXApp {
         }
       )
 
-      add(new Label {text = "Title:"}, 0, 0)
-      add(new Label {text = "Message:"}, 0, 1)
-      add(new Label {text = "Running:"}, 0, 2)
-      add(new Label {text = "State:"}, 0, 3)
-      add(new Label {text = "Total Work:"}, 0, 4)
-      add(new Label {text = "Work Done:"}, 0, 5)
-      add(new Label {text = "Progress:"}, 0, 6)
-      add(new Label {text = "Value:"}, 0, 7)
-      add(new Label {text = "Exception:"}, 0, 8)
+      add(new Label("Title:"), 0, 0)
+      add(new Label("Message:"), 0, 1)
+      add(new Label("Running:"), 0, 2)
+      add(new Label("State:"), 0, 3)
+      add(new Label("Total Work:"), 0, 4)
+      add(new Label("Work Done:"), 0, 5)
+      add(new Label("Progress:"), 0, 6)
+      add(new Label("Value:"), 0, 7)
+      add(new Label("Exception:"), 0, 8)
       add(title, 1, 0)
       add(message, 1, 1)
       add(running, 1, 2)
@@ -206,9 +206,9 @@ object ServiceExample extends JFXApp {
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = List(
-        new Label {text = "Process"},
+        new Label("Process"),
         numberOfItems,
-        new Label {text = "items"},
+        new Label("items"),
         startButton,
         cancelButton,
         exceptionButton
