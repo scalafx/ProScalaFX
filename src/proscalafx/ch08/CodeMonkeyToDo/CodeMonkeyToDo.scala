@@ -49,10 +49,9 @@ object CodeMonkeyToDo extends JFXApp {
     val rateLabel = new Label {text = "Rate"}
     val balanceLabel = new Label {text = "Balance"}
 
-    // NOTE: There is setValignment but not setHalignment in ScalaFX  GridPane
-    jfxsl.GridPane.setHalignment(volumeLabel, HPos.CENTER)
-    jfxsl.GridPane.setHalignment(rateLabel, HPos.CENTER)
-    jfxsl.GridPane.setHalignment(balanceLabel, HPos.CENTER)
+    GridPane.setHalignment(volumeLabel, HPos.CENTER)
+    GridPane.setHalignment(rateLabel, HPos.CENTER)
+    GridPane.setHalignment(balanceLabel, HPos.CENTER)
 
     val volumeSlider = new Slider {
       min = 0.0
@@ -124,8 +123,7 @@ object CodeMonkeyToDo extends JFXApp {
       content +=(clipLabel, getUpButton, goToJobButton, meetingButton, link)
     }
 
-    // NOTE: There is setValignment but not setHalignment in ScalaFX  GridPane
-    jfxsl.GridPane.setHalignment(vbox, HPos.CENTER)
+    GridPane.setHalignment(vbox, HPos.CENTER)
 
     GridPane.setHgrow(vbox, jfxsl.Priority.ALWAYS)
     GridPane.setVgrow(vbox, jfxsl.Priority.ALWAYS)

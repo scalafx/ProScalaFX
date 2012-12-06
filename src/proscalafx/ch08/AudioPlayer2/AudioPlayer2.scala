@@ -119,11 +119,13 @@ object AudioPlayer2 extends JFXApp {
       mediaPlayer.onError = new Runnable {
         def run() {
           val errorMessage = media.error().getMessage
+          // Handle errors during playback
           println("MediaPlayer Error: " + errorMessage)
         }
       }
       mediaPlayer.play()
     } catch {
+      // Handle construction errors
       case re: RuntimeException => println("Caught Exception: " + re.getMessage)
     }
   }
@@ -135,8 +137,8 @@ object AudioPlayer2 extends JFXApp {
       case "artist" => artist.text = value.toString
       case "title"  => title.text = value.toString
       case "year"   => year.text = value.toString
-      case "image"  => albumCover.setImage(value.asInstanceOf[javafx.scene.image.Image])
-      case _        => println("metadata key: " + key + ", value: " + value)
+      case "image"  => albumCover.image = value.asInstanceOf[javafx.scene.image.Image]
+      case _        => println("Unhandled metadata key: " + key + ", value: " + value)
     }
   }
 }
