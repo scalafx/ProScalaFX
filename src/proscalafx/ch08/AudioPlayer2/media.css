@@ -1,0 +1,22 @@
+.root {
+    -fx-base: #aaa;
+    -fx-background-color: black;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 60%, #111, #000);
+    -fx-background-image: url("resources/cross.png");
+}
+
+.button {
+    -fx-text-fill: #E0E0E0;
+    -fx-font-size: 20pt;
+    -fx-pref-width: 300px;
+}
+
+.label {
+    -fx-font-size: 18pt;
+    -fx-text-fill: #aaa;
+}
+
+#title {
+    -fx-font-size: 24pt;
+    -fx-text-fill: #ddd;
+}

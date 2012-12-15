@@ -53,9 +53,7 @@ you on the good Earth." """.replace("\n", "")
     scene = new Scene(516, 387) {
       content = new Group {
         children = List(
-          new ImageView {
-            image = new Image("http://projavafx.com/images/earthrise.jpg")
-          },
+          new ImageView(new Image("http://projavafx.com/images/earthrise.jpg")),
           new ScrollPane {
             layoutX = 50
             layoutY = 180

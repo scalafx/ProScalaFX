@@ -2,7 +2,6 @@ package proscalafx.ch06
 
 import java.util.concurrent.atomic.AtomicBoolean
 import javafx.beans.{binding => jfxbb}
-import javafx.concurrent.Task
 import javafx.{concurrent => jfxc}
 import javafx.{geometry => jfxg}
 import scalafx.Includes._
@@ -10,6 +9,7 @@ import scalafx.application.JFXApp
 import scalafx.beans.property.IntegerProperty
 import scalafx.concurrent.Service
 import scalafx.event.ActionEvent
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.{TextField, Button, Label, ProgressBar}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
@@ -59,7 +59,7 @@ object ServiceExample extends JFXApp {
     // delegate parameter (ScalaFX `Service` has no default constructor).
     object worker extends Service(new jfxc.Service[String]() {
 
-      protected def createTask(): Task[String] = new jfxc.Task[String] {
+      protected def createTask(): jfxc.Task[String] = new jfxc.Task[String] {
         protected def call(): String = {
           updateTitle("Example Task")
           updateMessage("Starting...")
@@ -81,7 +81,6 @@ object ServiceExample extends JFXApp {
 
           "Completed at " + System.currentTimeMillis
         }
-
       }
     })
 
@@ -163,7 +162,7 @@ object ServiceExample extends JFXApp {
 
 
     val topPane = new HBox() {
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = progressBar
@@ -172,7 +171,7 @@ object ServiceExample extends JFXApp {
     val centerPane = new GridPane {
       hgap = 10
       vgap = 10
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       columnConstraints = List(new ColumnConstraints {
         halignment = jfxg.HPos.RIGHT
         minWidth = 65
@@ -183,15 +182,15 @@ object ServiceExample extends JFXApp {
         }
       )
 
-      add(new Label {text = "Title:"}, 0, 0)
-      add(new Label {text = "Message:"}, 0, 1)
-      add(new Label {text = "Running:"}, 0, 2)
-      add(new Label {text = "State:"}, 0, 3)
-      add(new Label {text = "Total Work:"}, 0, 4)
-      add(new Label {text = "Work Done:"}, 0, 5)
-      add(new Label {text = "Progress:"}, 0, 6)
-      add(new Label {text = "Value:"}, 0, 7)
-      add(new Label {text = "Exception:"}, 0, 8)
+      add(new Label("Title:"), 0, 0)
+      add(new Label("Message:"), 0, 1)
+      add(new Label("Running:"), 0, 2)
+      add(new Label("State:"), 0, 3)
+      add(new Label("Total Work:"), 0, 4)
+      add(new Label("Work Done:"), 0, 5)
+      add(new Label("Progress:"), 0, 6)
+      add(new Label("Value:"), 0, 7)
+      add(new Label("Exception:"), 0, 8)
       add(title, 1, 0)
       add(message, 1, 1)
       add(running, 1, 2)
@@ -203,13 +202,13 @@ object ServiceExample extends JFXApp {
       add(exception, 1, 8)
     }
     val buttonPane = new HBox {
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = List(
-        new Label {text = "Process"},
+        new Label("Process"),
         numberOfItems,
-        new Label {text = "items"},
+        new Label("items"),
         startButton,
         cancelButton,
         exceptionButton

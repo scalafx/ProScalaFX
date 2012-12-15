@@ -99,9 +99,7 @@ object StageCoachMain extends JFXApp {
               new HBox {
                 spacing = 10
                 content = List(
-                  new Label {
-                    text = "title:"
-                  },
+                  new Label("title:"),
                   titleTextField)
               },
               new Button {
