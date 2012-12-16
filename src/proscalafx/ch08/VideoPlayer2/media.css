@@ -1,0 +1,9 @@
+.root {
+    -fx-background-color: black;
+}
+
+.label {
+    -fx-padding: 20;
+    -fx-font-size: 36pt;
+    -fx-text-fill: white;
+}

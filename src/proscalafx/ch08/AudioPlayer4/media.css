@@ -1,0 +1,100 @@
+.root {
+    -fx-base: #222;
+    -fx-background-color: black;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 60%, #111, #000);
+    -fx-background-image: url("resources/cross.png");
+}
+
+.button {
+    -fx-text-fill: #E0E0E0;
+}
+
+.label {
+    -fx-font-size: 18pt;
+    -fx-text-fill: #aaa;
+}
+
+#title {
+    -fx-font-size: 24pt;
+    -fx-text-fill: #ddd;
+}
+
+#openButton {
+    -fx-graphic: url("resources/music_note.png");
+}
+
+#eqButton {
+    -fx-shape: "M 1,0 L 10,0 13,5 10,10 1,10 Q 0 10 0 9 L 0,1 Q 0 0 1 0";
+    -fx-font-size: 12pt;
+    -fx-alignment: center-left;
+}
+
+.eqSlider {
+    -fx-background-radius: 5;
+    -fx-background-color: #222, #888, black;
+    -fx-background-insets: 0, 1 0 0 1, 1;
+    -fx-padding: 2 10;
+}
+
+.eqSlider .thumb {
+    -fx-background-image: url("resources/thumb.png");
+    -fx-padding: 12;
+}
+
+.eqSlider:vertical .track {
+    -fx-padding: 5;
+}
+
+.spectrumBar {
+    -fx-background-radius: 5;
+    -fx-background-color: #222, #888, black;
+    -fx-background-insets: 0, 1 0 0 1, 1;
+    -fx-padding: 2 10;
+}
+
+#backButton {
+    -fx-shape: "M 3,0 L 12,0 Q 13,0 13,1 L 13,9 Q 13,10 12,10 L 3,10 1,5";
+    -fx-font-size: 12pt;
+    -fx-alignment: center-right;
+}
+
+#playPauseButton, #seekEndButton, #seekStartButton {
+    -fx-background-color: transparent;
+}
+
+#playPauseButton:hover, #seekEndButton:hover, #seekStartButton:hover {
+    -fx-background-color: rgb(255, 255, 255, 0.1);
+}
+
+#seekEndButton {
+    -fx-graphic: url("resources/next.png");
+}
+
+#seekStartButton {
+    -fx-graphic: url("resources/prev.png");
+}
+
+#volumeHigh {
+    -fx-image: url("resources/volHigh.png");
+}
+
+#volumeLow {
+    -fx-image: url("resources/volLow.png");
+}
+
+.statusDisplay {
+    -fx-border-color: white;
+    -fx-border-radius: 2;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-font-size: 10pt;
+}
+
+.mediaText {
+    -fx-text-fill: white;
+    -fx-font-size: 11pt;
+}
+
+.eqLabel {
+    -fx-padding: 8 3;
+}

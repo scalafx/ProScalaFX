@@ -1,11 +1,11 @@
 package proscalafx.ch04.reversi.ui
 
-import javafx.application.{ConditionalFeature, Platform}
 import javafx.geometry.Pos
 import javafx.scene.text.FontWeight
+import javafx.{application => jfxa}
 import proscalafx.ch04.reversi.model.{Owner, WHITE, BLACK, ReversiModel}
 import scalafx.Includes._
-import scalafx.application.JFXApp
+import scalafx.application.{Platform, JFXApp}
 import scalafx.scene.control.Button
 import scalafx.scene.effect.{DropShadow, InnerShadow}
 import scalafx.scene.layout._
@@ -54,7 +54,7 @@ object Reversi extends JFXApp {
   AnchorPane.setTopAnchor(restart, 10d)
 
 
-  if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
+  if (Platform.isSupported(jfxa.ConditionalFeature.SCENE3D)) {
     stage.scene().camera = new PerspectiveCamera() {
       fieldOfView = 60
     }.delegate
@@ -105,7 +105,7 @@ object Reversi extends JFXApp {
       }, i, j)
     }
 
-    if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
+    if (Platform.isSupported(jfxa.ConditionalFeature.SCENE3D)) {
       val scale = new Scale(.45, .8, 1, 300, 60, 0)
       val translate = new Translate(75, -2, -150)
       val xRot = new Rotate {

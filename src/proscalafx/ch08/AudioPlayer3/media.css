@@ -1,0 +1,61 @@
+.root {
+    -fx-base: #222;
+    -fx-background-color: black;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 60%, #111, #000);
+    -fx-background-image: url("resources/cross.png");
+}
+
+.button {
+    -fx-text-fill: #E0E0E0;
+}
+
+.label {
+    -fx-font-size: 18pt;
+    -fx-text-fill: #aaa;
+}
+
+#title {
+    -fx-font-size: 24pt;
+    -fx-text-fill: #ddd;
+}
+
+#openButton {
+    -fx-graphic: url("resources/music_note.png");
+}
+
+#playPauseButton, #seekEndButton, #seekStartButton {
+    -fx-background-color: transparent;
+}
+
+#playPauseButton:hover, #seekEndButton:hover, #seekStartButton:hover {
+    -fx-background-color: rgb(255, 255, 255, 0.1);
+}
+
+#seekEndButton {
+    -fx-graphic: url("resources/next.png");
+}
+
+#seekStartButton {
+    -fx-graphic: url("resources/prev.png");
+}
+
+#volumeHigh {
+    -fx-image: url("resources/volHigh.png");
+}
+
+#volumeLow {
+    -fx-image: url("resources/volLow.png");
+}
+
+.statusDisplay {
+    -fx-border-color: white;
+    -fx-border-radius: 2;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-font-size: 10pt;
+}
+
+.mediaText {
+    -fx-text-fill: white;
+    -fx-font-size: 11pt;
+}

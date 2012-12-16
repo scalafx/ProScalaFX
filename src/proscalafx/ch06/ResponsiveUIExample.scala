@@ -1,12 +1,12 @@
 package proscalafx.ch06
 
-import javafx.application.Platform
 import javafx.scene.{paint => jfxsp}
 import javafx.{geometry => jfxg}
 import scalafx.Includes._
-import scalafx.application.JFXApp
+import scalafx.application.{Platform, JFXApp}
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.{BorderPane, HBox}
@@ -38,14 +38,12 @@ object ResponsiveUIExample extends JFXApp {
           def run() {
             try {
               Thread.sleep(3000)
-              Platform.runLater(new Runnable() {
-                def run() {
-                  val rect = view.rectangle
-                  val newArcSize = if (rect.arcHeight() < 20) 30 else 0
-                  rect.arcWidth() = newArcSize
-                  rect.arcHeight() = newArcSize
-                }
-              })
+              Platform.runLater {
+                val rect = view.rectangle
+                val newArcSize = if (rect.arcHeight() < 20) 30 else 0
+                rect.arcWidth() = newArcSize
+                rect.arcHeight() = newArcSize
+              }
             } catch {
               case e: InterruptedException => {/* Properly handle exception */}
             }
@@ -91,7 +89,7 @@ object ResponsiveUIExample extends JFXApp {
     val changeStrokeButton = new Button("Chang Stroke")
 
     val buttonHBox = new HBox {
-      padding = new jfxg.Insets(10, 10, 10, 10)
+      padding = Insets(10)
       spacing = 10
       innerAlignment = jfxg.Pos.CENTER
       content = List(
@@ -102,7 +100,7 @@ object ResponsiveUIExample extends JFXApp {
 
     val scene = new Scene {
       root = new BorderPane {
-        padding = new jfxg.Insets(10, 10, 10, 10)
+        padding = Insets(10)
         center = rectangle
         bottom = buttonHBox
       }.delegate

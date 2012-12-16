@@ -1,0 +1,25 @@
+.root {
+    -fx-base: #606060;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 60%, #666a6b, #2b2f32);
+    -fx-background-image: url("resources/cross.png");
+    /*  -fx-background-repeat: repeat;  */
+    -fx-background-position: left top;
+}
+
+.button {
+    -fx-text-fill: #E0E0E0;
+    -fx-font-size: 20pt;
+    -fx-pref-width: 300px;
+}
+
+.label {
+    -fx-text-fill: #E0E0E0;
+}
+
+#clipLabel {
+    -fx-font-size: 24pt;
+}
+
+.hyperlink {
+    -fx-text-fill: #808080;
+}

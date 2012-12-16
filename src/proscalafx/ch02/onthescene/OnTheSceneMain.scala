@@ -3,7 +3,7 @@
  */
 package proscalafx.ch02.onthescene
 
-import javafx.scene.Cursor
+import javafx.{scene => jfxs}
 import javafx.scene.{text => jfxst}
 import javafx.{geometry => jfxg}
 import scalafx.Includes._
@@ -31,22 +31,22 @@ object OnTheSceneMain extends JFXApp {
 
   val fillVals = DoubleProperty(255.0)
 
-  val cursors = ObservableBuffer[Cursor](
-    Cursor.DEFAULT,
-    Cursor.CROSSHAIR,
-    Cursor.WAIT,
-    Cursor.TEXT,
-    Cursor.HAND,
-    Cursor.MOVE,
-    Cursor.N_RESIZE,
-    Cursor.NE_RESIZE,
-    Cursor.E_RESIZE,
-    Cursor.SE_RESIZE,
-    Cursor.S_RESIZE,
-    Cursor.SW_RESIZE,
-    Cursor.W_RESIZE,
-    Cursor.NW_RESIZE,
-    Cursor.NONE
+  val cursors = ObservableBuffer[jfxs.Cursor](
+    jfxs.Cursor.DEFAULT,
+    jfxs.Cursor.CROSSHAIR,
+    jfxs.Cursor.WAIT,
+    jfxs.Cursor.TEXT,
+    jfxs.Cursor.HAND,
+    jfxs.Cursor.MOVE,
+    jfxs.Cursor.N_RESIZE,
+    jfxs.Cursor.NE_RESIZE,
+    jfxs.Cursor.E_RESIZE,
+    jfxs.Cursor.SE_RESIZE,
+    jfxs.Cursor.S_RESIZE,
+    jfxs.Cursor.SW_RESIZE,
+    jfxs.Cursor.W_RESIZE,
+    jfxs.Cursor.NW_RESIZE,
+    jfxs.Cursor.NONE
   )
 
   val sliderRef = new Slider {
@@ -56,7 +56,7 @@ object OnTheSceneMain extends JFXApp {
     orientation = jfxg.Orientation.VERTICAL
   }
 
-  val choiceRef = new ChoiceBox[Cursor] {
+  val choiceRef = new ChoiceBox[jfxs.Cursor] {
     items = cursors
     // XXX: String converter used to remove "[SFX]" in begin of toString. 
     //However in selected item the prefix "[SFX]" appears.
