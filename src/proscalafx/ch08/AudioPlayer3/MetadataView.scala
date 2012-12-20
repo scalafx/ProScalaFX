@@ -1,14 +1,13 @@
 package proscalafx.ch08.AudioPlayer3
 
 import javafx.scene.{layout => jfxsl}
-import javafx.{geometry => jfxg}
 import scalafx.Includes._
-import scalafx.geometry.Insets
+import scalafx.geometry.{VPos, Insets}
 import scalafx.scene.Node
 import scalafx.scene.control.Label
 import scalafx.scene.effect.Reflection
 import scalafx.scene.image.ImageView
-import scalafx.scene.layout.{RowConstraints, ColumnConstraints, GridPane}
+import scalafx.scene.layout.{Priority, RowConstraints, ColumnConstraints, GridPane}
 
 
 /**
@@ -57,11 +56,11 @@ class MetadataView(songModel: SongModel) extends AbstractView(songModel) {
         // NOTE: the call to delegate to avoid compilation error.
         // Should `scalafx.scene.layout.GridPane.columnConstraints_=()` be fixed to work without call to delegate?
         new ColumnConstraints {
-          hgrow = jfxsl.Priority.ALWAYS
+          hgrow = Priority.ALWAYS
         }.delegate
         )
       val r0 = new RowConstraints {
-        valignment = jfxg.VPos.TOP
+        valignment = VPos.TOP
       }
       rowConstraints +=(r0, r0, r0, r0)
     }

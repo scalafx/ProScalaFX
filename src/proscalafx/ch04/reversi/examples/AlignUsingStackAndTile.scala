@@ -1,15 +1,13 @@
 package proscalafx.ch04.reversi.examples
 
-import javafx.geometry.Pos
-import javafx.scene.text.FontWeight
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.geometry.Pos
 import scalafx.scene.Scene
 import scalafx.scene.layout.StackPane
 import scalafx.scene.layout.TilePane
 import scalafx.scene.paint.Color
-import scalafx.scene.text.Font
-import scalafx.scene.text.Text
+import scalafx.scene.text.{FontWeight, Font, Text}
 import scalafx.stage.Stage
 
 object AlignUsingStackAndTile extends JFXApp {

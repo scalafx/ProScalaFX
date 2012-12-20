@@ -3,13 +3,11 @@
  */
 package proscalafx.ch02.stagecoach
 
-import javafx.geometry.VPos
-import javafx.stage.StageStyle
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.beans.property.ReadOnlyDoubleProperty.sfxReadOnlyDoubleProperty2jfx
 import scalafx.beans.property.StringProperty
-import scalafx.geometry.Rectangle2D
+import scalafx.geometry.{VPos, Rectangle2D}
 import scalafx.scene.Group
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
@@ -23,8 +21,7 @@ import scalafx.scene.paint.Color
 import scalafx.scene.paint.Color.sfxColor2jfx
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
-import scalafx.stage.Screen
-import scalafx.stage.Stage
+import scalafx.stage.{StageStyle, Screen, Stage}
 
 
 /**

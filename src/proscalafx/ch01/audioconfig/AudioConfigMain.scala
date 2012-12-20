@@ -1,9 +1,8 @@
 package proscalafx.ch01.audioconfig
 
-import javafx.geometry.VPos
-import javafx.scene.text.FontWeight
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.geometry.VPos
 import scalafx.scene.Scene
 import scalafx.scene.control.CheckBox
 import scalafx.scene.control.ChoiceBox
@@ -13,8 +12,7 @@ import scalafx.scene.paint.LinearGradient
 import scalafx.scene.paint.Stop
 import scalafx.scene.shape.Line
 import scalafx.scene.shape.Rectangle
-import scalafx.scene.text.Font
-import scalafx.scene.text.Text
+import scalafx.scene.text.{FontWeight, Font, Text}
 import scalafx.stage.Stage
 
 object AudioConfigMain extends JFXApp {

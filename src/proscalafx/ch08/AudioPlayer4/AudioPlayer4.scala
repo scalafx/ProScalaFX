@@ -2,11 +2,10 @@
 package proscalafx.ch08.AudioPlayer4
 
 import com.sun.javafx.{runtime => csjfxr}
-import javafx.scene.{input => jfxsi}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.event.ActionEvent
-import scalafx.scene.input.DragEvent
+import scalafx.scene.input.{TransferMode, DragEvent}
 import scalafx.scene.layout.{StackPane, BorderPane}
 import scalafx.scene.{Node, Scene}
 import scalafx.stage.Stage
@@ -66,7 +65,7 @@ object AudioPlayer4 extends JFXApp {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {
         // NOTE: We need to pass in `TransferMode` as Java vararg, since we use `javafx.scene.input.DragEvent`
-        event.acceptTransferModes(jfxsi.TransferMode.ANY: _*)
+        event.acceptTransferModes(TransferMode.ANY: _*)
       }
       event.consume()
     }

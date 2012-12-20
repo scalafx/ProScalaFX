@@ -2,15 +2,14 @@ package proscalafx.ch08.AudioPlayer2
 
 import javafx.scene.{layout => jfxsl}
 import javafx.{collections => jfxc}
-import javafx.{geometry => jfxg}
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.geometry.Insets
+import scalafx.geometry.{VPos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
 import scalafx.scene.effect.Reflection
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{RowConstraints, ColumnConstraints, GridPane}
+import scalafx.scene.layout.{Priority, RowConstraints, ColumnConstraints, GridPane}
 import scalafx.scene.media.{Media, MediaPlayer}
 import scalafx.stage.Stage
 
@@ -54,11 +53,11 @@ object AudioPlayer2 extends JFXApp {
       // NOTE: the call to delegate to avoid compilation error.
       // Should `scalafx.scene.layout.GridPane.columnConstraints_=()` be fixed to work without call to delegate?
       new ColumnConstraints {
-        hgrow = jfxsl.Priority.ALWAYS
+        hgrow = Priority.ALWAYS
       }.delegate
       )
     val r0 = new RowConstraints {
-      valignment = jfxg.VPos.TOP
+      valignment = VPos.TOP
     }
     rowConstraints +=(r0, r0, r0, r0)
   }
@@ -133,12 +132,12 @@ object AudioPlayer2 extends JFXApp {
 
   private def handleMetadata(key: String, value: AnyRef) {
     key match {
-      case "album"  => album.text = value.toString
+      case "album" => album.text = value.toString
       case "artist" => artist.text = value.toString
-      case "title"  => title.text = value.toString
-      case "year"   => year.text = value.toString
-      case "image"  => albumCover.image = value.asInstanceOf[javafx.scene.image.Image]
-      case _        => println("Unhandled metadata key: " + key + ", value: " + value)
+      case "title" => title.text = value.toString
+      case "year" => year.text = value.toString
+      case "image" => albumCover.image = value.asInstanceOf[javafx.scene.image.Image]
+      case _ => println("Unhandled metadata key: " + key + ", value: " + value)
     }
   }
 }

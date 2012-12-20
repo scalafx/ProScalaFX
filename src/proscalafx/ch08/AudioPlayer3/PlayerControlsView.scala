@@ -1,20 +1,18 @@
 package proscalafx.ch08.AudioPlayer3
 
-import javafx.geometry.{VPos, HPos, Pos}
-import javafx.scene.layout.Priority
 import javafx.scene.media.MediaPlayer.Status
 import scalafx.Includes._
+import scalafx.application.Platform
 import scalafx.event.ActionEvent
 import scalafx.event.subscriptions.Subscription
-import scalafx.geometry.Insets
+import scalafx.geometry.{Pos, HPos, VPos, Insets}
 import scalafx.scene.Node
 import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{ColumnConstraints, GridPane, HBox}
+import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-import scalafx.application.Platform
 
 
 /**
@@ -165,7 +163,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
           case Status.PLAYING => mediaPlayer.pause()
-          case _              => mediaPlayer.play()
+          case _ => mediaPlayer.play()
         }
       }
     }

@@ -1,22 +1,18 @@
 package proscalafx.ch01.helloearthrise
 
-import javafx.geometry.VPos
 import javafx.scene.control.ScrollPane.ScrollBarPolicy
-import javafx.scene.text.FontWeight
-import javafx.scene.text.TextAlignment
 import scalafx.animation.Interpolator
 import scalafx.animation.Timeline
 import scalafx.animation.TranslateTransition
 import scalafx.application.JFXApp
+import scalafx.geometry.VPos
 import scalafx.scene.Group
 import scalafx.scene.Scene
 import scalafx.scene.control.ScrollPane
 import scalafx.scene.image.Image
-import scalafx.scene.image.Image.sfxImage2jfx
 import scalafx.scene.image.ImageView
 import scalafx.scene.paint.Color
-import scalafx.scene.text.Font
-import scalafx.scene.text.Text
+import scalafx.scene.text.{FontWeight, TextAlignment, Font, Text}
 import scalafx.stage.Stage
 import scalafx.util.Duration
 import scalafx.util.UtilIncludes.jfxDuration2sfx
