@@ -1,7 +1,6 @@
 package proscalafx.ch01.audioconfig
 
-import scalafx.beans.property.BooleanProperty
-import scalafx.beans.property.IntegerProperty
+import scalafx.beans.property.{BooleanProperty, IntegerProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.SingleSelectionModel
 

@@ -2,23 +2,15 @@ package proscalafx.ch02.zenpong
 
 import javafx.animation.Animation.Status
 import scalafx.Includes._
-import scalafx.animation.KeyFrame
-import scalafx.animation.Timeline
+import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.JFXApp
-import scalafx.beans.property.BooleanProperty
-import scalafx.beans.property.DoubleProperty
+import scalafx.beans.property.{BooleanProperty, DoubleProperty}
 import scalafx.event.ActionEvent
-import scalafx.scene.Cursor
-import scalafx.scene.Group
-import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.input.{KeyCode, KeyEvent, MouseEvent}
-import scalafx.scene.paint.Color
-import scalafx.scene.paint.CycleMethod
-import scalafx.scene.paint.LinearGradient
-import scalafx.scene.paint.Stop
-import scalafx.scene.shape.Circle
-import scalafx.scene.shape.Rectangle
+import scalafx.scene.paint.{Color, CycleMethod, LinearGradient, Stop}
+import scalafx.scene.shape.{Circle, Rectangle}
+import scalafx.scene.{Cursor, Group, Scene}
 import scalafx.stage.Stage
 
 object ZenPongMain extends JFXApp {

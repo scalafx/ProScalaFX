@@ -8,19 +8,13 @@ import scalafx.application.JFXApp
 import scalafx.beans.property.ReadOnlyDoubleProperty.sfxReadOnlyDoubleProperty2jfx
 import scalafx.beans.property.StringProperty
 import scalafx.geometry.{VPos, Rectangle2D}
-import scalafx.scene.Group
-import scalafx.scene.Scene
-import scalafx.scene.control.Button
-import scalafx.scene.control.CheckBox
-import scalafx.scene.control.Label
-import scalafx.scene.control.TextField
+import scalafx.scene.control.{Button, CheckBox, Label, TextField}
 import scalafx.scene.input.MouseEvent
-import scalafx.scene.layout.HBox
-import scalafx.scene.layout.VBox
+import scalafx.scene.layout.{HBox, VBox}
 import scalafx.scene.paint.Color
-import scalafx.scene.paint.Color.sfxColor2jfx
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
+import scalafx.scene.{Group, Scene}
 import scalafx.stage.{StageStyle, Screen, Stage}
 
 
