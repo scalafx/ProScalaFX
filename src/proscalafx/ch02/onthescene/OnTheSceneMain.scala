@@ -7,15 +7,13 @@ import javafx.scene.{text => jfxst}
 import javafx.{scene => jfxs}
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.beans.property.DoubleProperty
-import scalafx.beans.property.StringProperty
+import scalafx.beans.property.{DoubleProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
 import scalafx.geometry.{VPos, Orientation, HPos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control._
-import scalafx.scene.layout.FlowPane
-import scalafx.scene.layout.HBox
+import scalafx.scene.layout.{FlowPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{FontWeight, Font, Text}
 import scalafx.stage.Stage
@@ -178,6 +176,5 @@ object OnTheSceneMain extends JFXApp {
   }
 
   // Add to the Text node to the FlowPane. 
-  // TODO: Use ScalaFX notation. 
-  sceneRef.content.add(addedTextRef)
+  sceneRef.content += addedTextRef
 }
