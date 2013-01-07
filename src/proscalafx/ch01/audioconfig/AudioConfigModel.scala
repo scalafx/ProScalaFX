@@ -26,7 +26,7 @@ class AudioConfigModel {
   /**
    * Indicates whether audio is muted
    */
-  val muting: BooleanProperty = false
+  val muting = BooleanProperty(false)
 
   /**
    * List of some musical genres

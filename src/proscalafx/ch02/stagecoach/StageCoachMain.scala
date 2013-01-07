@@ -30,7 +30,7 @@ import scalafx.stage.{StageStyle, Screen, Stage}
  */
 object StageCoachMain extends JFXApp {
 
-  val titleProperty: StringProperty = ""
+  val titleProperty = StringProperty("")
 
   val stageStyle = parameters.unnamed match {
     case Seq("transparent") => StageStyle.TRANSPARENT

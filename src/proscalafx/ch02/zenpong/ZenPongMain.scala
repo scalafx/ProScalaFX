@@ -138,7 +138,7 @@ object ZenPongMain extends JFXApp {
   /**
    * Controls whether the startButton is visible
    */
-  val startVisible: BooleanProperty = true
+  val startVisible = BooleanProperty(true)
 
   /**
    * The animation of the ball
