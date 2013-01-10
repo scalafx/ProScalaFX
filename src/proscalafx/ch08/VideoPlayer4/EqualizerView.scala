@@ -1,12 +1,10 @@
 package proscalafx.ch08.VideoPlayer4
 
-import javafx.scene.{layout => jfxsl}
-import javafx.{geometry => jfxg}
 import scalafx.Includes._
 import scalafx.event.ActionEvent
-import scalafx.geometry.Insets
+import scalafx.geometry.{Orientation, HPos, VPos, Insets}
 import scalafx.scene.control.{Label, Slider, Button}
-import scalafx.scene.layout.{RowConstraints, GridPane}
+import scalafx.scene.layout.{Priority, RowConstraints, GridPane}
 import scalafx.scene.media.{EqualizerBand, MediaPlayer}
 
 /**
@@ -51,7 +49,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
 
   protected def initView(): GridPane = {
     val middle = new RowConstraints()
-    val outside = new RowConstraints() {vgrow = jfxsl.Priority.ALWAYS}
+    val outside = new RowConstraints() {vgrow = Priority.ALWAYS}
     new GridPane {
       padding = Insets(10)
       hgap = 20
@@ -68,8 +66,8 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     createSpectrumBars(gridPane)
     spectrumListener = new SpectrumListener(StartFrequency, mediaPlayer, spectrumBars)
 
-    GridPane.setValignment(backButton, jfxg.VPos.BOTTOM)
-    GridPane.setHalignment(backButton, jfxg.HPos.CENTER)
+    GridPane.setValignment(backButton, VPos.BOTTOM)
+    GridPane.setHalignment(backButton, HPos.CENTER)
     GridPane.setMargin(backButton, Insets(20, 0, 0, 0))
     gridPane.add(backButton, 0, 3)
   }
@@ -110,9 +108,9 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
         styleClass +=("mediaText", "eqLabel")
       }
 
-      GridPane.setHalignment(label, jfxg.HPos.CENTER)
-      GridPane.setHalignment(slider, jfxg.HPos.CENTER)
-      GridPane.setHgrow(slider, jfxsl.Priority.ALWAYS)
+      GridPane.setHalignment(label, HPos.CENTER)
+      GridPane.setHalignment(slider, HPos.CENTER)
+      GridPane.setHgrow(slider, Priority.ALWAYS)
 
       gp.add(label, i, 1)
       gp.add(slider, i, 2)
@@ -125,7 +123,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     max = maxValue
     value = eb.gain()
     styleClass += "eqSlider"
-    orientation = jfxg.Orientation.VERTICAL
+    orientation = Orientation.VERTICAL
     value <==> eb.gain
     prefWidth = 44
   }
@@ -137,7 +135,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     for (i <- 0 until spectrumBars.length) {
       spectrumBars(i) = new SpectrumBar(100, 20)
       spectrumBars(i).setMaxWidth(44)
-      GridPane.setHalignment(spectrumBars(i), jfxg.HPos.CENTER)
+      GridPane.setHalignment(spectrumBars(i), HPos.CENTER)
       gridPane.add(spectrumBars(i), i, 0)
     }
   }

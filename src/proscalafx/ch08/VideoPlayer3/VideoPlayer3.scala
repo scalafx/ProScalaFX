@@ -2,11 +2,10 @@ package proscalafx.ch08.VideoPlayer3
 
 import java.io.File
 import java.net.URL
-import javafx.geometry.Pos
 import scalafx.Includes._
 import scalafx.animation.{TranslateTransition, ParallelTransition}
 import scalafx.application.{Platform, JFXApp}
-import scalafx.geometry.Rectangle2D
+import scalafx.geometry.{Pos, Rectangle2D}
 import scalafx.scene.control.Label
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.StackPane
@@ -14,7 +13,6 @@ import scalafx.scene.media.{MediaMarkerEvent, Media, MediaPlayer, MediaView}
 import scalafx.scene.{Node, Scene}
 import scalafx.stage.Stage
 import scalafx.util.Duration
-import sfxext.Includes._
 
 
 /**
@@ -68,7 +66,7 @@ object VideoPlayer3 extends JFXApp {
         message.visible = true
         buildSplitTransition(mediaView1, mediaView2).play
       }
-      case _       => buildJoinTransition(mediaView1, mediaView2).play
+      case _ => buildJoinTransition(mediaView1, mediaView2).play
     }
   }
 

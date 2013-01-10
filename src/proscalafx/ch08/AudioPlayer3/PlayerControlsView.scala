@@ -1,20 +1,18 @@
 package proscalafx.ch08.AudioPlayer3
 
-import javafx.geometry.{VPos, HPos, Pos}
-import javafx.scene.layout.Priority
-import javafx.scene.media.MediaPlayer.Status
 import scalafx.Includes._
+import scalafx.application.Platform
 import scalafx.event.ActionEvent
 import scalafx.event.subscriptions.Subscription
-import scalafx.geometry.Insets
+import scalafx.geometry.{Pos, HPos, VPos, Insets}
 import scalafx.scene.Node
 import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{ColumnConstraints, GridPane, HBox}
+import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-import scalafx.application.Platform
+import scalafx.scene.media.MediaPlayer.Status
 
 
 /**
@@ -164,8 +162,8 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       onAction = (ae: ActionEvent) => {
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
-          case Status.PLAYING => mediaPlayer.pause()
-          case _              => mediaPlayer.play()
+          case Status.PLAYING.delegate => mediaPlayer.pause()
+          case _ => mediaPlayer.play()
         }
       }
     }
@@ -201,11 +199,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = songModel.mediaPlayer()
-    if (mediaPlayer.status == Status.STOPPED) mediaPlayer.pause()
+    if ( Status.STOPPED == mediaPlayer.status ) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (mediaPlayer.status != Status.PLAYING) updatePositionSlider(duration)
+    if (  Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
   }
 
   private def formatDuration(duration: Duration): String = {
@@ -216,7 +214,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
   def updateStatus(newStatus: Status) {
-    if (newStatus == Status.UNKNOWN || newStatus == null) {
+    if (Status.UNKNOWN == newStatus  || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"
@@ -224,7 +222,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       controlPanel.disable = false
       positionSlider.disable = false
       statusLabel.text = newStatus.toString
-      playPauseIcon.image = if (newStatus == Status.PLAYING) pauseImg else playImg
+      playPauseIcon.image = if (Status.PLAYING == newStatus) pauseImg else playImg
     }
   }
 

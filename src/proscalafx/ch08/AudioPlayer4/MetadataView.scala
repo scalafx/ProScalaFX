@@ -1,13 +1,11 @@
 package proscalafx.ch08.AudioPlayer4
 
-import javafx.scene.{layout => jfxsl}
-import javafx.{geometry => jfxg}
 import scalafx.Includes._
-import scalafx.geometry.Insets
+import scalafx.geometry.{VPos, Insets}
 import scalafx.scene.control.Label
 import scalafx.scene.effect.Reflection
 import scalafx.scene.image.ImageView
-import scalafx.scene.layout.{RowConstraints, ColumnConstraints, GridPane}
+import scalafx.scene.layout.{Priority, RowConstraints, ColumnConstraints, GridPane}
 
 
 /**
@@ -46,7 +44,7 @@ class MetadataView(songModel: SongModel) extends AbstractView[GridPane](songMode
     new GridPane {
       padding = Insets(10)
       hgap = 20
-      add(albumCover, 0, 0, 1, jfxsl.GridPane.REMAINING)
+      add(albumCover, 0, 0, 1, GridPane.REMAINING)
       add(title, 1, 0)
       add(artist, 1, 1)
       add(album, 1, 2)
@@ -56,11 +54,11 @@ class MetadataView(songModel: SongModel) extends AbstractView[GridPane](songMode
         // NOTE: the call to delegate to avoid compilation error.
         // Should `scalafx.scene.layout.GridPane.columnConstraints_=()` be fixed to work without call to delegate?
         new ColumnConstraints {
-          hgrow = jfxsl.Priority.ALWAYS
+          hgrow = Priority.ALWAYS
         }.delegate
         )
       val r0 = new RowConstraints {
-        valignment = jfxg.VPos.TOP
+        valignment = VPos.TOP
       }
       rowConstraints +=(r0, r0, r0, r0)
     }

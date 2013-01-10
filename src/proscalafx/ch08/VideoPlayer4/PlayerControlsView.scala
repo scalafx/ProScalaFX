@@ -1,20 +1,18 @@
 package proscalafx.ch08.VideoPlayer4
 
-import javafx.scene.{layout => jfxsl}
-import javafx.scene.{media => jffxsm}
-import javafx.{geometry => jfxg}
 import scalafx.Includes._
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
 import scalafx.event.subscriptions.Subscription
-import scalafx.geometry.Insets
+import scalafx.geometry.{HPos, Pos, VPos, Insets}
 import scalafx.scene.Node
 import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{ColumnConstraints, GridPane, HBox}
+import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
+import scalafx.scene.media.MediaPlayer.Status
 
 /**
  * @author Jarek Sacha 
@@ -70,7 +68,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
     val buttonCol = new ColumnConstraints(100)
     val spacerCol = new ColumnConstraints(40, 80, 80)
-    val middleCol = new ColumnConstraints {hgrow = jfxsl.Priority.ALWAYS}
+    val middleCol = new ColumnConstraints {hgrow = Priority.ALWAYS}
 
     val gp = new GridPane {
       hgap = 1
@@ -79,12 +77,12 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
       columnConstraints = List(buttonCol, spacerCol, middleCol, spacerCol, buttonCol)
     }
 
-    GridPane.setValignment(openButton, jfxg.VPos.BOTTOM)
-    eqButton.alignment = jfxg.Pos.BOTTOM_RIGHT
-    GridPane.setHalignment(volHigh, jfxg.HPos.RIGHT)
-    GridPane.setValignment(volumeSlider, jfxg.VPos.TOP)
-    statusLabel.alignment = jfxg.Pos.TOP_RIGHT
-    GridPane.setHalignment(currentTimeLabel, jfxg.HPos.RIGHT)
+    GridPane.setValignment(openButton, VPos.BOTTOM)
+    eqButton.alignment = Pos.BOTTOM_RIGHT
+    GridPane.setHalignment(volHigh, HPos.RIGHT)
+    GridPane.setValignment(volumeSlider, VPos.TOP)
+    statusLabel.alignment = Pos.TOP_RIGHT
+    GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
 
     gp.add(openButton, 0, 0, 1, 3)
     gp.add(volLow, 1, 0)
@@ -147,7 +145,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
     }
 
     new HBox {
-      innerAlignment = jfxg.Pos.CENTER
+      innerAlignment = Pos.CENTER
       fillHeight = false
       content = List(seekStartButton, playPauseButton, seekEndButton)
     }
@@ -169,7 +167,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
       onAction = (ae: ActionEvent) => {
         val mediaPlayer = mediaModel.mediaPlayer()
         mediaPlayer.status() match {
-          case jffxsm.MediaPlayer.Status.PLAYING => mediaPlayer.pause()
+          case Status.PLAYING.delegate => mediaPlayer.pause()
           case _ => mediaPlayer.play()
         }
       }
@@ -207,11 +205,11 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = mediaModel.mediaPlayer()
-    if (mediaPlayer.status == jffxsm.MediaPlayer.Status.STOPPED) mediaPlayer.pause()
+    if (Status.STOPPED == mediaPlayer.status) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (mediaPlayer.status != jffxsm.MediaPlayer.Status.PLAYING) updatePositionSlider(duration)
+    if (Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
   }
 
 
@@ -223,16 +221,16 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
   }
 
 
-  def updateStatus(newStatus: jffxsm.MediaPlayer.Status) {
-    if (newStatus == jffxsm.MediaPlayer.Status.UNKNOWN || newStatus == null) {
+  def updateStatus(newStatus: Status) {
+    if (MediaPlayer.Status.UNKNOWN == newStatus  || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"
     } else {
       controlPanel.disable = false
       positionSlider.disable = false
-      statusLabel.text = newStatus.toString
-      playPauseIcon.image = if (newStatus == jffxsm.MediaPlayer.Status.PLAYING) pauseImg else playImg
+      statusLabel.text = newStatus.toString()
+      playPauseIcon.image = if (Status.PLAYING == newStatus) pauseImg else playImg
     }
   }
 
