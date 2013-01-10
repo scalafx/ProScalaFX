@@ -1,7 +1,6 @@
 package proscalafx.ch05.ui
 
 import javafx.beans.{value => jfxbv}
-import javafx.scene.control.ScrollPane.ScrollBarPolicy
 import javafx.scene.control.TableColumn.CellDataFeatures
 import javafx.{event => jfxe}
 import javafx.{util => jfxu}
@@ -19,6 +18,7 @@ import scalafx.scene.shape.{Rectangle, Circle}
 import scalafx.scene.web.{HTMLEditor, WebView}
 import scalafx.scene.{Node, Scene}
 import scalafx.stage.{Stage, Popup}
+import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 
 
 /**

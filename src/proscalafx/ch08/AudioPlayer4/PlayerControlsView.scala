@@ -13,6 +13,7 @@ import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
+import scalafx.scene.media.MediaPlayer.Status
 
 
 /**
@@ -162,7 +163,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
       onAction = (ae: ActionEvent) => {
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
-          case jffxsm.MediaPlayer.Status.PLAYING => mediaPlayer.pause()
+          case Status.PLAYING.delegate => mediaPlayer.pause()
           case _ => mediaPlayer.play()
         }
       }

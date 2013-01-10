@@ -1,6 +1,5 @@
 package proscalafx.ch08.CodeMonkeyToDo
 
-import javafx.scene.{layout => jfxsl}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.event.ActionEvent
@@ -126,7 +125,7 @@ object CodeMonkeyToDo extends JFXApp {
 
     GridPane.setHgrow(vbox, Priority.ALWAYS)
     GridPane.setVgrow(vbox, Priority.ALWAYS)
-    grid.add(vbox, 0, 0, jfxsl.GridPane.REMAINING, 1)
+    grid.add(vbox, 0, 0, GridPane.REMAINING, 1)
   }
 
   /** Returns a function that can be assigned to `oAction` */

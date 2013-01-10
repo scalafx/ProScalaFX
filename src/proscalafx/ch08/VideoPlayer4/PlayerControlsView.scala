@@ -1,6 +1,5 @@
 package proscalafx.ch08.VideoPlayer4
 
-import javafx.scene.{media => jffxsm}
 import scalafx.Includes._
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
@@ -13,6 +12,7 @@ import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
+import scalafx.scene.media.MediaPlayer.Status
 
 /**
  * @author Jarek Sacha 
@@ -167,7 +167,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
       onAction = (ae: ActionEvent) => {
         val mediaPlayer = mediaModel.mediaPlayer()
         mediaPlayer.status() match {
-          case jffxsm.MediaPlayer.Status.PLAYING => mediaPlayer.pause()
+          case Status.PLAYING.delegate => mediaPlayer.pause()
           case _ => mediaPlayer.play()
         }
       }
@@ -205,11 +205,11 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = mediaModel.mediaPlayer()
-    if (mediaPlayer.status == jffxsm.MediaPlayer.Status.STOPPED) mediaPlayer.pause()
+    if (Status.STOPPED == mediaPlayer.status) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (mediaPlayer.status != jffxsm.MediaPlayer.Status.PLAYING) updatePositionSlider(duration)
+    if (Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
   }
 
 
@@ -221,16 +221,16 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
   }
 
 
-  def updateStatus(newStatus: jffxsm.MediaPlayer.Status) {
-    if (newStatus == jffxsm.MediaPlayer.Status.UNKNOWN || newStatus == null) {
+  def updateStatus(newStatus: Status) {
+    if (MediaPlayer.Status.UNKNOWN == newStatus  || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"
     } else {
       controlPanel.disable = false
       positionSlider.disable = false
-      statusLabel.text = newStatus.toString
-      playPauseIcon.image = if (newStatus == jffxsm.MediaPlayer.Status.PLAYING) pauseImg else playImg
+      statusLabel.text = newStatus.toString()
+      playPauseIcon.image = if (Status.PLAYING == newStatus) pauseImg else playImg
     }
   }
 

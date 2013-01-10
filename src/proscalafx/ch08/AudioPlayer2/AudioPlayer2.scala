@@ -1,6 +1,5 @@
 package proscalafx.ch08.AudioPlayer2
 
-import javafx.scene.{layout => jfxsl}
 import javafx.{collections => jfxc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
@@ -43,7 +42,7 @@ object AudioPlayer2 extends JFXApp {
   private def createGridPane(): GridPane = new GridPane {
     padding = Insets(10)
     hgap = 20
-    add(albumCover, 0, 0, 1, jfxsl.GridPane.REMAINING)
+    add(albumCover, 0, 0, 1, GridPane.REMAINING)
     add(title, 1, 0)
     add(artist, 1, 1)
     add(album, 1, 2)

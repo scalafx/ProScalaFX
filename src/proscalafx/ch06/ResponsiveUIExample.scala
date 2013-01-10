@@ -31,7 +31,7 @@ object ResponsiveUIExample extends JFXApp {
     view.changeFillButton.onAction = {
       (ae: ActionEvent) => {
         val fillPaint = model.fillPaint()
-        model.fillPaint() = if (fillPaint == jfxsp.Color.LIGHTGRAY) jfxsp.Color.GRAY else jfxsp.Color.LIGHTGRAY
+        model.fillPaint() = if (Color.LIGHTGRAY == fillPaint) Color.GRAY else Color.LIGHTGRAY
 
         val task = new Runnable {
           def run() {
