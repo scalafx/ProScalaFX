@@ -2,9 +2,9 @@ package proscalafx.ch08.VideoPlayer2
 
 import java.io.File
 import java.net.URL
-import javafx.geometry.Pos
 import scalafx.Includes._
 import scalafx.application.{Platform, JFXApp}
+import scalafx.geometry.Pos
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
 import scalafx.scene.input.MouseEvent
@@ -12,7 +12,6 @@ import scalafx.scene.layout.StackPane
 import scalafx.scene.media.{MediaMarkerEvent, Media, MediaPlayer, MediaView}
 import scalafx.stage.Stage
 import scalafx.util.Duration
-import sfxext.Includes._
 
 
 /**

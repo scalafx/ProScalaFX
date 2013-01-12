@@ -1,13 +1,12 @@
 package proscalafx.ch04.reversi.examples
 
-import javafx.geometry.Pos
-import javafx.scene.text.FontWeight
 import proscalafx.ch04.reversi.model.BLACK
 import proscalafx.ch04.reversi.model.Owner
 import proscalafx.ch04.reversi.model.ReversiModel
 import proscalafx.ch04.reversi.model.WHITE
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.geometry.Pos
 import scalafx.scene.Node
 import scalafx.scene.Scene
 import scalafx.scene.effect.DropShadow
@@ -20,8 +19,7 @@ import scalafx.scene.layout.TilePane
 import scalafx.scene.layout.VBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
-import scalafx.scene.text.Font
-import scalafx.scene.text.Text
+import scalafx.scene.text.{FontWeight, Font, Text}
 import scalafx.stage.Stage
 
 

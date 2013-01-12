@@ -1,17 +1,14 @@
 package proscalafx.ch05.ui
 
 import javafx.beans.{value => jfxbv}
-import javafx.scene.control.ScrollPane.ScrollBarPolicy
-import javafx.scene.control.SelectionMode
 import javafx.scene.control.TableColumn.CellDataFeatures
 import javafx.{event => jfxe}
-import javafx.{geometry => jfxg}
 import javafx.{util => jfxu}
 import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.event.ActionEvent
-import scalafx.geometry.Insets
+import scalafx.geometry.{Pos, Orientation, Insets}
 import scalafx.scene.control._
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.KeyCombination
@@ -21,6 +18,7 @@ import scalafx.scene.shape.{Rectangle, Circle}
 import scalafx.scene.web.{HTMLEditor, WebView}
 import scalafx.scene.{Node, Scene}
 import scalafx.stage.{Stage, Popup}
+import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 
 
 /**
@@ -95,7 +93,7 @@ object StarterAppMain extends JFXApp {
           }
         },
         new Separator {
-          orientation = jfxg.Orientation.VERTICAL
+          orientation = Orientation.VERTICAL
         },
         new ToggleButton {
           id = "boldButton"
@@ -126,7 +124,7 @@ object StarterAppMain extends JFXApp {
           }
         },
         new Separator {
-          orientation = jfxg.Orientation.VERTICAL
+          orientation = Orientation.VERTICAL
         },
         new ToggleButton {
           id = "leftAlignButton"
@@ -509,7 +507,7 @@ object StarterAppMain extends JFXApp {
             (stage.height() - alertPopup.height()) / 2.0 + stage.y())
         }
       }
-      alignment = jfxg.Pos.CENTER
+      alignment = Pos.CENTER
       margin = Insets(10, 0, 10, 0)
     }
 
@@ -541,7 +539,7 @@ object StarterAppMain extends JFXApp {
           }
           bottom = new Button("OK") {
             onAction = {e: ActionEvent => inner.hide}
-            alignment = jfxg.Pos.CENTER
+            alignment = Pos.CENTER
             margin = Insets(10, 0, 10, 0)
           }
         }

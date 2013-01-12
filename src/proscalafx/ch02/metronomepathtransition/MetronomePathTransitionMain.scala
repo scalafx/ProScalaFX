@@ -4,7 +4,6 @@
 package proscalafx.ch02.metronomepathtransition
 
 import javafx.animation.Animation.Status
-import javafx.animation.PathTransition.OrientationType
 import scalafx.Includes._
 import scalafx.animation.Interpolator
 import scalafx.animation.PathTransition
@@ -20,6 +19,7 @@ import scalafx.scene.shape.MoveTo
 import scalafx.scene.shape.Path
 import scalafx.stage.Stage
 import scalafx.util.Duration
+import scalafx.animation.PathTransition.OrientationType
 
 /**
  *

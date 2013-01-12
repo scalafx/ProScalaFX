@@ -1,11 +1,10 @@
 package proscalafx.ch04.reversi.ui
 
-import javafx.geometry.HPos
-import javafx.geometry.VPos
 import javafx.scene.{layout => jfxsl}
 import proscalafx.ch04.reversi.model.ReversiModel
 import scalafx.Includes._
 import scalafx.animation.FadeTransition
+import scalafx.geometry.{VPos, HPos}
 import scalafx.scene.effect.Light
 import scalafx.scene.effect.Lighting
 import scalafx.scene.input.MouseEvent

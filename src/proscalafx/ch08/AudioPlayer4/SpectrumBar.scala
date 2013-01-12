@@ -4,8 +4,8 @@ package proscalafx.ch08.AudioPlayer4
 import com.sun.{javafx => csjfx}
 import javafx.scene.{layout => jfxsl}
 import javafx.scene.{paint => jfxsp}
-import javafx.{geometry => jfxg}
 import scalafx.Includes._
+import scalafx.geometry.Pos
 import scalafx.scene.paint.{Color, Stop}
 import scalafx.scene.shape.Rectangle
 
@@ -22,7 +22,7 @@ class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
   getStyleClass.add("spectrumBar")
 
   setSpacing(SPACING)
-  setAlignment(jfxg.Pos.BOTTOM_CENTER)
+  setAlignment(Pos.BOTTOM_CENTER)
 
   val stops: Array[jfxsp.Stop] = Array(
     Stop(0.3, Color.RED),

@@ -1,25 +1,17 @@
 package proscalafx.ch01.helloearthrise
 
-import javafx.geometry.VPos
-import javafx.scene.control.ScrollPane.ScrollBarPolicy
-import javafx.scene.text.FontWeight
-import javafx.scene.text.TextAlignment
-import scalafx.animation.Interpolator
-import scalafx.animation.Timeline
-import scalafx.animation.TranslateTransition
+import scalafx.Includes._
+import scalafx.animation.{Interpolator, Timeline, TranslateTransition}
 import scalafx.application.JFXApp
-import scalafx.scene.Group
-import scalafx.scene.Scene
+import scalafx.geometry.VPos
 import scalafx.scene.control.ScrollPane
-import scalafx.scene.image.Image
-import scalafx.scene.image.Image.sfxImage2jfx
-import scalafx.scene.image.ImageView
+import scalafx.scene.control.ScrollPane.ScrollBarPolicy
+import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.paint.Color
-import scalafx.scene.text.Font
-import scalafx.scene.text.Text
+import scalafx.scene.text.{FontWeight, TextAlignment, Font, Text}
+import scalafx.scene.{Group, Scene}
 import scalafx.stage.Stage
 import scalafx.util.Duration
-import scalafx.util.UtilIncludes.jfxDuration2sfx
 
 object HelloScrollPaneMain extends JFXApp {
 
@@ -64,7 +56,8 @@ you on the good Earth." """.replace("\n", "")
             pannable = true
             content = textRef
             style = "-fx-background-color: transparent;"
-          })
+          }
+        )
       }
     }
   }
@@ -76,5 +69,4 @@ you on the good Earth." """.replace("\n", "")
     toY = -820
     interpolator = Interpolator.LINEAR
   }.play
-
 }
