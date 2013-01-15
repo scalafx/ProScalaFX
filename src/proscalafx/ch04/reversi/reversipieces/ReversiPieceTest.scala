@@ -1,15 +1,13 @@
 package proscalafx.ch04.reversi.reversipieces
 
 
-import javafx.scene.layout.Priority
 import proscalafx.ch04.reversi.model.BLACK
 import proscalafx.ch04.reversi.model.WHITE
 import proscalafx.ch04.reversi.ui.ReversiPiece
 import proscalafx.ch04.reversi.ui.ReversiSquare
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
-import scalafx.scene.layout.HBox
-import scalafx.scene.layout.StackPane
+import scalafx.scene.layout.{Priority, HBox, StackPane}
 import scalafx.stage.Stage
 
 object ReversiPieceTest extends JFXApp {

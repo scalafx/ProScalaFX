@@ -1,12 +1,10 @@
 package proscalafx.ch04.reversi.examples
 
-import javafx.geometry.VPos
-import javafx.scene.text.FontWeight
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.geometry.VPos
 import scalafx.scene.Scene
-import scalafx.scene.text.Font
-import scalafx.scene.text.Text
+import scalafx.scene.text.{FontWeight, Font, Text}
 import scalafx.stage.Stage
 
 object CenterUsingBind extends JFXApp {

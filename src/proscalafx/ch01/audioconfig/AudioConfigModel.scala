@@ -1,7 +1,6 @@
 package proscalafx.ch01.audioconfig
 
-import scalafx.beans.property.BooleanProperty
-import scalafx.beans.property.IntegerProperty
+import scalafx.beans.property.{BooleanProperty, IntegerProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.SingleSelectionModel
 
@@ -26,7 +25,7 @@ class AudioConfigModel {
   /**
    * Indicates whether audio is muted
    */
-  val muting: BooleanProperty = false
+  val muting = BooleanProperty(false)
 
   /**
    * List of some musical genres

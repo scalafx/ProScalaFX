@@ -5,12 +5,12 @@ import java.awt.{BorderLayout, FlowLayout, Dimension}
 import javafx.embed.{swing => jfxes}
 import javafx.scene.{paint => jfxsp}
 import javax.swing.{JButton, JPanel, JFrame}
+import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
-import scalafx.application.Platform
 
 
 /**

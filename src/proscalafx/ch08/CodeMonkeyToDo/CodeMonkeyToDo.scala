@@ -1,14 +1,12 @@
 package proscalafx.ch08.CodeMonkeyToDo
 
-import javafx.geometry.{Pos, HPos}
-import javafx.scene.{layout => jfxsl}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.event.ActionEvent
-import scalafx.geometry.Insets
+import scalafx.geometry.{Pos, HPos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control.{Hyperlink, Button, Label, Slider}
-import scalafx.scene.layout.{VBox, GridPane}
+import scalafx.scene.layout.{Priority, VBox, GridPane}
 import scalafx.scene.media.AudioClip
 import scalafx.scene.web.WebView
 import scalafx.stage.Stage
@@ -57,19 +55,19 @@ object CodeMonkeyToDo extends JFXApp {
       min = 0.0
       max = 1.0
       value = 1.0
-      hgrow = jfxsl.Priority.ALWAYS
+      hgrow = Priority.ALWAYS
     }
     val rateSlider = new Slider {
       min = 0.25
       max = 2.5
       value = 1.0
-      hgrow = jfxsl.Priority.ALWAYS
+      hgrow = Priority.ALWAYS
     }
     val balanceSlider = new Slider {
       min = -1.0
       max = 1.0
       value = 0.0
-      hgrow = jfxsl.Priority.ALWAYS
+      hgrow = Priority.ALWAYS
     }
 
     grid.add(volumeLabel, 0, 2)
@@ -125,9 +123,9 @@ object CodeMonkeyToDo extends JFXApp {
 
     GridPane.setHalignment(vbox, HPos.CENTER)
 
-    GridPane.setHgrow(vbox, jfxsl.Priority.ALWAYS)
-    GridPane.setVgrow(vbox, jfxsl.Priority.ALWAYS)
-    grid.add(vbox, 0, 0, jfxsl.GridPane.REMAINING, 1)
+    GridPane.setHgrow(vbox, Priority.ALWAYS)
+    GridPane.setVgrow(vbox, Priority.ALWAYS)
+    grid.add(vbox, 0, 0, GridPane.REMAINING, 1)
   }
 
   /** Returns a function that can be assigned to `oAction` */

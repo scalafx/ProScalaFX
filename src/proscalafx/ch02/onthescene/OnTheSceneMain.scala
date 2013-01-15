@@ -3,23 +3,19 @@
  */
 package proscalafx.ch02.onthescene
 
-import javafx.{scene => jfxs}
 import javafx.scene.{text => jfxst}
-import javafx.{geometry => jfxg}
+import javafx.{scene => jfxs}
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.beans.property.DoubleProperty
-import scalafx.beans.property.StringProperty
+import scalafx.beans.property.{DoubleProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
-import scalafx.geometry.Insets
+import scalafx.geometry.{VPos, Orientation, HPos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control._
-import scalafx.scene.layout.FlowPane
-import scalafx.scene.layout.HBox
+import scalafx.scene.layout.{FlowPane, HBox}
 import scalafx.scene.paint.Color
-import scalafx.scene.text.Font
-import scalafx.scene.text.Text
+import scalafx.scene.text.{FontWeight, Font, Text}
 import scalafx.stage.Stage
 
 
@@ -53,7 +49,7 @@ object OnTheSceneMain extends JFXApp {
     min = 0
     max = 255
     value = 255
-    orientation = jfxg.Orientation.VERTICAL
+    orientation = Orientation.VERTICAL
   }
 
   val choiceRef = new ChoiceBox[jfxs.Cursor] {
@@ -96,10 +92,10 @@ object OnTheSceneMain extends JFXApp {
     layoutX = 20
     layoutY = 40
     padding = Insets(0, 20, 40, 0)
-    orientation = jfxg.Orientation.VERTICAL
+    orientation = Orientation.VERTICAL
     vgap = 10
     hgap = 20
-    columnHalignment = jfxg.HPos.LEFT
+    columnHalignment = HPos.LEFT
     content = List(
       new HBox {
         spacing = 10
@@ -172,15 +168,13 @@ object OnTheSceneMain extends JFXApp {
   val addedTextRef = new Text {
     layoutX = 0
     layoutY = -30
-    textOrigin = jfxg.VPos.TOP
+    textOrigin = VPos.TOP
     fill = Color.BLUE
-    font = Font.font("Sans Serif", jfxst.FontWeight.BOLD, 16)
+    font = Font.font("Sans Serif", FontWeight.BOLD, 16)
     managed = false
     text <== new StringProperty("Scene fill: ") + sceneRef.fill
   }
 
   // Add to the Text node to the FlowPane. 
-  // TODO: Use ScalaFX notation. 
-  sceneRef.content.add(addedTextRef)
-
+  sceneRef.content += addedTextRef
 }
