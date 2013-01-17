@@ -25,7 +25,7 @@ object ChartApp7 extends JFXApp {
     scene = new Scene(400, 250) {
       root = new StackPane {
         content = lineChart
-      }.delegate
+      }
     }
   }
 

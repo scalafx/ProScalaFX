@@ -55,7 +55,7 @@ object JavaFXSceneInSwingExample extends App {
       canvas.setScene(new Scene {
         root = new VBox {
           content = List(rectangle)
-        }.delegate
+        }
       }.delegate)
     }
 

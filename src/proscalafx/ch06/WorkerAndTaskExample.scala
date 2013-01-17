@@ -187,7 +187,7 @@ object WorkerAndTaskExample extends JFXApp {
         top = topPane
         center = centerPane
         bottom = buttonPane
-      }.delegate
+      }
     }
   }
 

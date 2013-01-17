@@ -21,7 +21,7 @@ object ChartApp1 extends JFXApp {
         content = new PieChart() {
           data = chartData()
         }
-      }.delegate
+      }
     }
   }
 

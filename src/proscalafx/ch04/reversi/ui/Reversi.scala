@@ -40,7 +40,7 @@ object Reversi extends JFXApp {
           game,
           restart
         )
-      }.delegate
+      }
     }
   }
 

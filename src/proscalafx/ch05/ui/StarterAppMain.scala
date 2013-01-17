@@ -9,6 +9,7 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.event.ActionEvent
 import scalafx.geometry.{Pos, Orientation, Insets}
+import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 import scalafx.scene.control._
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.KeyCombination
@@ -18,7 +19,6 @@ import scalafx.scene.shape.{Rectangle, Circle}
 import scalafx.scene.web.{HTMLEditor, WebView}
 import scalafx.scene.{Node, Scene}
 import scalafx.stage.{Stage, Popup}
-import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 
 
 /**
@@ -39,7 +39,7 @@ object StarterAppMain extends JFXApp {
           )
           center = createTabs()
         }
-      }.delegate
+      }
     }
     title = "ScalaFX Starter App"
   }
