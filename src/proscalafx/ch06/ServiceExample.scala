@@ -218,7 +218,7 @@ object ServiceExample extends JFXApp {
         top = topPane
         center = centerPane
         bottom = buttonPane
-      }.delegate
+      }
     }
   }
 

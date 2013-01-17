@@ -33,7 +33,7 @@ object BorderLayoutExample extends JFXApp {
 
   stage = new Stage {
     scene = new Scene(600, 400) {
-      // NOTE: Assign borderPane directly to `root` to avoid layout issues.
+      // Assign borderPane directly to `root` to avoid layout issues.
       // If assigned to `content` there will be `Group` node at root that interferes with automatic rescaling.
       root = borderPane
     }

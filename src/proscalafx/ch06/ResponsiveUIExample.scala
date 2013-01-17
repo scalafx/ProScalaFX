@@ -102,7 +102,7 @@ object ResponsiveUIExample extends JFXApp {
         padding = Insets(10)
         center = rectangle
         bottom = buttonHBox
-      }.delegate
+      }
     }
   }
 

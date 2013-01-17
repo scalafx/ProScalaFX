@@ -77,7 +77,7 @@ object JavaFXThreadsExample extends JFXApp {
           stackTrace,
           updateButton
         )
-      }.delegate
+      }
     }
   }
 

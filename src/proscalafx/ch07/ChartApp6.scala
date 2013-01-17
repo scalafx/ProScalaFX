@@ -25,7 +25,7 @@ object ChartApp6 extends JFXApp {
     scene = new Scene(400, 250) {
       root = new StackPane {
         content = scatterChart
-      }.delegate
+      }
     }
   }
 

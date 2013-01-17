@@ -30,7 +30,7 @@ object ChartApp2 extends JFXApp {
           // If you get NPE, comment line below
           labelsVisible = false
         }
-      }.delegate
+      }
     }
   }
 
