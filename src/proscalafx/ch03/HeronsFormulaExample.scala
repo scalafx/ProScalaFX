@@ -1,9 +1,6 @@
 package proscalafx.ch03
 
-import scalafx.Includes.jfxBooleanBinding2sfx
-import scalafx.Includes.when
-import scalafx.beans.binding.NumberBinding.sfxNumberBinding2jfx
-import scalafx.beans.property.DoubleProperty.sfxDoubleProperty2jfx
+import scalafx.Includes._
 import scalafx.beans.property.DoubleProperty
 
 object HeronsFormulaExample extends App {
@@ -21,7 +18,7 @@ object HeronsFormulaExample extends App {
 
   printf("Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
     " the area of the triangle is %3.2f\n", a.get, b.get, c.get,
-    math.sqrt(areaSquared.get));
+    math.sqrt(areaSquared.get))
 
   a() = 2
   b() = 2
@@ -29,5 +26,5 @@ object HeronsFormulaExample extends App {
 
   printf("Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
     " the area of the triangle is %3.2f\n", a.get, b.get, c.get,
-    math.sqrt(areaSquared.get));
+    math.sqrt(areaSquared.get))
 }

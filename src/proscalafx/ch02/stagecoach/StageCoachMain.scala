@@ -1,11 +1,7 @@
-/**
- *
- */
 package proscalafx.ch02.stagecoach
 
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.beans.property.ReadOnlyDoubleProperty.sfxReadOnlyDoubleProperty2jfx
 import scalafx.beans.property.StringProperty
 import scalafx.geometry.{VPos, Rectangle2D}
 import scalafx.scene.control.{Button, CheckBox, Label, TextField}
