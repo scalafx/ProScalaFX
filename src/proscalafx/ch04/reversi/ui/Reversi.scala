@@ -156,9 +156,7 @@ object Reversi extends JFXApp {
 
     val background = new Region() {
       style = "-fx-background-color: " + owner.opposite.colorStyle
-      // NOTE: If `effect` is bound without delegates it has always value `null`.
-      // effect <== when(ReversiModel.turn === owner) then innerShadow otherwise  null.asInstanceOf[scalafx.scene.effect.InnerShadow]
-      effect <== when(ReversiModel.turn === owner) then innerShadow.delegate otherwise noInnerShadow
+      effect <== when(ReversiModel.turn === owner) then innerShadow otherwise noInnerShadow
     }
 
     val dropShadow = new DropShadow() {
@@ -171,9 +169,7 @@ object Reversi extends JFXApp {
       radiusX = 32
       radiusY = 20
       fill = owner.color
-      // NOTE: If `effect` is bound without delegates it has always value `null`.
-      // effect <== when(ReversiModel.turn === owner) then dropShadow otherwise null.asInstanceOf[scalafx.scene.effect.DropShadow]
-      effect <== when(ReversiModel.turn === owner) then dropShadow.delegate otherwise noDropShadow
+      effect <== when(ReversiModel.turn === owner) then dropShadow otherwise noDropShadow
     }
 
     val score = new Text() {

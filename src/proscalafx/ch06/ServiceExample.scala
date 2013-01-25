@@ -115,8 +115,7 @@ object ServiceExample extends JFXApp {
       text <== (model.worker.progress * 100).asString("%5.2f%%")
     }
     val value = new Label {
-      // NOTE: using delegate
-      text <== model.worker.delegate.valueProperty()
+      text <== model.worker.value
     }
     val exception = new Label {
       text <== new jfxbb.StringBinding {
