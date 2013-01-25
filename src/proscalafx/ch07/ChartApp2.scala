@@ -24,7 +24,7 @@ object ChartApp2 extends JFXApp {
           title = "Tiobe index"
           legendSide = Side.LEFT
           clockwise = false
-          // NOTE: Setting `labelsVisible` property to `false` is causing NullPointerException.
+          // Setting `labelsVisible` property to `false` is causing NullPointerException.
           // This is JavaFX 2.2 bug apparently fixed in v.2.2.4
           // See [[http://javafx-jira.kenai.com/browse/RT-24106]]
           // If you get NPE, comment line below
