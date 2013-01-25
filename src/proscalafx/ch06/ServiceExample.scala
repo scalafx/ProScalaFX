@@ -41,7 +41,7 @@ object ServiceExample extends JFXApp {
     view.cancelButton.onAction = {
       ae: ActionEvent => {
         model.worker.cancel;
-        {/* return `Unit` */}
+        ()
       }
     }
     view.exceptionButton.onAction = {ae: ActionEvent => model.shouldThrow.set(true)}
@@ -102,7 +102,8 @@ object ServiceExample extends JFXApp {
       text <== model.worker.running.asString()
     }
     val state = new Label {
-      text <== jfxbb.Bindings.format("%s", stateProperty)
+      // NOTE: we need to use delegate to get proper binding, without it the value of text will not change.
+      text <== jfxbb.Bindings.format("%s", stateProperty.delegate)
     }
     val totalWork = new Label {
       text <== model.worker.totalWork.asString()

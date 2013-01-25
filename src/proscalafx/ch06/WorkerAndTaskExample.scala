@@ -95,7 +95,8 @@ object WorkerAndTaskExample extends JFXApp {
       text <== model.worker.running.asString()
     }
     val state = new Label {
-      text <== jfxbb.Bindings.format("%s", stateProperty)
+      // NOTE: we need to use delegate to get proper binding, without it the value of text will not change.
+      text <== jfxbb.Bindings.format("%s", stateProperty.delegate)
     }
     val totalWork = new Label {
       text <== model.worker.totalWork.asString()
