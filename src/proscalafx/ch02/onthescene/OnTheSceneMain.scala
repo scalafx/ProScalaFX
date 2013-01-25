@@ -7,6 +7,7 @@ import javafx.scene.{text => jfxst}
 import javafx.{scene => jfxs}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.{DoubleProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
@@ -16,7 +17,6 @@ import scalafx.scene.control._
 import scalafx.scene.layout.{FlowPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{FontWeight, Font, Text}
-import scalafx.stage.Stage
 
 
 /**
@@ -133,7 +133,7 @@ object OnTheSceneMain extends JFXApp {
     stylesheets = List(this.getClass.getResource("onTheScene.css").toExternalForm)
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "On the Scene"
     scene = sceneRef
   }

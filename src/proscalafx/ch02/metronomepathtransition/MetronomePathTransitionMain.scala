@@ -7,8 +7,10 @@ import javafx.animation.Animation.Status
 import scalafx.Includes._
 import scalafx.animation.Interpolator
 import scalafx.animation.PathTransition
+import scalafx.animation.PathTransition.OrientationType
 import scalafx.animation.Timeline
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
@@ -17,9 +19,7 @@ import scalafx.scene.shape.ArcTo
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.shape.MoveTo
 import scalafx.scene.shape.Path
-import scalafx.stage.Stage
 import scalafx.util.Duration
-import scalafx.animation.PathTransition.OrientationType
 
 /**
  *
@@ -48,7 +48,7 @@ object MetronomePathTransitionMain extends JFXApp {
     cycleCount = Timeline.INDEFINITE
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Metronome using PathTransition"
     scene = new Scene(400, 500) {
       content = List(

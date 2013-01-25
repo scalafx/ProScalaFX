@@ -2,6 +2,7 @@ package proscalafx.ch02.stagecoach
 
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.StringProperty
 import scalafx.geometry.{VPos, Rectangle2D}
 import scalafx.scene.control.{Button, CheckBox, Label, TextField}
@@ -11,7 +12,7 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
 import scalafx.scene.{Group, Scene}
-import scalafx.stage.{StageStyle, Screen, Stage}
+import scalafx.stage.{StageStyle, Screen}
 
 
 /**
@@ -57,7 +58,7 @@ object StageCoachMain extends JFXApp {
     prefColumnCount = 15
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     resizable = false
     title <== titleProperty
     scene = new Scene(270, 370) {

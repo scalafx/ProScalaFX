@@ -3,6 +3,7 @@ package misc
 import javafx.scene.{paint => jfxsp}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
 import scalafx.geometry.{Pos, Insets}
@@ -11,7 +12,6 @@ import scalafx.scene.control.Button
 import scalafx.scene.layout.{BorderPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
-import scalafx.stage.Stage
 
 
 /** Example illustrating problem with `ObjectProperty` holding a ScalaFX wrapper,
@@ -35,7 +35,7 @@ object ChangeFillExample extends JFXApp {
   val light = jfxsp.Color.LIGHTGRAY
   val dark = jfxsp.Color.GRAY
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Change Fill Example"
     scene = new Scene {
       root = new BorderPane {

@@ -2,6 +2,7 @@ package proscalafx.ch01.audioconfig
 
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.VPos
 import scalafx.scene.Scene
 import scalafx.scene.control.CheckBox
@@ -13,7 +14,6 @@ import scalafx.scene.paint.Stop
 import scalafx.scene.shape.Line
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.{FontWeight, Font, Text}
-import scalafx.stage.Stage
 
 object AudioConfigMain extends JFXApp {
 
@@ -26,7 +26,7 @@ object AudioConfigMain extends JFXApp {
     items = acModel.genres
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Audio Configuration"
     scene = new Scene {
       content = List(

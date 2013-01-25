@@ -5,13 +5,13 @@ import scalafx.Includes._
 import scalafx.animation.Interpolator
 import scalafx.animation.Timeline
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.DoubleProperty
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Line
-import scalafx.stage.Stage
 
 object Metronome1Main extends JFXApp {
 
@@ -25,7 +25,7 @@ object Metronome1Main extends JFXApp {
     cycleCount = Timeline.INDEFINITE
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Metronome 1"
     scene = new Scene(400, 500) {
       content = List(

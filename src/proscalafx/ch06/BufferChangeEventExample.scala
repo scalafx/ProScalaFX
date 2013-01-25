@@ -43,11 +43,11 @@ object BufferChangeEventExample extends App {
     sb.append("\t\tKind of change: ")
 
     change match {
-      case Add(position, added)             =>
+      case Add(position, added) =>
         sb.append("added\n")
         sb.append("\t\tPosition: " + position + "\n")
         sb.append("\t\tElement : " + added + "\n")
-      case Remove(position, removed)        =>
+      case Remove(position, removed) =>
         sb.append("removed\n")
         sb.append("\t\tPosition: " + position + "\n")
         sb.append("\t\tElement : " + removed + "\n")

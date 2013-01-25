@@ -2,6 +2,7 @@ package proscalafx.ch04.reversi.ui
 
 import proscalafx.ch04.reversi.model.{Owner, WHITE, BLACK, ReversiModel}
 import scalafx.Includes._
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{ConditionalFeature, Platform, JFXApp}
 import scalafx.geometry.Pos
 import scalafx.scene.control.Button
@@ -12,7 +13,6 @@ import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{FontWeight, Font, Text}
 import scalafx.scene.transform.{Rotate, Translate, Scale}
 import scalafx.scene.{PerspectiveCamera, Scene}
-import scalafx.stage.Stage
 
 
 object Reversi extends JFXApp {
@@ -33,7 +33,7 @@ object Reversi extends JFXApp {
     bottom = createScoreBoxes()
   }
 
-  stage = new Stage() {
+  stage = new PrimaryStage() {
     scene = new Scene(600, 400) {
       root = new AnchorPane() {
         content = List(

@@ -10,9 +10,9 @@ import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
+import scalafx.scene.media.MediaPlayer.Status
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-import scalafx.scene.media.MediaPlayer.Status
 
 /**
  * @author Jarek Sacha 
@@ -222,7 +222,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
 
   def updateStatus(newStatus: Status) {
-    if (MediaPlayer.Status.UNKNOWN == newStatus  || newStatus == null) {
+    if (MediaPlayer.Status.UNKNOWN == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"

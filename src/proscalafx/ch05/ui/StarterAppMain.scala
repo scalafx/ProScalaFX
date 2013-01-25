@@ -7,6 +7,7 @@ import javafx.{util => jfxu}
 import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.event.ActionEvent
 import scalafx.geometry.{Pos, Orientation, Insets}
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
@@ -18,7 +19,7 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.{Rectangle, Circle}
 import scalafx.scene.web.{HTMLEditor, WebView}
 import scalafx.scene.{Node, Scene}
-import scalafx.stage.{Stage, Popup}
+import scalafx.stage.Popup
 
 
 /**
@@ -28,7 +29,7 @@ object StarterAppMain extends JFXApp {
 
   private val model = new StarterAppModel()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     scene = new Scene(800, 600) {
       stylesheets = List(getClass.getResource("starterApp.css").toExternalForm)
       root = new BorderPane {

@@ -4,6 +4,7 @@ import java.io.File
 import java.net.URL
 import scalafx.Includes._
 import scalafx.animation.{TranslateTransition, ParallelTransition}
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{Platform, JFXApp}
 import scalafx.geometry.{Pos, Rectangle2D}
 import scalafx.scene.control.Label
@@ -11,7 +12,6 @@ import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.StackPane
 import scalafx.scene.media.{MediaMarkerEvent, Media, MediaPlayer, MediaView}
 import scalafx.scene.{Node, Scene}
-import scalafx.stage.Stage
 import scalafx.util.Duration
 
 
@@ -52,7 +52,7 @@ object VideoPlayer3 extends JFXApp {
     }
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Video Player 3"
     scene = new Scene(root, 960, 540) {
       val stylesheet: URL = getClass.getResource("media.css")

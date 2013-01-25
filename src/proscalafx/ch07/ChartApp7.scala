@@ -3,11 +3,11 @@ package proscalafx.ch07
 import javafx.scene.{chart => jfxsc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.scene.chart._
 import scalafx.scene.layout.StackPane
-import scalafx.stage.Stage
 
 
 /**
@@ -20,7 +20,7 @@ object ChartApp7 extends JFXApp {
   lineChart.title = "Speculations"
   lineChart.data = createChartData()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "LineChart example"
     scene = new Scene(400, 250) {
       root = new StackPane {

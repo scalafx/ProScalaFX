@@ -1,8 +1,8 @@
 package proscalafx.ch03
 
-import scalafx.beans.property.DoubleProperty
+import javafx.beans.{binding => jfxbb}
 import scalafx.beans.binding.NumberBinding
-import javafx.beans.{ binding => jfxbb }
+import scalafx.beans.property.DoubleProperty
 
 object HeronsFormulaDirectExtensionExample extends App {
   val a = DoubleProperty(0.0)

@@ -2,13 +2,13 @@ package proscalafx.ch04.reversi.examples
 
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.Scene
 import scalafx.scene.layout.StackPane
 import scalafx.scene.layout.TilePane
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{FontWeight, Font, Text}
-import scalafx.stage.Stage
 
 object AlignUsingStackAndTile extends JFXApp {
   val left = new StackPane {
@@ -21,7 +21,7 @@ object AlignUsingStackAndTile extends JFXApp {
     }
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     scene = new Scene(400, 100) {
       content = new TilePane {
         snapToPixel = false

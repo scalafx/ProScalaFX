@@ -11,9 +11,9 @@ import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
+import scalafx.scene.media.MediaPlayer.Status
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-import scalafx.scene.media.MediaPlayer.Status
 
 
 /**

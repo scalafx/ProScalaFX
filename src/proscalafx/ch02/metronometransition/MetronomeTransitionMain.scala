@@ -6,12 +6,12 @@ import scalafx.animation.Interpolator
 import scalafx.animation.Timeline
 import scalafx.animation.TranslateTransition
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Circle
-import scalafx.stage.Stage
 import scalafx.util.Duration
 
 object MetronomeTransitionMain extends JFXApp {
@@ -33,7 +33,7 @@ object MetronomeTransitionMain extends JFXApp {
     cycleCount = Timeline.INDEFINITE
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     width = 400
     height = 500
     title = "Metronome using TranslateTransition"

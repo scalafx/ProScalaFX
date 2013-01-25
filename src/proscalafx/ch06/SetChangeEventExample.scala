@@ -1,7 +1,7 @@
 package proscalafx.ch06
 
-import scalafx.collections.ObservableSet._
 import scalafx.collections.ObservableSet
+import scalafx.collections.ObservableSet._
 
 object SetChangeEventExample extends App {
 
@@ -32,12 +32,12 @@ object SetChangeEventExample extends App {
   set += "First"
 
   println("Calling set += (\"Second\", \"Third\"): ")
-  set += ("Second", "Third")
-  
+  set +=("Second", "Third")
+
   println("Calling set -= \"Second\": ")
   set -= "Second"
-    
+
   println("Calling set -= (\"First\", \"Third\"): ")
-  set -= ("First", "Third")
+  set -=("First", "Third")
 
 }

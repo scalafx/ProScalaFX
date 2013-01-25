@@ -1,14 +1,14 @@
 package proscalafx.ch03
 
-import scalafx.beans.property.IntegerProperty
 import scalafx.beans.binding.NumberBinding
+import scalafx.beans.property.IntegerProperty
 
 object TriangleAreaExample extends App {
 
   def printResult(x1: IntegerProperty, y1: IntegerProperty,
-    x2: IntegerProperty, y2: IntegerProperty,
-    x3: IntegerProperty, y3: IntegerProperty,
-    area: NumberBinding) {
+                  x2: IntegerProperty, y2: IntegerProperty,
+                  x3: IntegerProperty, y3: IntegerProperty,
+                  area: NumberBinding) {
     println("For A(%d,%d), B(%d,%d), C(%d,%d), the area of triangle ABC is %1.1f".format(
       x1(), y1(), x2(), y2(), x3(), y3(), area()))
   }
@@ -35,15 +35,21 @@ object TriangleAreaExample extends App {
   val determinant = diff2 - x3y2
   val area = determinant / 2.0D
 
-  x1() = 0; y1() = 0
-  x2() = 6; y2() = 0
-  x3() = 4; y3() = 3
+  x1() = 0;
+  y1() = 0
+  x2() = 6;
+  y2() = 0
+  x3() = 4;
+  y3() = 3
 
   printResult(x1, y1, x2, y2, x3, y3, area)
 
-  x1() = 1; y1() = 0
-  x2() = 2; y2() = 2
-  x3() = 0; y3() = 1
+  x1() = 1;
+  y1() = 0
+  x2() = 2;
+  y2() = 2
+  x3() = 0;
+  y3() = 1
 
   printResult(x1, y1, x2, y2, x3, y3, area)
 }

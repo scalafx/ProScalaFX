@@ -1,9 +1,9 @@
 package proscalafx.ch03
 
-import scalafx.beans.property.FloatProperty
-import scalafx.beans.property.LongProperty
 import scalafx.beans.property.DoubleProperty
+import scalafx.beans.property.FloatProperty
 import scalafx.beans.property.IntegerProperty
+import scalafx.beans.property.LongProperty
 
 object NumericPropertiesExample extends App {
   val i = new IntegerProperty(null, "i", 1024)

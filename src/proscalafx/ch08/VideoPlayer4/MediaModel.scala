@@ -96,12 +96,12 @@ class MediaModel {
 
   private def handleMetadata(key: String, value: AnyRef) {
     key match {
-      case "album"  => album() = value.toString
+      case "album" => album() = value.toString
       case "artist" => artist() = value.toString
-      case "title"  => title() = value.toString
-      case "year"   => year() = value.toString
-      case "image"  => albumCover() = value.asInstanceOf[javafx.scene.image.Image]
-      case _        => println("Unhandled metadata key: " + key + ", value: " + value)
+      case "title" => title() = value.toString
+      case "year" => year() = value.toString
+      case "image" => albumCover() = value.asInstanceOf[javafx.scene.image.Image]
+      case _ => println("Unhandled metadata key: " + key + ", value: " + value)
     }
   }
 }

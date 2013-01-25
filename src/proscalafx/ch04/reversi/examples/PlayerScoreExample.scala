@@ -3,6 +3,7 @@ package proscalafx.ch04.reversi.examples
 import proscalafx.ch04.reversi.model.{WHITE, BLACK, Owner, ReversiModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.Scene
 import scalafx.scene.effect.{InnerShadow, DropShadow}
@@ -10,7 +11,6 @@ import scalafx.scene.layout._
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{FontWeight, Font, Text}
-import scalafx.stage.Stage
 
 
 object PlayerScoreExample extends JFXApp {
@@ -23,7 +23,7 @@ object PlayerScoreExample extends JFXApp {
     )
   }
 
-  stage = new Stage() {
+  stage = new PrimaryStage() {
     scene = new Scene(600, 140) {
       content = tiles
     }

@@ -7,6 +7,7 @@ import scalafx.animation.Interpolator
 import scalafx.animation.Timeline
 import scalafx.animation.TranslateTransition
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.VPos
 import scalafx.scene.Group
 import scalafx.scene.Scene
@@ -15,7 +16,6 @@ import scalafx.scene.image.ImageView
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.{FontWeight, TextAlignment, Font, Text}
-import scalafx.stage.Stage
 import scalafx.util.Duration
 import scalafx.util.UtilIncludes.jfxDuration2sfx
 
@@ -50,7 +50,7 @@ you on the good Earth." """.replace("\n", "")
     font = Font.font("SansSerif", FontWeight.BOLD, 24.0)
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Hello Earthrise"
     scene = new Scene(516, 387) {
       content = new Group {

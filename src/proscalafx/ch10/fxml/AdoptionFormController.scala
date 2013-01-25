@@ -5,7 +5,6 @@ import java.util
 import javafx.scene.{layout => jfxsl}
 import javafx.{event => jfxe}
 import javafx.{fxml => jfxf}
-import scalafx.Includes._
 import scalafx.scene.layout.GridPane
 
 /** Example of a controlled initialized through FXML.

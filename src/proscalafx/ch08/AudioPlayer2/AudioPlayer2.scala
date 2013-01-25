@@ -3,6 +3,7 @@ package proscalafx.ch08.AudioPlayer2
 import javafx.{collections => jfxc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.{VPos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
@@ -10,7 +11,6 @@ import scalafx.scene.effect.Reflection
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Priority, RowConstraints, ColumnConstraints, GridPane}
 import scalafx.scene.media.{Media, MediaPlayer}
-import scalafx.stage.Stage
 
 
 /**
@@ -30,7 +30,7 @@ object AudioPlayer2 extends JFXApp {
   createControls()
   createMedia()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Audio Player 2"
     scene = new Scene(createGridPane(), 800, 400) {
       val stylesheet = getClass.getResource("media.css")

@@ -1,8 +1,7 @@
 package proscalafx.ch03
 
-import scalafx.beans.property.IntegerProperty
 import javafx.beans.binding.Bindings
-import scalafx.beans.property.StringProperty
+import scalafx.beans.property.IntegerProperty
 
 object TriangleAreaFluentExample extends App {
   val x1 = IntegerProperty(0)
@@ -18,15 +17,21 @@ object TriangleAreaFluentExample extends App {
     "For A(%d,%d), B(%d,%d), C(%d,%d), the area of triangle ABC is %.1f",
     x1.delegate, y1.delegate, x2.delegate, y2.delegate, x3.delegate, y3.delegate, area.delegate)
 
-  x1() = 0; y1() = 0
-  x2() = 6; y2() = 0
-  x3() = 4; y3() = 3
+  x1() = 0;
+  y1() = 0
+  x2() = 6;
+  y2() = 0
+  x3() = 4;
+  y3() = 3
 
   println(output.get)
 
-  x1() = 1; y1() = 0
-  x2() = 2; y2() = 2
-  x3() = 0; y3() = 1
+  x1() = 1;
+  y1() = 0
+  x2() = 2;
+  y2() = 2
+  x3() = 0;
+  y3() = 1
 
   println(output.get)
 }

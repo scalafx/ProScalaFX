@@ -2,6 +2,7 @@ package proscalafx.ch08.CodeMonkeyToDo
 
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.event.ActionEvent
 import scalafx.geometry.{Pos, HPos, Insets}
 import scalafx.scene.Scene
@@ -9,7 +10,6 @@ import scalafx.scene.control.{Hyperlink, Button, Label, Slider}
 import scalafx.scene.layout.{Priority, VBox, GridPane}
 import scalafx.scene.media.AudioClip
 import scalafx.scene.web.WebView
-import scalafx.stage.Stage
 
 
 /**
@@ -31,7 +31,7 @@ object CodeMonkeyToDo extends JFXApp {
   val (volumeSlider, rateSlider, balanceSlider) = createControls(grid)
   createClipList(grid)
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     scene = new Scene(grid, 640, 380) {
       title = "AudioClip Example"
       stylesheets += getClass.getResource("media.css").toString
@@ -107,7 +107,7 @@ object CodeMonkeyToDo extends JFXApp {
         val webView = new WebView {
           engine.load("http://www.jonathancoulton.com/2006/04/14/" + "thing-a-week-29-code-monkey/")
         }
-        val stage = new Stage {
+        val stage = new PrimaryStage {
           title = "Code Monkey"
           scene = new Scene(webView, 720, 480)
         }

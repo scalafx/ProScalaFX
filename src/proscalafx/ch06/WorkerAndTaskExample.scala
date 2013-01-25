@@ -5,13 +5,13 @@ import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.concurrent.Task
 import scalafx.event.ActionEvent
 import scalafx.geometry.{HPos, Pos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label, ProgressBar}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
-import scalafx.stage.Stage
 
 
 /**
@@ -20,7 +20,7 @@ import scalafx.stage.Stage
 object WorkerAndTaskExample extends JFXApp {
 
   hookupEvents()
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Worker and Task Example"
     scene = view.scene
   }

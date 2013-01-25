@@ -4,6 +4,7 @@ import javafx.animation.Animation.Status
 import scalafx.Includes._
 import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.{BooleanProperty, DoubleProperty}
 import scalafx.event.ActionEvent
 import scalafx.scene.control.Button
@@ -11,7 +12,6 @@ import scalafx.scene.input.{KeyCode, KeyEvent, MouseEvent}
 import scalafx.scene.paint.{Color, CycleMethod, LinearGradient, Stop}
 import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.scene.{Cursor, Group, Scene}
-import scalafx.stage.Stage
 
 object ZenPongMain extends JFXApp {
 
@@ -227,7 +227,7 @@ object ZenPongMain extends JFXApp {
     }
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "ZenPong Example"
     scene = new Scene(500, 500) {
       fill = LinearGradient(

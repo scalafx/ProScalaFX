@@ -4,8 +4,8 @@ import java.io.IOException
 import javafx.{fxml => jfxf}
 import javafx.{scene => jfxs}
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
-import scalafx.stage.Stage
 
 /** Example of using FXMLLoader from ScalaFX.
   *
@@ -24,7 +24,7 @@ object FXMLAdoptionForm extends JFXApp {
   // though it can be a generic, here use `javafx.scene.parent`.
   val root: jfxs.Parent = jfxf.FXMLLoader.load(resource)
 
-  stage = new Stage() {
+  stage = new PrimaryStage() {
     title = "FXML GridPane Demo"
     scene = new Scene(root)
   }

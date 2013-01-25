@@ -2,12 +2,12 @@ package proscalafx.ch07
 
 import javafx.scene.{chart => jfxsc}
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Side
 import scalafx.scene.Scene
 import scalafx.scene.chart.PieChart
 import scalafx.scene.layout.StackPane
-import scalafx.stage.Stage
 
 
 /**
@@ -15,7 +15,7 @@ import scalafx.stage.Stage
  */
 object ChartApp2 extends JFXApp {
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Chart App 2"
     scene = new Scene(400, 350) {
       root = new StackPane {

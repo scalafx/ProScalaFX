@@ -3,6 +3,7 @@ package proscalafx.ch01.helloearthrise
 import scalafx.Includes._
 import scalafx.animation.{Interpolator, Timeline, TranslateTransition}
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.VPos
 import scalafx.scene.control.ScrollPane
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
@@ -10,7 +11,6 @@ import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{FontWeight, TextAlignment, Font, Text}
 import scalafx.scene.{Group, Scene}
-import scalafx.stage.Stage
 import scalafx.util.Duration
 
 object HelloScrollPaneMain extends JFXApp {
@@ -40,7 +40,7 @@ you on the good Earth." """.replace("\n", "")
     font = Font.font("SansSerif", FontWeight.BOLD, 24.0)
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Hello Earthrise"
     scene = new Scene(516, 387) {
       content = new Group {

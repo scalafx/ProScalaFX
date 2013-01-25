@@ -6,9 +6,9 @@ import proscalafx.ch04.reversi.model.WHITE
 import proscalafx.ch04.reversi.ui.ReversiPiece
 import proscalafx.ch04.reversi.ui.ReversiSquare
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.layout.{Priority, HBox, StackPane}
-import scalafx.stage.Stage
 
 object ReversiPieceTest extends JFXApp {
 
@@ -18,7 +18,7 @@ object ReversiPieceTest extends JFXApp {
   // are added to that group. That may have undesired layout complications. In our case it will prevent automatic
   // resizing of the content.
   // To work around this, we assign to `root` directly.
-  stage = new Stage() {
+  stage = new PrimaryStage() {
     scene = new Scene() {
       root = new HBox {
         snapToPixel = false
