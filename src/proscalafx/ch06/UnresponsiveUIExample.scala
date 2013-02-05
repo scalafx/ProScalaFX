@@ -79,7 +79,7 @@ object UnresponsiveUIExample extends JFXApp {
     val buttonHBox = new HBox {
       padding = Insets(10)
       spacing = 10
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       content = List(
         changeFillButton,
         changeStrokeButton

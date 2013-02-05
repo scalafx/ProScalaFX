@@ -36,12 +36,12 @@ object VideoPlayer3 extends JFXApp {
 
   val mediaView1 = new MediaView(mediaPlayer) {
     viewport = new Rectangle2D(0, 0, 960 / 2, 540)
-    alignment = Pos.CENTER_LEFT
+    alignmentInParent = Pos.CENTER_LEFT
   }
 
   val mediaView2 = new MediaView(mediaPlayer) {
     viewport = new Rectangle2D(960 / 2, 0, 960 / 2, 540)
-    alignment = Pos.CENTER_RIGHT
+    alignmentInParent = Pos.CENTER_RIGHT
   }
 
   val root = new StackPane {

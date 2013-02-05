@@ -86,7 +86,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     GridPane.setValignment(openButton, VPos.BOTTOM)
     GridPane.setHalignment(volHigh, HPos.RIGHT)
     GridPane.setValignment(volumeSlider, VPos.TOP)
-    statusLabel.alignment = Pos.TOP_RIGHT
+    statusLabel.alignmentInParent = Pos.TOP_RIGHT
     GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
 
     gp.add(openButton, 0, 0, 1, 3)
@@ -138,7 +138,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     }
 
     new HBox {
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       fillHeight = false
       content = List(seekStartButton, playPauseButton, seekEndButton)
     }

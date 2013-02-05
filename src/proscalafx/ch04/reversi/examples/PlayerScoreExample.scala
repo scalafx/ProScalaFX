@@ -82,11 +82,11 @@ object PlayerScoreExample extends JFXApp {
         new FlowPane() {
           hgap = 20
           vgap = 10
-          innerAlignment = Pos.CENTER
+          alignment = Pos.CENTER
           content = List(
             score,
             new VBox() {
-              innerAlignment = Pos.CENTER
+              alignment = Pos.CENTER
               spacing = 10
               content = List(
                 piece,

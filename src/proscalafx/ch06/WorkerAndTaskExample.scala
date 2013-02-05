@@ -135,7 +135,7 @@ object WorkerAndTaskExample extends JFXApp {
     val topPane = new HBox() {
       padding = Insets(10)
       spacing = 10
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       content = progressBar
     }
 
@@ -175,7 +175,7 @@ object WorkerAndTaskExample extends JFXApp {
     val buttonPane = new HBox {
       padding = Insets(10)
       spacing = 10
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       content = List(
         startButton,
         cancelButton,

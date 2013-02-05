@@ -117,7 +117,7 @@ object CodeMonkeyToDo extends JFXApp {
 
     val vbox = new VBox {
       spacing = 30
-      innerAlignment = Pos.TOP_CENTER
+      alignment = Pos.TOP_CENTER
       content +=(clipLabel, getUpButton, goToJobButton, meetingButton, link)
     }
 

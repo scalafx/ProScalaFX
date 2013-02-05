@@ -508,7 +508,7 @@ object StarterAppMain extends JFXApp {
             (stage.height() - alertPopup.height()) / 2.0 + stage.y())
         }
       }
-      alignment = Pos.CENTER
+      alignmentInParent = Pos.CENTER
       margin = Insets(10, 0, 10, 0)
     }
 
@@ -540,7 +540,7 @@ object StarterAppMain extends JFXApp {
           }
           bottom = new Button("OK") {
             onAction = {e: ActionEvent => inner.hide}
-            alignment = Pos.CENTER
+            alignmentInParent = Pos.CENTER
             margin = Insets(10, 0, 10, 0)
           }
         }

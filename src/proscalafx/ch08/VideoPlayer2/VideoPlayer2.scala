@@ -20,7 +20,7 @@ import scalafx.util.Duration
 object VideoPlayer2 extends JFXApp {
 
   val markerText = new Label {
-    alignment = Pos.TOP_CENTER
+    alignmentInParent = Pos.TOP_CENTER
   }
 
   val file = new File("media/omgrobots.flv")

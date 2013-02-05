@@ -17,7 +17,7 @@ object AlignUsingStackAndTile extends JFXApp {
       text = "ScalaFX"
       font = Font.font(null, FontWeight.BOLD, 18)
       fill = Color.WHITE
-      alignment = Pos.CENTER_RIGHT
+      alignmentInParent = Pos.CENTER_RIGHT
     }
   }
 
@@ -28,7 +28,7 @@ object AlignUsingStackAndTile extends JFXApp {
         content = List(left, new Text {
           text = "Reversi"
           font = Font.font(null, FontWeight.BOLD, 18)
-          alignment = Pos.CENTER_LEFT
+          alignmentInParent = Pos.CENTER_LEFT
         })
       }
     }

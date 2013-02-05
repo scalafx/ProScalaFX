@@ -51,12 +51,12 @@ object BorderLayoutExample extends JFXApp {
         content = new Text("ScalaFX") {
           font = Font.font(null, FontWeight.BOLD, 18)
           fill = Color.WHITE
-          alignment = Pos.CENTER_RIGHT
+          alignmentInParent = Pos.CENTER_RIGHT
         }
       },
       new Text("Reversi") {
         font = Font.font(null, FontWeight.BOLD, 18)
-        alignment = Pos.CENTER_LEFT
+        alignmentInParent = Pos.CENTER_LEFT
       })
     prefTileHeight = 40
     prefTileWidth <== parent.selectDouble("width") / 2
@@ -124,11 +124,11 @@ object BorderLayoutExample extends JFXApp {
         new FlowPane {
           hgap = 20
           vgap = 10
-          innerAlignment = Pos.CENTER
+          alignment = Pos.CENTER
           content = List(
             score,
             new VBox {
-              innerAlignment = Pos.CENTER
+              alignment = Pos.CENTER
               spacing = 10
               content = List(
                 piece,
