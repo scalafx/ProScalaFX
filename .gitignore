@@ -49,7 +49,6 @@ local.properties
 *.vspscc
 .builds
 *.dotCover
-
 ## If you have NuGet Package Restore enabled, uncomment this
 #packages/
 # Visual C++ cache files
@@ -129,3 +128,4 @@ pip-log.txt
 /local/
 /out/
 /target/
+/.idea_modules/
