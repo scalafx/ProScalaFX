@@ -8,7 +8,7 @@ import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.event.ActionEvent
+import scalafx.event.{Event, ActionEvent}
 import scalafx.geometry.{Pos, Orientation, Insets}
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 import scalafx.scene.control._
@@ -53,7 +53,9 @@ object StarterAppMain extends JFXApp {
           new MenuItem("New...") {
             graphic = new ImageView(new Image(this, "images/paper.png"))
             accelerator = KeyCombination.keyCombination("Ctrl +N")
-            onAction = {e: ActionEvent => println(e.eventType + " occurred on MenuItem New")}
+            onAction = {
+              e: ActionEvent => println(e.eventType + " occurred on MenuItem New")
+            }
           },
           new MenuItem("Save")
         )
@@ -199,16 +201,13 @@ object StarterAppMain extends JFXApp {
           text = "WebView"
           content = webView
           closable = false
-          // NOTE: Using JavaFX Event in closure. Shouldn't implicit conversion take care of this?
-          onSelectionChanged = {
-            e: jfxe.Event => {
-              val randomWebSite = model.randomWebSite()
-              if (inner.selected()) {
-                webView.engine.load(randomWebSite)
-                println("WebView tab is selected, loading: " + randomWebSite)
-              }
-              println("")
+          onSelectionChanged = (e: Event) => {
+            val randomWebSite = model.randomWebSite()
+            if (inner.selected()) {
+              webView.engine.load(randomWebSite)
+              println("WebView tab is selected, loading: " + randomWebSite)
             }
+            println("")
           }
         }
       )
@@ -365,7 +364,9 @@ object StarterAppMain extends JFXApp {
       spacing = 20
       content = List(
         new Button("Button") {
-          onAction = {e: ActionEvent => println(e.eventType + " occured on Button")}
+          onAction = {
+            e: ActionEvent => println(e.eventType + " occured on Button")
+          }
         },
         new CheckBox("CheckBox") {
           inner =>
@@ -386,7 +387,9 @@ object StarterAppMain extends JFXApp {
           )
         },
         new Hyperlink("Hyperlink") {
-          onAction = {e: ActionEvent => println(e.eventType + " occurred on Hyperlink")}
+          onAction = {
+            e: ActionEvent => println(e.eventType + " occurred on Hyperlink")
+          }
         },
         new ChoiceBox(model.choiceBoxItems) {
           selectionModel().selectFirst()
@@ -397,17 +400,23 @@ object StarterAppMain extends JFXApp {
         new MenuButton("MenuButton") {
           items = List(
             new MenuItem("MenuItem A") {
-              onAction = {ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")}
+              onAction = {
+                ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")
+              }
             },
             new MenuItem("MenuItem B")
           )
         },
         new SplitMenuButton {
           text = "SplitMenuButton"
-          onAction = {ae: ActionEvent => println(ae.eventType + " occurred on SplitMenuButton")}
+          onAction = {
+            ae: ActionEvent => println(ae.eventType + " occurred on SplitMenuButton")
+          }
           items = List(
             new MenuItem("MenuItem A") {
-              onAction = {ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")}
+              onAction = {
+                ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")
+              }
             },
             new MenuItem("MenuItem B")
           )
@@ -415,12 +424,16 @@ object StarterAppMain extends JFXApp {
         new TextField {
           promptText = "Enter user name"
           prefColumnCount = 16
-          text.onChange {println("TextField text is: " + text())}
+          text.onChange {
+            println("TextField text is: " + text())
+          }
         },
         new PasswordField {
           promptText = "Enter password"
           prefColumnCount = 16
-          text.onChange {println("PasswordField text is: " + text())}
+          text.onChange {
+            println("PasswordField text is: " + text())
+          }
         },
         new HBox {
           spacing = 10
@@ -431,7 +444,9 @@ object StarterAppMain extends JFXApp {
             new TextArea {
               prefColumnCount = 12
               prefRowCount = 4
-              text.onChange {println("TextArea text is: " + text())}
+              text.onChange {
+                println("TextArea text is: " + text())
+              }
             }
           )
         },
@@ -476,10 +491,14 @@ object StarterAppMain extends JFXApp {
       //      )
       delegate.getItems.addAll(
         new MenuItem("MenuItemA") {
-          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item A")}
+          onAction = {
+            e: ActionEvent => println(e.eventType + " occurred on Menu Item A")
+          }
         }.delegate,
         new MenuItem("MenuItemB") {
-          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item B")}
+          onAction = {
+            e: ActionEvent => println(e.eventType + " occurred on Menu Item B")
+          }
         }.delegate
       )
     }
@@ -539,7 +558,9 @@ object StarterAppMain extends JFXApp {
             maxHeight = 140
           }
           bottom = new Button("OK") {
-            onAction = {e: ActionEvent => inner.hide}
+            onAction = {
+              e: ActionEvent => inner.hide
+            }
             alignmentInParent = Pos.CENTER
             margin = Insets(10, 0, 10, 0)
           }
