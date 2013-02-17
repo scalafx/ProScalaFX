@@ -2,7 +2,6 @@ package proscalafx.ch05.ui
 
 import javafx.beans.{value => jfxbv}
 import javafx.scene.control.TableColumn.CellDataFeatures
-import javafx.{event => jfxe}
 import javafx.{util => jfxu}
 import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
@@ -159,7 +158,7 @@ object StarterAppMain extends JFXApp {
     alignToggleGroup.selectToggle(alignToggleGroup.toggles(0))
     alignToggleGroup.selectedToggle.onChange {
       val tb = alignToggleGroup.selectedToggle.get.asInstanceOf[javafx.scene.control.ToggleButton]
-      println(tb.id() + " selecled")
+      println(tb.id() + " selected")
     }
 
     toolBar
@@ -310,7 +309,7 @@ object StarterAppMain extends JFXApp {
           },
           new TreeItem("Mineral") {
             children = List(
-              new TreeItem("Coper"),
+              new TreeItem("Copper"),
               new TreeItem("Diamond"),
               new TreeItem("Quartz")
             )
@@ -365,14 +364,14 @@ object StarterAppMain extends JFXApp {
       content = List(
         new Button("Button") {
           onAction = {
-            e: ActionEvent => println(e.eventType + " occured on Button")
+            e: ActionEvent => println(e.eventType + " occurred on Button")
           }
         },
         new CheckBox("CheckBox") {
           inner =>
           onAction = {
             e: ActionEvent =>
-              println(e.eventType + " occured on CheckBox, and `selected` property is: " + inner.selected())
+              println(e.eventType + " occurred on CheckBox, and `selected` property is: " + inner.selected())
           }
         },
         new HBox {
@@ -476,7 +475,7 @@ object StarterAppMain extends JFXApp {
     radioToggleGroup.selectToggle(radioToggleGroup.toggles(0))
     radioToggleGroup.selectedToggle.onChange {
       val rb = radioToggleGroup.selectedToggle.get.asInstanceOf[javafx.scene.control.ToggleButton]
-      if (rb != null) println(rb.id() + " selecled")
+      if (rb != null) println(rb.id() + " selected")
     }
 
     val sampleContextMenu = new ContextMenu {
