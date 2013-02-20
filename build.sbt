@@ -18,6 +18,9 @@ scalaSource in Test <<= baseDirectory(_ / "test/src")
 // Append -deprecation to the options passed to the Scala compiler
 scalacOptions += "-deprecation"
 
+// Point to location of a snapshot repositiry for ScalaFX
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+
 // ScalaFX dedpendency
 libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M1-SNAPSHOT"
 

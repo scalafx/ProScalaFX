@@ -156,7 +156,7 @@ object Reversi extends JFXApp {
 
     val background = new Region() {
       style = "-fx-background-color: " + owner.opposite.colorStyle
-      effect <== when(ReversiModel.turn === owner) then innerShadow otherwise noInnerShadow
+      effect <== when(ReversiModel.turn === owner) choose innerShadow otherwise noInnerShadow
     }
 
     val dropShadow = new DropShadow() {
@@ -169,7 +169,7 @@ object Reversi extends JFXApp {
       radiusX = 32
       radiusY = 20
       fill = owner.color
-      effect <== when(ReversiModel.turn === owner) then dropShadow otherwise noDropShadow
+      effect <== when(ReversiModel.turn === owner) choose dropShadow otherwise noDropShadow
     }
 
     val score = new Text() {
