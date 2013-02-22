@@ -5,19 +5,14 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.VPos
 import scalafx.scene.Scene
-import scalafx.scene.control.CheckBox
-import scalafx.scene.control.ChoiceBox
-import scalafx.scene.control.Slider
-import scalafx.scene.paint.Color
-import scalafx.scene.paint.LinearGradient
-import scalafx.scene.paint.Stop
-import scalafx.scene.shape.Line
-import scalafx.scene.shape.Rectangle
+import scalafx.scene.control.{CheckBox, ChoiceBox, Slider}
+import scalafx.scene.paint.{Color, LinearGradient, Stop}
+import scalafx.scene.shape.{Line, Rectangle}
 import scalafx.scene.text.{FontWeight, Font, Text}
 
 object AudioConfigMain extends JFXApp {
 
-  val acModel = new AudioConfigModel
+  val acModel = new AudioConfigModel()
 
   val genreChoiceBox = new ChoiceBox[String] {
     layoutX = 204
@@ -123,7 +118,7 @@ object AudioConfigMain extends JFXApp {
     }
   }
 
-  acModel.genreSelectionModel = genreChoiceBox.selectionModel.get
-  acModel.addListenerToGenreSelectionModel
+  acModel.genreSelectionModel = genreChoiceBox.selectionModel()
+  acModel.addListenerToGenreSelectionModel()
   acModel.genreSelectionModel.selectFirst
 }

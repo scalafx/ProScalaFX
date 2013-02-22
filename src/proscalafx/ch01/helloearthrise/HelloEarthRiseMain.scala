@@ -1,28 +1,18 @@
-/**
- *
- */
 package proscalafx.ch01.helloearthrise
 
-import scalafx.animation.Interpolator
-import scalafx.animation.Timeline
-import scalafx.animation.TranslateTransition
+import scalafx.Includes._
+import scalafx.animation.{Interpolator, Timeline, TranslateTransition}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.VPos
-import scalafx.scene.Group
-import scalafx.scene.Scene
-import scalafx.scene.image.Image
-import scalafx.scene.image.ImageView
+import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.{FontWeight, TextAlignment, Font, Text}
+import scalafx.scene.{Group, Scene}
 import scalafx.util.Duration
-import scalafx.util.UtilIncludes.jfxDuration2sfx
 
-/**
- * Main class for the "Hello World" style example
- *
- */
+/** Main class for the "Hello World" style example. */
 object HelloEarthRiseMain extends JFXApp {
 
   val message = """Earthrise at Christmas: 
@@ -53,16 +43,15 @@ you on the good Earth." """.replace("\n", "")
   stage = new PrimaryStage {
     title = "Hello Earthrise"
     scene = new Scene(516, 387) {
-      content = new Group {
-        children = List(
-          new ImageView(image = new Image("http://projavafx.com/images/earthrise.jpg")),
-          new Group {
-            layoutX = 50
-            layoutY = 180
-            children = List(textRef)
-            clip = Rectangle(430, 85)
-          })
-      }
+      content = List(
+        new ImageView(image = new Image("http://projavafx.com/images/earthrise.jpg")),
+        new Group {
+          layoutX = 50
+          layoutY = 180
+          children = List(textRef)
+          clip = Rectangle(430, 85)
+        }
+      )
     }
   }
 

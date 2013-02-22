@@ -5,12 +5,12 @@ import scalafx.animation.{Interpolator, Timeline, TranslateTransition}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.VPos
+import scalafx.scene.Scene
 import scalafx.scene.control.ScrollPane
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{FontWeight, TextAlignment, Font, Text}
-import scalafx.scene.{Group, Scene}
 import scalafx.util.Duration
 
 object HelloScrollPaneMain extends JFXApp {
@@ -43,22 +43,20 @@ you on the good Earth." """.replace("\n", "")
   stage = new PrimaryStage {
     title = "Hello Earthrise"
     scene = new Scene(516, 387) {
-      content = new Group {
-        children = List(
-          new ImageView(new Image("http://projavafx.com/images/earthrise.jpg")),
-          new ScrollPane {
-            layoutX = 50
-            layoutY = 180
-            prefWidth = 440
-            prefHeight = 85
-            hbarPolicy = ScrollBarPolicy.NEVER
-            vbarPolicy = ScrollBarPolicy.NEVER
-            pannable = true
-            content = textRef
-            style = "-fx-background-color: transparent;"
-          }
-        )
-      }
+      content = List(
+        new ImageView(new Image("http://projavafx.com/images/earthrise.jpg")),
+        new ScrollPane {
+          layoutX = 50
+          layoutY = 180
+          prefWidth = 440
+          prefHeight = 85
+          hbarPolicy = ScrollBarPolicy.NEVER
+          vbarPolicy = ScrollBarPolicy.NEVER
+          pannable = true
+          content = textRef
+          style = "-fx-background-color: transparent;"
+        }
+      )
     }
   }
 
