@@ -4,7 +4,7 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.StringProperty
-import scalafx.geometry.{VPos, Rectangle2D}
+import scalafx.geometry.VPos
 import scalafx.scene.control.{Button, CheckBox, Label, TextField}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.{HBox, VBox}
@@ -15,14 +15,20 @@ import scalafx.scene.{Group, Scene}
 import scalafx.stage.{StageStyle, Screen}
 
 
-/**
- * @author Rafael
- *
- */
+/** Stage property example.
+  *
+  * Can be run vith various command line parameters to control stagre style:
+  * decorated - a solid white background and platform decorations (default).
+  * transparent - transparent background and no decorations.
+  * undecorated - a solid white background and no decorations.
+  * utility - a solid white background and minimal platform decorations used for a utility window.
+  * @author Rafael
+  */
 object StageCoachMain extends JFXApp {
 
   val titleProperty = StringProperty("")
 
+  // Process command line parameters
   val stageStyle = parameters.unnamed match {
     case Seq("transparent") => StageStyle.TRANSPARENT
     case Seq("undecorated") => StageStyle.UNDECORATED
@@ -47,8 +53,7 @@ object StageCoachMain extends JFXApp {
   }
   lazy val checkBoxResizable = new CheckBox {
     text = "resizable"
-    disable = (stageStyle == StageStyle.TRANSPARENT ||
-      stageStyle == StageStyle.UNDECORATED)
+    disable = (stageStyle == StageStyle.TRANSPARENT || stageStyle == StageStyle.UNDECORATED)
   }
   lazy val checkBoxFullScreen = new CheckBox {
     text = "fullScreen"
@@ -101,14 +106,16 @@ object StageCoachMain extends JFXApp {
               new Button {
                 text = "close()"
                 onAction = stage.close
-              })
-          })
+              }
+            )
+          }
+        )
       }
     }
   }
 
   //when mouse button is pressed, save the initial position of screen
-  val rootGroup = stage.scene.get.content(0)
+  val rootGroup = stage.scene().content(0)
   var dragAnchorX = 0.0
   var dragAnchorY = 0.0
   rootGroup.onMousePressed = (me: MouseEvent) => {
@@ -126,22 +133,23 @@ object StageCoachMain extends JFXApp {
   textStageH.text <== new StringProperty("height: ") + stage.height.asString
   textStageF.text <== new StringProperty("focused: ") + stage.focused.asString
   stage.resizable = false
-  // NOTE: Due to a bug in JavaFX (2.2.3) Stage.resizableProperty(), cannot directly use binding here,
+  // NOTE: Due to a bug in JavaFX (2.2.3+) Stage.resizableProperty(), cannot directly use binding here,
   // see http://javafx-jira.kenai.com/browse/RT-25942
   // TODO: Revert to binding once JavaFX bug is corrected
-  //  stage.resizable <==> checkBoxResizable.selected
+  //    stage.resizable <==> checkBoxResizable.selected
   checkBoxResizable.selected.onChange {
     // To avoid using resizableProperty, use delegate.setResizable()
     // stage.resizable = checkBoxResizable.selected.get
-    stage.delegate.setResizable(checkBoxResizable.selected.get)
+    stage.delegate.setResizable(checkBoxResizable.selected())
   }
-  checkBoxFullScreen.onAction = {stage.fullScreen = checkBoxFullScreen.selected.get}
+  checkBoxFullScreen.onAction = {
+    stage.fullScreen = checkBoxFullScreen.selected()
+  }
   stage.title <== titleTextField.text
 
   stage.initStyle(stageStyle)
   stage.onCloseRequest = println("Stage is closing")
-  val primScreenBounds: Rectangle2D = Screen.primary.visualBounds
-  stage.x = (primScreenBounds.width - stage.width.get) / 2
-  stage.y = (primScreenBounds.height - stage.height.get) / 2
-
+  val primScreenBounds = Screen.primary.visualBounds
+  stage.x = (primScreenBounds.width - stage.width()) / 2
+  stage.y = (primScreenBounds.height - stage.height()) / 2
 }

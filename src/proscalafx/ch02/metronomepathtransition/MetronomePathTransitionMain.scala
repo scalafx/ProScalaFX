@@ -1,29 +1,18 @@
-/**
- *
- */
 package proscalafx.ch02.metronomepathtransition
 
 import javafx.animation.Animation.Status
 import scalafx.Includes._
-import scalafx.animation.Interpolator
-import scalafx.animation.PathTransition
 import scalafx.animation.PathTransition.OrientationType
-import scalafx.animation.Timeline
+import scalafx.animation.{Interpolator, PathTransition, Timeline}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
 import scalafx.scene.paint.Color
-import scalafx.scene.shape.ArcTo
-import scalafx.scene.shape.Ellipse
-import scalafx.scene.shape.MoveTo
-import scalafx.scene.shape.Path
+import scalafx.scene.shape.{ArcTo, Ellipse, MoveTo, Path}
 import scalafx.util.Duration
 
-/**
- *
- */
 object MetronomePathTransitionMain extends JFXApp {
 
   val ellipse = new Ellipse {
@@ -40,7 +29,8 @@ object MetronomePathTransitionMain extends JFXApp {
     path = new Path {
       elements = List(
         MoveTo(100, 50),
-        ArcTo(350, 350, 0, 300, 50, false, true))
+        ArcTo(350, 350, 0, 300, 50, false, true)
+      )
     }
     orientation = OrientationType.ORTHOGONAL_TO_TANGENT
     interpolator = Interpolator.LINEAR
@@ -77,9 +67,10 @@ object MetronomePathTransitionMain extends JFXApp {
               text = "Stop"
               onAction = anim.stop()
               disable <== (anim.status === Status.STOPPED)
-            })
-        })
+            }
+          )
+        }
+      )
     }
   }
-
 }

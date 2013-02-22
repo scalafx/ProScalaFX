@@ -2,9 +2,7 @@ package proscalafx.ch02.metronometransition
 
 import javafx.animation.Animation.Status
 import scalafx.Includes._
-import scalafx.animation.Interpolator
-import scalafx.animation.Timeline
-import scalafx.animation.TranslateTransition
+import scalafx.animation.{Interpolator, Timeline, TranslateTransition}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
@@ -64,9 +62,10 @@ object MetronomeTransitionMain extends JFXApp {
               text = "Stop"
               onAction = anim.stop()
               disable <== anim.status.isEqualTo(Status.STOPPED)
-            })
-        })
+            }
+          )
+        }
+      )
     }
   }
-
 }
