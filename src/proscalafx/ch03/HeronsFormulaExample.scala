@@ -11,7 +11,7 @@ object HeronsFormulaExample extends App {
   val s = (a + b + c) / 2.0
 
   val areaSquared =
-    when(((a + b) > c) && ((b + c) > a) && ((a + c) > b)) choose (s * (s - a) * (s - b) * (s - c)).delegate otherwise 0.0
+    when(((a + b) > c) && ((b + c) > a) && ((a + c) > b)) choose (s * (s - a) * (s - b) * (s - c)) otherwise 0.0
 
   a() = 3
   b() = 4
