@@ -10,10 +10,10 @@ object RectangleAreaExample extends App {
   val y = new DoubleProperty(null, "y", 3.0)
   println("Creating binding area with dependencies x and y.")
   val area = x * y
-  println("area.value = " + area.value)
+  println("area = " + area())
   println("Setting x to 5")
   x() = 5
   println("Setting y to 7")
   y() = 7
-  println("area.value = " + area.value)
+  println("area = " + area())
 }

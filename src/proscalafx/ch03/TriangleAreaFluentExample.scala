@@ -1,6 +1,7 @@
 package proscalafx.ch03
 
 import javafx.beans.{binding => jfxbb}
+import scalafx.Includes._
 import scalafx.beans.property.IntegerProperty
 
 object TriangleAreaFluentExample extends App {
@@ -25,7 +26,7 @@ object TriangleAreaFluentExample extends App {
   x3() = 4
   y3() = 3
 
-  println(output.get)
+  println(output())
 
   x1() = 1
   y1() = 0
@@ -34,5 +35,5 @@ object TriangleAreaFluentExample extends App {
   x3() = 0
   y3() = 1
 
-  println(output.get)
+  println(output())
 }

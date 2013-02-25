@@ -1,9 +1,6 @@
 package proscalafx.ch03
 
-import scalafx.beans.property.DoubleProperty
-import scalafx.beans.property.FloatProperty
-import scalafx.beans.property.IntegerProperty
-import scalafx.beans.property.LongProperty
+import scalafx.beans.property.{DoubleProperty, FloatProperty, IntegerProperty, LongProperty}
 
 object NumericPropertiesExample extends App {
   val i = new IntegerProperty(null, "i", 1024)
@@ -12,32 +9,32 @@ object NumericPropertiesExample extends App {
   val d = new DoubleProperty(null, "d", 0.0)
   println("Constructed numerical properties i, l, f, d.")
 
-  println("i.get = " + i.get)
-  println("l.get = " + l.get)
-  println("f.get = " + f.get)
-  println("d.get = " + d.get)
+  println("i = " + i())
+  println("l = " + l())
+  println("f = " + f())
+  println("d = " + d())
 
   l <== i
   f <== l
   d <== f
   println("Bound l to i, f to l, d to f.")
 
-  println("i.get = " + i.get)
-  println("l.get = " + l.get)
-  println("f.get = " + f.get)
-  println("d.get = " + d.get)
+  println("i = " + i())
+  println("l = " + l())
+  println("f = " + f())
+  println("d = " + d())
 
   println("Calling i.set(2048).")
   i() = 2048
 
-  println("i.get = " + i.get)
-  println("l.get = " + l.get)
-  println("f.get = " + f.get)
-  println("d.get = " + d.get)
+  println("i = " + i())
+  println("l = " + l())
+  println("f = " + f())
+  println("d = " + d())
 
-  d.unbind
-  f.unbind
-  l.unbind
+  d.unbind()
+  f.unbind()
+  l.unbind()
   println("Unbound l to i, f to l, d to f.")
 
   f <== d
@@ -48,8 +45,8 @@ object NumericPropertiesExample extends App {
   println("Calling d.set(10000000000L).")
   d() = 10000000000L
 
-  println("d.get = " + d.get)
-  println("f.get = " + f.get)
-  println("l.get = " + l.get)
-  println("i.get = " + i.get)
+  println("d = " + d())
+  println("f = " + f())
+  println("l = " + l())
+  println("i = " + i())
 }
