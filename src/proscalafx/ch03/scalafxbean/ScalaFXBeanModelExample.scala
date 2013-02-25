@@ -1,8 +1,6 @@
 package proscalafx.ch03.scalafxbean
 
-import scalafx.beans.property.IntegerProperty
-import scalafx.beans.property.ObjectProperty
-import scalafx.beans.property.StringProperty
+import scalafx.beans.property.{IntegerProperty, ObjectProperty, StringProperty}
 import scalafx.scene.paint.Color
 
 class ScalaFXBeanModelExample {
