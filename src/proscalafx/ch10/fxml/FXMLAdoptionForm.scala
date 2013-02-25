@@ -3,6 +3,7 @@ package proscalafx.ch10.fxml
 import java.io.IOException
 import javafx.{fxml => jfxf}
 import javafx.{scene => jfxs}
+import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
