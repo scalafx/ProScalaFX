@@ -35,20 +35,20 @@ object TriangleAreaExample extends App {
   val determinant = diff2 - x3y2
   val area = determinant / 2.0D
 
-  x1() = 0;
+  x1() = 0
   y1() = 0
-  x2() = 6;
+  x2() = 6
   y2() = 0
-  x3() = 4;
+  x3() = 4
   y3() = 3
 
   printResult(x1, y1, x2, y2, x3, y3, area)
 
-  x1() = 1;
+  x1() = 1
   y1() = 0
-  x2() = 2;
+  x2() = 2
   y2() = 2
-  x3() = 0;
+  x3() = 0
   y3() = 1
 
   printResult(x1, y1, x2, y2, x3, y3, area)
