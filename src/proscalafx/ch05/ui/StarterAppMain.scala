@@ -1,8 +1,5 @@
 package proscalafx.ch05.ui
 
-import javafx.beans.{value => jfxbv}
-import javafx.scene.control.TableColumn.CellDataFeatures
-import javafx.{util => jfxu}
 import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
@@ -215,49 +212,29 @@ object StarterAppMain extends JFXApp {
 
 
   private def createTableDemoNode(): Node = {
-    val firstNameColumn = new TableColumn[Person, String]("First Name") {
-      // NOTE: Bug #10?  [[https://code.google.com/p/scalafx/issues/detail?id=10]]
-      // Cell factory need to be assigned using JavaFX `setCellValueFactory`
-      //      cellValueFactory = _.value.firstName
+    // Create columns
+    val firstNameColumn = new TableColumn[Person, String] {
+      text = "First Name"
+      cellValueFactory = {_.value.firstName}
       prefWidth = 180
     }
-    firstNameColumn.setCellValueFactory(new jfxu.Callback[CellDataFeatures[Person, String], jfxbv.ObservableValue[String]] {
-      def call(param: CellDataFeatures[Person, String]) = param.getValue.firstName
-    })
-
-    val lastNameColumn = new TableColumn[Person, String]("First Name") {
-      // NOTE: Bug #10?  [[https://code.google.com/p/scalafx/issues/detail?id=10]]
-      // Cell factory need to be assigned using JavaFX `setCellValueFactory`
-      //      cellValueFactory = _.value.firstName
+    val lastNameColumn = new TableColumn[Person, String] {
+      text = "Last Name"
+      cellValueFactory = {_.value.lastName}
       prefWidth = 180
     }
-    lastNameColumn.setCellValueFactory(new jfxu.Callback[CellDataFeatures[Person, String], jfxbv.ObservableValue[String]] {
-      def call(param: CellDataFeatures[Person, String]) = param.getValue.lastName
-    })
-
-    val phoneColumn = new TableColumn[Person, String]("First Name") {
-      // NOTE: Bug #10?  [[https://code.google.com/p/scalafx/issues/detail?id=10]]
-      // Cell factory need to be assigned using JavaFX `setCellValueFactory`
-      //      cellValueFactory = _.value.firstName
+    val phoneColumn = new TableColumn[Person, String] {
+      text = "Phone"
+      cellValueFactory = {_.value.phone}
       prefWidth = 180
     }
-    phoneColumn.setCellValueFactory(new jfxu.Callback[CellDataFeatures[Person, String], jfxbv.ObservableValue[String]] {
-      def call(param: CellDataFeatures[Person, String]) = param.getValue.phone
-    })
 
-
+    // Create table
     val table = new TableView[Person](model.getTeamMembers) {
-      // NOTE: there may be an issue with assigning columns directly, do it through delegate
-      //      columns ++= List(
-      //        tc
-      //      )
-      delegate.getColumns.addAll(
-        firstNameColumn.delegate,
-        lastNameColumn.delegate,
-        phoneColumn.delegate
-      )
+      columns +=(firstNameColumn, lastNameColumn, phoneColumn)
     }
 
+    // Listen to row selection, and print values of the selected row
     table.getSelectionModel.selectedItemProperty.onChange(
       (_, _, newValue) => println(newValue + " chosen in TableView")
     )
