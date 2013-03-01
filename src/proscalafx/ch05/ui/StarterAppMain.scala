@@ -320,12 +320,7 @@ object StarterAppMain extends JFXApp {
     )
 
     new SplitPane {
-      // NOTE: Using JavaFX way of adding items using `addAll`.
-      //      items = List (
-      //          treeView,
-      //          listView
-      //      )
-      items.addAll(
+      items ++= List(
         treeView,
         listView
       )
