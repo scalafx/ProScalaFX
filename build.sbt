@@ -5,7 +5,7 @@ name := "ScalaFXPro"
 version := "1.0.0-SNAPSHOT"
 
 // Version of scala to use
-scalaVersion := "2.9.2"
+scalaVersion := "2.9.3"
 
 // Set the main Scala source directory to be <base>/src
 scalaSource in Compile <<= baseDirectory(_ / "src")
