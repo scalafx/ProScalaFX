@@ -6,6 +6,7 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.event.{Event, ActionEvent}
 import scalafx.geometry.{Pos, Orientation, Insets}
+import scalafx.scene.control.MenuItem._
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 import scalafx.scene.control._
 import scalafx.scene.image.{Image, ImageView}
@@ -299,7 +300,6 @@ object StarterAppMain extends JFXApp {
             )
           }
         )
-
       }
     }
 
@@ -451,27 +451,13 @@ object StarterAppMain extends JFXApp {
     }
 
     val sampleContextMenu = new ContextMenu {
-      // NOTE: Adding menu items through delegate. Adding directly does nothing.
-      //      items ++= List(
-      //        new MenuItem("MenuItemA") {
-      //          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item A")}
-      //        },
-      //        new MenuItem("MenuItemB") {
-      //          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item B")}
-      //        }
-      //      )
-      delegate.getItems.addAll(
+      items +=(
         new MenuItem("MenuItemA") {
-          onAction = {
-            e: ActionEvent => println(e.eventType + " occurred on Menu Item A")
-          }
-        }.delegate,
+          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item A")}
+        },
         new MenuItem("MenuItemB") {
-          onAction = {
-            e: ActionEvent => println(e.eventType + " occurred on Menu Item B")
-          }
-        }.delegate
-      )
+          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item B")}
+        })
     }
 
     new ScrollPane {
@@ -512,15 +498,16 @@ object StarterAppMain extends JFXApp {
   def createAlertPopup(popupText: String) = new Popup {
     inner =>
     content.add(new StackPane {
-      content = List(new Rectangle {
-        width = 300
-        height = 200
-        arcWidth = 20
-        arcHeight = 20
-        fill = Color.LIGHTBLUE
-        stroke = Color.GRAY
-        strokeWidth = 2
-      },
+      content = List(
+        new Rectangle {
+          width = 300
+          height = 200
+          arcWidth = 20
+          arcHeight = 20
+          fill = Color.LIGHTBLUE
+          stroke = Color.GRAY
+          strokeWidth = 2
+        },
         new BorderPane {
           center = new Label {
             text = popupText
@@ -529,9 +516,7 @@ object StarterAppMain extends JFXApp {
             maxHeight = 140
           }
           bottom = new Button("OK") {
-            onAction = {
-              e: ActionEvent => inner.hide
-            }
+            onAction = {e: ActionEvent => inner.hide}
             alignmentInParent = Pos.CENTER
             margin = Insets(10, 0, 10, 0)
           }
