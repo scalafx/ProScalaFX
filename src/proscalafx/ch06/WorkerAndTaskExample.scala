@@ -28,17 +28,7 @@ object WorkerAndTaskExample extends JFXApp {
 
   private def hookupEvents() {
     view.startButton.onAction = {ae: ActionEvent => new Thread(model.worker).start()}
-    // NOTE: Implicit conversion for `onAction` requires that the handler return `Unit`.
-    // In the handler wi call `cancel` that returns `Boolean`. To satisfy handler signature, we add empty block `{}`
-    // at the end of action handler, which effectively makes the handler to return `Unit`. We could use any statement
-    // that produces `Unit`, for instance, `println`.
-    // Semicolon as added after `cancel` to make it explicit that the empty block is not a part of `cancel` invocation.
-    view.cancelButton.onAction = {
-      ae: ActionEvent => {
-        model.worker.cancel;
-        {/* return `Unit` */}
-      }
-    }
+    view.cancelButton.onAction = {ae: ActionEvent => model.worker.cancel}
     view.exceptionButton.onAction = {ae: ActionEvent => model.shouldThrow.set(true)}
   }
 
