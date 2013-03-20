@@ -5,6 +5,7 @@ import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.IntegerProperty
 import scalafx.concurrent.Service
 import scalafx.event.ActionEvent
@@ -12,7 +13,6 @@ import scalafx.geometry.{HPos, Pos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control.{TextField, Button, Label, ProgressBar}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
-import scalafx.stage.Stage
 
 
 /**
@@ -21,7 +21,7 @@ import scalafx.stage.Stage
 object ServiceExample extends JFXApp {
 
   hookupEvents()
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Service Example"
     scene = view.scene
   }
@@ -33,17 +33,7 @@ object ServiceExample extends JFXApp {
         model.shouldThrow.set(false)
         model.worker.restart
     }
-    // NOTE: Implicit conversion for `onAction` requires that the handler return `Unit`.
-    // In the handler wi call `cancel` that returns `Boolean`. To satisfy handler signature, we add empty block `{}`
-    // at the end of action handler, which effectively makes the handler to return `Unit`. We could use any statement
-    // that produces `Unit`, for instance, `println`.
-    // Semicolon as added after `cancel` to make it explicit that the empty block is not a part of `cancel` invocation.
-    view.cancelButton.onAction = {
-      ae: ActionEvent => {
-        model.worker.cancel;
-        {/* return `Unit` */}
-      }
-    }
+    view.cancelButton.onAction = {ae: ActionEvent => model.worker.cancel}
     view.exceptionButton.onAction = {ae: ActionEvent => model.shouldThrow.set(true)}
   }
 
@@ -102,7 +92,8 @@ object ServiceExample extends JFXApp {
       text <== model.worker.running.asString()
     }
     val state = new Label {
-      text <== jfxbb.Bindings.format("%s", stateProperty)
+      // NOTE: we need to use delegate to get proper binding, without it the value of text will not change.
+      text <== jfxbb.Bindings.format("%s", stateProperty.delegate)
     }
     val totalWork = new Label {
       text <== model.worker.totalWork.asString()
@@ -114,8 +105,7 @@ object ServiceExample extends JFXApp {
       text <== (model.worker.progress * 100).asString("%5.2f%%")
     }
     val value = new Label {
-      // NOTE: using delegate
-      text <== model.worker.delegate.valueProperty()
+      text <== model.worker.value
     }
     val exception = new Label {
       text <== new jfxbb.StringBinding {
@@ -163,7 +153,7 @@ object ServiceExample extends JFXApp {
     val topPane = new HBox() {
       padding = Insets(10)
       spacing = 10
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       content = progressBar
     }
 
@@ -203,7 +193,7 @@ object ServiceExample extends JFXApp {
     val buttonPane = new HBox {
       padding = Insets(10)
       spacing = 10
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       content = List(
         new Label("Process"),
         numberOfItems,

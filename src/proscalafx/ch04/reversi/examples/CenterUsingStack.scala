@@ -2,17 +2,17 @@ package proscalafx.ch04.reversi.examples
 
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.layout.StackPane
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{FontWeight, Font, Text}
-import scalafx.stage.Stage
 
 object CenterUsingStack extends JFXApp {
   val ellipse = new Ellipse
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     scene = new Scene(400, 100) {
       content = new StackPane {
         content = List(

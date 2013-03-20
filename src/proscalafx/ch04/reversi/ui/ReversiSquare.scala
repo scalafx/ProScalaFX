@@ -33,7 +33,7 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
     toValue = 1
   }
 
-  style <== when(ReversiModel.legalMove(x, y)) then
+  style <== when(ReversiModel.legalMove(x, y)) choose
     "-fx-background-color: derive(dodgerblue, -60%)" otherwise
     "-fx-background-color: burlywood"
 

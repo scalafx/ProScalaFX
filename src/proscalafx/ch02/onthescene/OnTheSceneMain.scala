@@ -1,48 +1,48 @@
-/**
- *
- */
 package proscalafx.ch02.onthescene
 
+import javafx.scene.{control => jfxsc}
 import javafx.scene.{text => jfxst}
 import javafx.{scene => jfxs}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.{DoubleProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
 import scalafx.geometry.{VPos, Orientation, HPos, Insets}
-import scalafx.scene.Scene
 import scalafx.scene.control._
 import scalafx.scene.layout.{FlowPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{FontWeight, Font, Text}
-import scalafx.stage.Stage
+import scalafx.scene.{Cursor, Scene}
 
 
 /**
  * @author Rafael
- *
  */
 object OnTheSceneMain extends JFXApp {
 
   val fillVals = DoubleProperty(255.0)
 
+  // NOTE: The buffer has a JFX value type due to ScalaFX Issue 14:
+  // "ObjectProperty holding a ScalaFX wrapper cannot bind to ScalaFX control's properties"
+  // We will nedd to bind, in the code below, the buffer to Scene's cursor property.
   val cursors = ObservableBuffer[jfxs.Cursor](
-    jfxs.Cursor.DEFAULT,
-    jfxs.Cursor.CROSSHAIR,
-    jfxs.Cursor.WAIT,
-    jfxs.Cursor.TEXT,
-    jfxs.Cursor.HAND,
-    jfxs.Cursor.MOVE,
-    jfxs.Cursor.N_RESIZE,
-    jfxs.Cursor.NE_RESIZE,
-    jfxs.Cursor.E_RESIZE,
-    jfxs.Cursor.SE_RESIZE,
-    jfxs.Cursor.S_RESIZE,
-    jfxs.Cursor.SW_RESIZE,
-    jfxs.Cursor.W_RESIZE,
-    jfxs.Cursor.NW_RESIZE,
-    jfxs.Cursor.NONE
+    Cursor.DEFAULT,
+    Cursor.CROSSHAIR,
+    Cursor.WAIT,
+    Cursor.TEXT,
+    Cursor.HAND,
+    Cursor.MOVE,
+    Cursor.N_RESIZE,
+    Cursor.NE_RESIZE,
+    Cursor.E_RESIZE,
+    Cursor.SE_RESIZE,
+    Cursor.S_RESIZE,
+    Cursor.SW_RESIZE,
+    Cursor.W_RESIZE,
+    Cursor.NW_RESIZE,
+    Cursor.NONE
   )
 
   val sliderRef = new Slider {
@@ -83,10 +83,10 @@ object OnTheSceneMain extends JFXApp {
     id = "stageY"
   }
 
-  val labelStageW = new Label
-  val labelStageH = new Label
+  val labelStageW = new Label()
+  val labelStageH = new Label()
 
-  val toggleGrp = new ToggleGroup
+  val toggleGrp = new ToggleGroup()
 
   val sceneRoot = new FlowPane {
     layoutX = 20
@@ -108,9 +108,9 @@ object OnTheSceneMain extends JFXApp {
       new Hyperlink {
         text = "lookup()"
         onAction = (ae: ActionEvent) => {
-          println("sceneRef:" + stage.scene.get)
-          val textRef: Text = stage.scene.get.lookup("#sceneHeightText").asInstanceOf[jfxst.Text]
-          println(textRef.text.get)
+          println("sceneRef:" + stage.scene())
+          val textRef = stage.scene().lookup("#sceneHeightText").asInstanceOf[jfxst.Text]
+          println(textRef.text())
         }
       },
       new RadioButton {
@@ -125,7 +125,8 @@ object OnTheSceneMain extends JFXApp {
       labelStageX,
       labelStageY,
       labelStageW,
-      labelStageH)
+      labelStageH
+    )
   }
 
   val sceneRef = new Scene(600, 250) {
@@ -133,12 +134,12 @@ object OnTheSceneMain extends JFXApp {
     stylesheets = List(this.getClass.getResource("onTheScene.css").toExternalForm)
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "On the Scene"
     scene = sceneRef
   }
 
-  choiceRef.selectionModel.get.selectFirst
+  choiceRef.selectionModel().selectFirst()
 
   // Setup various property binding
   textSceneX.text <== new StringProperty("Scene x: ") + sceneRef.x.asString
@@ -154,15 +155,15 @@ object OnTheSceneMain extends JFXApp {
 
   // When fillVals changes, use that value as the RGB to fill the scene
   fillVals.onChange({
-    val fillValue: Double = fillVals.get / 256.0
+    val fillValue: Double = fillVals() / 256.0
     sceneRef.fill = Color(fillValue, fillValue, fillValue, 1.0)
   })
 
   // When the selected radio button changes, set the appropriate stylesheet
-  toggleGrp.selectedToggle.onChange({
-    val radioButtonText = toggleGrp.selectedToggle.get.asInstanceOf[javafx.scene.control.RadioButton].text
-    sceneRef.stylesheets = List(this.getClass.getResource(radioButtonText.get).toExternalForm)
-  })
+  toggleGrp.selectedToggle.onChange {
+    val radioButtonText = toggleGrp.selectedToggle().asInstanceOf[jfxsc.RadioButton].text()
+    sceneRef.stylesheets = List(this.getClass.getResource(radioButtonText).toExternalForm)
+  }
 
   // Define an unmanaged node that will display Text 
   val addedTextRef = new Text {

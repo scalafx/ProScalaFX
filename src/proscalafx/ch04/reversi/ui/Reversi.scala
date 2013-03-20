@@ -2,6 +2,7 @@ package proscalafx.ch04.reversi.ui
 
 import proscalafx.ch04.reversi.model.{Owner, WHITE, BLACK, ReversiModel}
 import scalafx.Includes._
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{ConditionalFeature, Platform, JFXApp}
 import scalafx.geometry.Pos
 import scalafx.scene.control.Button
@@ -12,7 +13,6 @@ import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{FontWeight, Font, Text}
 import scalafx.scene.transform.{Rotate, Translate, Scale}
 import scalafx.scene.{PerspectiveCamera, Scene}
-import scalafx.stage.Stage
 
 
 object Reversi extends JFXApp {
@@ -33,7 +33,7 @@ object Reversi extends JFXApp {
     bottom = createScoreBoxes()
   }
 
-  stage = new Stage() {
+  stage = new PrimaryStage() {
     scene = new Scene(600, 400) {
       root = new AnchorPane() {
         content = List(
@@ -71,13 +71,13 @@ object Reversi extends JFXApp {
           text = "ScalaFX"
           font = Font.font(null, FontWeight.BOLD, 18)
           fill = Color.WHITE
-          alignment = Pos.CENTER_RIGHT
+          alignmentInParent = Pos.CENTER_RIGHT
         }
       },
       new Text {
         text = "Reversi"
         font = Font.font(null, FontWeight.BOLD, 18)
-        alignment = Pos.CENTER_LEFT
+        alignmentInParent = Pos.CENTER_LEFT
       })
     prefTileHeight = 40
     prefTileWidth <== parent.selectDouble("width") / 2
@@ -156,9 +156,7 @@ object Reversi extends JFXApp {
 
     val background = new Region() {
       style = "-fx-background-color: " + owner.opposite.colorStyle
-      // NOTE: If `effect` is bound without delegates it has always value `null`.
-      // effect <== when(ReversiModel.turn === owner) then innerShadow otherwise  null.asInstanceOf[scalafx.scene.effect.InnerShadow]
-      effect <== when(ReversiModel.turn === owner) then innerShadow.delegate otherwise noInnerShadow
+      effect <== when(ReversiModel.turn === owner) choose innerShadow otherwise noInnerShadow
     }
 
     val dropShadow = new DropShadow() {
@@ -171,9 +169,7 @@ object Reversi extends JFXApp {
       radiusX = 32
       radiusY = 20
       fill = owner.color
-      // NOTE: If `effect` is bound without delegates it has always value `null`.
-      // effect <== when(ReversiModel.turn === owner) then dropShadow otherwise null.asInstanceOf[scalafx.scene.effect.DropShadow]
-      effect <== when(ReversiModel.turn === owner) then dropShadow.delegate otherwise noDropShadow
+      effect <== when(ReversiModel.turn === owner) choose dropShadow otherwise noDropShadow
     }
 
     val score = new Text() {
@@ -194,11 +190,11 @@ object Reversi extends JFXApp {
         new FlowPane() {
           hgap = 20
           vgap = 10
-          innerAlignment = Pos.CENTER
+          alignment = Pos.CENTER
           content = List(
             score,
             new VBox() {
-              innerAlignment = Pos.CENTER
+              alignment = Pos.CENTER
               spacing = 10
               content = List(
                 piece,

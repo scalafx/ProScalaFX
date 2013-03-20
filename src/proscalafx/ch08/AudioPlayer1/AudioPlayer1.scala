@@ -1,9 +1,9 @@
 package proscalafx.ch08.AudioPlayer1
 
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.media.{MediaPlayer, Media}
-import scalafx.stage.Stage
 
 
 /**
@@ -17,7 +17,7 @@ object AudioPlayer1 extends JFXApp {
   val mediaPlayer = new MediaPlayer(media)
   mediaPlayer.play()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Audio Player 1"
     scene = new Scene(200, 200)
   }

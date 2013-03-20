@@ -2,10 +2,10 @@ package proscalafx.ch08.VideoPlayer1
 
 import java.io.File
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.layout.StackPane
 import scalafx.scene.media.{Media, MediaPlayer, MediaView}
-import scalafx.stage.Stage
 
 
 /**
@@ -19,7 +19,7 @@ object VideoPlayer1 extends JFXApp {
   val mediaView = new MediaView(mediaPlayer)
   val root = new StackPane {content = mediaView}
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Video Player 1"
     scene = new Scene(root, 960, 540)
   }

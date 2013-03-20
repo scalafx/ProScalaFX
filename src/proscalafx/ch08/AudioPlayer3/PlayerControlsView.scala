@@ -10,9 +10,9 @@ import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
+import scalafx.scene.media.MediaPlayer.Status
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-import scalafx.scene.media.MediaPlayer.Status
 
 
 /**
@@ -86,7 +86,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     GridPane.setValignment(openButton, VPos.BOTTOM)
     GridPane.setHalignment(volHigh, HPos.RIGHT)
     GridPane.setValignment(volumeSlider, VPos.TOP)
-    statusLabel.alignment = Pos.TOP_RIGHT
+    statusLabel.alignmentInParent = Pos.TOP_RIGHT
     GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
 
     gp.add(openButton, 0, 0, 1, 3)
@@ -138,7 +138,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     }
 
     new HBox {
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       fillHeight = false
       content = List(seekStartButton, playPauseButton, seekEndButton)
     }
@@ -199,11 +199,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = songModel.mediaPlayer()
-    if ( Status.STOPPED == mediaPlayer.status ) mediaPlayer.pause()
+    if (Status.STOPPED == mediaPlayer.status) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (  Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
+    if (Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
   }
 
   private def formatDuration(duration: Duration): String = {
@@ -214,7 +214,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
   def updateStatus(newStatus: Status) {
-    if (Status.UNKNOWN == newStatus  || newStatus == null) {
+    if (Status.UNKNOWN == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"

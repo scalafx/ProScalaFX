@@ -4,11 +4,11 @@ package proscalafx.ch08.VideoPlayer4
 import com.sun.javafx.{runtime => csjfxr}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.event.ActionEvent
 import scalafx.scene.input.{TransferMode, DragEvent}
 import scalafx.scene.layout.{StackPane, BorderPane}
 import scalafx.scene.{Node, Scene}
-import scalafx.stage.Stage
 
 
 /**
@@ -26,7 +26,7 @@ object VideoPlayer4 extends JFXApp {
   private val page2 = createPageTwo()
   private val rootNode = new StackPane {content = page1}
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Video Player 4"
     scene = new Scene(rootNode, 1024, 680) {
       val stylesheet = getClass.getResource("media.css")

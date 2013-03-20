@@ -2,6 +2,7 @@ package proscalafx.ch06
 
 import javafx.scene.{paint => jfxsp}
 import scalafx.Includes._
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{Platform, JFXApp}
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
@@ -11,7 +12,6 @@ import scalafx.scene.control.Button
 import scalafx.scene.layout.{BorderPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
-import scalafx.stage.Stage
 
 
 /**
@@ -21,7 +21,7 @@ object ResponsiveUIExample extends JFXApp {
 
   hookupEvents()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Unresponsive UI Example"
     scene = view.scene
   }
@@ -90,7 +90,7 @@ object ResponsiveUIExample extends JFXApp {
     val buttonHBox = new HBox {
       padding = Insets(10)
       spacing = 10
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       content = List(
         changeFillButton,
         changeStrokeButton

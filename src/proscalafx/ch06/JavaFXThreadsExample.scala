@@ -3,12 +3,12 @@ package proscalafx.ch06
 import scala.collection.JavaConversions
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, TextArea, ListView}
 import scalafx.scene.layout.VBox
-import scalafx.stage.Stage
 
 
 /** ScalaFX version of `JavaFXThreadsExample` from "Pro JavaFX 2" book.
@@ -20,7 +20,7 @@ object JavaFXThreadsExample extends JFXApp {
   private val model = new Model()
   private val view = new View(model)
   hookupEvents()
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "JavaFX Threads Information"
     scene = view.scene
   }
