@@ -10,7 +10,7 @@ scalaVersion := "2.9.3"
 // Set the main Scala source directory to be <base>/src
 scalaSource in Compile <<= baseDirectory(_ / "src")
 
-resourceDirectory <<= baseDirectory(_ / "src")
+resourceDirectory in Compile <<= baseDirectory(_ / "src")
 
 // Set the Scala test directory to be <base>/test/src
 scalaSource in Test <<= baseDirectory(_ / "test/src")
@@ -19,12 +19,12 @@ scalaSource in Test <<= baseDirectory(_ / "test/src")
 scalacOptions += "-deprecation"
 
 // Point to location of a snapshot repositiry for ScalaFX
-//resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
 // resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/staging"
 
 // ScalaFX dedpendency
-libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M2"
+libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M3-SNAPSHOT"
 
 // Test dependencies
 libraryDependencies += "junit" % "junit" % "4.11" % "test"
