@@ -44,10 +44,7 @@ object ReversiModel {
   def turnsRemaining(owner: Owner): NumberBinding = {
     val emptyCellCount = score(NONE)
 
-    // NOTE: We use here JavaFX delegate to produce NumberBinding, without it we would get ObjectBinding[T]
-    // that has no asString() needed to bind to string value of the expression in the caller of this method
-    //    when(turn === owner) then ((emptyCellCount + 1) / 2) otherwise (emptyCellCount / 2)
-    when(turn === owner) choose ((emptyCellCount + 1) / 2).delegate otherwise (emptyCellCount / 2).delegate
+    when(turn === owner) choose ((emptyCellCount + 1) / 2) otherwise (emptyCellCount / 2)
   }
 
 
