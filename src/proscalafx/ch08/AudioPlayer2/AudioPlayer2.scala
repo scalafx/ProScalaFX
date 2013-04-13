@@ -1,9 +1,9 @@
 package proscalafx.ch08.AudioPlayer2
 
-import javafx.{collections => jfxc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
+import scalafx.collections.ObservableMap.Add
 import scalafx.geometry.{VPos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
@@ -90,17 +90,12 @@ object AudioPlayer2 extends JFXApp {
 
   private def createMedia() {
     try {
+      // NOTE: Since ScalaFX Media is declared `final` cannot use 'hierarchical'/`anonymous class` pattern
       media = new Media("http://traffic.libsyn.com/dickwall/JavaPosse373.mp3")
-      // NOTE: Adding ScalaFX like listener will not work, using JavaFX style listener
-      //      media.getMetadata.onChange((_, change) => {
-      //        change match {
-      //          case Add(key, added) => handleMetadata(key, added)
-      //          case _               => {}
-      //        }
-      //      })
-      media.getMetadata.addListener(new jfxc.MapChangeListener[String, AnyRef] {
-        def onChanged(ch: jfxc.MapChangeListener.Change[_ <: String, _ <: AnyRef]) {
-          if (ch.wasAdded) handleMetadata(ch.getKey, ch.getValueAdded)
+      media.metadata.onChange((_, change) => {
+        change match {
+          case Add(key, added) => handleMetadata(key, added)
+          case _ => {}
         }
       })
 

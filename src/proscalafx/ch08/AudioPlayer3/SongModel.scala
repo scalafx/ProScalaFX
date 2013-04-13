@@ -1,9 +1,9 @@
 package proscalafx.ch08.AudioPlayer3
 
 import javafx.scene.{image => jfxsi}
-import javafx.{collections => jfxc}
 import scalafx.Includes._
 import scalafx.beans.property.{ReadOnlyObjectWrapper, ObjectProperty, StringProperty}
+import scalafx.collections.ObservableMap.Add
 import scalafx.scene.image.Image
 import scalafx.scene.media.{Media, MediaPlayer}
 
@@ -48,17 +48,12 @@ class SongModel {
     resetProperties()
 
     try {
+      // NOTE: Since ScalaFX Media is declared `final` cannot use 'hierarchical'/`anonymous class` pattern
       val media = new Media(url)
-      // NOTE: Adding ScalaFX like listener will not work, using JavaFX style listener
-      //      media.getMetadata.onChange((_, change) => {
-      //        change match {
-      //          case Add(key, added) => handleMetadata(key, added)
-      //          case _               => {}
-      //        }
-      //      })
-      media.getMetadata.addListener(new jfxc.MapChangeListener[String, AnyRef] {
-        def onChanged(ch: jfxc.MapChangeListener.Change[_ <: String, _ <: AnyRef]) {
-          if (ch.wasAdded) handleMetadata(ch.getKey, ch.getValueAdded)
+      media.metadata.onChange((_, change) => {
+        change match {
+          case Add(key, added) => handleMetadata(key, added)
+          case _ => {}
         }
       })
 
@@ -88,12 +83,12 @@ class SongModel {
 
   private def handleMetadata(key: String, value: AnyRef) {
     key match {
-      case "album"  => album() = value.toString
+      case "album" => album() = value.toString
       case "artist" => artist() = value.toString
-      case "title"  => title() = value.toString
-      case "year"   => year() = value.toString
-      case "image"  => albumCover() = value.asInstanceOf[javafx.scene.image.Image]
-      case _        => println("Unhandled metadata key: " + key + ", value: " + value)
+      case "title" => title() = value.toString
+      case "year" => year() = value.toString
+      case "image" => albumCover() = value.asInstanceOf[javafx.scene.image.Image]
+      case _ => println("Unhandled metadata key: " + key + ", value: " + value)
     }
   }
 }
