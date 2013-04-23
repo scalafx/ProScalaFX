@@ -21,15 +21,18 @@ scalacOptions += "-deprecation"
 // Point to location of a snapshot repositiry for ScalaFX
 resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
-// resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/staging"
+// resolvers += "Sonatype OSS Staging" at "https://oss.sonatype.org/content/repositories/staging"
 
 // ScalaFX dedpendency
-libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M3-SNAPSHOT"
+libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M3"
 
 // Test dependencies
 libraryDependencies += "junit" % "junit" % "4.11" % "test"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+
+// ScalaStyle
+org.scalastyle.sbt.ScalastylePlugin.Settings
 
 // Add JavaFX 2 to the unmanaged classpath
 // For Java 7 update 06+ the JFXRT JAR is part of the Java Runtime Environment
