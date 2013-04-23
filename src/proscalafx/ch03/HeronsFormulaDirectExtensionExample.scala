@@ -13,7 +13,7 @@ object HeronsFormulaDirectExtensionExample extends App {
 
     super.bind(a, b, c)
 
-    override def computeValue = {
+    override def computeValue: Double = {
       val a0 = a()
       val b0 = b()
       val c0 = c()

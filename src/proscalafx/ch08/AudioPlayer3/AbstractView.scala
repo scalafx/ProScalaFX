@@ -9,7 +9,7 @@ import scalafx.scene.Node
 abstract class AbstractView(protected val songMadel: SongModel) {
   private val _viewNode: Node = initView()
 
-  def viewNode = _viewNode
+  def viewNode: Node = _viewNode
 
   protected def initView(): Node
 }

@@ -328,7 +328,7 @@ object StarterAppMain extends JFXApp {
   }
 
 
-  def createScrollMiscDemoNode(): Node = {
+  private def createScrollMiscDemoNode(): Node = {
     val radioToggleGroup = new ToggleGroup()
     val variousControls = new VBox {
       padding = Insets(10)
@@ -469,7 +469,7 @@ object StarterAppMain extends JFXApp {
   }
 
 
-  def createHtmlEditorDemoNode(): Node = {
+  private def createHtmlEditorDemoNode(): Node = {
 
     val htmlEditor = new HTMLEditor {
       htmlText = "<p>Replace this text</p>"
@@ -495,7 +495,7 @@ object StarterAppMain extends JFXApp {
   }
 
 
-  def createAlertPopup(popupText: String) = new Popup {
+  private def createAlertPopup(popupText: String) = new Popup {
     inner =>
     content.add(new StackPane {
       content = List(

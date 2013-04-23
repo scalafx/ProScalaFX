@@ -30,9 +30,9 @@ object ChartApp11 extends JFXApp {
   // be achieved by calling
   xAxis.tickLabelFormatter = new StringConverter[Number] {
     // Here we do not need to convert from string.
-    def fromString(string: String) = throw new UnsupportedOperationException("Not implemented.")
+    def fromString(string: String): Number = throw new UnsupportedOperationException("Not implemented.")
 
-    def toString(t: Number) = (t.intValue() / xStep).toString
+    def toString(t: Number): String = (t.intValue() / xStep).toString
   }
   val yAxis = new NumberAxis()
   val bubbleChart = BubbleChart(xAxis, yAxis)
@@ -57,7 +57,7 @@ object ChartApp11 extends JFXApp {
     var cValue = 17.06
     var cppValue = 8.25
     val scale = 10
-    def dif = scale * math.random / 4
+    def dif: Double = scale * math.random / 4
     val answer = new ObservableBuffer[jfxsc.XYChart.Series[Number, Number]]()
     val java = new XYChart.Series[Number, Number] {
       name = "Java"

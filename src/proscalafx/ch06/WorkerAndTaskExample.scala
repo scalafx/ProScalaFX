@@ -22,25 +22,25 @@ object WorkerAndTaskExample extends JFXApp {
   hookupEvents()
   stage = new PrimaryStage {
     title = "Worker and Task Example"
-    scene = view.scene
+    scene = View.scene
   }
 
 
   private def hookupEvents() {
-    view.startButton.onAction = {ae: ActionEvent => new Thread(model.worker).start()}
-    view.cancelButton.onAction = {ae: ActionEvent => model.worker.cancel}
-    view.exceptionButton.onAction = {ae: ActionEvent => model.shouldThrow.set(true)}
+    View.startButton.onAction = {ae: ActionEvent => new Thread(Model.Worker).start()}
+    View.cancelButton.onAction = {ae: ActionEvent => Model.Worker.cancel}
+    View.exceptionButton.onAction = {ae: ActionEvent => Model.shouldThrow.set(true)}
   }
 
 
-  private object model {
+  private object Model {
     var shouldThrow = new AtomicBoolean(false)
 
     // NOTE: Object worker is created by extending `Task`.
     // ScalaFX `Task` cannot be directly instantiated since it is `abstract`, so we use `object` as a shortcut.
     // NOTE: ScalaFX `Task` is created by extending JavaFX `Task` that is passed to ScalaFX `Task` as the
     // delegate parameter (ScalaFX `Task` has no default constructor).
-    object worker extends Task(new jfxc.Task[String] {
+    object Worker extends Task(new jfxc.Task[String] {
 
       protected def call(): String = {
         updateTitle("Example Task")
@@ -68,44 +68,44 @@ object WorkerAndTaskExample extends JFXApp {
 
   }
 
-  private object view {
-    val stateProperty = model.worker.state
+  private object View {
+    val stateProperty = Model.Worker.state
 
     val progressBar = new ProgressBar() {
       minWidth = 250
-      progress <== model.worker.progress
+      progress <== Model.Worker.progress
     }
     val title = new Label {
-      text <== model.worker.title
+      text <== Model.Worker.title
     }
     val message = new Label {
-      text <== model.worker.message
+      text <== Model.Worker.message
     }
     val running = new Label {
-      text <== model.worker.running.asString()
+      text <== Model.Worker.running.asString()
     }
     val state = new Label {
       // NOTE: we need to use delegate to get proper binding, without it the value of text will not change.
       text <== jfxbb.Bindings.format("%s", stateProperty.delegate)
     }
     val totalWork = new Label {
-      text <== model.worker.totalWork.asString()
+      text <== Model.Worker.totalWork.asString()
     }
     val workDone = new Label {
-      text <== model.worker.workDone.asString()
+      text <== Model.Worker.workDone.asString()
     }
     val progress = new Label {
-      text <== (model.worker.progress * 100).asString("%5.2f%%")
+      text <== (Model.Worker.progress * 100).asString("%5.2f%%")
     }
     val value = new Label {
-      text <== model.worker.value
+      text <== Model.Worker.value
     }
     val exception = new Label {
       text <== new jfxbb.StringBinding {
-        super.bind(model.worker.exceptionProperty)
+        super.bind(Model.Worker.exceptionProperty)
 
         protected def computeValue(): String = {
-          val e = model.worker.exception()
+          val e = Model.Worker.exception()
           if (e == null) "" else e.getMessage
         }
       }

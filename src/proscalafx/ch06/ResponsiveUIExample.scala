@@ -23,22 +23,22 @@ object ResponsiveUIExample extends JFXApp {
 
   stage = new PrimaryStage {
     title = "Unresponsive UI Example"
-    scene = view.scene
+    scene = View.scene
   }
 
 
   def hookupEvents() {
-    view.changeFillButton.onAction = {
+    View.changeFillButton.onAction = {
       (ae: ActionEvent) => {
-        val fillPaint = model.fillPaint()
-        model.fillPaint() = if (Color.LIGHTGRAY == fillPaint) Color.GRAY else Color.LIGHTGRAY
+        val fillPaint = Model.fillPaint()
+        Model.fillPaint() = if (Color.LIGHTGRAY == fillPaint) Color.GRAY else Color.LIGHTGRAY
 
         val task = new Runnable {
           def run() {
             try {
               Thread.sleep(3000)
               Platform.runLater {
-                val rect = view.rectangle
+                val rect = View.rectangle
                 val newArcSize = if (rect.arcHeight() < 20) 30 else 0
                 rect.arcWidth() = newArcSize
                 rect.arcHeight() = newArcSize
@@ -52,16 +52,16 @@ object ResponsiveUIExample extends JFXApp {
       }
     }
 
-    view.changeStrokeButton.onAction = {
+    View.changeStrokeButton.onAction = {
       (ae: ActionEvent) => {
-        val strokePaint = model.strokePaint()
-        model.strokePaint() = if (strokePaint == jfxsp.Color.DARKGRAY) jfxsp.Color.BLACK else jfxsp.Color.DARKGRAY
+        val strokePaint = Model.strokePaint()
+        Model.strokePaint() = if (strokePaint == jfxsp.Color.DARKGRAY) jfxsp.Color.BLACK else jfxsp.Color.DARKGRAY
       }
     }
   }
 
 
-  private object model {
+  private object Model {
     // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
     // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
     val fillPaint = ObjectProperty(this, "fillPaint", Color.LIGHTGRAY)
@@ -69,13 +69,13 @@ object ResponsiveUIExample extends JFXApp {
   }
 
 
-  private object view {
+  private object View {
     val rectangle = new Rectangle {
       width = 200
       height = 200
       strokeWidth = 10
-      fill <== model.fillPaint
-      stroke <== model.strokePaint
+      fill <== Model.fillPaint
+      stroke <== Model.strokePaint
     }
 
     val changeFillButton = new Button("Change Fill")

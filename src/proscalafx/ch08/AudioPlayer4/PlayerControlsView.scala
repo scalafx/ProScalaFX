@@ -171,7 +171,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
   }
 
 
-  def createSlider(sliderId: String) = new Slider {
+  private def createSlider(sliderId: String) = new Slider {
     min = 0
     max = 1
     value = 0

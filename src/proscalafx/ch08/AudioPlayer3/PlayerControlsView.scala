@@ -103,7 +103,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  def createOpenButton() = new Button {
+  private def createOpenButton() = new Button {
     id = "openButton"
     onAction = (ae: ActionEvent) => {
       val fc = new FileChooser() {
@@ -121,7 +121,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  def createControlPanel(): Node = {
+  private def createControlPanel(): Node = {
     val playPauseButton = createPlayPauseButton()
     val seekStartButton = new Button {
       id = "seekStartButton"
@@ -145,7 +145,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  def createPlayPauseButton(): Button = {
+  private def createPlayPauseButton(): Button = {
     val pauseUrl = getClass.getResource("resources/pause.png")
     pauseImg = new Image(pauseUrl.toString)
 
@@ -170,7 +170,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  def createSlider(sliderId: String): Slider = new Slider {
+  private def createSlider(sliderId: String): Slider = new Slider {
     min = 0
     max = 1
     value = 0
@@ -213,7 +213,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     "%02d:%02d".format(minutes, seconds)
   }
 
-  def updateStatus(newStatus: Status) {
+  private def updateStatus(newStatus: Status) {
     if (Status.UNKNOWN == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true

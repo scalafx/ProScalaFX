@@ -129,7 +129,7 @@ object CodeMonkeyToDo extends JFXApp {
   }
 
   /** Returns a function that can be assigned to `oAction` */
-  def play(audioClip: AudioClip) =
+  private def play(audioClip: AudioClip) =
     (_: ActionEvent) => {
       audioClip.play(volumeSlider.value(), balanceSlider.value(), rateSlider.value(), 0.0, 0)
     }
