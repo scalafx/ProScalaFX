@@ -150,7 +150,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
 
 
   private def clearGridPane() {
-    viewNode.content.foreach(GridPane.clearConstraints(_))
+    viewNode.content.foreach(GridPane.clearConstraints)
     viewNode.content.clear()
   }
 }

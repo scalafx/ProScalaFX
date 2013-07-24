@@ -57,7 +57,7 @@ object JavaFXThreadsExample extends JFXApp {
     private def formatStackTrace(v: Array[StackTraceElement]): String = {
       val sb = new StringBuilder("StackTrace: \n")
       for (stackTraceElement <- v) {
-        sb ++= ("    at ") ++= (stackTraceElement.toString) ++= ("\n")
+        sb ++= "    at " ++= stackTraceElement.toString ++= "\n"
       }
       sb.toString()
     }

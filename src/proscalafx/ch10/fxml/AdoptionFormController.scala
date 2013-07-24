@@ -25,7 +25,7 @@ class AdoptionFormController extends jfxf.Initializable {
 
   @jfxf.FXML
   private def handleSubmit(event: jfxe.ActionEvent) {
-    grid.gridLinesVisible() = !(grid.gridLinesVisible())
+    grid.gridLinesVisible() = !grid.gridLinesVisible()
   }
 
 

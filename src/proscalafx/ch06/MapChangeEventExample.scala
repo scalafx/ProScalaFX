@@ -31,18 +31,18 @@ object MapChangeEventExample extends App {
   map -= "Second"
 
   println("Removing by value: Calling map retain({case (k, v) => v != 3})")
-  map retain ({case (k, v) => v != 3})
+  map retain {case (k, v) => v != 3}
 
 
   def prettyChange(change: Change[_, _]): String = {
     val sb = new StringBuffer("\tChange event data:\n")
 
     change match {
-      case Add(key, added)              =>
+      case Add(key, added) =>
         sb.append("\t\tWas added\n")
         sb.append("\t\tKey          : %s\n".format(key))
         sb.append("\t\tValue added  : %s\n".format(added))
-      case Remove(key, removed)         =>
+      case Remove(key, removed) =>
         sb.append("\t\tWas removed\n")
         sb.append("\t\tKey          : %s\n".format(key))
         sb.append("\t\tValue removed: %s\n".format(removed))
