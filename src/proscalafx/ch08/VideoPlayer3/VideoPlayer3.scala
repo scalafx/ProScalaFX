@@ -64,9 +64,9 @@ object VideoPlayer3 extends JFXApp {
     event.marker.getKey match {
       case "Split" => {
         message.visible = true
-        buildSplitTransition(mediaView1, mediaView2).play
+        buildSplitTransition(mediaView1, mediaView2).play()
       }
-      case _ => buildJoinTransition(mediaView1, mediaView2).play
+      case _ => buildJoinTransition(mediaView1, mediaView2).play()
     }
   }
 

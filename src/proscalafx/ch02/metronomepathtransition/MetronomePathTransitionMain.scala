@@ -29,7 +29,7 @@ object MetronomePathTransitionMain extends JFXApp {
     path = new Path {
       elements = List(
         MoveTo(100, 50),
-        ArcTo(350, 350, 0, 300, 50, false, true)
+        ArcTo(350, 350, 0, 300, 50, largeArcFlag = false, sweepFlag = true)
       )
     }
     orientation = OrientationType.ORTHOGONAL_TO_TANGENT
@@ -50,18 +50,18 @@ object MetronomePathTransitionMain extends JFXApp {
           content = List(
             new Button {
               text = "Start"
-              onAction = anim.playFromStart
+              onAction = anim.playFromStart()
               disable <== (anim.status =!= Status.STOPPED)
             },
             new Button {
               text = "Pause"
-              onAction = anim.pause
+              onAction = anim.pause()
               disable <== (anim.status =!= Status.RUNNING)
             },
             new Button {
               text = "Resume"
-              onAction = anim.play
-              disable <== (anim.status =!= (Status.PAUSED))
+              onAction = anim.play()
+              disable <== (anim.status =!= Status.PAUSED)
             },
             new Button {
               text = "Stop"

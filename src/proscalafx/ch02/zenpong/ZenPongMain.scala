@@ -134,8 +134,8 @@ object ZenPongMain extends JFXApp {
     onAction = {
       event: ActionEvent =>
         startVisible() = false
-        pongAnimation.playFromStart
-        pongComponents.requestFocus
+        pongAnimation.playFromStart()
+        pongComponents.requestFocus()
     }
   }
 
@@ -176,7 +176,7 @@ object ZenPongMain extends JFXApp {
     leftPaddleY() = 235.0
     rightPaddleY() = 235
     startVisible() = true
-    pongComponents.requestFocus
+    pongComponents.requestFocus()
   }
 
   /** Checks whether or not the ball has collided with either the paddles,

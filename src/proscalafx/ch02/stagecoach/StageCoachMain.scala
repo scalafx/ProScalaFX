@@ -97,15 +97,15 @@ object StageCoachMain extends JFXApp {
               },
               new Button {
                 text = "toBack()"
-                onAction = stage.toBack
+                onAction = stage.toBack()
               },
               new Button {
                 text = "toFront()"
-                onAction = stage.toFront
+                onAction = stage.toFront()
               },
               new Button {
                 text = "close()"
-                onAction = stage.close
+                onAction = stage.close()
               }
             )
           }

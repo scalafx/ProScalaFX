@@ -31,7 +31,7 @@ object ServiceExample extends JFXApp {
     View.startButton.onAction = {
       ae: ActionEvent =>
         Model.shouldThrow.set(false)
-        Model.Worker.restart
+        Model.Worker.restart()
     }
     View.cancelButton.onAction = {ae: ActionEvent => Model.Worker.cancel}
     View.exceptionButton.onAction = {ae: ActionEvent => Model.shouldThrow.set(true)}

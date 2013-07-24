@@ -120,5 +120,5 @@ object AudioConfigMain extends JFXApp {
 
   acModel.genreSelectionModel = genreChoiceBox.selectionModel()
   acModel.addListenerToGenreSelectionModel()
-  acModel.genreSelectionModel.selectFirst
+  acModel.genreSelectionModel.selectFirst()
 }

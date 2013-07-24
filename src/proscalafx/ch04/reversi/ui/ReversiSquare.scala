@@ -50,18 +50,18 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
   onMouseEntered = (e: MouseEvent) => {
     if (ReversiModel.legalMove(x, y).get) {
       highlightTransition.rate() = 1
-      highlightTransition.play
+      highlightTransition.play()
     }
   }
 
   onMouseExited = (e: MouseEvent) => {
     highlightTransition.rate = -1
-    highlightTransition.play
+    highlightTransition.play()
   }
 
   onMouseClicked = (e: MouseEvent) => {
     ReversiModel.play(x, y)
     highlightTransition.rate() = -1
-    highlightTransition.play
+    highlightTransition.play()
   }
 }

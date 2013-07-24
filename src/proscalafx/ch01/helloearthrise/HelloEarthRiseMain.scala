@@ -61,6 +61,6 @@ you on the good Earth." """.replace("\n", "")
     node = textRef
     toY = -820
     interpolator = Interpolator.LINEAR
-  }.play
+  }.play()
 
 }

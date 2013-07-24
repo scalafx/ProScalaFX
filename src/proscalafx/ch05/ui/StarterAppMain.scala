@@ -516,7 +516,7 @@ object StarterAppMain extends JFXApp {
             maxHeight = 140
           }
           bottom = new Button("OK") {
-            onAction = {e: ActionEvent => inner.hide}
+            onAction = {e: ActionEvent => inner.hide()}
             alignmentInParent = Pos.CENTER
             margin = Insets(10, 0, 10, 0)
           }
