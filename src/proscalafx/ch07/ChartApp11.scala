@@ -21,18 +21,19 @@ object ChartApp11 extends JFXApp {
   val xStep = 10
   val xMin = 2010 * xStep
   val xMax = 2016 * xStep
-  val xAxis = new NumberAxis()
-  xAxis.autoRanging = false
-  xAxis.lowerBound = xMin - xStep
-  xAxis.upperBound = xMax + xStep
-  xAxis.tickUnit = xStep
-  // The xAxis ranges from 20110 till 20210, but of course we want to show the years at the axis. This can
-  // be achieved by calling
-  xAxis.tickLabelFormatter = new StringConverter[Number] {
-    // Here we do not need to convert from string.
-    def fromString(string: String): Number = throw new UnsupportedOperationException("Not implemented.")
+  val xAxis = new NumberAxis() {
+    autoRanging = false
+    lowerBound = xMin - xStep
+    upperBound = xMax + xStep
+    tickUnit = xStep
+    // The xAxis ranges from 20110 till 20210, but of course we want to show the years at the axis. This can
+    // be achieved by calling
+    tickLabelFormatter = new StringConverter[Number] {
+      // Here we do not need to convert from string.
+      def fromString(string: String): Number = throw new UnsupportedOperationException("Not implemented.")
 
-    def toString(t: Number): String = (t.intValue() / xStep).toString
+      def toString(t: Number): String = (t.intValue() / xStep).toString
+    }
   }
   val yAxis = new NumberAxis()
   val bubbleChart = BubbleChart(xAxis, yAxis)

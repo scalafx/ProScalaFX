@@ -15,10 +15,11 @@ import scalafx.scene.layout.StackPane
  */
 object ChartApp5 extends JFXApp {
 
-  val xAxis = new NumberAxis()
-  xAxis.autoRanging = false
-  xAxis.lowerBound = 2011
-  xAxis.upperBound = 2021
+  val xAxis = new NumberAxis {
+    autoRanging = false
+    lowerBound = 2011
+    upperBound = 2021
+  }
   val yAxis = new NumberAxis()
   val scatterChart = ScatterChart(xAxis, yAxis)
   scatterChart.title = "Speculations"

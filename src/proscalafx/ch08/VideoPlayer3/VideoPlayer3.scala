@@ -26,11 +26,12 @@ object VideoPlayer3 extends JFXApp {
   }
 
   val file = new File("media/omgrobots.flv")
-  val media = new Media(file.toURI.toString)
-  media.getMarkers ++= Map(
-    "Split" -> (3000 ms),
-    "Join" -> (9000 ms)
-  )
+  val media = new Media(file.toURI.toString) {
+    markers ++= Map(
+      "Split" -> (3000 ms),
+      "Join" -> (9000 ms)
+    )
+  }
 
   val mediaPlayer = new MediaPlayer(media)
 

@@ -24,16 +24,18 @@ object VideoPlayer2 extends JFXApp {
   }
 
   val file = new File("media/omgrobots.flv")
-  val media = new Media(file.toURI.toString)
-  media.getMarkers ++= Map(
-    "Robot Finds Wall" -> (3100 ms),
-    "Then Finds the Green Line" -> (5600 ms),
-    "Robot Grabs Sled" -> (8000 ms),
-    "And Heads for Home" -> (11500 ms)
-  )
+  val media = new Media(file.toURI.toString) {
+    markers ++= Map(
+      "Robot Finds Wall" -> (3100 ms),
+      "Then Finds the Green Line" -> (5600 ms),
+      "Robot Grabs Sled" -> (8000 ms),
+      "And Heads for Home" -> (11500 ms)
+    )
+  }
 
-  val mediaPlayer = new MediaPlayer(media)
-  mediaPlayer.onMarker = (event: MediaMarkerEvent) => Platform.runLater {markerText.text = event.marker.getKey}
+  val mediaPlayer = new MediaPlayer(media) {
+    onMarker = (event: MediaMarkerEvent) => Platform.runLater {markerText.text = event.marker.getKey}
+  }
 
   val mediaView = new MediaView(mediaPlayer)
   val root = new StackPane {

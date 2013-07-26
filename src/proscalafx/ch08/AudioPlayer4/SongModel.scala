@@ -48,30 +48,23 @@ class SongModel {
     resetProperties()
 
     try {
-      // NOTE: Since ScalaFX Media is declared `final` cannot use 'hierarchical'/`anonymous class` pattern
-      val media = new Media(url)
-      media.metadata.onChange((_, change) => {
-        change match {
-          case Add(key, added) => handleMetadata(key, added)
-          case _ => {}
-        }
-      })
+      val media = new Media(url) {
+        metadata.onChange((_, change) => {
+          change match {
+            case Add(key, added) => handleMetadata(key, added)
+            case _ => {}
+          }
+        })
+      }
 
-      // NOTE: Since ScalaFX MediaPlayer is declared `final` cannot use 'hierarchical'/`anonymous class` pattern
-      //      mediaPlayer = new MediaPlayer(media) {
-      //        onError = new Runnable {
-      //          def run() {
-      //            val errorMessage: String = media.getError.getMessage
-      //            System.out.println("MediaPlayer Error: " + errorMessage)
-      //          }
-      //        }
-      //      }
-      _mediaPlayer() = new MediaPlayer(media)
-      _mediaPlayer().onError = new Runnable {
-        def run() {
-          val errorMessage = media.error().getMessage
-          // Handle errors during playback
-          println("MediaPlayer Error: " + errorMessage)
+      _mediaPlayer() = new MediaPlayer(media) {
+        // NOTE: there should be a simpler way to use Runnable using an assignment of a code block?
+        onError = new Runnable {
+          def run() {
+            val errorMessage = media.error().getMessage
+            // Handle errors during playback
+            println("MediaPlayer Error: " + errorMessage)
+          }
         }
       }
     } catch {

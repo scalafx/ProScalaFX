@@ -90,32 +90,25 @@ object AudioPlayer2 extends JFXApp {
 
   private def createMedia() {
     try {
-      // NOTE: Since ScalaFX Media is declared `final` cannot use 'hierarchical'/`anonymous class` pattern
-      media = new Media("http://traffic.libsyn.com/dickwall/JavaPosse373.mp3")
-      media.metadata.onChange((_, change) => {
-        change match {
-          case Add(key, added) => handleMetadata(key, added)
-          case _ => {}
-        }
-      })
+      media = new Media("http://traffic.libsyn.com/dickwall/JavaPosse373.mp3") {
+        metadata.onChange((_, change) => {
+          change match {
+            case Add(key, added) => handleMetadata(key, added)
+            case _ => {}
+          }
+        })
+      }
 
-      // NOTE: Since ScalaFX MediaPlayer is declared `final` cannot use 'hierarchical'/`anonymous class` pattern
-      //      mediaPlayer = new MediaPlayer(media) {
-      //        onError = new Runnable {
-      //          def run() {
-      //            val errorMessage: String = media.getError.getMessage
-      //            System.out.println("MediaPlayer Error: " + errorMessage)
-      //          }
-      //        }
-      //      }
-      mediaPlayer = new MediaPlayer(media)
-      mediaPlayer.onError = new Runnable {
-        def run() {
-          val errorMessage = media.error().getMessage
-          // Handle errors during playback
-          println("MediaPlayer Error: " + errorMessage)
+      mediaPlayer = new MediaPlayer(media) {
+        // NOTE: there should be a simpler way to use Runnable using an assignment of a code block?
+        onError = new Runnable {
+          def run() {
+            val errorMessage: String = media.getError.getMessage
+            System.out.println("MediaPlayer Error: " + errorMessage)
+          }
         }
       }
+
       mediaPlayer.play()
     } catch {
       // Handle construction errors
