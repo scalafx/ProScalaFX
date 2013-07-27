@@ -66,13 +66,10 @@ class MediaModel {
       }
 
       _mediaPlayer() = new MediaPlayer(media) {
-        // NOTE: there should be a simpler way to use Runnable using an assignment of a code block?
-        onError = new Runnable {
-          def run() {
-            val errorMessage = media.error().getMessage
-            // Handle errors during playback
-            println("MediaPlayer Error: " + errorMessage)
-          }
+        // Handle errors during playback
+        onError = {
+          val errorMessage = media.error().getMessage
+          println("MediaPlayer Error: " + errorMessage)
         }
       }.delegate
     } catch {

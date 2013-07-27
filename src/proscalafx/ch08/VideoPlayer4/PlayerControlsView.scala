@@ -255,7 +255,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
       totalDurationLabel.text = formatDuration(totalDuration)
     }
 
-    mp.onEndOfMedia = runnable {mediaModel.mediaPlayer().stop()}
+    mp.onEndOfMedia = mediaModel.mediaPlayer().stop()
 
     volumeSlider.value <==> mp.volume
   }
@@ -265,12 +265,5 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
     volumeSlider.value.unbind()
     statusInvalidationSubscription.cancel()
     currentTimeSubscription.cancel()
-  }
-
-
-  private def runnable(op: => Unit) = new Runnable {
-    def run() {
-      op
-    }
   }
 }

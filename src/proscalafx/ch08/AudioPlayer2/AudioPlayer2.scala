@@ -100,12 +100,9 @@ object AudioPlayer2 extends JFXApp {
       }
 
       mediaPlayer = new MediaPlayer(media) {
-        // NOTE: there should be a simpler way to use Runnable using an assignment of a code block?
-        onError = new Runnable {
-          def run() {
-            val errorMessage: String = media.getError.getMessage
-            System.out.println("MediaPlayer Error: " + errorMessage)
-          }
+        onError = {
+          val errorMessage: String = media.getError.getMessage
+          System.out.println("MediaPlayer Error: " + errorMessage)
         }
       }
 
