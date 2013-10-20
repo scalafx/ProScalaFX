@@ -24,12 +24,12 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 //resolvers += "Sonatype OSS Staging" at "https://oss.sonatype.org/content/repositories/staging"
 
 // ScalaFX dependency
-libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M6-SNAPSHOT"
+libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M6"
 
 // Test dependencies
 libraryDependencies += "junit" % "junit" % "4.11" % "test"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.2" % "test"
 
 // ScalaStyle
 org.scalastyle.sbt.ScalastylePlugin.Settings
