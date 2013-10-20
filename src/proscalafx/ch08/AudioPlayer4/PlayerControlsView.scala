@@ -200,11 +200,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = songModel.mediaPlayer()
-    if (mediaPlayer.status == jffxsm.MediaPlayer.Status.STOPPED) mediaPlayer.pause()
+    if (mediaPlayer.status() == jffxsm.MediaPlayer.Status.STOPPED) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (mediaPlayer.status != jffxsm.MediaPlayer.Status.PLAYING) updatePositionSlider(duration)
+    if (mediaPlayer.status() != jffxsm.MediaPlayer.Status.PLAYING) updatePositionSlider(duration)
   }
 
   private def formatDuration(duration: Duration): String = {

@@ -155,8 +155,8 @@ object ZenPongMain extends JFXApp {
       startButton
     )
     onKeyPressed = (k: KeyEvent) => k.code match {
-      case KeyCode.SPACE if pongAnimation.status == Status.STOPPED =>
-        rightPaddleY() = rightPaddleY.value - 6
+      case KeyCode.SPACE if pongAnimation.status() == Status.STOPPED =>
+      rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.L if !rightPaddle.boundsInParent().intersects(topWall.boundsInLocal()) =>
         rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.COMMA if !rightPaddle.boundsInParent().intersects(bottomWall.boundsInLocal()) =>
