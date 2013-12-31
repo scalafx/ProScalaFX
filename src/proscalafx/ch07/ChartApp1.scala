@@ -1,6 +1,5 @@
 package proscalafx.ch07
 
-import javafx.scene.{chart => jfxsc}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
@@ -26,7 +25,7 @@ object ChartApp1 extends JFXApp {
   }
 
 
-  private def chartData() = ObservableBuffer[jfxsc.PieChart.Data](
+  private def chartData() = ObservableBuffer(
     PieChart.Data("java", 17.56),
     PieChart.Data("C", 17.06),
     PieChart.Data("C++", 8.25),
