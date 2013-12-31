@@ -50,22 +50,22 @@ object MetronomePathTransitionMain extends JFXApp {
           content = List(
             new Button {
               text = "Start"
-              onAction = anim.playFromStart()
+              onAction = handle {anim.playFromStart()}
               disable <== (anim.status =!= Status.STOPPED)
             },
             new Button {
               text = "Pause"
-              onAction = anim.pause()
+              onAction = handle {anim.pause()}
               disable <== (anim.status =!= Status.RUNNING)
             },
             new Button {
               text = "Resume"
-              onAction = anim.play()
+              onAction = handle {anim.play()}
               disable <== (anim.status =!= Status.PAUSED)
             },
             new Button {
               text = "Stop"
-              onAction = anim.stop()
+              onAction = handle {anim.stop()}
               disable <== (anim.status === Status.STOPPED)
             }
           )

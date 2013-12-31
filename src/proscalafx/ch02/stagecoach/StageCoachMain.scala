@@ -17,7 +17,7 @@ import scalafx.stage.{StageStyle, Screen}
 
 /** Stage property example.
   *
-  * Can be run vith various command line parameters to control stagre style:
+  * Can be run with various command line parameters to control stage style:
   * decorated - a solid white background and platform decorations (default).
   * transparent - transparent background and no decorations.
   * undecorated - a solid white background and no decorations.
@@ -53,7 +53,7 @@ object StageCoachMain extends JFXApp {
   }
   lazy val checkBoxResizable = new CheckBox {
     text = "resizable"
-    disable = (stageStyle == StageStyle.TRANSPARENT || stageStyle == StageStyle.UNDECORATED)
+    disable = stageStyle == StageStyle.TRANSPARENT || stageStyle == StageStyle.UNDECORATED
   }
   lazy val checkBoxFullScreen = new CheckBox {
     text = "fullScreen"
@@ -97,15 +97,15 @@ object StageCoachMain extends JFXApp {
               },
               new Button {
                 text = "toBack()"
-                onAction = stage.toBack()
+                onAction = handle {stage.toBack()}
               },
               new Button {
                 text = "toFront()"
-                onAction = stage.toFront()
+                onAction = handle {stage.toFront()}
               },
               new Button {
                 text = "close()"
-                onAction = stage.close()
+                onAction = handle {stage.close()}
               }
             )
           }
@@ -142,13 +142,13 @@ object StageCoachMain extends JFXApp {
     // stage.resizable = checkBoxResizable.selected.get
     stage.delegate.setResizable(checkBoxResizable.selected())
   }
-  checkBoxFullScreen.onAction = {
+  checkBoxFullScreen.onAction = handle {
     stage.fullScreen = checkBoxFullScreen.selected()
   }
   stage.title <== titleTextField.text
 
   stage.initStyle(stageStyle)
-  stage.onCloseRequest = println("Stage is closing")
+  stage.onCloseRequest = handle {println("Stage is closing")}
   val primScreenBounds = Screen.primary.visualBounds
   stage.x = (primScreenBounds.width - stage.width()) / 2
   stage.y = (primScreenBounds.height - stage.height()) / 2

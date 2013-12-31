@@ -76,7 +76,7 @@ object StarterAppMain extends JFXApp {
           id = "newButton"
           graphic = new ImageView(new Image(this, "images/paper.png"))
           tooltip = Tooltip("New Document... Ctrl+N")
-          onAction = println("New toolbar button clicked")
+          onAction = handle {println("New toolbar button clicked")}
         },
         new Button {
           id = "editButton"
@@ -236,7 +236,7 @@ object StarterAppMain extends JFXApp {
     }
 
     // Listen to row selection, and print values of the selected row
-    table.getSelectionModel.selectedItemProperty.onChange(
+    table.selectionModel().selectedItem.onChange(
       (_, _, newValue) => println(newValue + " chosen in TableView")
     )
 
@@ -307,7 +307,7 @@ object StarterAppMain extends JFXApp {
       items = model.listViewItems
     }
 
-    treeView.selectionModel().setSelectionMode(SelectionMode.SINGLE)
+    treeView.selectionModel().selectionMode = SelectionMode.SINGLE
     treeView.selectionModel().selectedItem.onChange(
       (_, _, newTreeItem) => {
         if (newTreeItem != null && newTreeItem.isLeaf) {

@@ -19,7 +19,7 @@ object Reversi extends JFXApp {
 
   val restart = new Button() {
     text = "Restart"
-    onAction = ReversiModel.restart()
+    onAction = handle {ReversiModel.restart()}
   }
 
   val game = new BorderPane() {
