@@ -1,12 +1,11 @@
 package proscalafx.ch07
 
-import javafx.scene.{chart => jfxsc}
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.scene.chart.PieChart
 import scalafx.scene.layout.StackPane
-import scalafx.stage.Stage
 
 
 /**
@@ -14,19 +13,19 @@ import scalafx.stage.Stage
  */
 object ChartApp1 extends JFXApp {
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "PieChart"
     scene = new Scene(400, 250) {
       root = new StackPane {
         content = new PieChart() {
           data = chartData()
         }
-      }.delegate
+      }
     }
   }
 
 
-  private def chartData() = ObservableBuffer[jfxsc.PieChart.Data](
+  private def chartData() = ObservableBuffer(
     PieChart.Data("java", 17.56),
     PieChart.Data("C", 17.06),
     PieChart.Data("C++", 8.25),

@@ -1,8 +1,9 @@
 package proscalafx.ch08.AudioPlayer2
 
-import javafx.{collections => jfxc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
+import scalafx.collections.ObservableMap.Add
 import scalafx.geometry.{VPos, Insets}
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
@@ -10,7 +11,6 @@ import scalafx.scene.effect.Reflection
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Priority, RowConstraints, ColumnConstraints, GridPane}
 import scalafx.scene.media.{Media, MediaPlayer}
-import scalafx.stage.Stage
 
 
 /**
@@ -30,7 +30,7 @@ object AudioPlayer2 extends JFXApp {
   createControls()
   createMedia()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Audio Player 2"
     scene = new Scene(createGridPane(), 800, 400) {
       val stylesheet = getClass.getResource("media.css")
@@ -90,37 +90,22 @@ object AudioPlayer2 extends JFXApp {
 
   private def createMedia() {
     try {
-      media = new Media("http://traffic.libsyn.com/dickwall/JavaPosse373.mp3")
-      // NOTE: Adding ScalaFX like listener will not work, using JavaFX style listener
-      //      media.getMetadata.onChange((_, change) => {
-      //        change match {
-      //          case Add(key, added) => handleMetadata(key, added)
-      //          case _               => {}
-      //        }
-      //      })
-      media.getMetadata.addListener(new jfxc.MapChangeListener[String, AnyRef] {
-        def onChanged(ch: jfxc.MapChangeListener.Change[_ <: String, _ <: AnyRef]) {
-          if (ch.wasAdded) handleMetadata(ch.getKey, ch.getValueAdded)
-        }
-      })
+      media = new Media("http://traffic.libsyn.com/dickwall/JavaPosse373.mp3") {
+        metadata.onChange((_, change) => {
+          change match {
+            case Add(key, added) => handleMetadata(key, added)
+            case _ => {}
+          }
+        })
+      }
 
-      // NOTE: Since ScalaFX MediaPlayer is declared `final` cannot use 'hierarchical'/`anonymous class` pattern
-      //      mediaPlayer = new MediaPlayer(media) {
-      //        onError = new Runnable {
-      //          def run() {
-      //            val errorMessage: String = media.getError.getMessage
-      //            System.out.println("MediaPlayer Error: " + errorMessage)
-      //          }
-      //        }
-      //      }
-      mediaPlayer = new MediaPlayer(media)
-      mediaPlayer.onError = new Runnable {
-        def run() {
-          val errorMessage = media.error().getMessage
-          // Handle errors during playback
-          println("MediaPlayer Error: " + errorMessage)
+      mediaPlayer = new MediaPlayer(media) {
+        onError = {
+          val errorMessage: String = media.getError.getMessage
+          System.out.println("MediaPlayer Error: " + errorMessage)
         }
       }
+
       mediaPlayer.play()
     } catch {
       // Handle construction errors

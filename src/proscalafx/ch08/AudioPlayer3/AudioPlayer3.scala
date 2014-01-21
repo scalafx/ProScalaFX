@@ -3,10 +3,10 @@ package proscalafx.ch08.AudioPlayer3
 import com.sun.javafx.runtime.VersionInfo
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.input.{TransferMode, DragEvent}
 import scalafx.scene.layout.BorderPane
-import scalafx.stage.Stage
 
 
 /**
@@ -26,7 +26,7 @@ object AudioPlayer3 extends JFXApp {
     bottom = playerControlsView.viewNode
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Audio Player 3"
     scene = new Scene(root, 800, 400) {
       val stylesheet = getClass.getResource("media.css")

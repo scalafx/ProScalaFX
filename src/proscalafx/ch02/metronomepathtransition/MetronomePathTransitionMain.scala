@@ -1,29 +1,18 @@
-/**
- *
- */
 package proscalafx.ch02.metronomepathtransition
 
 import javafx.animation.Animation.Status
 import scalafx.Includes._
-import scalafx.animation.Interpolator
-import scalafx.animation.PathTransition
-import scalafx.animation.Timeline
+import scalafx.animation.PathTransition.OrientationType
+import scalafx.animation.{Interpolator, PathTransition, Timeline}
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
 import scalafx.scene.paint.Color
-import scalafx.scene.shape.ArcTo
-import scalafx.scene.shape.Ellipse
-import scalafx.scene.shape.MoveTo
-import scalafx.scene.shape.Path
-import scalafx.stage.Stage
+import scalafx.scene.shape.{ArcTo, Ellipse, MoveTo, Path}
 import scalafx.util.Duration
-import scalafx.animation.PathTransition.OrientationType
 
-/**
- *
- */
 object MetronomePathTransitionMain extends JFXApp {
 
   val ellipse = new Ellipse {
@@ -40,7 +29,8 @@ object MetronomePathTransitionMain extends JFXApp {
     path = new Path {
       elements = List(
         MoveTo(100, 50),
-        ArcTo(350, 350, 0, 300, 50, false, true))
+        ArcTo(350, 350, 0, 300, 50, largeArcFlag = false, sweepFlag = true)
+      )
     }
     orientation = OrientationType.ORTHOGONAL_TO_TANGENT
     interpolator = Interpolator.LINEAR
@@ -48,7 +38,7 @@ object MetronomePathTransitionMain extends JFXApp {
     cycleCount = Timeline.INDEFINITE
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Metronome using PathTransition"
     scene = new Scene(400, 500) {
       content = List(
@@ -60,26 +50,27 @@ object MetronomePathTransitionMain extends JFXApp {
           content = List(
             new Button {
               text = "Start"
-              onAction = anim.playFromStart
+              onAction = handle {anim.playFromStart()}
               disable <== (anim.status =!= Status.STOPPED)
             },
             new Button {
               text = "Pause"
-              onAction = anim.pause
+              onAction = handle {anim.pause()}
               disable <== (anim.status =!= Status.RUNNING)
             },
             new Button {
               text = "Resume"
-              onAction = anim.play
-              disable <== (anim.status =!= (Status.PAUSED))
+              onAction = handle {anim.play()}
+              disable <== (anim.status =!= Status.PAUSED)
             },
             new Button {
               text = "Stop"
-              onAction = anim.stop()
+              onAction = handle {anim.stop()}
               disable <== (anim.status === Status.STOPPED)
-            })
-        })
+            }
+          )
+        }
+      )
     }
   }
-
 }

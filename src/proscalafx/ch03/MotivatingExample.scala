@@ -12,7 +12,7 @@ object MotivatingExample extends App {
     intProperty = IntegerProperty(1024)
     println("intProperty = " + intProperty)
     println("intProperty.get = " + intProperty.get)
-    println("intProperty.getValue = " + intProperty.getValue.intValue)
+    println("intProperty.value = " + intProperty.value)
     println("intProperty() = " + intProperty())
   }
 

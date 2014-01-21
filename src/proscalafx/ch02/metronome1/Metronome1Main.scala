@@ -2,30 +2,33 @@ package proscalafx.ch02.metronome1
 
 import javafx.animation.Animation.Status
 import scalafx.Includes._
-import scalafx.animation.Interpolator
-import scalafx.animation.Timeline
+import scalafx.animation.{Interpolator, Timeline}
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.DoubleProperty
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Line
-import scalafx.stage.Stage
 
 object Metronome1Main extends JFXApp {
 
-  val startXVal: DoubleProperty = DoubleProperty(100.0)
+  val startXVal = DoubleProperty(100.0)
 
   val anim = new Timeline {
     autoReverse = true
     keyFrames = Seq(
-      at(0 s) {startXVal -> 100},
-      at(1 s) {startXVal -> 300 tween Interpolator.LINEAR})
+      at(0 s) {
+        startXVal -> 100
+      },
+      at(1 s) {
+        startXVal -> 300 tween Interpolator.LINEAR
+      })
     cycleCount = Timeline.INDEFINITE
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Metronome 1"
     scene = new Scene(400, 500) {
       content = List(
@@ -44,25 +47,27 @@ object Metronome1Main extends JFXApp {
           content = List(
             new Button {
               text = "Start"
-              onAction = anim.playFromStart
-              disable <== (anim.status =!= Status.STOPPED)
+              onAction = handle {anim.playFromStart()}
+              disable <== anim.status =!= Status.STOPPED
             },
             new Button {
               text = "Pause"
-              onAction = anim.pause
-              disable <== (anim.status =!= Status.RUNNING)
+              onAction = handle {anim.pause()}
+              disable <== anim.status =!= Status.RUNNING
             },
             new Button {
               text = "Resume"
-              onAction = anim.play
-              disable <== (anim.status =!= Status.PAUSED)
+              onAction = handle {anim.play()}
+              disable <== anim.status =!= Status.PAUSED
             },
             new Button {
               text = "Stop"
-              onAction = anim.stop()
-              disable <== (anim.status === Status.STOPPED)
-            })
-        })
+              onAction = handle {anim.stop()}
+              disable <== anim.status === Status.STOPPED
+            }
+          )
+        }
+      )
     }
   }
 

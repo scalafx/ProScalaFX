@@ -3,11 +3,11 @@ package proscalafx.ch07
 import javafx.scene.{chart => jfxsc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.scene.chart.{ScatterChart, NumberAxis, XYChart}
 import scalafx.scene.layout.StackPane
-import scalafx.stage.Stage
 
 
 /**
@@ -15,21 +15,22 @@ import scalafx.stage.Stage
  */
 object ChartApp5 extends JFXApp {
 
-  val xAxis = new NumberAxis()
-  xAxis.autoRanging = false
-  xAxis.lowerBound = 2011
-  xAxis.upperBound = 2021
+  val xAxis = new NumberAxis {
+    autoRanging = false
+    lowerBound = 2011
+    upperBound = 2021
+  }
   val yAxis = new NumberAxis()
   val scatterChart = ScatterChart(xAxis, yAxis)
   scatterChart.title = "Speculations"
   scatterChart.data = createChartData()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "ScatterChart example"
     scene = new Scene(400, 250) {
       root = new StackPane {
         content = scatterChart
-      }.delegate
+      }
     }
   }
 

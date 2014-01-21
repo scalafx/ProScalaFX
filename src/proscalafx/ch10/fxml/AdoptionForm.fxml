@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
-<StackPane prefWidth="400" prefHeight="500" xmlns:fx="http://javafx.com/fxml"
+<?import java.lang.String?>
+<StackPane prefHeight="500.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
            fx:controller="proscalafx.ch10.fxml.AdoptionFormController">
     <children>
         <ImageView>
-            <image>
-                <Image url="@cat.jpg" requestedWidth="800" requestedHeight="800"
-                       preserveRatio="true"/>
-            </image>
             <effect>
                 <ColorAdjust brightness="0.1">
                     <input>
@@ -23,26 +20,22 @@
                     </input>
                 </ColorAdjust>
             </effect>
+            <image>
+                <Image url="@cat.jpg" preserveRatio="true" requestedHeight="800.0" requestedWidth="800.0"/>
+            </image>
         </ImageView>
-        <GridPane fx:id="gridDelegate" hgap="10" vgap="10" style="-fx-padding: 20">
-            <columnConstraints>
-                <ColumnConstraints minWidth="60" halignment="right"/>
-                <ColumnConstraints prefWidth="300" hgrow="always"/>
-            </columnConstraints>
+        <GridPane fx:id="gridDelegate" hgap="10.0" style="-fx-padding: 20" vgap="10.0">
             <children>
-                <Label text="Cat Adoption Form" style="-fx-font-size: 24"
-                       GridPane.halignment="center" GridPane.columnSpan="2147483647"/>
-
+                <Label style="-fx-font-size: 24" text="Cat Adoption Form" GridPane.columnSpan="2147483647"
+                       GridPane.halignment="CENTER"/>
                 <Label text="Size: " GridPane.rowIndex="2"/>
-                <TextField promptText="approximate size in pounds"
-                           GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
+                <TextField fx:id="sizeTextField" promptText="approximate size in pounds" GridPane.columnIndex="1"
+                           GridPane.rowIndex="2"/>
                 <Label text="Breed: " GridPane.rowIndex="3"/>
-                <TextField promptText="pet breed"
-                           GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
+                <TextField fx:id="breedTextField" promptText="pet breed" GridPane.columnIndex="1"
+                           GridPane.rowIndex="3"/>
                 <Label text="Sex: " GridPane.rowIndex="4"/>
-                <ChoiceBox GridPane.rowIndex="4" GridPane.columnIndex="1">
+                <ChoiceBox fx:id="sexChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Male"/>
@@ -51,15 +44,24 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
-
-                <Label text="Additional Info: " wrapText="true" textAlignment="right"
-                       GridPane.rowIndex="5" GridPane.valignment="baseline"/>
-                <TextArea prefRowCount="8" wrapText="true" GridPane.rowIndex="5"
-                          GridPane.columnIndex="1" GridPane.vgrow="always"/>
-
-                <Button text="Submit" GridPane.rowIndex="6" GridPane.columnIndex="1"
-                        GridPane.halignment="right" onAction="#handleSubmit"/>
+                <Label text="Additional Info: " textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="5"
+                       GridPane.valignment="BASELINE"/>
+                <TextArea fx:id="additionalInfoTextArea" prefRowCount="8" wrapText="true" GridPane.columnIndex="1"
+                          GridPane.rowIndex="5" GridPane.vgrow="ALWAYS"/>
+                <HBox id="HBox" alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#handleClear" text="Clear"/>
+                        <Button onAction="#handleSubmit" text="Submit"/>
+                    </children>
+                    <padding>
+                        <Insets left="10.0" right="10.0"/>
+                    </padding>
+                </HBox>
             </children>
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="60.0"/>
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="300.0"/>
+            </columnConstraints>
         </GridPane>
     </children>
 </StackPane>

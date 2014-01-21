@@ -10,9 +10,9 @@ import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
+import scalafx.scene.media.MediaPlayer.Status
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-import scalafx.scene.media.MediaPlayer.Status
 
 
 /**
@@ -86,7 +86,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     GridPane.setValignment(openButton, VPos.BOTTOM)
     GridPane.setHalignment(volHigh, HPos.RIGHT)
     GridPane.setValignment(volumeSlider, VPos.TOP)
-    statusLabel.alignment = Pos.TOP_RIGHT
+    statusLabel.alignmentInParent = Pos.TOP_RIGHT
     GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
 
     gp.add(openButton, 0, 0, 1, 3)
@@ -103,7 +103,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  def createOpenButton() = new Button {
+  private def createOpenButton() = new Button {
     id = "openButton"
     onAction = (ae: ActionEvent) => {
       val fc = new FileChooser() {
@@ -121,7 +121,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  def createControlPanel(): Node = {
+  private def createControlPanel(): Node = {
     val playPauseButton = createPlayPauseButton()
     val seekStartButton = new Button {
       id = "seekStartButton"
@@ -138,14 +138,14 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     }
 
     new HBox {
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       fillHeight = false
       content = List(seekStartButton, playPauseButton, seekEndButton)
     }
   }
 
 
-  def createPlayPauseButton(): Button = {
+  private def createPlayPauseButton(): Button = {
     val pauseUrl = getClass.getResource("resources/pause.png")
     pauseImg = new Image(pauseUrl.toString)
 
@@ -170,7 +170,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  def createSlider(sliderId: String): Slider = new Slider {
+  private def createSlider(sliderId: String): Slider = new Slider {
     min = 0
     max = 1
     value = 0
@@ -199,11 +199,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = songModel.mediaPlayer()
-    if ( Status.STOPPED == mediaPlayer.status ) mediaPlayer.pause()
+    if (Status.STOPPED == mediaPlayer.status) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (  Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
+    if (Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
   }
 
   private def formatDuration(duration: Duration): String = {
@@ -213,8 +213,8 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     "%02d:%02d".format(minutes, seconds)
   }
 
-  def updateStatus(newStatus: Status) {
-    if (Status.UNKNOWN == newStatus  || newStatus == null) {
+  private def updateStatus(newStatus: Status) {
+    if (Status.UNKNOWN == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"
@@ -249,7 +249,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       totalDurationLabel.text = formatDuration(totalDuration)
     }
 
-    mp.onEndOfMedia = runnable {songModel.mediaPlayer().stop()}
+    mp.onEndOfMedia = songModel.mediaPlayer().stop()
 
     volumeSlider.value <==> mp.volume
   }
@@ -259,12 +259,4 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     statusInvalidationSubscription.cancel()
     currentTimeSubscription.cancel()
   }
-
-
-  private def runnable(op: => Unit) = new Runnable {
-    def run() {
-      op
-    }
-  }
-
 }

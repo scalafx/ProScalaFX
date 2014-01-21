@@ -23,16 +23,10 @@ object JavaFXSceneInSwingExample extends App {
 
 
   private class Model {
-    // NOTE: We use here JavaFX Paint as the  type for `ObjectProperty` (2012.11.17).
-    // Without that we will have problems with binding those to `fill` and `stroke` in the `View`.
-    // Compiler would throw:
-    //   error: overloaded method value <== with alternatives:
-    //   (v: scalafx.beans.value.ObservableValue[_ <: javafx.scene.paint.Paint, _ <: javafx.scene.paint.Paint])Unit <and>
-    //   (v: javafx.beans.value.ObservableValue[_ <: javafx.scene.paint.Paint])Unit
-    //   cannot be applied to (scalafx.beans.property.ObjectProperty[scalafx.scene.paint.Paint])
-    //   fill <== Model.fillPaint
-    val fill = new ObjectProperty[jfxsp.Paint](this, "fillPaint", Color.LIGHTGRAY)
-    val stroke = new ObjectProperty[jfxsp.Paint](this, "strokePaint", Color.DARKGRAY)
+    // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
+    // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
+    val fill = ObjectProperty(this, "fillPaint", Color.LIGHTGRAY)
+    val stroke = ObjectProperty(this, "strokePaint", Color.DARKGRAY)
   }
 
 
@@ -55,7 +49,7 @@ object JavaFXSceneInSwingExample extends App {
       canvas.setScene(new Scene {
         root = new VBox {
           content = List(rectangle)
-        }.delegate
+        }
       }.delegate)
     }
 

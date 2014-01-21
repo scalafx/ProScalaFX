@@ -3,6 +3,7 @@ package proscalafx.ch06
 import javafx.scene.{paint => jfxsp}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
 import scalafx.geometry.{Pos, Insets}
@@ -11,7 +12,6 @@ import scalafx.scene.control.Button
 import scalafx.scene.layout.{BorderPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
-import scalafx.stage.Stage
 
 
 /**
@@ -21,7 +21,7 @@ object UnresponsiveUIExample extends JFXApp {
 
   hookupEvents()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Unresponsive UI Example"
     scene = View.scene
   }
@@ -51,16 +51,10 @@ object UnresponsiveUIExample extends JFXApp {
 
 
   private object Model {
-    // NOTE: We use here JavaFX Paint as the  type for `ObjectProperty` (2012.11.17).
-    // Without that we will have problems with binding those to `fill` and `stroke` in the `View`.
-    // Compiler would throw:
-    //   error: overloaded method value <== with alternatives:
-    //   (v: scalafx.beans.value.ObservableValue[_ <: javafx.scene.paint.Paint, _ <: javafx.scene.paint.Paint])Unit <and>
-    //   (v: javafx.beans.value.ObservableValue[_ <: javafx.scene.paint.Paint])Unit
-    //   cannot be applied to (scalafx.beans.property.ObjectProperty[scalafx.scene.paint.Paint])
-    //   fill <== Model.fillPaint
-    val fillPaint = new ObjectProperty[jfxsp.Paint](this, "fillPaint", Color.LIGHTGRAY)
-    val strokePaint = new ObjectProperty[jfxsp.Paint](this, "strokePaint", Color.DARKGRAY)
+    // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
+    // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
+    val fillPaint = ObjectProperty(this, "fillPaint", Color.LIGHTGRAY)
+    val strokePaint = ObjectProperty(this, "strokePaint", Color.DARKGRAY)
   }
 
 
@@ -79,7 +73,7 @@ object UnresponsiveUIExample extends JFXApp {
     val buttonHBox = new HBox {
       padding = Insets(10)
       spacing = 10
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       content = List(
         changeFillButton,
         changeStrokeButton
@@ -91,7 +85,7 @@ object UnresponsiveUIExample extends JFXApp {
         padding = Insets(10)
         center = rectangle
         bottom = buttonHBox
-      }.delegate
+      }
     }
   }
 

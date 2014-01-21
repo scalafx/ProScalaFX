@@ -29,8 +29,8 @@ class ReversiPiece(_owner: Owner = NONE) extends Region {
 
 
   style <== (
-    when(owner === NONE) then nonePieceStyle otherwise
-      (when(owner === WHITE) then whitePieceStyle otherwise blackPieceStyle)
+    when(owner === NONE) choose nonePieceStyle otherwise
+      (when(owner === WHITE) choose whitePieceStyle otherwise blackPieceStyle)
     ) + tileStyle
 
   effect = new Reflection {

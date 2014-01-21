@@ -1,13 +1,11 @@
 package proscalafx.ch07
 
-import javafx.scene.{chart => jfxsc}
-import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.scene.chart.{ScatterChart, NumberAxis, XYChart}
 import scalafx.scene.layout.StackPane
-import scalafx.stage.Stage
 
 
 /**
@@ -15,52 +13,45 @@ import scalafx.stage.Stage
  */
 object ChartApp4 extends JFXApp {
 
-  val xAxis = new NumberAxis()
-  xAxis.autoRanging = false
-  xAxis.lowerBound = 2011
-  xAxis.upperBound = 2021
+  val xAxis = new NumberAxis {
+    autoRanging = false
+    lowerBound = 2011
+    upperBound = 2021
+  }
   val yAxis = new NumberAxis()
-  val scatterChart = ScatterChart(xAxis, yAxis)
-  scatterChart.data = createChartData()
+  val scatterChart = ScatterChart[Number, Number](xAxis, yAxis, createChartData())
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "Chart App 4"
     scene = new Scene(400, 250) {
       root = new StackPane {
         content = scatterChart
-      }.delegate
+      }
     }
   }
 
 
-  // NOTE: explicit type signature using Number instead Int and Double
-  // NOTE: use of jfxsc.XYChart.Series as type for ObservableBuffer, this the same as
-  // signature for scalafx.scene.chart.XYChart.data used above.
-  private def createChartData(): ObservableBuffer[jfxsc.XYChart.Series[Number, Number]] = {
-    var javaValue = 17.56
-    var cValue = 17.06
-    var cppValue = 8.25
-    val answer = new ObservableBuffer[jfxsc.XYChart.Series[Number, Number]]()
-    val java = new XYChart.Series[Number, Number] {
-      name = "Java"
-    }
-    val c = new XYChart.Series[Number, Number] {
-      name = "C"
-    }
-    val cpp = new XYChart.Series[Number, Number] {
-      name = "C++"
-    }
-    for (i <- 2011 to 2021) {
-      java.data() += XYChart.Data[Number, Number](i, javaValue)
-      javaValue += math.random - .5
+  private def createChartData() = {
 
-      c.data() += XYChart.Data[Number, Number](i, cValue)
-      cValue += math.random - .5
+    val years = 2011 to 2020
+    // Generate trend by creating a cumulative sum of random values
+    def generateTrend(startValue: Double) = years.map(_ => math.random - .5).scanLeft(startValue)(_ + _)
 
-      cpp.data() += XYChart.Data[Number, Number](i, cppValue)
-      cppValue += math.random - .5
-    }
-    answer.addAll(java, c, cpp)
-    answer
+    val javaTrend = generateTrend(17.56)
+    val cTrend = generateTrend(17.06)
+    val cppTrend = generateTrend(8.25)
+
+    // NOTE: explicit type signature using Number instead Int and Double
+    // We are deliberately using here factory methods, instead of "new", to create instances of
+    // javafx.scene.chart.* types.
+    val javaData = years zip javaTrend map {case (y, d) => XYChart.Data[Number, Number](y, d)}
+    val cData = years zip cTrend map {case (y, d) => XYChart.Data[Number, Number](y, d)}
+    val cppData = years zip cppTrend map {case (y, d) => XYChart.Data[Number, Number](y, d)}
+
+    ObservableBuffer(
+      XYChart.Series[Number, Number](name = "Java", data = ObservableBuffer(javaData)),
+      XYChart.Series[Number, Number](name = "C", data = ObservableBuffer(cData)),
+      XYChart.Series[Number, Number](name = "C++", data = ObservableBuffer(cppData))
+    )
   }
 }

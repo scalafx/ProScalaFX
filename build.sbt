@@ -5,39 +5,44 @@ name := "ScalaFXPro"
 version := "1.0.0-SNAPSHOT"
 
 // Version of scala to use
-scalaVersion := "2.9.2"
+scalaVersion := "2.9.3"
 
 // Set the main Scala source directory to be <base>/src
 scalaSource in Compile <<= baseDirectory(_ / "src")
 
-resourceDirectory <<= baseDirectory(_ / "src")
+resourceDirectory in Compile <<= baseDirectory(_ / "src")
 
 // Set the Scala test directory to be <base>/test/src
 scalaSource in Test <<= baseDirectory(_ / "test/src")
 
-// append -deprecation to the options passed to the Scala compiler
+// Append -deprecation to the options passed to the Scala compiler
 scalacOptions += "-deprecation"
 
-// ScalaFX is assumed to be in local repo (build locally)
-resolvers += "Local Maven Repository" at "file:///"+Path.userHome.absolutePath+"/.m2/repository"
+// Point to location of a snapshot repository for ScalaFX
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
-libraryDependencies += "org.scalafx" % "scalafx" % "1.0-SNAPSHOT"
+//resolvers += "Sonatype OSS Staging" at "https://oss.sonatype.org/content/repositories/staging"
+
+// ScalaFX dependency
+libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M7"
 
 // Test dependencies
-libraryDependencies += "junit" % "junit" % "4.+" % "test"
+libraryDependencies += "junit" % "junit" % "4.11" % "test"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "1.7.+" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.2" % "test"
+
+// ScalaStyle
+org.scalastyle.sbt.ScalastylePlugin.Settings
 
 // Add JavaFX 2 to the unmanaged classpath
 // For Java 7 update 06+ the JFXRT JAR is part of the Java Runtime Environment
 unmanagedJars in Compile += Attributed.blank(file(System.getenv("JAVA_HOME") + "/jre/lib/jfxrt.jar"))
 
-
 // Fork a new JVM for 'run' and 'test:run'
-fork := false
+fork := true
 
 // Fork a new JVM for 'test:run', but not 'run'
-fork in Test := false
+fork in Test := true
 
 // Only use a single thread for building
 parallelExecution := false

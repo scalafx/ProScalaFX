@@ -10,9 +10,9 @@ import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
+import scalafx.scene.media.MediaPlayer.Status
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-import scalafx.scene.media.MediaPlayer.Status
 
 /**
  * @author Jarek Sacha 
@@ -78,10 +78,10 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
     }
 
     GridPane.setValignment(openButton, VPos.BOTTOM)
-    eqButton.alignment = Pos.BOTTOM_RIGHT
+    eqButton.alignmentInParent = Pos.BOTTOM_RIGHT
     GridPane.setHalignment(volHigh, HPos.RIGHT)
     GridPane.setValignment(volumeSlider, VPos.TOP)
-    statusLabel.alignment = Pos.TOP_RIGHT
+    statusLabel.alignmentInParent = Pos.TOP_RIGHT
     GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
 
     gp.add(openButton, 0, 0, 1, 3)
@@ -145,7 +145,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
     }
 
     new HBox {
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       fillHeight = false
       content = List(seekStartButton, playPauseButton, seekEndButton)
     }
@@ -222,7 +222,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
 
   def updateStatus(newStatus: Status) {
-    if (MediaPlayer.Status.UNKNOWN == newStatus  || newStatus == null) {
+    if (MediaPlayer.Status.UNKNOWN == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"
@@ -255,7 +255,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
       totalDurationLabel.text = formatDuration(totalDuration)
     }
 
-    mp.onEndOfMedia = runnable {mediaModel.mediaPlayer().stop()}
+    mp.onEndOfMedia = mediaModel.mediaPlayer().stop()
 
     volumeSlider.value <==> mp.volume
   }
@@ -265,12 +265,5 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
     volumeSlider.value.unbind()
     statusInvalidationSubscription.cancel()
     currentTimeSubscription.cancel()
-  }
-
-
-  private def runnable(op: => Unit) = new Runnable {
-    def run() {
-      op
-    }
   }
 }

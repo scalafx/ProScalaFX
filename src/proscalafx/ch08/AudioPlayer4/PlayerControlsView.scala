@@ -11,9 +11,9 @@ import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
 import scalafx.scene.media.MediaPlayer
+import scalafx.scene.media.MediaPlayer.Status
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-import scalafx.scene.media.MediaPlayer.Status
 
 
 /**
@@ -78,10 +78,10 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     }
 
     GridPane.setValignment(openButton, VPos.BOTTOM)
-    eqButton.alignment = Pos.BOTTOM_RIGHT
+    eqButton.alignmentInParent = Pos.BOTTOM_RIGHT
     GridPane.setHalignment(volHigh, HPos.RIGHT)
     GridPane.setValignment(volumeSlider, VPos.TOP)
-    statusLabel.alignment = Pos.TOP_RIGHT
+    statusLabel.alignmentInParent = Pos.TOP_RIGHT
     GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
 
     gp.add(openButton, 0, 0, 1, 3)
@@ -141,7 +141,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     }
 
     new HBox {
-      innerAlignment = Pos.CENTER
+      alignment = Pos.CENTER
       fillHeight = false
       content = List(seekStartButton, playPauseButton, seekEndButton)
     }
@@ -171,7 +171,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
   }
 
 
-  def createSlider(sliderId: String) = new Slider {
+  private def createSlider(sliderId: String) = new Slider {
     min = 0
     max = 1
     value = 0
@@ -200,11 +200,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = songModel.mediaPlayer()
-    if (mediaPlayer.status == jffxsm.MediaPlayer.Status.STOPPED) mediaPlayer.pause()
+    if (mediaPlayer.status() == jffxsm.MediaPlayer.Status.STOPPED) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (mediaPlayer.status != jffxsm.MediaPlayer.Status.PLAYING) updatePositionSlider(duration)
+    if (mediaPlayer.status() != jffxsm.MediaPlayer.Status.PLAYING) updatePositionSlider(duration)
   }
 
   private def formatDuration(duration: Duration): String = {
@@ -250,7 +250,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
       totalDurationLabel.text = formatDuration(totalDuration)
     }
 
-    mp.onEndOfMedia = runnable {songModel.mediaPlayer().stop()}
+    mp.onEndOfMedia = songModel.mediaPlayer().stop()
 
     volumeSlider.value <==> mp.volume
   }
@@ -260,12 +260,5 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     volumeSlider.value.unbind()
     statusInvalidationSubscription.cancel()
     currentTimeSubscription.cancel()
-  }
-
-
-  private def runnable(op: => Unit) = new Runnable {
-    def run() {
-      op
-    }
   }
 }

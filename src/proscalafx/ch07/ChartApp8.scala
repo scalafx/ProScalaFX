@@ -3,11 +3,11 @@ package proscalafx.ch07
 import javafx.scene.{chart => jfxsc}
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.scene.chart._
 import scalafx.scene.layout.StackPane
-import scalafx.stage.Stage
 
 
 /**
@@ -21,12 +21,12 @@ object ChartApp8 extends JFXApp {
   barChart.data = createChartData()
   barChart.barGap = 1
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     title = "BarChart example"
     scene = new Scene(400, 250) {
       root = new StackPane {
         content = barChart
-      }.delegate
+      }
     }
   }
 

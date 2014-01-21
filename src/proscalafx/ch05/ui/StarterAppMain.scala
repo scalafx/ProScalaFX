@@ -1,14 +1,13 @@
 package proscalafx.ch05.ui
 
-import javafx.beans.{value => jfxbv}
-import javafx.scene.control.TableColumn.CellDataFeatures
-import javafx.{event => jfxe}
-import javafx.{util => jfxu}
 import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.event.ActionEvent
+import scalafx.application.JFXApp.PrimaryStage
+import scalafx.event.{Event, ActionEvent}
 import scalafx.geometry.{Pos, Orientation, Insets}
+import scalafx.scene.control.MenuItem._
+import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 import scalafx.scene.control._
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.KeyCombination
@@ -17,8 +16,7 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.{Rectangle, Circle}
 import scalafx.scene.web.{HTMLEditor, WebView}
 import scalafx.scene.{Node, Scene}
-import scalafx.stage.{Stage, Popup}
-import scalafx.scene.control.ScrollPane.ScrollBarPolicy
+import scalafx.stage.Popup
 
 
 /**
@@ -28,7 +26,7 @@ object StarterAppMain extends JFXApp {
 
   private val model = new StarterAppModel()
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     scene = new Scene(800, 600) {
       stylesheets = List(getClass.getResource("starterApp.css").toExternalForm)
       root = new BorderPane {
@@ -39,7 +37,7 @@ object StarterAppMain extends JFXApp {
           )
           center = createTabs()
         }
-      }.delegate
+      }
     }
     title = "ScalaFX Starter App"
   }
@@ -52,7 +50,9 @@ object StarterAppMain extends JFXApp {
           new MenuItem("New...") {
             graphic = new ImageView(new Image(this, "images/paper.png"))
             accelerator = KeyCombination.keyCombination("Ctrl +N")
-            onAction = {e: ActionEvent => println(e.eventType + " occurred on MenuItem New")}
+            onAction = {
+              e: ActionEvent => println(e.eventType + " occurred on MenuItem New")
+            }
           },
           new MenuItem("Save")
         )
@@ -76,7 +76,7 @@ object StarterAppMain extends JFXApp {
           id = "newButton"
           graphic = new ImageView(new Image(this, "images/paper.png"))
           tooltip = Tooltip("New Document... Ctrl+N")
-          onAction = println("New toolbar button clicked")
+          onAction = handle {println("New toolbar button clicked")}
         },
         new Button {
           id = "editButton"
@@ -156,7 +156,7 @@ object StarterAppMain extends JFXApp {
     alignToggleGroup.selectToggle(alignToggleGroup.toggles(0))
     alignToggleGroup.selectedToggle.onChange {
       val tb = alignToggleGroup.selectedToggle.get.asInstanceOf[javafx.scene.control.ToggleButton]
-      println(tb.id() + " selecled")
+      println(tb.id() + " selected")
     }
 
     toolBar
@@ -198,16 +198,13 @@ object StarterAppMain extends JFXApp {
           text = "WebView"
           content = webView
           closable = false
-          // NOTE: Using JavaFX Event in closure. Shouldn't implicit conversion take care of this?
-          onSelectionChanged = {
-            e: jfxe.Event => {
-              val randomWebSite = model.randomWebSite()
-              if (inner.selected()) {
-                webView.engine.load(randomWebSite)
-                println("WebView tab is selected, loading: " + randomWebSite)
-              }
-              println("")
+          onSelectionChanged = (e: Event) => {
+            val randomWebSite = model.randomWebSite()
+            if (inner.selected()) {
+              webView.engine.load(randomWebSite)
+              println("WebView tab is selected, loading: " + randomWebSite)
             }
+            println("")
           }
         }
       )
@@ -216,50 +213,30 @@ object StarterAppMain extends JFXApp {
 
 
   private def createTableDemoNode(): Node = {
-    val firstNameColumn = new TableColumn[Person, String]("First Name") {
-      // NOTE: Bug #10?  [[https://code.google.com/p/scalafx/issues/detail?id=10]]
-      // Cell factory need to be assigned using JavaFX `setCellValueFactory`
-      //      cellValueFactory = _.value.firstName
+    // Create columns
+    val firstNameColumn = new TableColumn[Person, String] {
+      text = "First Name"
+      cellValueFactory = {_.value.firstName}
       prefWidth = 180
     }
-    firstNameColumn.setCellValueFactory(new jfxu.Callback[CellDataFeatures[Person, String], jfxbv.ObservableValue[String]] {
-      def call(param: CellDataFeatures[Person, String]) = param.getValue.firstName
-    })
-
-    val lastNameColumn = new TableColumn[Person, String]("First Name") {
-      // NOTE: Bug #10?  [[https://code.google.com/p/scalafx/issues/detail?id=10]]
-      // Cell factory need to be assigned using JavaFX `setCellValueFactory`
-      //      cellValueFactory = _.value.firstName
+    val lastNameColumn = new TableColumn[Person, String] {
+      text = "Last Name"
+      cellValueFactory = {_.value.lastName}
       prefWidth = 180
     }
-    lastNameColumn.setCellValueFactory(new jfxu.Callback[CellDataFeatures[Person, String], jfxbv.ObservableValue[String]] {
-      def call(param: CellDataFeatures[Person, String]) = param.getValue.lastName
-    })
-
-    val phoneColumn = new TableColumn[Person, String]("First Name") {
-      // NOTE: Bug #10?  [[https://code.google.com/p/scalafx/issues/detail?id=10]]
-      // Cell factory need to be assigned using JavaFX `setCellValueFactory`
-      //      cellValueFactory = _.value.firstName
+    val phoneColumn = new TableColumn[Person, String] {
+      text = "Phone"
+      cellValueFactory = {_.value.phone}
       prefWidth = 180
     }
-    phoneColumn.setCellValueFactory(new jfxu.Callback[CellDataFeatures[Person, String], jfxbv.ObservableValue[String]] {
-      def call(param: CellDataFeatures[Person, String]) = param.getValue.phone
-    })
 
-
+    // Create table
     val table = new TableView[Person](model.getTeamMembers) {
-      // NOTE: there may be an issue with assigning columns directly, do it through delegate
-      //      columns ++= List(
-      //        tc
-      //      )
-      delegate.getColumns.addAll(
-        firstNameColumn.delegate,
-        lastNameColumn.delegate,
-        phoneColumn.delegate
-      )
+      columns +=(firstNameColumn, lastNameColumn, phoneColumn)
     }
 
-    table.getSelectionModel.selectedItemProperty.onChange(
+    // Listen to row selection, and print values of the selected row
+    table.selectionModel().selectedItem.onChange(
       (_, _, newValue) => println(newValue + " chosen in TableView")
     )
 
@@ -310,7 +287,7 @@ object StarterAppMain extends JFXApp {
           },
           new TreeItem("Mineral") {
             children = List(
-              new TreeItem("Coper"),
+              new TreeItem("Copper"),
               new TreeItem("Diamond"),
               new TreeItem("Quartz")
             )
@@ -323,7 +300,6 @@ object StarterAppMain extends JFXApp {
             )
           }
         )
-
       }
     }
 
@@ -331,7 +307,7 @@ object StarterAppMain extends JFXApp {
       items = model.listViewItems
     }
 
-    treeView.selectionModel().setSelectionMode(SelectionMode.SINGLE)
+    treeView.selectionModel().selectionMode = SelectionMode.SINGLE
     treeView.selectionModel().selectedItem.onChange(
       (_, _, newTreeItem) => {
         if (newTreeItem != null && newTreeItem.isLeaf) {
@@ -344,12 +320,7 @@ object StarterAppMain extends JFXApp {
     )
 
     new SplitPane {
-      // NOTE: Using JavaFX way of adding items using `addAll`.
-      //      items = List (
-      //          treeView,
-      //          listView
-      //      )
-      items.addAll(
+      items ++= List(
         treeView,
         listView
       )
@@ -357,20 +328,22 @@ object StarterAppMain extends JFXApp {
   }
 
 
-  def createScrollMiscDemoNode(): Node = {
+  private def createScrollMiscDemoNode(): Node = {
     val radioToggleGroup = new ToggleGroup()
     val variousControls = new VBox {
       padding = Insets(10)
       spacing = 20
       content = List(
         new Button("Button") {
-          onAction = {e: ActionEvent => println(e.eventType + " occured on Button")}
+          onAction = {
+            e: ActionEvent => println(e.eventType + " occurred on Button")
+          }
         },
         new CheckBox("CheckBox") {
           inner =>
           onAction = {
             e: ActionEvent =>
-              println(e.eventType + " occured on CheckBox, and `selected` property is: " + inner.selected())
+              println(e.eventType + " occurred on CheckBox, and `selected` property is: " + inner.selected())
           }
         },
         new HBox {
@@ -385,7 +358,9 @@ object StarterAppMain extends JFXApp {
           )
         },
         new Hyperlink("Hyperlink") {
-          onAction = {e: ActionEvent => println(e.eventType + " occurred on Hyperlink")}
+          onAction = {
+            e: ActionEvent => println(e.eventType + " occurred on Hyperlink")
+          }
         },
         new ChoiceBox(model.choiceBoxItems) {
           selectionModel().selectFirst()
@@ -396,17 +371,23 @@ object StarterAppMain extends JFXApp {
         new MenuButton("MenuButton") {
           items = List(
             new MenuItem("MenuItem A") {
-              onAction = {ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")}
+              onAction = {
+                ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")
+              }
             },
             new MenuItem("MenuItem B")
           )
         },
         new SplitMenuButton {
           text = "SplitMenuButton"
-          onAction = {ae: ActionEvent => println(ae.eventType + " occurred on SplitMenuButton")}
+          onAction = {
+            ae: ActionEvent => println(ae.eventType + " occurred on SplitMenuButton")
+          }
           items = List(
             new MenuItem("MenuItem A") {
-              onAction = {ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")}
+              onAction = {
+                ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")
+              }
             },
             new MenuItem("MenuItem B")
           )
@@ -414,12 +395,16 @@ object StarterAppMain extends JFXApp {
         new TextField {
           promptText = "Enter user name"
           prefColumnCount = 16
-          text.onChange {println("TextField text is: " + text())}
+          text.onChange {
+            println("TextField text is: " + text())
+          }
         },
         new PasswordField {
           promptText = "Enter password"
           prefColumnCount = 16
-          text.onChange {println("PasswordField text is: " + text())}
+          text.onChange {
+            println("PasswordField text is: " + text())
+          }
         },
         new HBox {
           spacing = 10
@@ -430,7 +415,9 @@ object StarterAppMain extends JFXApp {
             new TextArea {
               prefColumnCount = 12
               prefRowCount = 4
-              text.onChange {println("TextArea text is: " + text())}
+              text.onChange {
+                println("TextArea text is: " + text())
+              }
             }
           )
         },
@@ -460,27 +447,17 @@ object StarterAppMain extends JFXApp {
     radioToggleGroup.selectToggle(radioToggleGroup.toggles(0))
     radioToggleGroup.selectedToggle.onChange {
       val rb = radioToggleGroup.selectedToggle.get.asInstanceOf[javafx.scene.control.ToggleButton]
-      if (rb != null) println(rb.id() + " selecled")
+      if (rb != null) println(rb.id() + " selected")
     }
 
     val sampleContextMenu = new ContextMenu {
-      // NOTE: Adding menu items through delegate. Adding directly does nothing.
-      //      items ++= List(
-      //        new MenuItem("MenuItemA") {
-      //          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item A")}
-      //        },
-      //        new MenuItem("MenuItemB") {
-      //          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item B")}
-      //        }
-      //      )
-      delegate.getItems.addAll(
+      items +=(
         new MenuItem("MenuItemA") {
           onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item A")}
-        }.delegate,
+        },
         new MenuItem("MenuItemB") {
           onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item B")}
-        }.delegate
-      )
+        })
     }
 
     new ScrollPane {
@@ -492,7 +469,7 @@ object StarterAppMain extends JFXApp {
   }
 
 
-  def createHtmlEditorDemoNode(): Node = {
+  private def createHtmlEditorDemoNode(): Node = {
 
     val htmlEditor = new HTMLEditor {
       htmlText = "<p>Replace this text</p>"
@@ -507,7 +484,7 @@ object StarterAppMain extends JFXApp {
             (stage.height() - alertPopup.height()) / 2.0 + stage.y())
         }
       }
-      alignment = Pos.CENTER
+      alignmentInParent = Pos.CENTER
       margin = Insets(10, 0, 10, 0)
     }
 
@@ -518,18 +495,19 @@ object StarterAppMain extends JFXApp {
   }
 
 
-  def createAlertPopup(popupText: String) = new Popup {
+  private def createAlertPopup(popupText: String) = new Popup {
     inner =>
     content.add(new StackPane {
-      content = List(new Rectangle {
-        width = 300
-        height = 200
-        arcWidth = 20
-        arcHeight = 20
-        fill = Color.LIGHTBLUE
-        stroke = Color.GRAY
-        strokeWidth = 2
-      },
+      content = List(
+        new Rectangle {
+          width = 300
+          height = 200
+          arcWidth = 20
+          arcHeight = 20
+          fill = Color.LIGHTBLUE
+          stroke = Color.GRAY
+          strokeWidth = 2
+        },
         new BorderPane {
           center = new Label {
             text = popupText
@@ -538,8 +516,8 @@ object StarterAppMain extends JFXApp {
             maxHeight = 140
           }
           bottom = new Button("OK") {
-            onAction = {e: ActionEvent => inner.hide}
-            alignment = Pos.CENTER
+            onAction = {e: ActionEvent => inner.hide()}
+            alignmentInParent = Pos.CENTER
             margin = Insets(10, 0, 10, 0)
           }
         }

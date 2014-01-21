@@ -6,6 +6,7 @@ import proscalafx.ch04.reversi.model.ReversiModel
 import proscalafx.ch04.reversi.model.WHITE
 import scalafx.Includes._
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.Node
 import scalafx.scene.Scene
@@ -20,7 +21,6 @@ import scalafx.scene.layout.VBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{FontWeight, Font, Text}
-import scalafx.stage.Stage
 
 
 object BorderLayoutExample extends JFXApp {
@@ -31,9 +31,9 @@ object BorderLayoutExample extends JFXApp {
     bottom = createScoreBoxes
   }
 
-  stage = new Stage {
+  stage = new PrimaryStage {
     scene = new Scene(600, 400) {
-      // NOTE: Assign borderPane directly to `root` to avoid layout issues.
+      // Assign borderPane directly to `root` to avoid layout issues.
       // If assigned to `content` there will be `Group` node at root that interferes with automatic rescaling.
       root = borderPane
     }
@@ -51,12 +51,12 @@ object BorderLayoutExample extends JFXApp {
         content = new Text("ScalaFX") {
           font = Font.font(null, FontWeight.BOLD, 18)
           fill = Color.WHITE
-          alignment = Pos.CENTER_RIGHT
+          alignmentInParent = Pos.CENTER_RIGHT
         }
       },
       new Text("Reversi") {
         font = Font.font(null, FontWeight.BOLD, 18)
-        alignment = Pos.CENTER_LEFT
+        alignmentInParent = Pos.CENTER_LEFT
       })
     prefTileHeight = 40
     prefTileWidth <== parent.selectDouble("width") / 2
@@ -124,11 +124,11 @@ object BorderLayoutExample extends JFXApp {
         new FlowPane {
           hgap = 20
           vgap = 10
-          innerAlignment = Pos.CENTER
+          alignment = Pos.CENTER
           content = List(
             score,
             new VBox {
-              innerAlignment = Pos.CENTER
+              alignment = Pos.CENTER
               spacing = 10
               content = List(
                 piece,

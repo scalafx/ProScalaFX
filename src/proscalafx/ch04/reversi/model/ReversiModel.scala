@@ -37,17 +37,14 @@ object ReversiModel {
 
 
   def score(owner: Owner): NumberExpression = {
-    board.flatten.map(p => when(p === owner) then 1 otherwise 0).reduce(_ + _)
+    board.flatten.map(p => when(p === owner) choose 1 otherwise 0).reduce(_ + _)
   }
 
 
   def turnsRemaining(owner: Owner): NumberBinding = {
     val emptyCellCount = score(NONE)
 
-    // NOTE: We use here JavaFX delegate to produce NumberBinding, without it we would get ObjectBinding[T]
-    // that has no asString() needed to bind to string value of the expression in the caller of this method
-    //    when(turn === owner) then ((emptyCellCount + 1) / 2) otherwise (emptyCellCount / 2)
-    when(turn === owner) then ((emptyCellCount + 1) / 2).delegate otherwise (emptyCellCount / 2).delegate
+    when(turn === owner) choose ((emptyCellCount + 1) / 2) otherwise (emptyCellCount / 2)
   }
 
 

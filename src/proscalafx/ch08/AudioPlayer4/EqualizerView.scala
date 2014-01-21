@@ -126,7 +126,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     }
 
   private def clearGridPane() {
-    viewNode.content.foreach(GridPane.clearConstraints(_))
+    viewNode.content.foreach(GridPane.clearConstraints)
     viewNode.content.clear()
   }
 }

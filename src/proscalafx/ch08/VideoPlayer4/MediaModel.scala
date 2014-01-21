@@ -2,9 +2,9 @@ package proscalafx.ch08.VideoPlayer4
 
 import javafx.scene.{image => jfxsi}
 import javafx.scene.{media => jfxsm}
-import javafx.{collections => jfxc}
 import scalafx.Includes._
 import scalafx.beans.property.{ReadOnlyObjectWrapper, ObjectProperty, StringProperty}
+import scalafx.collections.ObservableMap.Add
 import scalafx.scene.image.Image
 import scalafx.scene.media.{Media, MediaPlayer}
 
@@ -56,37 +56,22 @@ class MediaModel {
     resetProperties()
 
     try {
-      val media = new Media(url)
-      // NOTE: Adding ScalaFX like listener will not work (no change notification received), using JavaFX style listener
-      //      media.getMetadata.onChange((_, change) => {
-      //        change match {
-      //          case Add(key, added) => handleMetadata(key, added)
-      //          case _               => {}
-      //        }
-      //      })
-      media.getMetadata.addListener(new jfxc.MapChangeListener[String, AnyRef] {
-        def onChanged(ch: jfxc.MapChangeListener.Change[_ <: String, _ <: AnyRef]) {
-          if (ch.wasAdded) handleMetadata(ch.getKey, ch.getValueAdded)
-        }
-      })
+      val media = new Media(url) {
+        metadata.onChange((_, change) => {
+          change match {
+            case Add(key, added) => handleMetadata(key, added)
+            case _ => {}
+          }
+        })
+      }
 
-      // NOTE: Since ScalaFX MediaPlayer is declared `final` cannot use 'hierarchical'/`anonymous class` pattern
-      //      mediaPlayer = new MediaPlayer(media) {
-      //        onError = new Runnable {
-      //          def run() {
-      //            val errorMessage: String = media.getError.getMessage
-      //            System.out.println("MediaPlayer Error: " + errorMessage)
-      //          }
-      //        }
-      //      }
-      _mediaPlayer() = new MediaPlayer(media)
-      _mediaPlayer().onError = new Runnable {
-        def run() {
+      _mediaPlayer() = new MediaPlayer(media) {
+        // Handle errors during playback
+        onError = {
           val errorMessage = media.error().getMessage
-          // Handle errors during playback
           println("MediaPlayer Error: " + errorMessage)
         }
-      }
+      }.delegate
     } catch {
       // Handle construction errors
       case re: RuntimeException => println("Caught Exception: " + re.getMessage)
@@ -96,12 +81,12 @@ class MediaModel {
 
   private def handleMetadata(key: String, value: AnyRef) {
     key match {
-      case "album"  => album() = value.toString
+      case "album" => album() = value.toString
       case "artist" => artist() = value.toString
-      case "title"  => title() = value.toString
-      case "year"   => year() = value.toString
-      case "image"  => albumCover() = value.asInstanceOf[javafx.scene.image.Image]
-      case _        => println("Unhandled metadata key: " + key + ", value: " + value)
+      case "title" => title() = value.toString
+      case "year" => year() = value.toString
+      case "image" => albumCover() = value.asInstanceOf[javafx.scene.image.Image]
+      case _ => println("Unhandled metadata key: " + key + ", value: " + value)
     }
   }
 }
