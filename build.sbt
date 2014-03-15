@@ -5,7 +5,7 @@ name := "ScalaFXPro"
 version := "1.0.0-SNAPSHOT"
 
 // Version of scala to use
-scalaVersion := "2.9.3"
+scalaVersion := "2.10.3"
 
 // Set the main Scala source directory to be <base>/src
 scalaSource in Compile <<= baseDirectory(_ / "src")
@@ -24,7 +24,7 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 //resolvers += "Sonatype OSS Staging" at "https://oss.sonatype.org/content/repositories/staging"
 
 // ScalaFX dependency
-libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M7"
+libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-R8"
 
 // Test dependencies
 libraryDependencies += "junit" % "junit" % "4.11" % "test"
