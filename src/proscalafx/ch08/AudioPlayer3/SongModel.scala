@@ -52,7 +52,7 @@ class SongModel {
         metadata.onChange((_, change) => {
           change match {
             case Add(key, added) => handleMetadata(key, added)
-            case _ => {}
+            case _ =>
           }
         })
       }

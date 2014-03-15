@@ -94,7 +94,7 @@ object AudioPlayer2 extends JFXApp {
         metadata.onChange((_, change) => {
           change match {
             case Add(key, added) => handleMetadata(key, added)
-            case _ => {}
+            case _ =>
           }
         })
       }
