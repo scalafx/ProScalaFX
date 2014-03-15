@@ -63,21 +63,18 @@ object FXCollectionsExample extends App {
 
   def prettyPrint(change: Change) {
     change match {
-      case Add(position, added)             => {
+      case Add(position, added)             =>
         println("\t\tKind of change: added")
         println("\t\tAdded size    : " + added.size)
         println("\t\tAdded sublist : " + mkString(added))
-      }
-      case Remove(position, removed)        => {
+      case Remove(position, removed)        =>
         println("\t\tKind of change: removed")
         println("\t\tRemoved size  : " + removed.size)
         println("\t\tRemoved       : " + mkString(removed))
-      }
-      case Reorder(start, end, permutation) => {
-        val permutations = for (i <- start until end) yield (i + "->" + permutation(i))
+      case Reorder(start, end, permutation) =>
+        val permutations = for (i <- start until end) yield i + "->" + permutation(i)
         println("\t\tKind of change: permuted")
         println("\t\tPermutation   : " + mkString(permutations))
-      }
     }
   }
 

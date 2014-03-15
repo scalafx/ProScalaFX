@@ -44,7 +44,7 @@ object ResponsiveUIExample extends JFXApp {
                 rect.arcHeight() = newArcSize
               }
             } catch {
-              case e: InterruptedException => {/* Properly handle exception */}
+              case e: InterruptedException => /* Properly handle exception */
             }
           }
         }

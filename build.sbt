@@ -1,11 +1,11 @@
 // Project name
-name := "ScalaFXPro"
+name := "ProScalaFX"
 
 // Current version
 version := "1.0.0-SNAPSHOT"
 
 // Version of scala to use
-scalaVersion := "2.9.3"
+scalaVersion := "2.10.3"
 
 // Set the main Scala source directory to be <base>/src
 scalaSource in Compile <<= baseDirectory(_ / "src")
@@ -19,20 +19,20 @@ scalaSource in Test <<= baseDirectory(_ / "test/src")
 scalacOptions += "-deprecation"
 
 // Point to location of a snapshot repository for ScalaFX
-resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+resolvers += Opts.resolver.sonatypeSnapshots
 
-//resolvers += "Sonatype OSS Staging" at "https://oss.sonatype.org/content/repositories/staging"
+//resolvers += Opts.resolver.sonatypeStaging
 
 // ScalaFX dependency
-libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-M7"
+libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-R8"
 
 // Test dependencies
 libraryDependencies += "junit" % "junit" % "4.11" % "test"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.2" % "test"
 
-// ScalaStyle
-org.scalastyle.sbt.ScalastylePlugin.Settings
+// Set the prompt (for this build) to include the project id.
+shellPrompt := { state => System.getProperty("user.name") + ":" + Project.extract(state).currentRef.project + "> " }
 
 // Add JavaFX 2 to the unmanaged classpath
 // For Java 7 update 06+ the JFXRT JAR is part of the Java Runtime Environment
