@@ -24,19 +24,19 @@ resolvers += Opts.resolver.sonatypeSnapshots
 //resolvers += Opts.resolver.sonatypeStaging
 
 // ScalaFX dependency
-libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-R8"
+libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-R9-SNAPSHOT"
 
 // Test dependencies
 libraryDependencies += "junit" % "junit" % "4.11" % "test"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.2" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.1.1" % "test"
 
 // Set the prompt (for this build) to include the project id.
 shellPrompt := { state => System.getProperty("user.name") + ":" + Project.extract(state).currentRef.project + "> " }
 
 // Add JavaFX 2 to the unmanaged classpath
 // For Java 7 update 06+ the JFXRT JAR is part of the Java Runtime Environment
-unmanagedJars in Compile += Attributed.blank(file(System.getenv("JAVA_HOME") + "/jre/lib/jfxrt.jar"))
+unmanagedJars in Compile += Attributed.blank(file(scala.util.Properties.javaHome + "/lib/jfxrt.jar"))
 
 // Fork a new JVM for 'run' and 'test:run'
 fork := true
