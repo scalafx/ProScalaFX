@@ -36,7 +36,7 @@ object UnresponsiveUIExample extends JFXApp {
         try {
           Thread.sleep(Long.MaxValue)
         } catch {
-          case e: InterruptedException => {/* Properly handle exception */}
+          case e: InterruptedException => /* Properly handle exception */
         }
       }
     }

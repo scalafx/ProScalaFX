@@ -132,7 +132,7 @@ object ServiceExample extends JFXApp {
           n = Integer.parseInt(text)
         }
         catch {
-          case e: NumberFormatException => {}
+          case e: NumberFormatException =>
         }
         n
       }

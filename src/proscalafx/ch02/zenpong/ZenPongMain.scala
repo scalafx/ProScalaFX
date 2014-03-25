@@ -165,7 +165,7 @@ object ZenPongMain extends JFXApp {
         leftPaddleY() = leftPaddleY.value - 6
       case KeyCode.Z if !leftPaddle.boundsInParent().intersects(bottomWall.boundsInLocal()) =>
         leftPaddleY() = leftPaddleY.value + 6
-      case _ => {}
+      case _ =>
     }
   }
 
