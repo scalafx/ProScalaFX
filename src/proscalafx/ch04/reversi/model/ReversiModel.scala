@@ -11,7 +11,7 @@ object ReversiModel {
 
   val BOARD_SIZE = 8
 
-  val turn = ObjectProperty[Owner](BLACK)
+  val turn = ObjectProperty[Owner](Black)
 
   val board = Array.tabulate(BOARD_SIZE, BOARD_SIZE)((_, _) => ObjectProperty[Owner](NONE))
 
@@ -21,10 +21,10 @@ object ReversiModel {
   private def initBoard() {
     val center1 = BOARD_SIZE / 2 - 1
     val center2 = BOARD_SIZE / 2
-    board(center1)(center1)() = WHITE
-    board(center1)(center2)() = BLACK
-    board(center2)(center1)() = BLACK
-    board(center2)(center2)() = WHITE
+    board(center1)(center1)() = White
+    board(center1)(center2)() = Black
+    board(center2)(center1)() = Black
+    board(center2)(center2)() = White
   }
 
 
@@ -32,7 +32,7 @@ object ReversiModel {
     board.flatten.foreach(_() = NONE)
 
     initBoard()
-    turn() = BLACK
+    turn() = Black
   }
 
 

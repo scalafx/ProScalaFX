@@ -1,6 +1,5 @@
 package proscalafx.ch06
 
-import javafx.scene.{paint => jfxsp}
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{Platform, JFXApp}
@@ -31,7 +30,7 @@ object ResponsiveUIExample extends JFXApp {
     View.changeFillButton.onAction = {
       (ae: ActionEvent) => {
         val fillPaint = Model.fillPaint()
-        Model.fillPaint() = if (Color.LIGHTGRAY == fillPaint) Color.GRAY else Color.LIGHTGRAY
+        Model.fillPaint() = if (Color.LightGray == fillPaint) Color.Gray else Color.LightGray
 
         val task = new Runnable {
           def run() {
@@ -55,7 +54,7 @@ object ResponsiveUIExample extends JFXApp {
     View.changeStrokeButton.onAction = {
       (ae: ActionEvent) => {
         val strokePaint = Model.strokePaint()
-        Model.strokePaint() = if (strokePaint == jfxsp.Color.DARKGRAY) jfxsp.Color.BLACK else jfxsp.Color.DARKGRAY
+        Model.strokePaint() = if (strokePaint == Color.DarkGray) Color.Black else Color.DarkGray
       }
     }
   }
@@ -64,8 +63,8 @@ object ResponsiveUIExample extends JFXApp {
   private object Model {
     // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
     // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
-    val fillPaint = ObjectProperty(this, "fillPaint", Color.LIGHTGRAY)
-    val strokePaint = ObjectProperty(this, "strokePaint", Color.DARKGRAY)
+    val fillPaint = ObjectProperty(this, "fillPaint", Color.LightGray)
+    val strokePaint = ObjectProperty(this, "strokePaint", Color.DarkGray)
   }
 
 

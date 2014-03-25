@@ -16,7 +16,7 @@ class ScalaFXBeanControllerExample(model: ScalaFXBeanModelExample,
 
   def switchColorPropertyOnModel() {
     val color = model.color()
-    model.color() = if (color == Color.BLACK) Color.WHITE else Color.BLACK
+    model.color() = if (color == Color.Black) Color.White else Color.Black
   }
 
 }

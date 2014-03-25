@@ -1,6 +1,6 @@
 package proscalafx.ch04.reversi.ui
 
-import proscalafx.ch04.reversi.model.{Owner, WHITE, BLACK, ReversiModel}
+import proscalafx.ch04.reversi.model.{Owner, White, Black, ReversiModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{ConditionalFeature, Platform, JFXApp}
@@ -70,7 +70,7 @@ object Reversi extends JFXApp {
         content = new Text {
           text = "ScalaFX"
           font = Font.font(null, FontWeight.BOLD, 18)
-          fill = Color.WHITE
+          fill = Color.White
           alignmentInParent = Pos.CENTER_RIGHT
         }
       },
@@ -139,8 +139,8 @@ object Reversi extends JFXApp {
     snapToPixel = false
     prefColumns = 2
     content = List(
-      createScore(BLACK),
-      createScore(WHITE)
+      createScore(Black),
+      createScore(White)
     )
     prefTileWidth <== parent.selectDouble("width") / 2
   }
@@ -149,7 +149,7 @@ object Reversi extends JFXApp {
   private def createScore(owner: Owner): StackPane = {
 
     val innerShadow = new InnerShadow() {
-      color = Color.DODGERBLUE
+      color = Color.DodgerBlue
       choke = 0.5
     }
     val noInnerShadow = null.asInstanceOf[javafx.scene.effect.InnerShadow]
@@ -160,7 +160,7 @@ object Reversi extends JFXApp {
     }
 
     val dropShadow = new DropShadow() {
-      color = Color.DODGERBLUE
+      color = Color.DodgerBlue
       spread = 0.2
     }
     val noDropShadow = null.asInstanceOf[javafx.scene.effect.DropShadow]

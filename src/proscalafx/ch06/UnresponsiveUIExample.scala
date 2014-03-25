@@ -31,7 +31,7 @@ object UnresponsiveUIExample extends JFXApp {
     View.changeFillButton.onAction = {
       (ae: ActionEvent) => {
         val fillPaint = Model.fillPaint()
-        Model.fillPaint() = if (fillPaint == jfxsp.Color.LIGHTGRAY) jfxsp.Color.GRAY else jfxsp.Color.LIGHTGRAY
+        Model.fillPaint() = if (fillPaint == Color.LightGray) Color.Gray else Color.LightGray
         // Bad code that will cause the UI to be unresponsive
         try {
           Thread.sleep(Long.MaxValue)
@@ -44,7 +44,7 @@ object UnresponsiveUIExample extends JFXApp {
     View.changeStrokeButton.onAction = {
       (ae: ActionEvent) => {
         val strokePaint = Model.strokePaint()
-        Model.strokePaint() = if (strokePaint == jfxsp.Color.DARKGRAY) jfxsp.Color.BLACK else jfxsp.Color.DARKGRAY
+        Model.strokePaint() = if (strokePaint == Color.DarkGray) Color.Black else Color.DarkGray
       }
     }
   }
@@ -53,8 +53,8 @@ object UnresponsiveUIExample extends JFXApp {
   private object Model {
     // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
     // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
-    val fillPaint = ObjectProperty(this, "fillPaint", Color.LIGHTGRAY)
-    val strokePaint = ObjectProperty(this, "strokePaint", Color.DARKGRAY)
+    val fillPaint = ObjectProperty(this, "fillPaint", Color.LightGray)
+    val strokePaint = ObjectProperty(this, "strokePaint", Color.DarkGray)
   }
 
 

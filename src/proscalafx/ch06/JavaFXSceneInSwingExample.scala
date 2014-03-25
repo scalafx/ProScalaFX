@@ -25,8 +25,8 @@ object JavaFXSceneInSwingExample extends App {
   private class Model {
     // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
     // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
-    val fill = ObjectProperty(this, "fillPaint", Color.LIGHTGRAY)
-    val stroke = ObjectProperty(this, "strokePaint", Color.DARKGRAY)
+    val fill = ObjectProperty(this, "fillPaint", Color.LightGray)
+    val stroke = ObjectProperty(this, "strokePaint", Color.DarkGray)
   }
 
 
@@ -74,14 +74,14 @@ object JavaFXSceneInSwingExample extends App {
     view.changeFillButton.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent) {
         Platform.runLater {
-          model.fill() = if (model.fill() == jfxsp.Color.LIGHTGRAY) jfxsp.Color.GRAY else jfxsp.Color.LIGHTGRAY
+          model.fill() = if (model.fill() == Color.LightGray) Color.Gray else Color.LightGray
         }
       }
     })
     view.changeStrokeButton.addActionListener(new ActionListener {
       def actionPerformed(e: ActionEvent) {
         Platform.runLater {
-          model.stroke() = if (model.stroke() == jfxsp.Color.DARKGRAY) jfxsp.Color.BLACK else jfxsp.Color.DARKGRAY
+          model.stroke() = if (model.stroke() == Color.DarkGray) Color.Black else Color.DarkGray
         }
       }
     })

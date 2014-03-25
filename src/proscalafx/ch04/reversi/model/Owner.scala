@@ -5,16 +5,16 @@ import scalafx.scene.paint.Color
 sealed case class Owner(color: Color, colorStyle: String) {
 
   def opposite: Owner = this match {
-    case WHITE => BLACK
-    case BLACK => WHITE
+    case White => Black
+    case Black => White
     case _ => NONE
   }
 
 }
 
-object NONE extends Owner(Color.TRANSPARENT, "")
+object NONE extends Owner(Color.Transparent, "")
 
-object WHITE extends Owner(Color.WHITE, "white")
+object White extends Owner(Color.White, "white")
 
-object BLACK extends Owner(Color.BLACK, "black")
+object Black extends Owner(Color.Black, "black")
 

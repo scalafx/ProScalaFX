@@ -25,9 +25,9 @@ object ChangeFillExample extends JFXApp {
 
   // `fillPaint` is created using ObjectProperty factory method to ensure proper type parameter
   // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
-  val fillPaint = ObjectProperty(this, "fillPaint", Color.LIGHTGRAY)
-  val light = jfxsp.Color.LIGHTGRAY
-  val dark = jfxsp.Color.GRAY
+  val fillPaint = ObjectProperty(this, "fillPaint", Color.LightGray)
+  val light : jfxsp.Color = Color.LightGray
+  val dark : jfxsp.Color = Color.Gray
 
   stage = new PrimaryStage {
     title = "Change Fill Example"

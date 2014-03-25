@@ -42,7 +42,7 @@ object ZenPongMain extends JFXApp {
   /** The moving ball */
   val ball = new Circle {
     radius = 5.0
-    fill = Color.WHITE
+    fill = Color.White
     centerX <== centerBallX
     centerY <== centerBallY
   }
@@ -52,7 +52,7 @@ object ZenPongMain extends JFXApp {
     x = 20
     width = 10
     height = 30
-    fill = Color.LIGHTBLUE
+    fill = Color.LightBlue
     cursor = Cursor.HAND
     translateY <== leftPaddleY
     onMousePressed = (me: MouseEvent) => {
@@ -68,7 +68,7 @@ object ZenPongMain extends JFXApp {
     x = 470
     width = 10
     height = 30
-    fill = Color.LIGHTBLUE
+    fill = Color.LightBlue
     cursor = Cursor.HAND
     translateY <== rightPaddleY
     onMousePressed = (me: MouseEvent) => {
@@ -207,7 +207,7 @@ object ZenPongMain extends JFXApp {
         endY = 1.0,
         proportional = true,
         cycleMethod = CycleMethod.NO_CYCLE,
-        stops = List(Stop(0.0, Color.BLACK), Stop(0.0, Color.GRAY)))
+        stops = List(Stop(0.0, Color.Black), Stop(0.0, Color.Gray)))
       content = pongComponents
     }
   }

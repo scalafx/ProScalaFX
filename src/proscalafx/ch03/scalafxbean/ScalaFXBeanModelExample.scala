@@ -17,7 +17,7 @@ class ScalaFXBeanModelExample {
     str() = value
   }
 
-  val color = new ObjectProperty[Color](this, "color", Color.BLACK)
+  val color = new ObjectProperty[Color](this, "color", Color.Black)
 
   def color_=(value: Color) {
     color() = value
