@@ -2,10 +2,10 @@
 name := "ProScalaFX"
 
 // Current version
-version := "1.0.0-SNAPSHOT"
+version := "2.2.60-R9-SNAPSHOT"
 
 // Version of scala to use
-scalaVersion := "2.10.3"
+scalaVersion := "2.10.4"
 
 // Set the main Scala source directory to be <base>/src
 scalaSource in Compile <<= baseDirectory(_ / "src")
@@ -24,12 +24,12 @@ resolvers += Opts.resolver.sonatypeSnapshots
 //resolvers += Opts.resolver.sonatypeStaging
 
 // ScalaFX dependency
-libraryDependencies += "org.scalafx" %% "scalafx" % "1.0.0-R9-SNAPSHOT"
+libraryDependencies += "org.scalafx" %% "scalafx" % "2.2.60-R9"
 
 // Test dependencies
 libraryDependencies += "junit" % "junit" % "4.11" % "test"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.1.1" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2" % "test"
 
 // Set the prompt (for this build) to include the project id.
 shellPrompt := { state => System.getProperty("user.name") + ":" + Project.extract(state).currentRef.project + "> " }
