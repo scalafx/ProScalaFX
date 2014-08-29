@@ -170,7 +170,7 @@ object OnTheSceneMain extends JFXApp {
     layoutX = 0
     layoutY = -30
     textOrigin = VPos.TOP
-    fill = Color.BLUE
+    fill = Color.Blue
     font = Font.font("Sans Serif", FontWeight.BOLD, 16)
     managed = false
     text <== new StringProperty("Scene fill: ") + sceneRef.fill

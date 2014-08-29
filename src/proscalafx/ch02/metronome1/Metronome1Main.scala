@@ -38,7 +38,7 @@ object Metronome1Main extends JFXApp {
           endX = 200
           endY = 400
           strokeWidth = 4
-          stroke = Color.BLUE
+          stroke = Color.Blue
         },
         new HBox {
           layoutX = 60

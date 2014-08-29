@@ -1,6 +1,6 @@
 package proscalafx.ch04.reversi.examples
 
-import proscalafx.ch04.reversi.model.{WHITE, BLACK, Owner, ReversiModel}
+import proscalafx.ch04.reversi.model.{White, Black, Owner, ReversiModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -18,8 +18,8 @@ object PlayerScoreExample extends JFXApp {
   val tiles = new TilePane() {
     snapToPixel = false
     content = List(
-      createScore(BLACK),
-      createScore(WHITE)
+      createScore(Black),
+      createScore(White)
     )
   }
 
@@ -39,19 +39,19 @@ object PlayerScoreExample extends JFXApp {
   private def createScore(owner: Owner): StackPane = {
 
     val innerShadow = new InnerShadow() {
-      color = Color.DODGERBLUE
+      color = Color.DodgerBlue
       choke = 0.5
     }
 
     val background = new Region() {
       style = "-fx-background-color: " + owner.opposite.colorStyle
-      if (BLACK == owner) {
+      if (Black == owner) {
         effect = innerShadow
       }
     }
 
     val dropShadow = new DropShadow() {
-      color = Color.DODGERBLUE
+      color = Color.DodgerBlue
       spread = 0.2
     }
 
@@ -59,7 +59,7 @@ object PlayerScoreExample extends JFXApp {
       radiusX = 32
       radiusY = 20
       fill = owner.color
-      if (BLACK == owner) {
+      if (Black == owner) {
         effect = dropShadow
       }
     }

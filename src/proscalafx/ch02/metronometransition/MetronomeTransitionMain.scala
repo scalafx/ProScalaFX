@@ -18,7 +18,7 @@ object MetronomeTransitionMain extends JFXApp {
     centerX = 100
     centerY = 50
     radius = 4
-    fill = Color.BLUE
+    fill = Color.Blue
   }
 
   val anim = new TranslateTransition {

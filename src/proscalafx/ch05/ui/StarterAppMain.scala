@@ -81,14 +81,14 @@ object StarterAppMain extends JFXApp {
         new Button {
           id = "editButton"
           graphic = new Circle {
-            fill = Color.GREEN
+            fill = Color.Green
             radius = 8
           }
         },
         new Button {
           id = "deleteButton"
           graphic = new Circle {
-            fill = Color.BLUE
+            fill = Color.Blue
             radius = 8
           }
         },
@@ -98,7 +98,7 @@ object StarterAppMain extends JFXApp {
         new ToggleButton {
           id = "boldButton"
           graphic = new Circle {
-            fill = Color.MAROON
+            fill = Color.Maroon
             radius = 8
           }
           onAction = {
@@ -112,7 +112,7 @@ object StarterAppMain extends JFXApp {
         new ToggleButton {
           id = "italicButton"
           graphic = new Circle {
-            fill = Color.YELLOW
+            fill = Color.Yellow
             radius = 8
           }
           onAction = {
@@ -130,7 +130,7 @@ object StarterAppMain extends JFXApp {
           id = "leftAlignButton"
           toggleGroup = alignToggleGroup
           graphic = new Circle {
-            fill = Color.PURPLE
+            fill = Color.Purple
             radius = 8
           }
         },
@@ -138,7 +138,7 @@ object StarterAppMain extends JFXApp {
           toggleGroup = alignToggleGroup
           id = "centerAlignButton"
           graphic = new Circle {
-            fill = Color.ORANGE
+            fill = Color.Orange
             radius = 8
           }
         },
@@ -146,7 +146,7 @@ object StarterAppMain extends JFXApp {
           toggleGroup = alignToggleGroup
           id = "rightAlignButton"
           graphic = new Circle {
-            fill = Color.CYAN
+            fill = Color.Cyan
             radius = 8
           }
         }
@@ -504,8 +504,8 @@ object StarterAppMain extends JFXApp {
           height = 200
           arcWidth = 20
           arcHeight = 20
-          fill = Color.LIGHTBLUE
-          stroke = Color.GRAY
+          fill = Color.LightBlue
+          stroke = Color.Gray
           strokeWidth = 2
         },
         new BorderPane {

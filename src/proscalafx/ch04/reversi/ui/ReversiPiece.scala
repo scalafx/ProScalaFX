@@ -2,7 +2,7 @@ package proscalafx.ch04.reversi.ui
 
 import proscalafx.ch04.reversi.model.NONE
 import proscalafx.ch04.reversi.model.Owner
-import proscalafx.ch04.reversi.model.WHITE
+import proscalafx.ch04.reversi.model.White
 import scalafx.Includes._
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.effect.Reflection
@@ -30,7 +30,7 @@ class ReversiPiece(_owner: Owner = NONE) extends Region {
 
   style <== (
     when(owner === NONE) choose nonePieceStyle otherwise
-      (when(owner === WHITE) choose whitePieceStyle otherwise blackPieceStyle)
+      (when(owner === White) choose whitePieceStyle otherwise blackPieceStyle)
     ) + tileStyle
 
   effect = new Reflection {

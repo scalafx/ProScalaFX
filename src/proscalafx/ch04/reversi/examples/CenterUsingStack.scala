@@ -19,7 +19,7 @@ object CenterUsingStack extends JFXApp {
           ellipse,
           new Text("ScalaFX Reversi") {
             font = Font.font(null, FontWeight.BOLD, 18)
-            fill = Color.WHITE
+            fill = Color.White
           }
         )
       }

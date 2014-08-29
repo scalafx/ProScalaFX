@@ -41,7 +41,7 @@ object AudioConfigMain extends JFXApp {
           layoutX = 65
           layoutY = 12
           textOrigin = VPos.TOP
-          fill = Color.WHITE
+          fill = Color.White
           text = "Audio Configuration"
           font = Font.font("SansSerif", FontWeight.BOLD, 20)
         },
@@ -59,7 +59,7 @@ object AudioConfigMain extends JFXApp {
           height = 130
           arcWidth = 20
           arcHeight = 20
-          fill = Color.WHITE
+          fill = Color.White
           stroke = Color.color(0.66, 0.67, 0.69)
         },
         new Text {

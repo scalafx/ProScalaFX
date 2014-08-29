@@ -67,7 +67,7 @@ object StageCoachMain extends JFXApp {
     resizable = false
     title <== titleProperty
     scene = new Scene(270, 370) {
-      fill = Color.TRANSPARENT
+      fill = Color.Transparent
       content = new Group {
         children = List(
           new Rectangle {
@@ -75,7 +75,7 @@ object StageCoachMain extends JFXApp {
             height = 350
             arcWidth = 50
             arcHeight = 50
-            fill = Color.SKYBLUE
+            fill = Color.SkyBlue
           },
           new VBox {
             layoutX = 30

@@ -16,7 +16,7 @@ object AlignUsingStackAndTile extends JFXApp {
     content = new Text {
       text = "ScalaFX"
       font = Font.font(null, FontWeight.BOLD, 18)
-      fill = Color.WHITE
+      fill = Color.White
       alignmentInParent = Pos.CENTER_RIGHT
     }
   }

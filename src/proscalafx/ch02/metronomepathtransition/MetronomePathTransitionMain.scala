@@ -20,7 +20,7 @@ object MetronomePathTransitionMain extends JFXApp {
     centerY = 50
     radiusX = 4
     radiusY = 8
-    fill = Color.BLUE
+    fill = Color.Blue
   }
 
   val anim = new PathTransition {

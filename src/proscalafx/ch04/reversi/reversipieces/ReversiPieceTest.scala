@@ -1,8 +1,8 @@
 package proscalafx.ch04.reversi.reversipieces
 
 
-import proscalafx.ch04.reversi.model.BLACK
-import proscalafx.ch04.reversi.model.WHITE
+import proscalafx.ch04.reversi.model.Black
+import proscalafx.ch04.reversi.model.White
 import proscalafx.ch04.reversi.ui.ReversiPiece
 import proscalafx.ch04.reversi.ui.ReversiSquare
 import scalafx.application.JFXApp
@@ -26,14 +26,14 @@ object ReversiPieceTest extends JFXApp {
           new StackPane {
             content = List(
               new ReversiSquare(0, 0),
-              new ReversiPiece(WHITE)
+              new ReversiPiece(White)
             )
             hgrow = Priority.ALWAYS
           },
           new StackPane {
             content = List(
               new ReversiSquare(0, 0),
-              new ReversiPiece(BLACK)
+              new ReversiPiece(Black)
             )
             hgrow = Priority.ALWAYS
           }

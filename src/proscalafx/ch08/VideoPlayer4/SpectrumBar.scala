@@ -25,8 +25,8 @@ class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
   setAlignment(Pos.BOTTOM_CENTER)
 
   val stops: Array[jfxsp.Stop] = Array(
-    Stop(0.3, Color.RED),
-    Stop(0.7, Color.YELLOW),
+    Stop(0.3, Color.Red),
+    Stop(0.7, Color.Yellow),
     Stop(0.9, Color.web("56F32B"))
   )
   for (i <- 0 until barCount) {
