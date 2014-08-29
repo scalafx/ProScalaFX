@@ -12,9 +12,6 @@ scalaSource in Compile <<= baseDirectory(_ / "src")
 
 resourceDirectory in Compile <<= baseDirectory(_ / "src")
 
-// Set the Scala test directory to be <base>/test/src
-scalaSource in Test <<= baseDirectory(_ / "test/src")
-
 // Append -deprecation to the options passed to the Scala compiler
 scalacOptions += "-deprecation"
 
@@ -26,11 +23,6 @@ resolvers += Opts.resolver.sonatypeSnapshots
 // ScalaFX dependency
 libraryDependencies += "org.scalafx" %% "scalafx" % "2.2.60-R9"
 
-// Test dependencies
-libraryDependencies += "junit" % "junit" % "4.11" % "test"
-
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2" % "test"
-
 // Set the prompt (for this build) to include the project id.
 shellPrompt := { state => System.getProperty("user.name") + ":" + Project.extract(state).currentRef.project + "> " }
 
@@ -40,14 +32,4 @@ unmanagedJars in Compile += Attributed.blank(file(scala.util.Properties.javaHome
 
 // Fork a new JVM for 'run' and 'test:run'
 fork := true
-
-// Fork a new JVM for 'test:run', but not 'run'
-fork in Test := true
-
-// Only use a single thread for building
-parallelExecution := false
-
-// Execute tests in the current project serially
-parallelExecution in Test := false
-
 
