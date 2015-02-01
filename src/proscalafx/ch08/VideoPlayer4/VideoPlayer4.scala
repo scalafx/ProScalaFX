@@ -2,12 +2,13 @@
 package proscalafx.ch08.VideoPlayer4
 
 import com.sun.javafx.{runtime => csjfxr}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.event.ActionEvent
-import scalafx.scene.input.{TransferMode, DragEvent}
-import scalafx.scene.layout.{StackPane, BorderPane}
+import scalafx.scene.input.{DragEvent, TransferMode}
+import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.scene.{Node, Scene}
 
 
@@ -24,7 +25,7 @@ object VideoPlayer4 extends JFXApp {
 
   private val page1 = createPageOne()
   private val page2 = createPageTwo()
-  private val rootNode = new StackPane {content = page1}
+  private val rootNode = new StackPane {children = page1}
 
   stage = new PrimaryStage {
     title = "Video Player 4"
@@ -41,7 +42,7 @@ object VideoPlayer4 extends JFXApp {
   private def createPageOne(): Node = {
     videoView = new VideoView(mediaModel)
     playerControlsView = new PlayerControlsView(mediaModel)
-    playerControlsView.onNextPageAction {(ae: ActionEvent) => rootNode.content = page2}
+    playerControlsView.onNextPageAction { (ae: ActionEvent) => rootNode.children = page2}
     new BorderPane {
       center = videoView.viewNode
       bottom = playerControlsView.viewNode
@@ -51,7 +52,7 @@ object VideoPlayer4 extends JFXApp {
 
   private def createPageTwo(): Node = {
     equalizerView = new EqualizerView(mediaModel)
-    equalizerView.onNextPageAction {(ae: ActionEvent) => rootNode.content = page1}
+    equalizerView.onNextPageAction { (ae: ActionEvent) => rootNode.children = page1}
     equalizerView.viewNode
   }
 

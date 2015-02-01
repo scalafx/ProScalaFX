@@ -1,6 +1,7 @@
 package proscalafx.ch07
 
 import javafx.scene.{chart => jfxsc}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -24,7 +25,7 @@ object ChartApp7 extends JFXApp {
     title = "LineChart example"
     scene = new Scene(400, 250) {
       root = new StackPane {
-        content = lineChart
+        children = lineChart
       }
     }
   }

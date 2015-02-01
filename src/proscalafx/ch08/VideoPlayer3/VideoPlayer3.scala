@@ -2,15 +2,16 @@ package proscalafx.ch08.VideoPlayer3
 
 import java.io.File
 import java.net.URL
+
 import scalafx.Includes._
-import scalafx.animation.{TranslateTransition, ParallelTransition}
+import scalafx.animation.{ParallelTransition, TranslateTransition}
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.application.{Platform, JFXApp}
+import scalafx.application.{JFXApp, Platform}
 import scalafx.geometry.{Pos, Rectangle2D}
 import scalafx.scene.control.Label
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.StackPane
-import scalafx.scene.media.{MediaMarkerEvent, Media, MediaPlayer, MediaView}
+import scalafx.scene.media.{Media, MediaMarkerEvent, MediaPlayer, MediaView}
 import scalafx.scene.{Node, Scene}
 import scalafx.util.Duration
 
@@ -37,16 +38,16 @@ object VideoPlayer3 extends JFXApp {
 
   val mediaView1 = new MediaView(mediaPlayer) {
     viewport = new Rectangle2D(0, 0, 960 / 2, 540)
-    alignmentInParent = Pos.CENTER_LEFT
+    alignmentInParent = Pos.CenterLeft
   }
 
   val mediaView2 = new MediaView(mediaPlayer) {
     viewport = new Rectangle2D(960 / 2, 0, 960 / 2, 540)
-    alignmentInParent = Pos.CENTER_RIGHT
+    alignmentInParent = Pos.CenterRight
   }
 
   val root = new StackPane {
-    content +=(message, mediaView1, mediaView2)
+    children +=(message, mediaView1, mediaView2)
     onMouseClicked = (event: MouseEvent) => {
       mediaPlayer.seek(Duration.ZERO)
       message.visible = false

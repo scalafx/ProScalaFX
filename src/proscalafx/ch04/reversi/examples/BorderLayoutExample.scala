@@ -1,26 +1,17 @@
 package proscalafx.ch04.reversi.examples
 
-import proscalafx.ch04.reversi.model.Black
-import proscalafx.ch04.reversi.model.Owner
-import proscalafx.ch04.reversi.model.ReversiModel
-import proscalafx.ch04.reversi.model.White
+import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
-import scalafx.scene.Node
-import scalafx.scene.Scene
-import scalafx.scene.effect.DropShadow
-import scalafx.scene.effect.InnerShadow
-import scalafx.scene.layout.BorderPane
-import scalafx.scene.layout.FlowPane
-import scalafx.scene.layout.Region
-import scalafx.scene.layout.StackPane
-import scalafx.scene.layout.TilePane
-import scalafx.scene.layout.VBox
+import scalafx.scene.{Node, Scene}
+import scalafx.scene.effect.{DropShadow, InnerShadow}
+import scalafx.scene.layout.{BorderPane, FlowPane, Region, StackPane, TilePane, VBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
-import scalafx.scene.text.{FontWeight, Font, Text}
+import scalafx.scene.text.{Font, FontWeight, Text}
 
 
 object BorderLayoutExample extends JFXApp {
@@ -45,18 +36,18 @@ object BorderLayoutExample extends JFXApp {
 
   private def createTitle = new TilePane {
     snapToPixel = false
-    content = List(
+    children = List(
       new StackPane {
         style = "-fx-background-color: black"
-        content = new Text("ScalaFX") {
-          font = Font.font(null, FontWeight.BOLD, 18)
+        children = new Text("ScalaFX") {
+          font = Font.font(null, FontWeight.Bold, 18)
           fill = Color.White
-          alignmentInParent = Pos.CENTER_RIGHT
+          alignmentInParent = Pos.CenterRight
         }
       },
       new Text("Reversi") {
-        font = Font.font(null, FontWeight.BOLD, 18)
-        alignmentInParent = Pos.CENTER_LEFT
+        font = Font.font(null, FontWeight.Bold, 18)
+        alignmentInParent = Pos.CenterLeft
       })
     prefTileHeight = 40
     prefTileWidth <== parent.selectDouble("width") / 2
@@ -71,7 +62,7 @@ object BorderLayoutExample extends JFXApp {
   private def createScoreBoxes = new TilePane {
     snapToPixel = false
     prefColumns = 2
-    content = List(
+    children = List(
       createScore(Black),
       createScore(White)
     )
@@ -107,30 +98,30 @@ object BorderLayoutExample extends JFXApp {
     }
 
     val score = new Text {
-      font = Font.font(null, FontWeight.BOLD, 100)
+      font = Font.font(null, FontWeight.Bold, 100)
       fill = owner.color
       text <== ReversiModel.score(owner).asString
     }
 
     val remaining = new Text {
-      font = Font.font(null, FontWeight.BOLD, 12)
+      font = Font.font(null, FontWeight.Bold, 12)
       fill = owner.color
       text <== ReversiModel.turnsRemaining(owner).asString() + " turns remaining"
     }
 
     new StackPane {
-      content = List(
+      children = List(
         backgroundRegion,
         new FlowPane {
           hgap = 20
           vgap = 10
-          alignment = Pos.CENTER
-          content = List(
+          alignment = Pos.Center
+          children = List(
             score,
             new VBox {
-              alignment = Pos.CENTER
+              alignment = Pos.Center
               spacing = 10
-              content = List(
+              children = List(
                 piece,
                 remaining)
             }

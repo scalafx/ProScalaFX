@@ -1,6 +1,7 @@
 package proscalafx.ch04.reversi.reversipieces
 
 import proscalafx.ch04.reversi.ui.ReversiSquare
+
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
@@ -18,7 +19,7 @@ object ReversiSquareTest extends JFXApp {
   stage = new PrimaryStage {
     scene = new Scene() {
       root = new StackPane {
-        content = new ReversiSquare(0, 0)
+        children = new ReversiSquare(0, 0)
       }
     }
   }

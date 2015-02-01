@@ -1,6 +1,7 @@
 package proscalafx.ch02.metronomepathtransition
 
 import javafx.animation.Animation.Status
+
 import scalafx.Includes._
 import scalafx.animation.PathTransition.OrientationType
 import scalafx.animation.{Interpolator, PathTransition, Timeline}
@@ -35,7 +36,7 @@ object MetronomePathTransitionMain extends JFXApp {
     orientation = OrientationType.ORTHOGONAL_TO_TANGENT
     interpolator = Interpolator.LINEAR
     autoReverse = true
-    cycleCount = Timeline.INDEFINITE
+    cycleCount = Timeline.Indefinite
   }
 
   stage = new PrimaryStage {
@@ -47,7 +48,7 @@ object MetronomePathTransitionMain extends JFXApp {
           layoutX = 60
           layoutY = 420
           spacing = 10
-          content = List(
+          children = List(
             new Button {
               text = "Start"
               onAction = handle {anim.playFromStart()}

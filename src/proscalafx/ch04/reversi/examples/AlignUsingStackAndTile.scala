@@ -5,19 +5,18 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.Scene
-import scalafx.scene.layout.StackPane
-import scalafx.scene.layout.TilePane
+import scalafx.scene.layout.{StackPane, TilePane}
 import scalafx.scene.paint.Color
-import scalafx.scene.text.{FontWeight, Font, Text}
+import scalafx.scene.text.{Font, FontWeight, Text}
 
 object AlignUsingStackAndTile extends JFXApp {
   val left = new StackPane {
     style = "-fx-background-color: black"
-    content = new Text {
+    children = new Text {
       text = "ScalaFX"
-      font = Font.font(null, FontWeight.BOLD, 18)
+      font = Font.font(null, FontWeight.Bold, 18)
       fill = Color.White
-      alignmentInParent = Pos.CENTER_RIGHT
+      alignmentInParent = Pos.CenterRight
     }
   }
 
@@ -25,10 +24,10 @@ object AlignUsingStackAndTile extends JFXApp {
     scene = new Scene(400, 100) {
       content = new TilePane {
         snapToPixel = false
-        content = List(left, new Text {
+        children = List(left, new Text {
           text = "Reversi"
-          font = Font.font(null, FontWeight.BOLD, 18)
-          alignmentInParent = Pos.CENTER_LEFT
+          font = Font.font(null, FontWeight.Bold, 18)
+          alignmentInParent = Pos.CenterLeft
         })
       }
     }

@@ -1,10 +1,11 @@
 package proscalafx.ch06
 
 import java.awt.event.{ActionEvent, ActionListener}
-import java.awt.{BorderLayout, FlowLayout, Dimension}
+import java.awt.{BorderLayout, Dimension, FlowLayout}
 import javafx.embed.{swing => jfxes}
 import javafx.scene.{paint => jfxsp}
-import javax.swing.{JButton, JPanel, JFrame}
+import javax.swing.{JButton, JFrame, JPanel}
+
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.Scene
@@ -48,7 +49,7 @@ object JavaFXSceneInSwingExample extends App {
 
       canvas.setScene(new Scene {
         root = new VBox {
-          content = List(rectangle)
+          children = List(rectangle)
         }
       }.delegate)
     }

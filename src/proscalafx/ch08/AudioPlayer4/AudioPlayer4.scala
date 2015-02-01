@@ -2,12 +2,13 @@
 package proscalafx.ch08.AudioPlayer4
 
 import com.sun.javafx.{runtime => csjfxr}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.event.ActionEvent
-import scalafx.scene.input.{TransferMode, DragEvent}
-import scalafx.scene.layout.{StackPane, BorderPane}
+import scalafx.scene.input.{DragEvent, TransferMode}
+import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.scene.{Node, Scene}
 
 
@@ -24,7 +25,7 @@ object AudioPlayer4 extends JFXApp {
 
   private val page1 = createPageOne()
   private val page2 = createPageTwo()
-  private val rootNode = new StackPane {content = page1}
+  private val rootNode = new StackPane {children = page1}
 
   stage = new PrimaryStage {
     title = "Audio Player 4"
@@ -41,7 +42,7 @@ object AudioPlayer4 extends JFXApp {
   private def createPageOne(): Node = {
     metaDataView = new MetadataView(songModel)
     playerControlsView = new PlayerControlsView(songModel)
-    playerControlsView.onNextPageAction {(ae: ActionEvent) => rootNode.content = page2}
+    playerControlsView.onNextPageAction { (ae: ActionEvent) => rootNode.children = page2}
     new BorderPane {
       center = metaDataView.viewNode
       bottom = playerControlsView.viewNode
@@ -54,7 +55,7 @@ object AudioPlayer4 extends JFXApp {
     equalizerView.onNextPageAction {
       (ae: ActionEvent) =>
         println("Got back button click")
-        rootNode.content = page1
+        rootNode.children = page1
     }
     equalizerView.viewNode
   }

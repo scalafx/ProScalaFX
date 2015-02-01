@@ -1,14 +1,13 @@
 package proscalafx.ch04.reversi.reversipieces
 
 
-import proscalafx.ch04.reversi.model.Black
-import proscalafx.ch04.reversi.model.White
-import proscalafx.ch04.reversi.ui.ReversiPiece
-import proscalafx.ch04.reversi.ui.ReversiSquare
+import proscalafx.ch04.reversi.model.{Black, White}
+import proscalafx.ch04.reversi.ui.{ReversiPiece, ReversiSquare}
+
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
-import scalafx.scene.layout.{Priority, HBox, StackPane}
+import scalafx.scene.layout.{HBox, Priority, StackPane}
 
 object ReversiPieceTest extends JFXApp {
 
@@ -22,20 +21,20 @@ object ReversiPieceTest extends JFXApp {
     scene = new Scene() {
       root = new HBox {
         snapToPixel = false
-        content = List(
+        children = List(
           new StackPane {
-            content = List(
+            children = List(
               new ReversiSquare(0, 0),
               new ReversiPiece(White)
             )
-            hgrow = Priority.ALWAYS
+            hgrow = Priority.Always
           },
           new StackPane {
-            content = List(
+            children = List(
               new ReversiSquare(0, 0),
               new ReversiPiece(Black)
             )
-            hgrow = Priority.ALWAYS
+            hgrow = Priority.Always
           }
         )
       }

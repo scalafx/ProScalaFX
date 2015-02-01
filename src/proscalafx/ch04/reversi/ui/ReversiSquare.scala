@@ -1,12 +1,13 @@
 package proscalafx.ch04.reversi.ui
 
 import javafx.scene.{layout => jfxsl}
+
 import proscalafx.ch04.reversi.model.ReversiModel
+
 import scalafx.Includes._
 import scalafx.animation.FadeTransition
-import scalafx.geometry.{VPos, HPos}
-import scalafx.scene.effect.Light
-import scalafx.scene.effect.Lighting
+import scalafx.geometry.{HPos, VPos}
+import scalafx.scene.effect.{Light, Lighting}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.Region
 import scalafx.util.Duration
@@ -22,7 +23,7 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
     getChildren.add(highlight)
 
     protected override def layoutChildren() {
-      layoutInArea(highlight, 0, 0, getWidth, getHeight, getBaselineOffset, HPos.CENTER, VPos.CENTER)
+      layoutInArea(highlight, 0, 0, getWidth, getHeight, getBaselineOffset, HPos.Center, VPos.Center)
     }
   }
 

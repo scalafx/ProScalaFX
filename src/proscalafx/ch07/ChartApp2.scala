@@ -18,7 +18,7 @@ object ChartApp2 extends JFXApp {
     title = "Chart App 2"
     scene = new Scene(400, 350) {
       root = new StackPane {
-        content = new PieChart() {
+        children = new PieChart() {
           data = chartData()
           title = "Tiobe index"
           legendSide = Side.LEFT

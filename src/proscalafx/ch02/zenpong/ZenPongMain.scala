@@ -1,6 +1,7 @@
 package proscalafx.ch02.zenpong
 
 import javafx.animation.Animation.Status
+
 import scalafx.Includes._
 import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.JFXApp
@@ -123,7 +124,7 @@ object ZenPongMain extends JFXApp {
   })
   val pongAnimation = new Timeline {
     keyFrames = Seq(keyFrame)
-    cycleCount = Timeline.INDEFINITE
+    cycleCount = Timeline.Indefinite
   }
 
   val startButton = new Button {
@@ -206,7 +207,7 @@ object ZenPongMain extends JFXApp {
         endX = 0.0,
         endY = 1.0,
         proportional = true,
-        cycleMethod = CycleMethod.NO_CYCLE,
+        cycleMethod = CycleMethod.NoCycle,
         stops = List(Stop(0.0, Color.Black), Stop(0.0, Color.Gray)))
       content = pongComponents
     }

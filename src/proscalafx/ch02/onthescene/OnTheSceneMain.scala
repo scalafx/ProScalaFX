@@ -1,19 +1,19 @@
 package proscalafx.ch02.onthescene
 
-import javafx.scene.{control => jfxsc}
-import javafx.scene.{text => jfxst}
+import javafx.scene.{control => jfxsc, text => jfxst}
 import javafx.{scene => jfxs}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.{DoubleProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
-import scalafx.geometry.{VPos, Orientation, HPos, Insets}
+import scalafx.geometry.{HPos, Insets, Orientation, VPos}
 import scalafx.scene.control._
 import scalafx.scene.layout.{FlowPane, HBox}
 import scalafx.scene.paint.Color
-import scalafx.scene.text.{FontWeight, Font, Text}
+import scalafx.scene.text.{Font, FontWeight, Text}
 import scalafx.scene.{Cursor, Scene}
 
 
@@ -95,11 +95,11 @@ object OnTheSceneMain extends JFXApp {
     orientation = Orientation.VERTICAL
     vgap = 10
     hgap = 20
-    columnHalignment = HPos.LEFT
-    content = List(
+    columnHalignment = HPos.Left
+    children = List(
       new HBox {
         spacing = 10
-        content = List(sliderRef, choiceRef)
+        children = List(sliderRef, choiceRef)
       },
       textSceneX,
       textSceneY,
@@ -169,9 +169,9 @@ object OnTheSceneMain extends JFXApp {
   val addedTextRef = new Text {
     layoutX = 0
     layoutY = -30
-    textOrigin = VPos.TOP
+    textOrigin = VPos.Top
     fill = Color.Blue
-    font = Font.font("Sans Serif", FontWeight.BOLD, 16)
+    font = Font.font("Sans Serif", FontWeight.Bold, 16)
     managed = false
     text <== new StringProperty("Scene fill: ") + sceneRef.fill
   }

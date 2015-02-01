@@ -4,12 +4,12 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableMap.Add
-import scalafx.geometry.{VPos, Insets}
+import scalafx.geometry.{Insets, VPos}
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
 import scalafx.scene.effect.Reflection
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{Priority, RowConstraints, ColumnConstraints, GridPane}
+import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, RowConstraints}
 import scalafx.scene.media.{Media, MediaPlayer}
 
 
@@ -52,11 +52,11 @@ object AudioPlayer2 extends JFXApp {
       // NOTE: the call to delegate to avoid compilation error.
       // Should `scalafx.scene.layout.GridPane.columnConstraints_=()` be fixed to work without call to delegate?
       new ColumnConstraints {
-        hgrow = Priority.ALWAYS
+        hgrow = Priority.Always
       }.delegate
       )
     val r0 = new RowConstraints {
-      valignment = VPos.TOP
+      valignment = VPos.Top
     }
     rowConstraints +=(r0, r0, r0, r0)
   }

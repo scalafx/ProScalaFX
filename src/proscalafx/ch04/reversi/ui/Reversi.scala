@@ -1,17 +1,18 @@
 package proscalafx.ch04.reversi.ui
 
-import proscalafx.ch04.reversi.model.{Owner, White, Black, ReversiModel}
+import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.application.{ConditionalFeature, Platform, JFXApp}
+import scalafx.application.{ConditionalFeature, JFXApp, Platform}
 import scalafx.geometry.Pos
 import scalafx.scene.control.Button
 import scalafx.scene.effect.{DropShadow, InnerShadow}
 import scalafx.scene.layout._
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
-import scalafx.scene.text.{FontWeight, Font, Text}
-import scalafx.scene.transform.{Rotate, Translate, Scale}
+import scalafx.scene.text.{Font, FontWeight, Text}
+import scalafx.scene.transform.{Rotate, Scale, Translate}
 import scalafx.scene.{PerspectiveCamera, Scene}
 
 
@@ -25,7 +26,7 @@ object Reversi extends JFXApp {
   val game = new BorderPane() {
     top = createTitle()
     center = new StackPane() {
-      content = List(
+      children = List(
         createBackground(),
         createTiles()
       )
@@ -36,7 +37,7 @@ object Reversi extends JFXApp {
   stage = new PrimaryStage() {
     scene = new Scene(600, 400) {
       root = new AnchorPane() {
-        content = List(
+        children = List(
           game,
           restart
         )
@@ -52,7 +53,7 @@ object Reversi extends JFXApp {
   AnchorPane.setTopAnchor(restart, 10d)
 
 
-  if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
+  if (Platform.isSupported(ConditionalFeature.Scene3D)) {
     stage.scene().camera = new PerspectiveCamera() {
       fieldOfView = 60
     }.delegate
@@ -64,20 +65,20 @@ object Reversi extends JFXApp {
 
   private def createTitle() = new TilePane {
     snapToPixel = false
-    content = List(
+    children = List(
       new StackPane {
         style = "-fx-background-color: black"
-        content = new Text {
+        children = new Text {
           text = "ScalaFX"
-          font = Font.font(null, FontWeight.BOLD, 18)
+          font = Font.font(null, FontWeight.Bold, 18)
           fill = Color.White
-          alignmentInParent = Pos.CENTER_RIGHT
+          alignmentInParent = Pos.CenterRight
         }
       },
       new Text {
         text = "Reversi"
-        font = Font.font(null, FontWeight.BOLD, 18)
-        alignmentInParent = Pos.CENTER_LEFT
+        font = Font.font(null, FontWeight.Bold, 18)
+        alignmentInParent = Pos.CenterRight
       })
     prefTileHeight = 40
     prefTileWidth <== parent.selectDouble("width") / 2
@@ -99,11 +100,11 @@ object Reversi extends JFXApp {
       val piece = new ReversiPiece()
       piece.owner <== ReversiModel.board(i)(j)
       board.add(new StackPane {
-        content = List(square, piece)
+        children = List(square, piece)
       }, i, j)
     }
 
-    if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
+    if (Platform.isSupported(ConditionalFeature.Scene3D)) {
       val scale = new Scale(.45, .8, 1, 300, 60, 0)
       val translate = new Translate(75, -2, -150)
       val xRot = new Rotate {
@@ -138,7 +139,7 @@ object Reversi extends JFXApp {
   private def createScoreBoxes() = new TilePane() {
     snapToPixel = false
     prefColumns = 2
-    content = List(
+    children = List(
       createScore(Black),
       createScore(White)
     )
@@ -173,30 +174,30 @@ object Reversi extends JFXApp {
     }
 
     val score = new Text() {
-      font = Font.font(null, FontWeight.BOLD, 100)
+      font = Font.font(null, FontWeight.Bold, 100)
       fill = owner.color
       text <== ReversiModel.score(owner).asString()
     }
 
     val remaining = new Text() {
-      font = Font.font(null, FontWeight.BOLD, 12)
+      font = Font.font(null, FontWeight.Bold, 12)
       fill = owner.color
       text <== ReversiModel.turnsRemaining(owner).asString() + " turns remaining"
     }
 
     new StackPane() {
-      content = List(
+      children = List(
         backgroundRegion,
         new FlowPane() {
           hgap = 20
           vgap = 10
-          alignment = Pos.CENTER
-          content = List(
+          alignment = Pos.Center
+          children = List(
             score,
             new VBox() {
-              alignment = Pos.CENTER
+              alignment = Pos.Center
               spacing = 10
-              content = List(
+              children = List(
                 piece,
                 remaining
               )

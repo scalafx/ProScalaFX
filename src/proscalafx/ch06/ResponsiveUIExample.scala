@@ -2,10 +2,10 @@ package proscalafx.ch06
 
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.application.{Platform, JFXApp}
+import scalafx.application.{JFXApp, Platform}
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
-import scalafx.geometry.{Pos, Insets}
+import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.{BorderPane, HBox}
@@ -83,8 +83,8 @@ object ResponsiveUIExample extends JFXApp {
     val buttonHBox = new HBox {
       padding = Insets(10)
       spacing = 10
-      alignment = Pos.CENTER
-      content = List(
+      alignment = Pos.Center
+      children = List(
         changeFillButton,
         changeStrokeButton
       )

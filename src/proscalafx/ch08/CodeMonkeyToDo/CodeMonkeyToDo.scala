@@ -4,10 +4,10 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.event.ActionEvent
-import scalafx.geometry.{Pos, HPos, Insets}
+import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.Scene
-import scalafx.scene.control.{Hyperlink, Button, Label, Slider}
-import scalafx.scene.layout.{Priority, VBox, GridPane}
+import scalafx.scene.control.{Button, Hyperlink, Label, Slider}
+import scalafx.scene.layout.{GridPane, Priority, VBox}
 import scalafx.scene.media.AudioClip
 import scalafx.scene.web.WebView
 
@@ -47,27 +47,27 @@ object CodeMonkeyToDo extends JFXApp {
     val rateLabel = new Label {text = "Rate"}
     val balanceLabel = new Label {text = "Balance"}
 
-    GridPane.setHalignment(volumeLabel, HPos.CENTER)
-    GridPane.setHalignment(rateLabel, HPos.CENTER)
-    GridPane.setHalignment(balanceLabel, HPos.CENTER)
+    GridPane.setHalignment(volumeLabel, HPos.Center)
+    GridPane.setHalignment(rateLabel, HPos.Center)
+    GridPane.setHalignment(balanceLabel, HPos.Center)
 
     val volumeSlider = new Slider {
       min = 0.0
       max = 1.0
       value = 1.0
-      hgrow = Priority.ALWAYS
+      hgrow = Priority.Always
     }
     val rateSlider = new Slider {
       min = 0.25
       max = 2.5
       value = 1.0
-      hgrow = Priority.ALWAYS
+      hgrow = Priority.Always
     }
     val balanceSlider = new Slider {
       min = -1.0
       max = 1.0
       value = 0.0
-      hgrow = Priority.ALWAYS
+      hgrow = Priority.Always
     }
 
     grid.add(volumeLabel, 0, 2)
@@ -117,14 +117,14 @@ object CodeMonkeyToDo extends JFXApp {
 
     val vbox = new VBox {
       spacing = 30
-      alignment = Pos.TOP_CENTER
-      content +=(clipLabel, getUpButton, goToJobButton, meetingButton, link)
+      alignment = Pos.TopCenter
+      children +=(clipLabel, getUpButton, goToJobButton, meetingButton, link)
     }
 
-    GridPane.setHalignment(vbox, HPos.CENTER)
+    GridPane.setHalignment(vbox, HPos.Center)
 
-    GridPane.setHgrow(vbox, Priority.ALWAYS)
-    GridPane.setVgrow(vbox, Priority.ALWAYS)
+    GridPane.setHgrow(vbox, Priority.Always)
+    GridPane.setVgrow(vbox, Priority.Always)
     grid.add(vbox, 0, 0, GridPane.REMAINING, 1)
   }
 

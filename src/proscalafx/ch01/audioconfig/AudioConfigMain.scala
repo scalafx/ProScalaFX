@@ -8,7 +8,7 @@ import scalafx.scene.Scene
 import scalafx.scene.control.{CheckBox, ChoiceBox, Slider}
 import scalafx.scene.paint.{Color, LinearGradient, Stop}
 import scalafx.scene.shape.{Line, Rectangle}
-import scalafx.scene.text.{FontWeight, Font, Text}
+import scalafx.scene.text.{Font, FontWeight, Text}
 
 object AudioConfigMain extends JFXApp {
 
@@ -40,10 +40,10 @@ object AudioConfigMain extends JFXApp {
         new Text {
           layoutX = 65
           layoutY = 12
-          textOrigin = VPos.TOP
+          textOrigin = VPos.Top
           fill = Color.White
           text = "Audio Configuration"
-          font = Font.font("SansSerif", FontWeight.BOLD, 20)
+          font = Font.font("SansSerif", FontWeight.Bold, 20)
         },
         new Rectangle {
           x = 0
@@ -65,9 +65,9 @@ object AudioConfigMain extends JFXApp {
         new Text {
           layoutX = 18
           layoutY = 69
-          textOrigin = VPos.TOP
+          textOrigin = VPos.Top
           fill = Color.web("#131021")
-          font = Font.font("SansSerif", FontWeight.BOLD, 18)
+          font = Font.font("SansSerif", FontWeight.Bold, 18)
           text <== acModel.selectedDBs.asString + " dB"
         },
         new Slider {
@@ -89,10 +89,10 @@ object AudioConfigMain extends JFXApp {
         new Text {
           layoutX = 18
           layoutY = 113
-          textOrigin = VPos.TOP
+          textOrigin = VPos.Top
           fill = Color.web("#131021")
           text = "Muting"
-          font = Font.font("SanSerif", FontWeight.BOLD, 18)
+          font = Font.font("SanSerif", FontWeight.Bold, 18)
         },
         new CheckBox {
           layoutX = 280
@@ -109,10 +109,10 @@ object AudioConfigMain extends JFXApp {
         new Text {
           layoutX = 18
           layoutY = 154
-          textOrigin = VPos.TOP
+          textOrigin = VPos.Top
           fill = Color.web("#131021")
           text = "Genre"
-          font = Font.font("SanSerif", FontWeight.BOLD, 18)
+          font = Font.font("SanSerif", FontWeight.Bold, 18)
         },
         genreChoiceBox)
     }
