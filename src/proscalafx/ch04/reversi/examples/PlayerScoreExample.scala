@@ -43,7 +43,7 @@ object PlayerScoreExample extends JFXApp {
       choke = 0.5
     }
 
-    val background = new Region() {
+    val backgroundRegion = new Region() {
       style = "-fx-background-color: " + owner.opposite.colorStyle
       if (Black == owner) {
         effect = innerShadow
@@ -78,7 +78,7 @@ object PlayerScoreExample extends JFXApp {
 
     new StackPane() {
       content = List(
-        background,
+        backgroundRegion,
         new FlowPane() {
           hgap = 20
           vgap = 10
