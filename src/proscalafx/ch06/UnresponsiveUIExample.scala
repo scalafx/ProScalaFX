@@ -1,12 +1,13 @@
 package proscalafx.ch06
 
 import javafx.scene.{paint => jfxsp}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.ObjectProperty
 import scalafx.event.ActionEvent
-import scalafx.geometry.{Pos, Insets}
+import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
 import scalafx.scene.layout.{BorderPane, HBox}
@@ -73,8 +74,8 @@ object UnresponsiveUIExample extends JFXApp {
     val buttonHBox = new HBox {
       padding = Insets(10)
       spacing = 10
-      alignment = Pos.CENTER
-      content = List(
+      alignment = Pos.Center
+      children = List(
         changeFillButton,
         changeStrokeButton
       )

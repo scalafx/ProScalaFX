@@ -1,23 +1,24 @@
 package proscalafx.ch04.reversi.examples
 
-import proscalafx.ch04.reversi.model.{White, Black, Owner, ReversiModel}
+import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.Scene
-import scalafx.scene.effect.{InnerShadow, DropShadow}
+import scalafx.scene.effect.{DropShadow, InnerShadow}
 import scalafx.scene.layout._
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
-import scalafx.scene.text.{FontWeight, Font, Text}
+import scalafx.scene.text.{Font, FontWeight, Text}
 
 
 object PlayerScoreExample extends JFXApp {
 
   val tiles = new TilePane() {
     snapToPixel = false
-    content = List(
+    children = List(
       createScore(Black),
       createScore(White)
     )
@@ -65,30 +66,30 @@ object PlayerScoreExample extends JFXApp {
     }
 
     val score = new Text() {
-      font = Font.font(null, FontWeight.BOLD, 100)
+      font = Font.font(null, FontWeight.Bold, 100)
       fill = owner.color
       text <== ReversiModel.score(owner).asString()
     }
 
     val remaining = new Text() {
-      font = Font.font(null, FontWeight.BOLD, 12)
+      font = Font.font(null, FontWeight.Bold, 12)
       fill = owner.color
       text <== ReversiModel.turnsRemaining(owner).asString() + " turns remaining"
     }
 
     new StackPane() {
-      content = List(
+      children = List(
         backgroundRegion,
         new FlowPane() {
           hgap = 20
           vgap = 10
-          alignment = Pos.CENTER
-          content = List(
+          alignment = Pos.Center
+          children = List(
             score,
             new VBox() {
-              alignment = Pos.CENTER
+              alignment = Pos.Center
               spacing = 10
-              content = List(
+              children = List(
                 piece,
                 remaining
               )

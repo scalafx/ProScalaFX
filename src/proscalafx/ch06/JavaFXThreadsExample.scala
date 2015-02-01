@@ -7,7 +7,7 @@ import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
-import scalafx.scene.control.{Button, TextArea, ListView}
+import scalafx.scene.control.{Button, ListView, TextArea}
 import scalafx.scene.layout.VBox
 
 
@@ -72,7 +72,7 @@ object JavaFXThreadsExample extends JFXApp {
       root = new VBox {
         spacing = 10
         padding = Insets(10)
-        content = List(
+        children = List(
           threadNames,
           stackTrace,
           updateButton

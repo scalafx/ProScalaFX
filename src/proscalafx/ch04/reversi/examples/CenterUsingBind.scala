@@ -5,12 +5,12 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.VPos
 import scalafx.scene.Scene
-import scalafx.scene.text.{FontWeight, Font, Text}
+import scalafx.scene.text.{Font, FontWeight, Text}
 
 object CenterUsingBind extends JFXApp {
   val text = new Text("ScalaFX Reversi") {
-    textOrigin = VPos.TOP
-    font = Font.font(null, FontWeight.BOLD, 18)
+    textOrigin = VPos.Top
+    font = Font.font(null, FontWeight.Bold, 18)
   }
 
   stage = new PrimaryStage {

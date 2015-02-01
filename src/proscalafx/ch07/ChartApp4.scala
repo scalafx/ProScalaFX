@@ -4,7 +4,7 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
-import scalafx.scene.chart.{ScatterChart, NumberAxis, XYChart}
+import scalafx.scene.chart.{NumberAxis, ScatterChart, XYChart}
 import scalafx.scene.layout.StackPane
 
 
@@ -25,7 +25,7 @@ object ChartApp4 extends JFXApp {
     title = "Chart App 4"
     scene = new Scene(400, 250) {
       root = new StackPane {
-        content = scatterChart
+        children = scatterChart
       }
     }
   }

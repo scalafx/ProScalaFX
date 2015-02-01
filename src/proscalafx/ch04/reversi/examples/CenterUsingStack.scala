@@ -7,7 +7,7 @@ import scalafx.scene.Scene
 import scalafx.scene.layout.StackPane
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
-import scalafx.scene.text.{FontWeight, Font, Text}
+import scalafx.scene.text.{Font, FontWeight, Text}
 
 object CenterUsingStack extends JFXApp {
   val ellipse = new Ellipse
@@ -15,10 +15,10 @@ object CenterUsingStack extends JFXApp {
   stage = new PrimaryStage {
     scene = new Scene(400, 100) {
       content = new StackPane {
-        content = List(
+        children = List(
           ellipse,
           new Text("ScalaFX Reversi") {
-            font = Font.font(null, FontWeight.BOLD, 18)
+            font = Font.font(null, FontWeight.Bold, 18)
             fill = Color.White
           }
         )

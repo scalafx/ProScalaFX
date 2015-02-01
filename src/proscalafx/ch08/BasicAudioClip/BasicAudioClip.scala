@@ -22,7 +22,7 @@ object BasicAudioClip extends JFXApp {
   val audioClip = new AudioClip(resource.toString)
   val stackPane = new StackPane {
     padding = Insets(10)
-    content = new Button {
+    children = new Button {
       text = "Bing Zzzzt!"
       onAction = {_: ActionEvent => audioClip.play(1.0)}
     }

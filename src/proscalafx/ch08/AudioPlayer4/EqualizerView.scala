@@ -2,9 +2,9 @@ package proscalafx.ch08.AudioPlayer4
 
 import scalafx.Includes._
 import scalafx.event.ActionEvent
-import scalafx.geometry.{Orientation, HPos, VPos, Insets}
-import scalafx.scene.control.{Label, Slider, Button}
-import scalafx.scene.layout.{Priority, RowConstraints, GridPane}
+import scalafx.geometry.{HPos, Insets, Orientation, VPos}
+import scalafx.scene.control.{Button, Label, Slider}
+import scalafx.scene.layout.{GridPane, Priority, RowConstraints}
 import scalafx.scene.media.{EqualizerBand, MediaPlayer}
 
 /**
@@ -46,7 +46,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
 
   protected def initView(): GridPane = {
     val middle = new RowConstraints()
-    val outside = new RowConstraints() {vgrow = Priority.ALWAYS}
+    val outside = new RowConstraints() {vgrow = Priority.Always}
     new GridPane {
       padding = Insets(10)
       hgap = 20
@@ -60,8 +60,8 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     createEQBands(gridPane, mediaPlayer)
     createSpectrumBars(gridPane)
     spectrumListener = new SpectrumListener(START_FREQ, mediaPlayer, spectrumBars)
-    GridPane.setValignment(backButton, VPos.BOTTOM)
-    GridPane.setHalignment(backButton, HPos.CENTER)
+    GridPane.setValignment(backButton, VPos.Bottom)
+    GridPane.setHalignment(backButton, HPos.Center)
     GridPane.setMargin(backButton, Insets(20, 0, 0, 0))
     gridPane.add(backButton, 0, 3)
   }
@@ -89,9 +89,9 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
         text = formatFrequency(band.getCenterFrequency)
         styleClass +=("mediaText", "eqLabel")
       }
-      GridPane.setHalignment(label, HPos.CENTER)
-      GridPane.setHalignment(slider, HPos.CENTER)
-      GridPane.setHgrow(slider, Priority.ALWAYS)
+      GridPane.setHalignment(label, HPos.Center)
+      GridPane.setHalignment(slider, HPos.Center)
+      GridPane.setHgrow(slider, Priority.Always)
       gp.add(label, i, 1)
       gp.add(slider, i, 2)
     }
@@ -113,7 +113,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     for (i <- 0 until spectrumBars.length) {
       spectrumBars(i) = new SpectrumBar(100, 20)
       spectrumBars(i).setMaxWidth(44)
-      GridPane.setHalignment(spectrumBars(i), HPos.CENTER)
+      GridPane.setHalignment(spectrumBars(i), HPos.Center)
       gridPane.add(spectrumBars(i), i, 0)
     }
   }
@@ -126,7 +126,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     }
 
   private def clearGridPane() {
-    viewNode.content.foreach(GridPane.clearConstraints)
-    viewNode.content.clear()
+    viewNode.children.foreach(GridPane.clearConstraints)
+    viewNode.children.clear()
   }
 }

@@ -1,19 +1,20 @@
 package proscalafx.ch05.ui
 
 import proscalafx.ch05.model.{Person, StarterAppModel}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.event.{Event, ActionEvent}
-import scalafx.geometry.{Pos, Orientation, Insets}
+import scalafx.event.{ActionEvent, Event}
+import scalafx.geometry.{Insets, Orientation, Pos}
 import scalafx.scene.control.MenuItem._
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 import scalafx.scene.control._
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.KeyCombination
-import scalafx.scene.layout.{HBox, StackPane, VBox, BorderPane}
+import scalafx.scene.layout.{BorderPane, HBox, StackPane, VBox}
 import scalafx.scene.paint.Color
-import scalafx.scene.shape.{Rectangle, Circle}
+import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.scene.web.{HTMLEditor, WebView}
 import scalafx.scene.{Node, Scene}
 import scalafx.stage.Popup
@@ -31,7 +32,7 @@ object StarterAppMain extends JFXApp {
       stylesheets = List(getClass.getResource("starterApp.css").toExternalForm)
       root = new BorderPane {
         top = new VBox {
-          content = List(
+          children = List(
             createMenus(),
             createToolBar()
           )
@@ -333,7 +334,7 @@ object StarterAppMain extends JFXApp {
     val variousControls = new VBox {
       padding = Insets(10)
       spacing = 20
-      content = List(
+      children = List(
         new Button("Button") {
           onAction = {
             e: ActionEvent => println(e.eventType + " occurred on Button")
@@ -348,7 +349,7 @@ object StarterAppMain extends JFXApp {
         },
         new HBox {
           spacing = 10
-          content = List(
+          children = List(
             new RadioButton("RadioButton1") {
               toggleGroup = radioToggleGroup
             },
@@ -408,7 +409,7 @@ object StarterAppMain extends JFXApp {
         },
         new HBox {
           spacing = 10
-          content = List(
+          children = List(
             new Label {
               text = "TextArea"
             },
@@ -484,7 +485,7 @@ object StarterAppMain extends JFXApp {
             (stage.height() - alertPopup.height()) / 2.0 + stage.y())
         }
       }
-      alignmentInParent = Pos.CENTER
+      alignmentInParent = Pos.Center
       margin = Insets(10, 0, 10, 0)
     }
 
@@ -498,7 +499,7 @@ object StarterAppMain extends JFXApp {
   private def createAlertPopup(popupText: String) = new Popup {
     inner =>
     content.add(new StackPane {
-      content = List(
+      children = List(
         new Rectangle {
           width = 300
           height = 200
@@ -517,7 +518,7 @@ object StarterAppMain extends JFXApp {
           }
           bottom = new Button("OK") {
             onAction = {e: ActionEvent => inner.hide()}
-            alignmentInParent = Pos.CENTER
+            alignmentInParent = Pos.Center
             margin = Insets(10, 0, 10, 0)
           }
         }

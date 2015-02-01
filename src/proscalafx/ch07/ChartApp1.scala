@@ -17,7 +17,7 @@ object ChartApp1 extends JFXApp {
     title = "PieChart"
     scene = new Scene(400, 250) {
       root = new StackPane {
-        content = new PieChart() {
+        children = new PieChart() {
           data = chartData()
         }
       }

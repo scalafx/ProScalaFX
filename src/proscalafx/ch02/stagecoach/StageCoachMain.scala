@@ -12,7 +12,7 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
 import scalafx.scene.{Group, Scene}
-import scalafx.stage.{StageStyle, Screen}
+import scalafx.stage.{Screen, StageStyle}
 
 
 /** Stage property example.
@@ -37,19 +37,19 @@ object StageCoachMain extends JFXApp {
   }
 
   lazy val textStageX = new Text {
-    textOrigin = VPos.TOP
+    textOrigin = VPos.Top
   }
   lazy val textStageY = new Text {
-    textOrigin = VPos.TOP
+    textOrigin = VPos.Top
   }
   lazy val textStageW = new Text {
-    textOrigin = VPos.TOP
+    textOrigin = VPos.Top
   }
   lazy val textStageH = new Text {
-    textOrigin = VPos.TOP
+    textOrigin = VPos.Top
   }
   lazy val textStageF = new Text {
-    textOrigin = VPos.TOP
+    textOrigin = VPos.Top
   }
   lazy val checkBoxResizable = new CheckBox {
     text = "resizable"
@@ -81,7 +81,7 @@ object StageCoachMain extends JFXApp {
             layoutX = 30
             layoutY = 20
             spacing = 10
-            content = List(
+            children = List(
               textStageX,
               textStageY,
               textStageW,
@@ -91,7 +91,7 @@ object StageCoachMain extends JFXApp {
               checkBoxFullScreen,
               new HBox {
                 spacing = 10
-                content = List(
+                children = List(
                   new Label("title:"),
                   titleTextField)
               },

@@ -2,15 +2,16 @@ package proscalafx.ch08.VideoPlayer2
 
 import java.io.File
 import java.net.URL
+
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.application.{Platform, JFXApp}
+import scalafx.application.{JFXApp, Platform}
 import scalafx.geometry.Pos
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.StackPane
-import scalafx.scene.media.{MediaMarkerEvent, Media, MediaPlayer, MediaView}
+import scalafx.scene.media.{Media, MediaMarkerEvent, MediaPlayer, MediaView}
 import scalafx.util.Duration
 
 
@@ -20,7 +21,7 @@ import scalafx.util.Duration
 object VideoPlayer2 extends JFXApp {
 
   val markerText = new Label {
-    alignmentInParent = Pos.TOP_CENTER
+    alignmentInParent = Pos.TopCenter
   }
 
   val file = new File("media/omgrobots.flv")
@@ -39,7 +40,7 @@ object VideoPlayer2 extends JFXApp {
 
   val mediaView = new MediaView(mediaPlayer)
   val root = new StackPane {
-    content +=(mediaView, markerText)
+    children +=(mediaView, markerText)
     onMouseClicked = (event: MouseEvent) => {
       mediaPlayer.seek(Duration.ZERO)
       markerText.text = ""

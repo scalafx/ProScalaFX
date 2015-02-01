@@ -4,11 +4,11 @@ import scalafx.Includes._
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
 import scalafx.event.subscriptions.Subscription
-import scalafx.geometry.{Pos, HPos, VPos, Insets}
+import scalafx.geometry.{HPos, Insets, Pos, VPos}
 import scalafx.scene.Node
 import scalafx.scene.control.{Button, Label, Slider}
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{Priority, ColumnConstraints, GridPane, HBox}
+import scalafx.scene.layout.{ColumnConstraints, GridPane, HBox, Priority}
 import scalafx.scene.media.MediaPlayer
 import scalafx.scene.media.MediaPlayer.Status
 import scalafx.stage.FileChooser
@@ -73,7 +73,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     val buttonCol = new ColumnConstraints(100)
     val spacerCol = new ColumnConstraints(40, 80, 80)
     val middleCol = new ColumnConstraints {
-      hgrow = Priority.ALWAYS
+      hgrow = Priority.Always
     }
 
     val gp = new GridPane {
@@ -83,11 +83,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       columnConstraints = List(buttonCol, spacerCol, middleCol, spacerCol, buttonCol)
     }
 
-    GridPane.setValignment(openButton, VPos.BOTTOM)
-    GridPane.setHalignment(volHigh, HPos.RIGHT)
-    GridPane.setValignment(volumeSlider, VPos.TOP)
-    statusLabel.alignmentInParent = Pos.TOP_RIGHT
-    GridPane.setHalignment(currentTimeLabel, HPos.RIGHT)
+    GridPane.setValignment(openButton, VPos.Bottom)
+    GridPane.setHalignment(volHigh, HPos.Right)
+    GridPane.setValignment(volumeSlider, VPos.Top)
+    statusLabel.alignmentInParent = Pos.TopRight
+    GridPane.setHalignment(currentTimeLabel, HPos.Right)
 
     gp.add(openButton, 0, 0, 1, 3)
     gp.add(volLow, 1, 0)
@@ -138,9 +138,9 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     }
 
     new HBox {
-      alignment = Pos.CENTER
+      alignment = Pos.Center
       fillHeight = false
-      content = List(seekStartButton, playPauseButton, seekEndButton)
+      children = List(seekStartButton, playPauseButton, seekEndButton)
     }
   }
 

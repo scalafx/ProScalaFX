@@ -1,6 +1,5 @@
 package proscalafx.ch01.helloearthrise
 
-import scalafx.Includes._
 import scalafx.animation.{Interpolator, Timeline, TranslateTransition}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -10,7 +9,7 @@ import scalafx.scene.control.ScrollPane
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.paint.Color
-import scalafx.scene.text.{FontWeight, TextAlignment, Font, Text}
+import scalafx.scene.text.{Font, FontWeight, Text, TextAlignment}
 import scalafx.util.Duration
 
 object HelloScrollPaneMain extends JFXApp {
@@ -32,12 +31,12 @@ you on the good Earth." """.replace("\n", "")
 
   val textRef = new Text {
     layoutY = 100
-    textOrigin = VPos.TOP
-    textAlignment = TextAlignment.JUSTIFY
+    textOrigin = VPos.Top
+    textAlignment = TextAlignment.Justify
     wrappingWidth = 400
     text = message
     fill = Color.rgb(187, 195, 107)
-    font = Font.font("SansSerif", FontWeight.BOLD, 24.0)
+    font = Font.font("SansSerif", FontWeight.Bold, 24.0)
   }
 
   stage = new PrimaryStage {
@@ -61,7 +60,7 @@ you on the good Earth." """.replace("\n", "")
   }
 
   new TranslateTransition {
-    cycleCount = Timeline.INDEFINITE
+    cycleCount = Timeline.Indefinite
     duration = Duration(75000)
     node = textRef
     toY = -820

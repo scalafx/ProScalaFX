@@ -3,15 +3,16 @@ package proscalafx.ch06
 import java.util.concurrent.atomic.AtomicBoolean
 import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.IntegerProperty
 import scalafx.concurrent.Service
 import scalafx.event.ActionEvent
-import scalafx.geometry.{HPos, Pos, Insets}
+import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.Scene
-import scalafx.scene.control.{TextField, Button, Label, ProgressBar}
+import scalafx.scene.control.{Button, Label, ProgressBar, TextField}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
 
 
@@ -153,8 +154,8 @@ object ServiceExample extends JFXApp {
     val topPane = new HBox() {
       padding = Insets(10)
       spacing = 10
-      alignment = Pos.CENTER
-      content = progressBar
+      alignment = Pos.Center
+      children = progressBar
     }
 
     val centerPane = new GridPane {
@@ -162,11 +163,11 @@ object ServiceExample extends JFXApp {
       vgap = 10
       padding = Insets(10)
       columnConstraints = List(new ColumnConstraints {
-        halignment = HPos.RIGHT
+        halignment = HPos.Right
         minWidth = 65
       },
         new ColumnConstraints {
-          halignment = HPos.LEFT
+          halignment = HPos.Left
           minWidth = 200
         }
       )
@@ -193,8 +194,8 @@ object ServiceExample extends JFXApp {
     val buttonPane = new HBox {
       padding = Insets(10)
       spacing = 10
-      alignment = Pos.CENTER
-      content = List(
+      alignment = Pos.Center
+      children = List(
         new Label("Process"),
         numberOfItems,
         new Label("items"),

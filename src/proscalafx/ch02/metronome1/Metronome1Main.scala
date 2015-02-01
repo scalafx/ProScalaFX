@@ -1,6 +1,7 @@
 package proscalafx.ch02.metronome1
 
 import javafx.animation.Animation.Status
+
 import scalafx.Includes._
 import scalafx.animation.{Interpolator, Timeline}
 import scalafx.application.JFXApp
@@ -25,7 +26,7 @@ object Metronome1Main extends JFXApp {
       at(1 s) {
         startXVal -> 300 tween Interpolator.LINEAR
       })
-    cycleCount = Timeline.INDEFINITE
+    cycleCount = Timeline.Indefinite
   }
 
   stage = new PrimaryStage {
@@ -44,7 +45,7 @@ object Metronome1Main extends JFXApp {
           layoutX = 60
           layoutY = 420
           spacing = 10
-          content = List(
+          children = List(
             new Button {
               text = "Start"
               onAction = handle {anim.playFromStart()}

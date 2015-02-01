@@ -1,7 +1,7 @@
 package proscalafx.ch08.FullScreenVideoPlayer
 
 import java.io.File
-import scalafx.Includes._
+
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
@@ -23,7 +23,7 @@ object FullScreenVideoPlayer extends JFXApp {
     preserveRatio = true
   }
 
-  val root = new StackPane {content = mediaView}
+  val root = new StackPane {children = mediaView}
 
   stage = new PrimaryStage {
     title = "Video Player 1"
