@@ -154,7 +154,7 @@ object Reversi extends JFXApp {
     }
     val noInnerShadow = null.asInstanceOf[javafx.scene.effect.InnerShadow]
 
-    val background = new Region() {
+    val backgroundRegion = new Region() {
       style = "-fx-background-color: " + owner.opposite.colorStyle
       effect <== when(ReversiModel.turn === owner) choose innerShadow otherwise noInnerShadow
     }
@@ -186,7 +186,7 @@ object Reversi extends JFXApp {
 
     new StackPane() {
       content = List(
-        background,
+        backgroundRegion,
         new FlowPane() {
           hgap = 20
           vgap = 10
