@@ -2,9 +2,10 @@ package proscalafx.ch06
 
 import java.{util => ju}
 import javafx.{collections => jfxc}
+
 import scala.collection.JavaConversions
 import scalafx.collections.ObservableBuffer
-import scalafx.collections.ObservableBuffer.{Reorder, Remove, Add, Change}
+import scalafx.collections.ObservableBuffer._
 
 
 /** ScalaFX version of `FXCollectionsExample` from "Pro JavaFX 2" book.
@@ -75,6 +76,11 @@ object FXCollectionsExample extends App {
         val permutations = for (i <- start until end) yield i + "->" + permutation(i)
         println("\t\tKind of change: permuted")
         println("\t\tPermutation   : " + mkString(permutations))
+      case Update(from, to) =>
+        println("\t\tKind of change: updated\n")
+        println("\t\t\tfrom: " + from + "\n")
+        println("\t\t\tto  : " + to + "\n")
+
     }
   }
 

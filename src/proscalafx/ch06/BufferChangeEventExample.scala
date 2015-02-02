@@ -58,6 +58,10 @@ object BufferChangeEventExample extends App {
           .map(i => "%d->%s".format(i, permutation(i)))
           .mkString("\t\tPermutation: [", ", ", "]\n")
         sb.append(strLog)
+      case Update(from, to) =>
+        sb.append("updated\n")
+        sb.append("\t\tfrom: " + from + "\n")
+        sb.append("\t\tto  : " + to + "\n")
     }
 
     sb.toString
