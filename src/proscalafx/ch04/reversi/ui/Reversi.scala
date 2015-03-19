@@ -78,7 +78,7 @@ object Reversi extends JFXApp {
       new Text {
         text = "Reversi"
         font = Font.font(null, FontWeight.Bold, 18)
-        alignmentInParent = Pos.CenterRight
+        alignmentInParent = Pos.CenterLeft
       })
     prefTileHeight = 40
     prefTileWidth <== parent.selectDouble("width") / 2
