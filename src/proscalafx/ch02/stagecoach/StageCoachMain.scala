@@ -36,31 +36,30 @@ object StageCoachMain extends JFXApp {
     case _ => StageStyle.DECORATED
   }
 
-  lazy val textStageX = new Text {
+  val textStageX = new Text {
     textOrigin = VPos.Top
   }
-  lazy val textStageY = new Text {
+  val textStageY = new Text {
     textOrigin = VPos.Top
   }
-  lazy val textStageW = new Text {
+  val textStageW = new Text {
     textOrigin = VPos.Top
   }
-  lazy val textStageH = new Text {
+  val textStageH = new Text {
     textOrigin = VPos.Top
   }
-  lazy val textStageF = new Text {
+  val textStageF = new Text {
     textOrigin = VPos.Top
   }
-  lazy val checkBoxResizable = new CheckBox {
+  val checkBoxResizable = new CheckBox {
     text = "resizable"
     disable = stageStyle == StageStyle.TRANSPARENT || stageStyle == StageStyle.UNDECORATED
   }
-  lazy val checkBoxFullScreen = new CheckBox {
+  val checkBoxFullScreen = new CheckBox {
     text = "fullScreen"
   }
-  lazy val titleTextField = new TextField {
+  val titleTextField = new TextField {
     text = "Stage Coach"
-    prefColumnCount = 15
   }
 
   stage = new PrimaryStage {
@@ -133,15 +132,7 @@ object StageCoachMain extends JFXApp {
   textStageH.text <== new StringProperty("height: ") + stage.height.asString
   textStageF.text <== new StringProperty("focused: ") + stage.focused.asString
   stage.resizable = false
-  // NOTE: Due to a bug in JavaFX (2.2.3+) Stage.resizableProperty(), cannot directly use binding here,
-  // see http://javafx-jira.kenai.com/browse/RT-25942
-  // TODO: Revert to binding once JavaFX bug is corrected
-  //    stage.resizable <==> checkBoxResizable.selected
-  checkBoxResizable.selected.onChange {
-    // To avoid using resizableProperty, use delegate.setResizable()
-    // stage.resizable = checkBoxResizable.selected.get
-    stage.delegate.setResizable(checkBoxResizable.selected())
-  }
+  stage.resizable <==> checkBoxResizable.selected
   checkBoxFullScreen.onAction = handle {
     stage.fullScreen = checkBoxFullScreen.selected()
   }
@@ -149,6 +140,8 @@ object StageCoachMain extends JFXApp {
 
   stage.initStyle(stageStyle)
   stage.onCloseRequest = handle {println("Stage is closing")}
+  stage.show()
+
   val primScreenBounds = Screen.primary.visualBounds
   stage.x = (primScreenBounds.width - stage.width()) / 2
   stage.y = (primScreenBounds.height - stage.height()) / 2
