@@ -173,7 +173,7 @@ object OnTheSceneMain extends JFXApp {
     fill = Color.Blue
     font = Font.font("Sans Serif", FontWeight.Bold, 16)
     managed = false
-    text <== new StringProperty("Scene fill: ") + sceneRef.fill
+    text <== new StringProperty("Scene fill: ") + sceneRef.fill.asString()
   }
 
   // Add to the Text node to the FlowPane. 
