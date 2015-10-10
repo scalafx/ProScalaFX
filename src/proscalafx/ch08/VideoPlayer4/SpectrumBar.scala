@@ -1,12 +1,9 @@
 package proscalafx.ch08.VideoPlayer4
 
-import javafx.scene.{layout => jfxsl, paint => jfxsp}
-
-import com.sun.{javafx => csjfx}
+import javafx.scene.{layout => jfxsl}
 
 import scalafx.Includes._
 import scalafx.geometry.Pos
-import scalafx.scene.paint.{Color, Stop}
 import scalafx.scene.shape.Rectangle
 
 
@@ -15,26 +12,21 @@ import scalafx.scene.shape.Rectangle
   * @author Jarek Sacha
   */
 class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
-  private final val SPACING = 1.0
-  private final val ASPECT_RATIO = 3.0
-  private final val MIN_BAR_HEIGHT = 3.0
-  private var lastWidth = 0.0
-  private var lastHeight = 0.0
+  private val SPACING        = 1.0
+  private val ASPECT_RATIO   = 3.0
+  private val MIN_BAR_HEIGHT = 3.0
+  private var lastWidth      = 0.0
+  private var lastHeight     = 0.0
   getStyleClass.add("spectrumBar")
 
   setSpacing(SPACING)
   setAlignment(Pos.BottomCenter)
 
-  val stops: Array[jfxsp.Stop] = Array(
-    Stop(0.3, Color.Red),
-    Stop(0.7, Color.Yellow),
-    Stop(0.9, Color.web("56F32B"))
-  )
   for (i <- 0 until barCount) {
     val c = (i.toDouble / barCount.toDouble * 255.0).toInt
     val r = new Rectangle {
       visible = false
-      fill = csjfx.Utils.ladder(Color.rgb(c, c, c), stops)
+      style = s"-fx-fill: ladder( rgb($c, $c, $c), red 30%, yellow 70%, #56F32B 90%);"
       arcWidth = 2
       arcHeight = 2
     }
