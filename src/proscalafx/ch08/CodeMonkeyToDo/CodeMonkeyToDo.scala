@@ -13,13 +13,13 @@ import scalafx.scene.web.WebView
 
 
 /**
- * Controlling the playback parameters of an AudioClip.
- *
- * @author Jarek Sacha 
- */
+  * Controlling the playback parameters of an AudioClip.
+  *
+  * @author Jarek Sacha
+  */
 object CodeMonkeyToDo extends JFXApp {
-  val coffeeClip = new AudioClip(clipResourceString("resources/coffee.mp3"))
-  val jobClip = new AudioClip(clipResourceString("resources/job.mp3"))
+  val coffeeClip  = new AudioClip(clipResourceString("resources/coffee.mp3"))
+  val jobClip     = new AudioClip(clipResourceString("resources/job.mp3"))
   val meetingClip = new AudioClip(clipResourceString("resources/meeting.mp3"))
 
   val grid = new GridPane {
@@ -103,7 +103,7 @@ object CodeMonkeyToDo extends JFXApp {
     }
     val link = new Hyperlink {
       text = "About Code Monkey..."
-      onAction = (_: ActionEvent) => {
+      onAction = _ => {
         val webView = new WebView {
           engine.load("http://www.jonathancoulton.com/2006/04/14/" + "thing-a-week-29-code-monkey/")
         }
@@ -129,8 +129,7 @@ object CodeMonkeyToDo extends JFXApp {
   }
 
   /** Returns a function that can be assigned to `oAction` */
-  private def play(audioClip: AudioClip) =
-    (_: ActionEvent) => {
-      audioClip.play(volumeSlider.value(), balanceSlider.value(), rateSlider.value(), 0.0, 0)
-    }
+  private def play(audioClip: AudioClip) = (_: ActionEvent) => {
+    audioClip.play(volumeSlider.value(), balanceSlider.value(), rateSlider.value(), 0.0, 0)
+  }
 }

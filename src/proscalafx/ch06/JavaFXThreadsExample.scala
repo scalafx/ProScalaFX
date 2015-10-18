@@ -27,7 +27,7 @@ object JavaFXThreadsExample extends JFXApp {
 
 
   private def hookupEvents() {
-    view.updateButton.onAction = handle {model.update()}
+    view.updateButton.onAction = _ => {model.update()}
     view.threadNames.selectionModel().selectedItem.onChange {
       val index = view.threadNames.selectionModel().getSelectedIndex
       if (index >= 0) {

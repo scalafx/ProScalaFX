@@ -8,7 +8,6 @@ import scalafx.Includes._
 import scalafx.animation.FadeTransition
 import scalafx.geometry.{HPos, VPos}
 import scalafx.scene.effect.{Light, Lighting}
-import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.Region
 import scalafx.util.Duration
 
@@ -48,19 +47,19 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
   prefHeight = 200
   prefWidth = 200
 
-  onMouseEntered = (e: MouseEvent) => {
+  onMouseEntered = me => {
     if (ReversiModel.legalMove(x, y).get) {
       highlightTransition.rate() = 1
       highlightTransition.play()
     }
   }
 
-  onMouseExited = (e: MouseEvent) => {
+  onMouseExited = me => {
     highlightTransition.rate = -1
     highlightTransition.play()
   }
 
-  onMouseClicked = (e: MouseEvent) => {
+  onMouseClicked = me => {
     ReversiModel.play(x, y)
     highlightTransition.rate() = -1
     highlightTransition.play()

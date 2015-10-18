@@ -1,10 +1,8 @@
 package proscalafx.ch06
 
-import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
 import scalafx.beans.property.ObjectProperty
-import scalafx.event.ActionEvent
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
@@ -27,8 +25,7 @@ object ResponsiveUIExample extends JFXApp {
 
 
   def hookupEvents() {
-    View.changeFillButton.onAction = {
-      (ae: ActionEvent) => {
+    View.changeFillButton.onAction = _ => {
         val fillPaint = Model.fillPaint()
         Model.fillPaint() = if (Color.LightGray == fillPaint) Color.Gray else Color.LightGray
 
@@ -48,15 +45,12 @@ object ResponsiveUIExample extends JFXApp {
           }
         }
         new Thread(task).start()
-      }
     }
 
-    View.changeStrokeButton.onAction = {
-      (ae: ActionEvent) => {
+    View.changeStrokeButton.onAction = _ => {
         val strokePaint = Model.strokePaint()
         Model.strokePaint() = if (strokePaint == Color.DarkGray) Color.Black else Color.DarkGray
       }
-    }
   }
 
 

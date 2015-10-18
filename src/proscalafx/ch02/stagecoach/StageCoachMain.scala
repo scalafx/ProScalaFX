@@ -6,7 +6,6 @@ import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.StringProperty
 import scalafx.geometry.VPos
 import scalafx.scene.control.{Button, CheckBox, Label, TextField}
-import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
@@ -96,15 +95,15 @@ object StageCoachMain extends JFXApp {
               },
               new Button {
                 text = "toBack()"
-                onAction = handle {stage.toBack()}
+                onAction = _ => {stage.toBack()}
               },
               new Button {
                 text = "toFront()"
-                onAction = handle {stage.toFront()}
+                onAction = _ => {stage.toFront()}
               },
               new Button {
                 text = "close()"
-                onAction = handle {stage.close()}
+                onAction = _ => {stage.close()}
               }
             )
           }
@@ -117,11 +116,11 @@ object StageCoachMain extends JFXApp {
   val rootGroup = stage.scene().content(0)
   var dragAnchorX = 0.0
   var dragAnchorY = 0.0
-  rootGroup.onMousePressed = (me: MouseEvent) => {
+  rootGroup.onMousePressed = me => {
     dragAnchorX = me.screenX - stage.x.value
     dragAnchorY = me.screenY - stage.y.value
   }
-  rootGroup.onMouseDragged = (me: MouseEvent) => {
+  rootGroup.onMouseDragged = me => {
     stage.x = me.screenX - dragAnchorX
     stage.y = me.screenY - dragAnchorY
   }
@@ -133,13 +132,13 @@ object StageCoachMain extends JFXApp {
   textStageF.text <== new StringProperty("focused: ") + stage.focused.asString
   stage.resizable = false
   stage.resizable <==> checkBoxResizable.selected
-  checkBoxFullScreen.onAction = handle {
+  checkBoxFullScreen.onAction = _ => {
     stage.fullScreen = checkBoxFullScreen.selected()
   }
   stage.title <== titleTextField.text
 
   stage.initStyle(stageStyle)
-  stage.onCloseRequest = handle {println("Stage is closing")}
+  stage.onCloseRequest = _ => {println("Stage is closing")}
   stage.show()
 
   val primScreenBounds = Screen.primary.visualBounds

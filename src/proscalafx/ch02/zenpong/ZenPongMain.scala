@@ -7,9 +7,8 @@ import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.{BooleanProperty, DoubleProperty}
-import scalafx.event.ActionEvent
 import scalafx.scene.control.Button
-import scalafx.scene.input.{KeyCode, KeyEvent, MouseEvent}
+import scalafx.scene.input.KeyCode
 import scalafx.scene.paint.{Color, CycleMethod, LinearGradient, Stop}
 import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.scene.{Cursor, Group, Scene}
@@ -27,7 +26,7 @@ object ZenPongMain extends JFXApp {
   val rightPaddleY = new DoubleProperty
 
   /** The drag anchor for left and right paddles */
-  var leftPaddleDragAnchorY: Double = _
+  var leftPaddleDragAnchorY : Double = _
   var rightPaddleDragAnchorY: Double = _
 
   /** Controls whether the ball is moving right */
@@ -37,7 +36,7 @@ object ZenPongMain extends JFXApp {
   var movingDown = true
 
   /** The initial translateY property for the left and right paddles */
-  var initLeftPaddleTranslateY: Double = _
+  var initLeftPaddleTranslateY : Double = _
   var initRightPaddleTranslateY: Double = _
 
   /** The moving ball */
@@ -49,18 +48,18 @@ object ZenPongMain extends JFXApp {
   }
 
   /** The left and right paddles */
-  val leftPaddle: Rectangle = new Rectangle {
+  val leftPaddle : Rectangle = new Rectangle {
     x = 20
     width = 10
     height = 30
     fill = Color.LightBlue
     cursor = Cursor.HAND
     translateY <== leftPaddleY
-    onMousePressed = (me: MouseEvent) => {
+    onMousePressed = me => {
       initLeftPaddleTranslateY = leftPaddle.translateY()
       leftPaddleDragAnchorY = me.sceneY
     }
-    onMouseDragged = (me: MouseEvent) => {
+    onMouseDragged = me => {
       val dragY = me.sceneY - leftPaddleDragAnchorY
       leftPaddleY() = initLeftPaddleTranslateY + dragY
     }
@@ -72,30 +71,30 @@ object ZenPongMain extends JFXApp {
     fill = Color.LightBlue
     cursor = Cursor.HAND
     translateY <== rightPaddleY
-    onMousePressed = (me: MouseEvent) => {
+    onMousePressed = me => {
       initRightPaddleTranslateY = rightPaddle.getTranslateY
       rightPaddleDragAnchorY = me.getSceneY
     }
-    onMouseDragged = (me: MouseEvent) => {
+    onMouseDragged = me => {
       val dragY = me.sceneY - rightPaddleDragAnchorY
       rightPaddleY() = initRightPaddleTranslateY + dragY
     }
   }
 
   /** The walls */
-  val topWall = new Rectangle {
+  val topWall    = new Rectangle {
     x = 0
     y = 0
     width = 500
     height = 1
   }
-  val rightWall = new Rectangle {
+  val rightWall  = new Rectangle {
     x = 500
     y = 0
     width = 1
     height = 500
   }
-  val leftWall = new Rectangle {
+  val leftWall   = new Rectangle {
     x = 0
     y = 0
     width = 1
@@ -109,13 +108,12 @@ object ZenPongMain extends JFXApp {
   }
 
   /**
-   * Controls whether the startButton is visible
-   */
+    * Controls whether the startButton is visible
+    */
   val startVisible = BooleanProperty(true)
 
   /** The animation of the ball */
-  val keyFrame = KeyFrame(10 ms, onFinished = {
-    event: ActionEvent =>
+  val keyFrame      = KeyFrame(10 ms, onFinished = _ => {
       checkForCollision()
       val horzPixels = if (movingRight) 1 else -1
       val vertPixels = if (movingDown) 1 else -1
@@ -132,13 +130,12 @@ object ZenPongMain extends JFXApp {
     layoutY() = 470
     text = "Start!"
     visible <== startVisible
-    onAction = {
-      event: ActionEvent =>
-        startVisible() = false
-        pongAnimation.playFromStart()
-        pongComponents.requestFocus()
-    }
+    onAction = _ =>
+      startVisible() = false
+    pongAnimation.playFromStart()
+    pongComponents.requestFocus()
   }
+
 
   /** The Group containing all of the walls, paddles, and ball. This also allows
     * us to requestFocus for KeyEvents on the Group
@@ -155,9 +152,9 @@ object ZenPongMain extends JFXApp {
       rightPaddle,
       startButton
     )
-    onKeyPressed = (k: KeyEvent) => k.code match {
+    onKeyPressed = key => key.code match {
       case KeyCode.SPACE if pongAnimation.status() == Status.STOPPED =>
-      rightPaddleY() = rightPaddleY.value - 6
+        rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.L if !rightPaddle.boundsInParent().intersects(topWall.boundsInLocal()) =>
         rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.COMMA if !rightPaddle.boundsInParent().intersects(bottomWall.boundsInLocal()) =>

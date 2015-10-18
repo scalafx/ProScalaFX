@@ -4,11 +4,9 @@ import java.util.concurrent.atomic.AtomicBoolean
 import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
 
-import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.concurrent.Task
-import scalafx.event.ActionEvent
 import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label, ProgressBar}
@@ -28,9 +26,9 @@ object WorkerAndTaskExample extends JFXApp {
 
 
   private def hookupEvents() {
-    View.startButton.onAction = {ae: ActionEvent => new Thread(Model.Worker).start()}
-    View.cancelButton.onAction = {ae: ActionEvent => Model.Worker.cancel}
-    View.exceptionButton.onAction = {ae: ActionEvent => Model.shouldThrow.set(true)}
+    View.startButton.onAction = { _ => new Thread(Model.Worker).start() }
+    View.cancelButton.onAction = { _ => Model.Worker.cancel }
+    View.exceptionButton.onAction = { _ => Model.shouldThrow.set(true) }
   }
 
 

@@ -4,12 +4,10 @@ import java.util.concurrent.atomic.AtomicBoolean
 import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
 
-import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.IntegerProperty
 import scalafx.concurrent.Service
-import scalafx.event.ActionEvent
 import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label, ProgressBar, TextField}
@@ -29,13 +27,12 @@ object ServiceExample extends JFXApp {
 
 
   private def hookupEvents() {
-    View.startButton.onAction = {
-      ae: ActionEvent =>
+    View.startButton.onAction = _ => {
         Model.shouldThrow.set(false)
         Model.Worker.restart()
     }
-    View.cancelButton.onAction = {ae: ActionEvent => Model.Worker.cancel}
-    View.exceptionButton.onAction = {ae: ActionEvent => Model.shouldThrow.set(true)}
+    View.cancelButton.onAction = { _ => Model.Worker.cancel }
+    View.exceptionButton.onAction = { _ => Model.shouldThrow.set(true) }
   }
 
 

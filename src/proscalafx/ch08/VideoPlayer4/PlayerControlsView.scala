@@ -106,7 +106,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
   private def createOpenButton() = new Button {
     id = "openButton"
-    onAction = (ae: ActionEvent) => {
+    onAction = _ => {
       val fileChooser = new FileChooser() {
         title = "Pick a Sound File"
       }
@@ -133,11 +133,11 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
     val playPauseButton = createPlayPauseButton()
     val seekStartButton = new Button {
       id = "seekStartButton"
-      onAction = (ae: ActionEvent) => seekAndUpdatePosition(Duration.ZERO)
+      onAction = _ => seekAndUpdatePosition(Duration.ZERO)
     }
     val seekEndButton = new Button {
       id = "seekEndButton"
-      onAction = (ae: ActionEvent) => {
+      onAction = _ => {
         val mediaPlayer = mediaModel.mediaPlayer()
         val totalDuration = mediaPlayer.totalDuration()
         seekAndUpdatePosition(totalDuration - (1 s))
@@ -164,7 +164,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
     new Button {
       graphic = playPauseIcon
       id = "playPauseButton"
-      onAction = (ae: ActionEvent) => {
+      onAction = _ => {
         val mediaPlayer = mediaModel.mediaPlayer()
         mediaPlayer.status() match {
           case Status.PLAYING.delegate => mediaPlayer.pause()

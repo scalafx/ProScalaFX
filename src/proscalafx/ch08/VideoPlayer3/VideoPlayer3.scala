@@ -9,9 +9,8 @@ import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
 import scalafx.geometry.{Pos, Rectangle2D}
 import scalafx.scene.control.Label
-import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.StackPane
-import scalafx.scene.media.{Media, MediaMarkerEvent, MediaPlayer, MediaView}
+import scalafx.scene.media.{Media, MediaPlayer, MediaView}
 import scalafx.scene.{Node, Scene}
 import scalafx.util.Duration
 
@@ -48,7 +47,7 @@ object VideoPlayer3 extends JFXApp {
 
   val root = new StackPane {
     children +=(message, mediaView1, mediaView2)
-    onMouseClicked = (event: MouseEvent) => {
+    onMouseClicked = _ => {
       mediaPlayer.seek(Duration.ZERO)
       message.visible = false
     }
@@ -62,7 +61,7 @@ object VideoPlayer3 extends JFXApp {
     }
   }
 
-  mediaPlayer.onMarker = (event: MediaMarkerEvent) => Platform.runLater {
+  mediaPlayer.onMarker = event => Platform.runLater {
     event.marker.getKey match {
       case "Split" =>
         message.visible = true

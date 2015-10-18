@@ -5,7 +5,6 @@ import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.event.{ActionEvent, Event}
 import scalafx.geometry.{Insets, Orientation, Pos}
 import scalafx.scene.control.MenuItem._
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
@@ -21,8 +20,8 @@ import scalafx.stage.Popup
 
 
 /**
- * @author Jarek Sacha
- */
+  * @author Jarek Sacha
+  */
 object StarterAppMain extends JFXApp {
 
   private val model = new StarterAppModel()
@@ -51,9 +50,7 @@ object StarterAppMain extends JFXApp {
           new MenuItem("New...") {
             graphic = new ImageView(new Image(this, "images/paper.png"))
             accelerator = KeyCombination.keyCombination("Ctrl +N")
-            onAction = {
-              e: ActionEvent => println(e.eventType + " occurred on MenuItem New")
-            }
+            onAction = e => {println(e.eventType + " occurred on MenuItem New")}
           },
           new MenuItem("Save")
         )
@@ -77,7 +74,7 @@ object StarterAppMain extends JFXApp {
           id = "newButton"
           graphic = new ImageView(new Image(this, "images/paper.png"))
           tooltip = Tooltip("New Document... Ctrl+N")
-          onAction = handle {println("New toolbar button clicked")}
+          onAction = _ => {println("New toolbar button clicked")}
         },
         new Button {
           id = "editButton"
@@ -102,12 +99,11 @@ object StarterAppMain extends JFXApp {
             fill = Color.Maroon
             radius = 8
           }
-          onAction = {
-            e: ActionEvent =>
-              val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
-              print(e.eventType + " occurred on ToggleButton " + tb.id)
-              print(", and selectedProperty is: ")
-              println(tb.selectedProperty.value)
+          onAction = e => {
+            val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
+            print(e.eventType + " occurred on ToggleButton " + tb.id)
+            print(", and selectedProperty is: ")
+            println(tb.selectedProperty.value)
           }
         },
         new ToggleButton {
@@ -116,12 +112,11 @@ object StarterAppMain extends JFXApp {
             fill = Color.Yellow
             radius = 8
           }
-          onAction = {
-            e: ActionEvent =>
-              val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
-              print(e.eventType + " occurred on ToggleButton " + tb.id)
-              print(", and selectedProperty is: ")
-              println(tb.selectedProperty.value)
+          onAction = e => {
+            val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
+            print(e.eventType + " occurred on ToggleButton " + tb.id)
+            print(", and selectedProperty is: ")
+            println(tb.selectedProperty.value)
           }
         },
         new Separator {
@@ -199,7 +194,7 @@ object StarterAppMain extends JFXApp {
           text = "WebView"
           content = webView
           closable = false
-          onSelectionChanged = (e: Event) => {
+          onSelectionChanged = _ => {
             val randomWebSite = model.randomWebSite()
             if (inner.selected()) {
               webView.engine.load(randomWebSite)
@@ -336,15 +331,14 @@ object StarterAppMain extends JFXApp {
       spacing = 20
       children = List(
         new Button("Button") {
-          onAction = {
-            e: ActionEvent => println(e.eventType + " occurred on Button")
+          onAction = e => {
+            println(e.eventType + " occurred on Button")
           }
         },
         new CheckBox("CheckBox") {
           inner =>
-          onAction = {
-            e: ActionEvent =>
-              println(e.eventType + " occurred on CheckBox, and `selected` property is: " + inner.selected())
+          onAction = e => {
+            println(e.eventType + " occurred on CheckBox, and `selected` property is: " + inner.selected())
           }
         },
         new HBox {
@@ -359,8 +353,8 @@ object StarterAppMain extends JFXApp {
           )
         },
         new Hyperlink("Hyperlink") {
-          onAction = {
-            e: ActionEvent => println(e.eventType + " occurred on Hyperlink")
+          onAction = e => {
+            println(e.eventType + " occurred on Hyperlink")
           }
         },
         new ChoiceBox(model.choiceBoxItems) {
@@ -372,8 +366,8 @@ object StarterAppMain extends JFXApp {
         new MenuButton("MenuButton") {
           items = List(
             new MenuItem("MenuItem A") {
-              onAction = {
-                ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")
+              onAction = ae => {
+                println(ae.eventType + " occurred on Menu Item A")
               }
             },
             new MenuItem("MenuItem B")
@@ -381,13 +375,13 @@ object StarterAppMain extends JFXApp {
         },
         new SplitMenuButton {
           text = "SplitMenuButton"
-          onAction = {
-            ae: ActionEvent => println(ae.eventType + " occurred on SplitMenuButton")
+          onAction = ae => {
+            println(ae.eventType + " occurred on SplitMenuButton")
           }
           items = List(
             new MenuItem("MenuItem A") {
-              onAction = {
-                ae: ActionEvent => println(ae.eventType + " occurred on Menu Item A")
+              onAction = ae => {
+                println(ae.eventType + " occurred on Menu Item A")
               }
             },
             new MenuItem("MenuItem B")
@@ -454,10 +448,10 @@ object StarterAppMain extends JFXApp {
     val sampleContextMenu = new ContextMenu {
       items +=(
         new MenuItem("MenuItemA") {
-          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item A")}
+          onAction = { e => println(e.eventType + " occurred on Menu Item A") }
         },
         new MenuItem("MenuItemB") {
-          onAction = {e: ActionEvent => println(e.eventType + " occurred on Menu Item B")}
+          onAction = { e => println(e.eventType + " occurred on Menu Item B") }
         })
     }
 
@@ -477,13 +471,11 @@ object StarterAppMain extends JFXApp {
     }
 
     val viewHTMLButton = new Button("View HTML") {
-      onAction = {
-        e: ActionEvent => {
-          val alertPopup = createAlertPopup(htmlEditor.htmlText)
-          alertPopup.show(stage,
-            (stage.width() - alertPopup.width()) / 2.0 + stage.x(),
-            (stage.height() - alertPopup.height()) / 2.0 + stage.y())
-        }
+      onAction = e => {
+        val alertPopup = createAlertPopup(htmlEditor.htmlText)
+        alertPopup.show(stage,
+          (stage.width() - alertPopup.width()) / 2.0 + stage.x(),
+          (stage.height() - alertPopup.height()) / 2.0 + stage.y())
       }
       alignmentInParent = Pos.Center
       margin = Insets(10, 0, 10, 0)
@@ -517,7 +509,7 @@ object StarterAppMain extends JFXApp {
             maxHeight = 140
           }
           bottom = new Button("OK") {
-            onAction = {e: ActionEvent => inner.hide()}
+            onAction = { e => inner.hide() }
             alignmentInParent = Pos.Center
             margin = Insets(10, 0, 10, 0)
           }

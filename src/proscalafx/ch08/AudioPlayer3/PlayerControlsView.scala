@@ -2,7 +2,6 @@ package proscalafx.ch08.AudioPlayer3
 
 import scalafx.Includes._
 import scalafx.application.Platform
-import scalafx.event.ActionEvent
 import scalafx.event.subscriptions.Subscription
 import scalafx.geometry.{HPos, Insets, Pos, VPos}
 import scalafx.scene.Node
@@ -105,7 +104,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
 
   private def createOpenButton() = new Button {
     id = "openButton"
-    onAction = (ae: ActionEvent) => {
+    onAction = _ => {
       val fc = new FileChooser() {
         title = "Pick a Sound File"
       }
@@ -125,11 +124,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     val playPauseButton = createPlayPauseButton()
     val seekStartButton = new Button {
       id = "seekStartButton"
-      onAction = (ae: ActionEvent) => seekAndUpdatePosition(Duration.ZERO)
+      onAction = _ => seekAndUpdatePosition(Duration.ZERO)
     }
     val seekEndButton = new Button {
       id = "seekEndButton"
-      onAction = (ae: ActionEvent) => {
+      onAction = _ => {
         val mediaPlayer = songModel.mediaPlayer()
         val totalDuration = mediaPlayer.totalDuration()
         // Duration of 1 second is constructed using suffix `s`
@@ -159,7 +158,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     new Button {
       graphic = playPauseIcon
       id = "playPauseButton"
-      onAction = (ae: ActionEvent) => {
+      onAction = _ => {
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
           case Status.PLAYING.delegate => mediaPlayer.pause()
