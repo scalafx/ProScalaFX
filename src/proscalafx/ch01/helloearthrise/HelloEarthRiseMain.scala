@@ -59,7 +59,7 @@ you on the good Earth." """.replace("\n", "")
     duration = Duration(75000)
     node = textRef
     toY = -820
-    interpolator = Interpolator.LINEAR
+    interpolator = Interpolator.Linear
   }.play()
 
 }

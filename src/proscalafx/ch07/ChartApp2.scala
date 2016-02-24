@@ -21,7 +21,7 @@ object ChartApp2 extends JFXApp {
         children = new PieChart() {
           data = chartData()
           title = "Tiobe index"
-          legendSide = Side.LEFT
+          legendSide = Side.Left
           clockwise = false
           // Setting `labelsVisible` property to `false` is causing NullPointerException.
           // This is JavaFX 2.2 bug apparently fixed in v.2.2.4

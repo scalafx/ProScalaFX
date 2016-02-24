@@ -94,7 +94,7 @@ object StarterAppMain extends JFXApp {
           }
         },
         new Separator {
-          orientation = Orientation.VERTICAL
+          orientation = Orientation.Vertical
         },
         new ToggleButton {
           id = "boldButton"
@@ -125,7 +125,7 @@ object StarterAppMain extends JFXApp {
           }
         },
         new Separator {
-          orientation = Orientation.VERTICAL
+          orientation = Orientation.Vertical
         },
         new ToggleButton {
           id = "leftAlignButton"
@@ -308,7 +308,7 @@ object StarterAppMain extends JFXApp {
       items = model.listViewItems
     }
 
-    treeView.selectionModel().selectionMode = SelectionMode.SINGLE
+    treeView.selectionModel().selectionMode = SelectionMode.Single
     treeView.selectionModel().selectedItem.onChange(
       (_, _, newTreeItem) => {
         if (newTreeItem != null && newTreeItem.isLeaf) {
@@ -463,8 +463,8 @@ object StarterAppMain extends JFXApp {
 
     new ScrollPane {
       content = variousControls
-      hbarPolicy = ScrollBarPolicy.ALWAYS
-      vbarPolicy = ScrollBarPolicy.AS_NEEDED
+      hbarPolicy = ScrollBarPolicy.Always
+      vbarPolicy = ScrollBarPolicy.AsNeeded
       contextMenu = sampleContextMenu
     }
   }

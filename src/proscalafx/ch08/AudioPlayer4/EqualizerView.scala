@@ -11,8 +11,8 @@ import scalafx.scene.media.{EqualizerBand, MediaPlayer}
  * @author Jarek Sacha 
  */
 class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songModel) {
-  private final val START_FREQ: Double = 250.0
-  private final val BAND_COUNT: Int = 7
+  private final val StartFreq: Double = 250.0
+  private final val BandCount: Int = 7
   private var spectrumBars: Array[SpectrumBar] = null
   private var spectrumListener: SpectrumListener = null
   private val backButton = new Button {
@@ -59,7 +59,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     val mediaPlayer = songModel.mediaPlayer()
     createEQBands(gridPane, mediaPlayer)
     createSpectrumBars(gridPane)
-    spectrumListener = new SpectrumListener(START_FREQ, mediaPlayer, spectrumBars)
+    spectrumListener = new SpectrumListener(StartFreq, mediaPlayer, spectrumBars)
     GridPane.setValignment(backButton, VPos.Bottom)
     GridPane.setHalignment(backButton, HPos.Center)
     GridPane.setMargin(backButton, Insets(20, 0, 0, 0))
@@ -72,10 +72,10 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     val min = EqualizerBand.MIN_GAIN
     val max = EqualizerBand.MAX_GAIN
     val mid = (max - min) / 2
-    var freq = START_FREQ
+    var freq = StartFreq
 
-    for (j <- 0 until BAND_COUNT) {
-      val theta = j.toDouble / (BAND_COUNT - 1).toDouble * (2 * math.Pi)
+    for (j <- 0 until BandCount) {
+      val theta = j.toDouble / (BandCount - 1).toDouble * (2 * math.Pi)
       val scale = 0.4 * (1 + math.cos(theta))
       val gain = min + mid + (mid * scale)
       bands.add(new EqualizerBand(freq, freq / 2, gain))
@@ -102,14 +102,14 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     max = maxValue
     value = eb.gain()
     styleClass += "eqSlider"
-    orientation = Orientation.VERTICAL
+    orientation = Orientation.Vertical
     value <==> eb.gain
     prefWidth = 44
   }
 
 
   private def createSpectrumBars(gridPane: GridPane) {
-    spectrumBars = new Array[SpectrumBar](BAND_COUNT)
+    spectrumBars = new Array[SpectrumBar](BandCount)
     for (i <- 0 until spectrumBars.length) {
       spectrumBars(i) = new SpectrumBar(100, 20)
       spectrumBars(i).setMaxWidth(44)

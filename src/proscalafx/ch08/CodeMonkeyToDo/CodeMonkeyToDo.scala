@@ -125,7 +125,7 @@ object CodeMonkeyToDo extends JFXApp {
 
     GridPane.setHgrow(vbox, Priority.Always)
     GridPane.setVgrow(vbox, Priority.Always)
-    grid.add(vbox, 0, 0, GridPane.REMAINING, 1)
+    grid.add(vbox, 0, 0, GridPane.Remaining, 1)
   }
 
   /** Returns a function that can be assigned to `oAction` */

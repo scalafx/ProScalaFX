@@ -49,7 +49,7 @@ object VideoPlayer3 extends JFXApp {
   val root = new StackPane {
     children +=(message, mediaView1, mediaView2)
     onMouseClicked = (event: MouseEvent) => {
-      mediaPlayer.seek(Duration.ZERO)
+      mediaPlayer.seek(Duration.Zero)
       message.visible = false
     }
   }

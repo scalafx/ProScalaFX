@@ -125,7 +125,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     val playPauseButton = createPlayPauseButton()
     val seekStartButton = new Button {
       id = "seekStartButton"
-      onAction = (ae: ActionEvent) => seekAndUpdatePosition(Duration.ZERO)
+      onAction = (ae: ActionEvent) => seekAndUpdatePosition(Duration.Zero)
     }
     val seekEndButton = new Button {
       id = "seekEndButton"
@@ -162,7 +162,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       onAction = (ae: ActionEvent) => {
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
-          case Status.PLAYING.delegate => mediaPlayer.pause()
+          case Status.Playing.delegate => mediaPlayer.pause()
           case _ => mediaPlayer.play()
         }
       }
@@ -199,11 +199,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = songModel.mediaPlayer()
-    if (Status.STOPPED == mediaPlayer.status) mediaPlayer.pause()
+    if (Status.Stopped == mediaPlayer.status) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
+    if (Status.Playing != mediaPlayer.status) updatePositionSlider(duration)
   }
 
   private def formatDuration(duration: Duration): String = {
@@ -214,7 +214,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
   private def updateStatus(newStatus: Status) {
-    if (Status.UNKNOWN == newStatus || newStatus == null) {
+    if (Status.Unknown == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"
@@ -222,7 +222,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       controlPanel.disable = false
       positionSlider.disable = false
       statusLabel.text = newStatus.toString
-      playPauseIcon.image = if (Status.PLAYING == newStatus) pauseImg else playImg
+      playPauseIcon.image = if (Status.Playing == newStatus) pauseImg else playImg
     }
   }
 

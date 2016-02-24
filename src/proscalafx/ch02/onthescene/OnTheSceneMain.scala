@@ -28,28 +28,28 @@ object OnTheSceneMain extends JFXApp {
   // "ObjectProperty holding a ScalaFX wrapper cannot bind to ScalaFX control's properties"
   // We will nedd to bind, in the code below, the buffer to Scene's cursor property.
   val cursors = ObservableBuffer[jfxs.Cursor](
-    Cursor.DEFAULT,
-    Cursor.CROSSHAIR,
-    Cursor.WAIT,
-    Cursor.TEXT,
-    Cursor.HAND,
-    Cursor.MOVE,
-    Cursor.N_RESIZE,
-    Cursor.NE_RESIZE,
-    Cursor.E_RESIZE,
-    Cursor.SE_RESIZE,
-    Cursor.S_RESIZE,
-    Cursor.SW_RESIZE,
-    Cursor.W_RESIZE,
-    Cursor.NW_RESIZE,
-    Cursor.NONE
+    Cursor.Default,
+    Cursor.Crosshair,
+    Cursor.Wait,
+    Cursor.Text,
+    Cursor.Hand,
+    Cursor.Move,
+    Cursor.NResize,
+    Cursor.NEResize,
+    Cursor.EResize,
+    Cursor.SResize,
+    Cursor.SResize,
+    Cursor.SWResize,
+    Cursor.WResize,
+    Cursor.NWResize,
+    Cursor.None
   )
 
   val sliderRef = new Slider {
     min = 0
     max = 255
     value = 255
-    orientation = Orientation.VERTICAL
+    orientation = Orientation.Vertical
   }
 
   val choiceRef = new ChoiceBox[jfxs.Cursor] {
@@ -92,7 +92,7 @@ object OnTheSceneMain extends JFXApp {
     layoutX = 20
     layoutY = 40
     padding = Insets(0, 20, 40, 0)
-    orientation = Orientation.VERTICAL
+    orientation = Orientation.Vertical
     vgap = 10
     hgap = 20
     columnHalignment = HPos.Left
