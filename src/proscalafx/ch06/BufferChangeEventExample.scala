@@ -38,7 +38,7 @@ object BufferChangeEventExample extends App {
   strings -=("One_1", "Two_1", "Zero_1")
 
 
-  private def prettyPrint(index: Int, change: Change): String = {
+  private def prettyPrint(index: Int, change: Change[String]): String = {
     val sb = new StringBuffer("\t\tcursor = " + index + "\n")
     sb.append("\t\tKind of change: ")
 
