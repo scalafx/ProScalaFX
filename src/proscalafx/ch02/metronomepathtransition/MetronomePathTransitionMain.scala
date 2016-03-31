@@ -1,7 +1,7 @@
 package proscalafx.ch02.metronomepathtransition
 
-import javafx.animation.Animation.Status
 
+import scalafx.animation.Animation.Status
 import scalafx.animation.PathTransition.OrientationType
 import scalafx.animation.{Interpolator, PathTransition, Timeline}
 import scalafx.application.JFXApp
@@ -32,8 +32,8 @@ object MetronomePathTransitionMain extends JFXApp {
         ArcTo(350, 350, 0, 300, 50, largeArcFlag = false, sweepFlag = true)
       )
     }
-    orientation = OrientationType.ORTHOGONAL_TO_TANGENT
-    interpolator = Interpolator.LINEAR
+    orientation = OrientationType.OrthogonalToTangent
+    interpolator = Interpolator.Linear
     autoReverse = true
     cycleCount = Timeline.Indefinite
   }
@@ -47,26 +47,27 @@ object MetronomePathTransitionMain extends JFXApp {
           layoutX = 60
           layoutY = 420
           spacing = 10
+          // NOTE: the `disable` bindings below compare value of a property to JavaFX constant
           children = List(
             new Button {
               text = "Start"
               onAction = _ => {anim.playFromStart()}
-              disable <== (anim.status =!= Status.STOPPED)
+              disable <== (anim.status =!= Status.Stopped.delegate)
             },
             new Button {
               text = "Pause"
               onAction = _ => {anim.pause()}
-              disable <== (anim.status =!= Status.RUNNING)
+              disable <== (anim.status =!= Status.Running.delegate)
             },
             new Button {
               text = "Resume"
               onAction = _ => {anim.play()}
-              disable <== (anim.status =!= Status.PAUSED)
+              disable <== (anim.status =!= Status.Paused.delegate)
             },
             new Button {
               text = "Stop"
               onAction = _ => {anim.stop()}
-              disable <== (anim.status === Status.STOPPED)
+              disable <== (anim.status === Status.Stopped.delegate)
             }
           )
         }

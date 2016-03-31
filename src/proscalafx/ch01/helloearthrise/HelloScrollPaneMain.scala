@@ -49,8 +49,8 @@ you on the good Earth." """.replace("\n", "")
           layoutY = 180
           prefWidth = 440
           prefHeight = 85
-          hbarPolicy = ScrollBarPolicy.NEVER
-          vbarPolicy = ScrollBarPolicy.NEVER
+          hbarPolicy = ScrollBarPolicy.Never
+          vbarPolicy = ScrollBarPolicy.Never
           pannable = true
           content = textRef
           style = "-fx-background-color: transparent;"
@@ -64,6 +64,6 @@ you on the good Earth." """.replace("\n", "")
     duration = Duration(75000)
     node = textRef
     toY = -820
-    interpolator = Interpolator.LINEAR
+    interpolator = Interpolator.Linear
   }.play()
 }

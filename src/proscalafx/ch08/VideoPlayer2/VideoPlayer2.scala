@@ -41,7 +41,7 @@ object VideoPlayer2 extends JFXApp {
   val root = new StackPane {
     children +=(mediaView, markerText)
     onMouseClicked = _ => {
-      mediaPlayer.seek(Duration.ZERO)
+      mediaPlayer.seek(Duration.Zero)
       markerText.text = ""
     }
   }

@@ -24,7 +24,7 @@ object Metronome1Main extends JFXApp {
         startXVal -> 100
       },
       at(1 s) {
-        startXVal -> 300 tween Interpolator.LINEAR
+        startXVal -> 300 tween Interpolator.Linear
       })
     cycleCount = Timeline.Indefinite
   }

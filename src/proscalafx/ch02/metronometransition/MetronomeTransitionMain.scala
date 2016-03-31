@@ -26,7 +26,7 @@ object MetronomeTransitionMain extends JFXApp {
     node = circle
     fromX = 0
     toX = 200
-    interpolator = Interpolator.LINEAR
+    interpolator = Interpolator.Linear
     autoReverse = true
     cycleCount = Timeline.Indefinite
   }

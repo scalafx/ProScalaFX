@@ -11,15 +11,15 @@ import scalafx.scene.layout.BorderPane
 
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha 
+ */
 object AudioPlayer3 extends JFXApp {
   println("JavaFX version: " + VersionInfo.getRuntimeVersion)
 
-  private val songModel          = new SongModel() {
+  private final val songModel = new SongModel() {
     url = "http://traffic.libsyn.com/dickwall/JavaPosse373.mp3"
   }
-  private val metaDataView       = new MetadataView(songModel)
+  private val metaDataView = new MetadataView(songModel)
   private val playerControlsView = new PlayerControlsView(songModel)
 
   val root = new BorderPane {
@@ -42,7 +42,7 @@ object AudioPlayer3 extends JFXApp {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {
         // NOTE: We need to pass in `TransferMode` as Java vararg, since we use `javafx.scene.input.DragEvent`
-        event.acceptTransferModes(TransferMode.ANY: _*)
+        event.acceptTransferModes(TransferMode.Any: _*)
       }
       event.consume()
     }

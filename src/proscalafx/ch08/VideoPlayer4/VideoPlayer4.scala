@@ -61,7 +61,7 @@ object VideoPlayer4 extends JFXApp {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {
         // NOTE: We need to pass in `TransferMode` as Java vararg, since we use `javafx.scene.input.DragEvent`
-        event.acceptTransferModes(TransferMode.ANY: _*)
+        event.acceptTransferModes(TransferMode.Any: _*)
       }
       event.consume()
     }

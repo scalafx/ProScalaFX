@@ -133,7 +133,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
     val playPauseButton = createPlayPauseButton()
     val seekStartButton = new Button {
       id = "seekStartButton"
-      onAction = _ => seekAndUpdatePosition(Duration.ZERO)
+      onAction = _ => seekAndUpdatePosition(Duration.Zero)
     }
     val seekEndButton = new Button {
       id = "seekEndButton"
@@ -167,7 +167,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
       onAction = _ => {
         val mediaPlayer = mediaModel.mediaPlayer()
         mediaPlayer.status() match {
-          case Status.PLAYING.delegate => mediaPlayer.pause()
+          case Status.Playing.delegate => mediaPlayer.pause()
           case _ => mediaPlayer.play()
         }
       }
@@ -205,11 +205,11 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
   private def seekAndUpdatePosition(duration: Duration) {
     val mediaPlayer = mediaModel.mediaPlayer()
-    if (Status.STOPPED == mediaPlayer.status) mediaPlayer.pause()
+    if (Status.Stopped == mediaPlayer.status) mediaPlayer.pause()
 
     mediaPlayer.seek(duration)
 
-    if (Status.PLAYING != mediaPlayer.status) updatePositionSlider(duration)
+    if (Status.Playing != mediaPlayer.status) updatePositionSlider(duration)
   }
 
 
@@ -222,7 +222,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
 
   def updateStatus(newStatus: Status) {
-    if (MediaPlayer.Status.UNKNOWN == newStatus || newStatus == null) {
+    if (MediaPlayer.Status.Unknown == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
       statusLabel.text = "Buffering"
@@ -230,7 +230,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
       controlPanel.disable = false
       positionSlider.disable = false
       statusLabel.text = newStatus.toString()
-      playPauseIcon.image = if (Status.PLAYING == newStatus) pauseImg else playImg
+      playPauseIcon.image = if (Status.Playing == newStatus) pauseImg else playImg
     }
   }
 
