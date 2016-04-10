@@ -1,7 +1,5 @@
 package proscalafx.ch02.zenpong
 
-import javafx.animation.Animation.Status
-
 import scalafx.Includes._
 import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.JFXApp
@@ -26,7 +24,7 @@ object ZenPongMain extends JFXApp {
   val rightPaddleY = new DoubleProperty
 
   /** The drag anchor for left and right paddles */
-  var leftPaddleDragAnchorY : Double = _
+  var leftPaddleDragAnchorY: Double = _
   var rightPaddleDragAnchorY: Double = _
 
   /** Controls whether the ball is moving right */
@@ -36,7 +34,7 @@ object ZenPongMain extends JFXApp {
   var movingDown = true
 
   /** The initial translateY property for the left and right paddles */
-  var initLeftPaddleTranslateY : Double = _
+  var initLeftPaddleTranslateY: Double = _
   var initRightPaddleTranslateY: Double = _
 
   /** The moving ball */
@@ -48,7 +46,7 @@ object ZenPongMain extends JFXApp {
   }
 
   /** The left and right paddles */
-  val leftPaddle : Rectangle = new Rectangle {
+  val leftPaddle: Rectangle = new Rectangle {
     x = 20
     width = 10
     height = 30
@@ -82,19 +80,19 @@ object ZenPongMain extends JFXApp {
   }
 
   /** The walls */
-  val topWall    = new Rectangle {
+  val topWall = new Rectangle {
     x = 0
     y = 0
     width = 500
     height = 1
   }
-  val rightWall  = new Rectangle {
+  val rightWall = new Rectangle {
     x = 500
     y = 0
     width = 1
     height = 500
   }
-  val leftWall   = new Rectangle {
+  val leftWall = new Rectangle {
     x = 0
     y = 0
     width = 1
@@ -113,7 +111,8 @@ object ZenPongMain extends JFXApp {
   val startVisible = BooleanProperty(true)
 
   /** The animation of the ball */
-  val keyFrame      = KeyFrame(10 ms, onFinished = _ => {
+  val keyFrame = KeyFrame(10 ms, onFinished = {
+    _ =>
       checkForCollision()
       val horzPixels = if (movingRight) 1 else -1
       val vertPixels = if (movingDown) 1 else -1
@@ -130,10 +129,12 @@ object ZenPongMain extends JFXApp {
     layoutY() = 470
     text = "Start!"
     visible <== startVisible
-    onAction = _ =>
-      startVisible() = false
-    pongAnimation.playFromStart()
-    pongComponents.requestFocus()
+    onAction = {
+      _ =>
+        startVisible() = false
+        pongAnimation.playFromStart()
+        pongComponents.requestFocus()
+    }
   }
 
 
@@ -153,8 +154,8 @@ object ZenPongMain extends JFXApp {
       startButton
     )
     onKeyPressed = key => key.code match {
-      case KeyCode.Space if pongAnimation.status() == Status.STOPPED =>
-        rightPaddleY() = rightPaddleY.value - 6
+      //      case KeyCode.Space if pongAnimation.status() == Status.STOPPED =>
+      //        rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.L if !rightPaddle.boundsInParent().intersects(topWall.boundsInLocal()) =>
         rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.Comma if !rightPaddle.boundsInParent().intersects(bottomWall.boundsInLocal()) =>
