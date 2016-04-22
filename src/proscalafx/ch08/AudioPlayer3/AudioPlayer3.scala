@@ -1,11 +1,12 @@
 package proscalafx.ch08.AudioPlayer3
 
 import com.sun.javafx.runtime.VersionInfo
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
-import scalafx.scene.input.{TransferMode, DragEvent}
+import scalafx.scene.input.{DragEvent, TransferMode}
 import scalafx.scene.layout.BorderPane
 
 
@@ -41,7 +42,7 @@ object AudioPlayer3 extends JFXApp {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {
         // NOTE: We need to pass in `TransferMode` as Java vararg, since we use `javafx.scene.input.DragEvent`
-        event.acceptTransferModes(TransferMode.ANY: _*)
+        event.acceptTransferModes(TransferMode.Any: _*)
       }
       event.consume()
     }

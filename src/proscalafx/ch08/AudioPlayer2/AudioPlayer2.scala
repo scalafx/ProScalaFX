@@ -42,7 +42,7 @@ object AudioPlayer2 extends JFXApp {
   private def createGridPane(): GridPane = new GridPane {
     padding = Insets(10)
     hgap = 20
-    add(albumCover, 0, 0, 1, GridPane.REMAINING)
+    add(albumCover, 0, 0, 1, GridPane.Remaining)
     add(title, 1, 0)
     add(artist, 1, 1)
     add(album, 1, 2)

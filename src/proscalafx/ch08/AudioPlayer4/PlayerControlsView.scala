@@ -130,7 +130,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     val playPauseButton = createPlayPauseButton()
     val seekStartButton = new Button {
       id = "seekStartButton"
-      onAction = (ae: ActionEvent) => seekAndUpdatePosition(Duration.ZERO)
+      onAction = (ae: ActionEvent) => seekAndUpdatePosition(Duration.Zero)
     }
     val seekEndButton = new Button {
       id = "seekEndButton"
@@ -164,7 +164,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
       onAction = (ae: ActionEvent) => {
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
-          case Status.PLAYING.delegate => mediaPlayer.pause()
+          case Status.Playing.delegate => mediaPlayer.pause()
           case _ => mediaPlayer.play()
         }
       }

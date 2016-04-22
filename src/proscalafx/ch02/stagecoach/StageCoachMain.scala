@@ -30,10 +30,10 @@ object StageCoachMain extends JFXApp {
 
   // Process command line parameters
   val stageStyle = parameters.unnamed match {
-    case Seq("transparent") => StageStyle.TRANSPARENT
-    case Seq("undecorated") => StageStyle.UNDECORATED
-    case Seq("utility") => StageStyle.UTILITY
-    case _ => StageStyle.DECORATED
+    case Seq("transparent") => StageStyle.Transparent
+    case Seq("undecorated") => StageStyle.Undecorated
+    case Seq("utility") => StageStyle.Utility
+    case _ => StageStyle.Decorated
   }
 
   val textStageX = new Text {
@@ -53,7 +53,7 @@ object StageCoachMain extends JFXApp {
   }
   val checkBoxResizable = new CheckBox {
     text = "resizable"
-    disable = stageStyle == StageStyle.TRANSPARENT || stageStyle == StageStyle.UNDECORATED
+    disable = stageStyle == StageStyle.Transparent || stageStyle == StageStyle.Undecorated
   }
   val checkBoxFullScreen = new CheckBox {
     text = "fullScreen"

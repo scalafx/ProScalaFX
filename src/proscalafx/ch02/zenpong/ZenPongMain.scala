@@ -54,7 +54,7 @@ object ZenPongMain extends JFXApp {
     width = 10
     height = 30
     fill = Color.LightBlue
-    cursor = Cursor.HAND
+    cursor = Cursor.Hand
     translateY <== leftPaddleY
     onMousePressed = (me: MouseEvent) => {
       initLeftPaddleTranslateY = leftPaddle.translateY()
@@ -70,7 +70,7 @@ object ZenPongMain extends JFXApp {
     width = 10
     height = 30
     fill = Color.LightBlue
-    cursor = Cursor.HAND
+    cursor = Cursor.Hand
     translateY <== rightPaddleY
     onMousePressed = (me: MouseEvent) => {
       initRightPaddleTranslateY = rightPaddle.getTranslateY
@@ -156,11 +156,11 @@ object ZenPongMain extends JFXApp {
       startButton
     )
     onKeyPressed = (k: KeyEvent) => k.code match {
-      case KeyCode.SPACE if pongAnimation.status() == Status.STOPPED =>
+      case KeyCode.Space if pongAnimation.status() == Status.STOPPED =>
       rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.L if !rightPaddle.boundsInParent().intersects(topWall.boundsInLocal()) =>
         rightPaddleY() = rightPaddleY.value - 6
-      case KeyCode.COMMA if !rightPaddle.boundsInParent().intersects(bottomWall.boundsInLocal()) =>
+      case KeyCode.Comma if !rightPaddle.boundsInParent().intersects(bottomWall.boundsInLocal()) =>
         rightPaddleY() = rightPaddleY.value + 6
       case KeyCode.A if !leftPaddle.boundsInParent().intersects(topWall.boundsInLocal()) =>
         leftPaddleY() = leftPaddleY.value - 6

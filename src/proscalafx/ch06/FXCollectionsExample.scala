@@ -62,7 +62,7 @@ object FXCollectionsExample extends App {
   ObservableBuffer.fillAll(strings, "Ten")
 
 
-  def prettyPrint(change: Change) {
+  def prettyPrint(change: Change[String]) {
     change match {
       case Add(position, added)             =>
         println("\t\tKind of change: added")

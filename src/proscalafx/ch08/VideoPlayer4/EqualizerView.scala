@@ -123,7 +123,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     max = maxValue
     value = eb.gain()
     styleClass += "eqSlider"
-    orientation = Orientation.VERTICAL
+    orientation = Orientation.Vertical
     value <==> eb.gain
     prefWidth = 44
   }
