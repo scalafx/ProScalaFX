@@ -1,7 +1,7 @@
 package proscalafx.ch08.AudioPlayer4
 
 import javafx.scene.{media => jfxcm}
-import scalafx.Includes._
+
 import scalafx.scene.media.MediaPlayer
 
 /**
@@ -40,7 +40,7 @@ class SpectrumListener(startFreq: Double, mp: MediaPlayer, bars: Array[SpectrumB
   private def createNormArray(): Array[Double] = {
     val normArray = new Array[Double](bars.length)
     var currentNorm = 0.05
-    for (i <- 0 until normArray.length) {
+    for (i <- normArray.indices) {
       normArray(i) = 1 + currentNorm
       currentNorm *= 2
     }

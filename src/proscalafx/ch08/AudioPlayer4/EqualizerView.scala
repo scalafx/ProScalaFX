@@ -110,7 +110,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
 
   private def createSpectrumBars(gridPane: GridPane) {
     spectrumBars = new Array[SpectrumBar](BandCount)
-    for (i <- 0 until spectrumBars.length) {
+    for (i <- spectrumBars.indices) {
       spectrumBars(i) = new SpectrumBar(100, 20)
       spectrumBars(i).setMaxWidth(44)
       GridPane.setHalignment(spectrumBars(i), HPos.Center)
