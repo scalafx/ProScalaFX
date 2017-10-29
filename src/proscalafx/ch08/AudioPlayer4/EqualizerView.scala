@@ -13,8 +13,8 @@ import scalafx.scene.media.{EqualizerBand, MediaPlayer}
 class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songModel) {
   private final val StartFreq: Double = 250.0
   private final val BandCount: Int = 7
-  private var spectrumBars: Array[SpectrumBar] = null
-  private var spectrumListener: SpectrumListener = null
+  private var spectrumBars: Array[SpectrumBar] = _
+  private var spectrumListener: SpectrumListener = _
   private val backButton = new Button {
     text = "Back"
     id = "backButton"
