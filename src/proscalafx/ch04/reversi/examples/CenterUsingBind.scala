@@ -19,6 +19,6 @@ object CenterUsingBind extends JFXApp {
     }
   }
 
-  text.layoutX <== (stage.scene.width - text.prefWidth(-1)) / 2
-  text.layoutY <== (stage.scene.height - text.prefHeight(-1)) / 2
+  text.layoutX <== (stage.scene().width - text.prefWidth(-1)) / 2
+  text.layoutY <== (stage.scene().height - text.prefHeight(-1)) / 2
 }

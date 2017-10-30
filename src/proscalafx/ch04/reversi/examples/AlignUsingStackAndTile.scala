@@ -33,7 +33,7 @@ object AlignUsingStackAndTile extends JFXApp {
     }
   }
 
-  left.prefWidth <== stage.scene.width / 2
-  left.prefHeight <== stage.scene.height
+  left.prefWidth <== stage.scene().width / 2
+  left.prefHeight <== stage.scene().height
 
 }
