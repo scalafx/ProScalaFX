@@ -3,7 +3,7 @@ package proscalafx.ch06
 import java.{util => ju}
 import javafx.{collections => jfxc}
 
-import scala.collection.JavaConversions
+import scala.collection.JavaConverters
 import scalafx.collections.ObservableBuffer
 import scalafx.collections.ObservableBuffer._
 
@@ -35,7 +35,7 @@ object FXCollectionsExample extends App {
   strings.addAll("Zero", "One", "Two", "Three")
 
   println("Calling copy: ")
-  jfxc.FXCollections.copy(strings, JavaConversions.seqAsJavaList(List("Four", "Five")))
+  jfxc.FXCollections.copy(strings, JavaConverters.seqAsJavaList(List("Four", "Five")))
 
   println("Calling replaceAll: ")
   strings.replaceAll("Two", "Two_1")
@@ -64,11 +64,11 @@ object FXCollectionsExample extends App {
 
   def prettyPrint(change: Change[String]) {
     change match {
-      case Add(position, added)             =>
+      case Add(_, added) =>
         println("\t\tKind of change: added")
         println("\t\tAdded size    : " + added.size)
         println("\t\tAdded sublist : " + mkString(added))
-      case Remove(position, removed)        =>
+      case Remove(_, removed) =>
         println("\t\tKind of change: removed")
         println("\t\tRemoved size  : " + removed.size)
         println("\t\tRemoved       : " + mkString(removed))
