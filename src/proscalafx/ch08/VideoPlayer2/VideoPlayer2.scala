@@ -3,6 +3,7 @@ package proscalafx.ch08.VideoPlayer2
 import java.io.File
 import java.net.URL
 
+import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}

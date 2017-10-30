@@ -2,6 +2,7 @@ package proscalafx.ch08.AudioPlayer4
 
 import javafx.scene.{media => jffxsm}
 
+import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.application.Platform
 import scalafx.event.ActionEvent

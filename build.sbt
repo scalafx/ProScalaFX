@@ -13,7 +13,7 @@ scalaSource in Compile := baseDirectory(_ / "src").value
 resourceDirectory in Compile := baseDirectory(_ / "src").value
 
 // Append -deprecation to the options passed to the Scala compiler
-scalacOptions += "-deprecation"
+scalacOptions ++= Seq("-deprecation", "-feature")
 
 // Point to location of a snapshot repository for ScalaFX
 resolvers += Opts.resolver.sonatypeSnapshots

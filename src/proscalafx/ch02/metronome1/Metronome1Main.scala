@@ -2,6 +2,7 @@ package proscalafx.ch02.metronome1
 
 import javafx.animation.Animation.Status
 
+import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.animation.{Interpolator, Timeline}
 import scalafx.application.JFXApp

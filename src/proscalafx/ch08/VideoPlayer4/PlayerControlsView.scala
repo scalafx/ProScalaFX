@@ -1,5 +1,6 @@
 package proscalafx.ch08.VideoPlayer4
 
+import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
@@ -15,8 +16,8 @@ import scalafx.stage.FileChooser
 import scalafx.util.Duration
 
 /**
- * @author Jarek Sacha 
- */
+  * @author Jarek Sacha
+  */
 class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](mediaModel) {
   private var pauseImg: Image = _
   private var playImg: Image = _
@@ -63,12 +64,18 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
         }
     }
 
-    val volLow = new ImageView {id = "volumeLow"}
-    val volHigh = new ImageView {id = "volumeHigh"}
+    val volLow = new ImageView {
+      id = "volumeLow"
+    }
+    val volHigh = new ImageView {
+      id = "volumeHigh"
+    }
 
     val buttonCol = new ColumnConstraints(100)
     val spacerCol = new ColumnConstraints(40, 80, 80)
-    val middleCol = new ColumnConstraints {hgrow = Priority.Always}
+    val middleCol = new ColumnConstraints {
+      hgrow = Priority.Always
+    }
 
     val gp = new GridPane {
       hgap = 1
@@ -237,7 +244,9 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
 
   private def addListenersAndBindings(mp: MediaPlayer) {
     statusInvalidationSubscription = mp.status.onInvalidate {
-      Platform.runLater {updateStatus(mediaModel.mediaPlayer().status())}
+      Platform.runLater {
+        updateStatus(mediaModel.mediaPlayer().status())
+      }
     }
 
     currentTimeSubscription = mp.currentTime.onInvalidate {
