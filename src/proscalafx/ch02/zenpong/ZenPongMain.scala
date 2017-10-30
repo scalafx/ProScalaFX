@@ -2,6 +2,7 @@ package proscalafx.ch02.zenpong
 
 import javafx.animation.Animation.Status
 
+import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.JFXApp

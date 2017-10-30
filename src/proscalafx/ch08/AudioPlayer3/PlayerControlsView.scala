@@ -1,5 +1,6 @@
 package proscalafx.ch08.AudioPlayer3
 
+import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
@@ -13,7 +14,6 @@ import scalafx.scene.media.MediaPlayer
 import scalafx.scene.media.MediaPlayer.Status
 import scalafx.stage.FileChooser
 import scalafx.util.Duration
-
 
 /**
  * @author Jarek Sacha 

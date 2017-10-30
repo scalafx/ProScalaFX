@@ -14,8 +14,8 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
 
   private final val StartFrequency: Double = 250.0
   private final val BandCount: Int = 7
-  private var spectrumBars: Array[SpectrumBar] = null
-  private var spectrumListener: SpectrumListener = null
+  private var spectrumBars: Array[SpectrumBar] = _
+  private var spectrumListener: SpectrumListener = _
   private val backButton = new Button {
     text = "Back"
     id = "backButton"
@@ -132,7 +132,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
   private def createSpectrumBars(gridPane: GridPane) {
     spectrumBars = new Array[SpectrumBar](BandCount)
 
-    for (i <- 0 until spectrumBars.length) {
+    for (i <- spectrumBars.indices) {
       spectrumBars(i) = new SpectrumBar(100, 20)
       spectrumBars(i).setMaxWidth(44)
       GridPane.setHalignment(spectrumBars(i), HPos.Center)

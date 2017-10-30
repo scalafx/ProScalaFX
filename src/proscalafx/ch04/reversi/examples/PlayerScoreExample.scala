@@ -30,8 +30,8 @@ object PlayerScoreExample extends JFXApp {
     }
   }
 
-  tiles.prefTileWidth <== stage.scene.width / 2
-  tiles.prefTileHeight <== stage.scene.height
+  tiles.prefTileWidth <== stage.scene().width / 2
+  tiles.prefTileHeight <== stage.scene().height
 
 
   //---------------------------------------------------------------------------

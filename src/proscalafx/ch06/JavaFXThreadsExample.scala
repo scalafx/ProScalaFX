@@ -1,6 +1,6 @@
 package proscalafx.ch06
 
-import scala.collection.JavaConversions
+import scala.collection.JavaConverters
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -27,7 +27,9 @@ object JavaFXThreadsExample extends JFXApp {
 
 
   private def hookupEvents() {
-    view.updateButton.onAction = handle {model.update()}
+    view.updateButton.onAction = handle {
+      model.update()
+    }
     view.threadNames.selectionModel().selectedItem.onChange {
       val index = view.threadNames.selectionModel().getSelectedIndex
       if (index >= 0) {
@@ -46,7 +48,7 @@ object JavaFXThreadsExample extends JFXApp {
     def update() {
       threadNames.clear()
       stackTraces.clear()
-      val map = JavaConversions.mapAsScalaMap(Thread.getAllStackTraces)
+      val map = JavaConverters.mapAsScalaMap(Thread.getAllStackTraces)
       for ((k, v) <- map) {
         threadNames += "\"" + k.getName + "\""
         stackTraces += formatStackTrace(v)

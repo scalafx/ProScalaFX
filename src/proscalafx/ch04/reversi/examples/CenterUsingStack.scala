@@ -26,6 +26,6 @@ object CenterUsingStack extends JFXApp {
     }
   }
 
-  ellipse.radiusX <== stage.scene.width / 2
-  ellipse.radiusY <== stage.scene.height / 2
+  ellipse.radiusX <== stage.scene().width / 2
+  ellipse.radiusY <== stage.scene().height / 2
 }
