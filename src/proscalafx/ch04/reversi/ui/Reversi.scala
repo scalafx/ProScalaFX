@@ -1,10 +1,9 @@
 package proscalafx.ch04.reversi.ui
 
 import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
-
 import scalafx.Includes._
+import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.application.{ConditionalFeature, JFXApp, Platform}
 import scalafx.geometry.Pos
 import scalafx.scene.control.Button
 import scalafx.scene.effect.{DropShadow, InnerShadow}
@@ -12,15 +11,18 @@ import scalafx.scene.layout._
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{Font, FontWeight, Text}
-import scalafx.scene.transform.{Rotate, Scale, Translate}
-import scalafx.scene.{PerspectiveCamera, Scene}
+import scalafx.scene.{Node, Scene}
 
 
 object Reversi extends JFXApp {
 
+  private val model = ReversiModel
+
   val restart = new Button() {
     text = "Restart"
-    onAction = handle {ReversiModel.restart()}
+    onAction = handle {
+      ReversiModel.restart()
+    }
   }
 
   val game = new BorderPane() {
@@ -28,7 +30,7 @@ object Reversi extends JFXApp {
     center = new StackPane() {
       children = List(
         createBackground(),
-        createTiles()
+        tiles()
       )
     }
     bottom = createScoreBoxes()
@@ -52,12 +54,12 @@ object Reversi extends JFXApp {
   AnchorPane.setRightAnchor(restart, 10d)
   AnchorPane.setTopAnchor(restart, 10d)
 
-
-  if (Platform.isSupported(ConditionalFeature.Scene3D)) {
-    stage.scene().camera = new PerspectiveCamera() {
-      fieldOfView = 60
-    }.delegate
-  }
+  // Code commended below was only used in the first edition of the book
+  //  if (Platform.isSupported(ConditionalFeature.Scene3D)) {
+  //    stage.scene().camera = new PerspectiveCamera() {
+  //      fieldOfView = 60
+  //    }.delegate
+  //  }
 
 
   //---------------------------------------------------------------------------
@@ -89,49 +91,64 @@ object Reversi extends JFXApp {
     style = "-fx-background-color: radial-gradient(radius 100%, white, gray)"
   }
 
+  // Code commended below was only used in the first edition of the book
+  //  private def createTiles(): GridPane = {
+  //    val board = new GridPane
+  //    for {
+  //      i <- 0 until ReversiModel.BOARD_SIZE
+  //      j <- 0 until ReversiModel.BOARD_SIZE
+  //    } {
+  //      val square = new ReversiSquare(i, j)
+  //      val piece = new ReversiPiece()
+  //      piece.owner <== model.board(i)(j)
+  //      board.add(new StackPane {
+  //        children = List(square, piece)
+  //      }, i, j)
+  //    }
+  //
+  //    if (Platform.isSupported(ConditionalFeature.Scene3D)) {
+  //      val scale = new Scale(.45, .8, 1, 300, 60, 0)
+  //      val translate = new Translate(75, -2, -150)
+  //      val xRot = new Rotate {
+  //        angle = -40
+  //        pivotX = 300
+  //        pivotY = 150
+  //        pivotZ = 0
+  //        axis = Rotate.XAxis
+  //      }
+  //      val yRot = new Rotate {
+  //        angle = -5
+  //        pivotX = 300
+  //        pivotY = 150
+  //        pivotZ = 0
+  //        axis = Rotate.YAxis
+  //      }
+  //      val zRot = new Rotate {
+  //        angle = -6
+  //        pivotX = 300
+  //        pivotY = 150
+  //        pivotZ = 0
+  //        axis = Rotate.ZAxis
+  //      }
+  //
+  //      board.transforms ++= List(scale, translate, xRot, yRot, zRot)
+  //    }
+  //
+  //    board
+  //  }
 
-  private def createTiles(): GridPane = {
-    val board = new GridPane
-    for {
-      i <- 0 until ReversiModel.BOARD_SIZE
-      j <- 0 until ReversiModel.BOARD_SIZE
-    } {
+
+  private def tiles(): Node = {
+    val board = new GridPane()
+    for (i <- 0 until ReversiModel.BOARD_SIZE; j <- 0 until ReversiModel.BOARD_SIZE) {
       val square = new ReversiSquare(i, j)
       val piece = new ReversiPiece()
-      piece.owner <== ReversiModel.board(i)(j)
+      piece.owner <== model.board(i)(j)
       board.add(new StackPane {
-        children = List(square, piece)
+        children = Seq(square, piece)
       }, i, j)
+
     }
-
-    if (Platform.isSupported(ConditionalFeature.Scene3D)) {
-      val scale = new Scale(.45, .8, 1, 300, 60, 0)
-      val translate = new Translate(75, -2, -150)
-      val xRot = new Rotate {
-        angle = -40
-        pivotX = 300
-        pivotY = 150
-        pivotZ = 0
-        axis = Rotate.XAxis
-      }
-      val yRot = new Rotate {
-        angle = -5
-        pivotX = 300
-        pivotY = 150
-        pivotZ = 0
-        axis = Rotate.YAxis
-      }
-      val zRot = new Rotate {
-        angle = -6
-        pivotX = 300
-        pivotY = 150
-        pivotZ = 0
-        axis = Rotate.ZAxis
-      }
-
-      board.transforms ++= List(scale, translate, xRot, yRot, zRot)
-    }
-
     board
   }
 
