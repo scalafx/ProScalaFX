@@ -2,10 +2,10 @@ package proscalafx.ch06
 
 import java.awt.event.{ActionEvent, ActionListener}
 import java.awt.{BorderLayout, Dimension, FlowLayout}
+
 import javafx.embed.{swing => jfxes}
 import javafx.scene.{paint => jfxsp}
-import javax.swing.{JButton, JFrame, JPanel}
-
+import javax.swing.{JButton, JFrame, JPanel, WindowConstants}
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.Scene
@@ -65,7 +65,7 @@ object JavaFXSceneInSwingExample extends App {
     buttonPanel.add(changeStrokeButton)
     frame.add(canvasPanel, BorderLayout.CENTER)
     frame.add(buttonPanel, BorderLayout.SOUTH)
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
     frame.setLocationByPlatform(true)
     frame.pack()
   }
