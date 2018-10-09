@@ -6,3 +6,5 @@ ProScalaFX
 [Pro JavaFX8](http://www.apress.com/9781430265740) book [code](http://www.apress.com/downloadable/download/sample/sample_id/1574/).
 
 The original code was created for JavaFX 2.2 (Java 7). Current main branch was updated to work with ScalaFX 8 / JavaFX 8. Code for JavaFX 2.2 is still available on branch SFX-2.
+
+Branch SFX-11 is specific to JavaFX/ScalaFX 11.
