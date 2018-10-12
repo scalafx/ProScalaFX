@@ -13,7 +13,7 @@ abstract class AbstractView[T <: Node](protected val mediaModel: MediaModel) {
 
   def viewNode: T = _viewNode
 
-  def onNextPageAction(nextHandler: (ActionEvent => Unit)) {}
+  def onNextPageAction(nextHandler: ActionEvent => Unit) {}
 
   protected def initView(): T
 }

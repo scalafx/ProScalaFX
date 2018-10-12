@@ -1,7 +1,6 @@
 package proscalafx.ch08.VideoPlayer4
 
 import javafx.scene.{media => jfxcm}
-
 import scalafx.scene.media.MediaPlayer
 
 
@@ -61,7 +60,7 @@ class SpectrumListener(startFreq: Double, mp: MediaPlayer, bars: Array[SpectrumB
     var currentCutoff = 0d
     var currentBucketIndex = -1
 
-    for (i <- 0 until bandCount) {
+    for (_ <- 0 until bandCount) {
       if (currentSpectrumFreq > currentCutoff) {
         currentEQFreq *= 2
         currentCutoff = currentEQFreq + currentEQFreq / 2

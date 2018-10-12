@@ -1,8 +1,6 @@
 package proscalafx.ch02.metronome1
 
 import javafx.animation.Animation.Status
-
-import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.animation.{Interpolator, Timeline}
 import scalafx.application.JFXApp
@@ -13,6 +11,8 @@ import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Line
+
+import scala.language.postfixOps
 
 object Metronome1Main extends JFXApp {
 
@@ -49,22 +49,22 @@ object Metronome1Main extends JFXApp {
           children = List(
             new Button {
               text = "Start"
-              onAction = handle {anim.playFromStart()}
+              onAction = () => anim.playFromStart()
               disable <== anim.status =!= Status.STOPPED
             },
             new Button {
               text = "Pause"
-              onAction = handle {anim.pause()}
+              onAction = () => anim.pause()
               disable <== anim.status =!= Status.RUNNING
             },
             new Button {
               text = "Resume"
-              onAction = handle {anim.play()}
+              onAction = () => anim.play()
               disable <== anim.status =!= Status.PAUSED
             },
             new Button {
               text = "Stop"
-              onAction = handle {anim.stop()}
+              onAction = () => anim.stop()
               disable <== anim.status === Status.STOPPED
             }
           )

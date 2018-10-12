@@ -3,17 +3,17 @@ package proscalafx.ch08.VideoPlayer2
 import java.io.File
 import java.net.URL
 
-import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
 import scalafx.geometry.Pos
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
-import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.StackPane
-import scalafx.scene.media.{Media, MediaMarkerEvent, MediaPlayer, MediaView}
+import scalafx.scene.media.{Media, MediaPlayer, MediaView}
 import scalafx.util.Duration
+
+import scala.language.postfixOps
 
 
 /**
@@ -36,13 +36,15 @@ object VideoPlayer2 extends JFXApp {
   }
 
   val mediaPlayer = new MediaPlayer(media) {
-    onMarker = (event: MediaMarkerEvent) => Platform.runLater {markerText.text = event.marker.getKey}
+    onMarker = event => Platform.runLater {
+      markerText.text = event.marker.getKey
+    }
   }
 
   val mediaView = new MediaView(mediaPlayer)
   val root = new StackPane {
     children +=(mediaView, markerText)
-    onMouseClicked = (event: MouseEvent) => {
+    onMouseClicked = () => {
       mediaPlayer.seek(Duration.Zero)
       markerText.text = ""
     }

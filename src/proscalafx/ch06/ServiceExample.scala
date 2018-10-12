@@ -1,15 +1,14 @@
 package proscalafx.ch06
 
 import java.util.concurrent.atomic.AtomicBoolean
+
 import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
-
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.IntegerProperty
 import scalafx.concurrent.Service
-import scalafx.event.ActionEvent
 import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label, ProgressBar, TextField}
@@ -29,13 +28,12 @@ object ServiceExample extends JFXApp {
 
 
   private def hookupEvents() {
-    View.startButton.onAction = {
-      ae: ActionEvent =>
+    View.startButton.onAction = () => {
         Model.shouldThrow.set(false)
         Model.Worker.restart()
     }
-    View.cancelButton.onAction = {ae: ActionEvent => Model.Worker.cancel}
-    View.exceptionButton.onAction = {ae: ActionEvent => Model.shouldThrow.set(true)}
+    View.cancelButton.onAction = () => Model.Worker.cancel
+    View.exceptionButton.onAction = () => Model.shouldThrow.set(true)
   }
 
 
@@ -59,7 +57,7 @@ object ServiceExample extends JFXApp {
             try {
               Thread.sleep(20)
             } catch {
-              case e: InterruptedException => return "Canceled at " + System.currentTimeMillis
+              case _: InterruptedException => return "Canceled at " + System.currentTimeMillis
             }
             if (shouldThrow.get) {
               throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
@@ -133,7 +131,7 @@ object ServiceExample extends JFXApp {
           n = Integer.parseInt(text)
         }
         catch {
-          case e: NumberFormatException =>
+          case _: NumberFormatException =>
         }
         n
       }

@@ -3,7 +3,6 @@ package proscalafx.ch08.BasicAudioClip
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.event.ActionEvent
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
@@ -24,7 +23,7 @@ object BasicAudioClip extends JFXApp {
     padding = Insets(10)
     children = new Button {
       text = "Bing Zzzzt!"
-      onAction = {_: ActionEvent => audioClip.play(1.0)}
+      onAction = () => audioClip.play(1.0)
     }
   }
 

@@ -36,7 +36,7 @@ class AudioConfigModel {
     * code that executes when the selection in the ChoiceBox changes.
     */
   def addListenerToGenreSelectionModel() {
-    this.genreSelectionModel.selectedIndex.onChange({
+    this.genreSelectionModel.selectedIndex.onChange {
       selectedDBs.value = this.genreSelectionModel.selectedIndex() match {
         case 0 => 80
         case 1 => 100
@@ -45,6 +45,6 @@ class AudioConfigModel {
         case 4 => 120
         case 5 => 130
       }
-    })
+    }
   }
 }

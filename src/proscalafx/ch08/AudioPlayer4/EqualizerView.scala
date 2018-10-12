@@ -40,7 +40,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
       mp.audioSpectrumListener = if (newValue != null) spectrumListener else null
   }
 
-  override def onNextPageAction(nextHandler: (ActionEvent => Unit)) {
+  override def onNextPageAction(nextHandler: ActionEvent => Unit) {
     backButton.onAction = nextHandler
   }
 

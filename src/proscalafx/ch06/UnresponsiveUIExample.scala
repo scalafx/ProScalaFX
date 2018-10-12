@@ -1,12 +1,9 @@
 package proscalafx.ch06
 
-import javafx.scene.{paint => jfxsp}
-
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.ObjectProperty
-import scalafx.event.ActionEvent
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
@@ -29,25 +26,21 @@ object UnresponsiveUIExample extends JFXApp {
 
 
   def hookupEvents() {
-    View.changeFillButton.onAction = {
-      (ae: ActionEvent) => {
+    View.changeFillButton.onAction = () => {
         val fillPaint = Model.fillPaint()
         Model.fillPaint() = if (fillPaint == Color.LightGray) Color.Gray else Color.LightGray
         // Bad code that will cause the UI to be unresponsive
         try {
           Thread.sleep(Long.MaxValue)
         } catch {
-          case e: InterruptedException => /* Properly handle exception */
+          case _: InterruptedException => /* Properly handle exception */
         }
       }
-    }
 
-    View.changeStrokeButton.onAction = {
-      (ae: ActionEvent) => {
+    View.changeStrokeButton.onAction = () => {
         val strokePaint = Model.strokePaint()
         Model.strokePaint() = if (strokePaint == Color.DarkGray) Color.Black else Color.DarkGray
       }
-    }
   }
 
 

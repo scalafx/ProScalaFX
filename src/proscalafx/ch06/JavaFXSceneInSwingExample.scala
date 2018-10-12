@@ -1,10 +1,9 @@
 package proscalafx.ch06
 
-import java.awt.event.{ActionEvent, ActionListener}
+import java.awt.event.ActionEvent
 import java.awt.{BorderLayout, Dimension, FlowLayout}
 
 import javafx.embed.{swing => jfxes}
-import javafx.scene.{paint => jfxsp}
 import javax.swing.{JButton, JFrame, JPanel, WindowConstants}
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
@@ -72,18 +71,14 @@ object JavaFXSceneInSwingExample extends App {
 
 
   private class Controller(model: Model, view: View) {
-    view.changeFillButton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent) {
-        Platform.runLater {
-          model.fill() = if (model.fill() == Color.LightGray) Color.Gray else Color.LightGray
-        }
+    view.changeFillButton.addActionListener((_: ActionEvent) => {
+      Platform.runLater {
+        model.fill() = if (model.fill() == Color.LightGray) Color.Gray else Color.LightGray
       }
     })
-    view.changeStrokeButton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent) {
-        Platform.runLater {
-          model.stroke() = if (model.stroke() == Color.DarkGray) Color.Black else Color.DarkGray
-        }
+    view.changeStrokeButton.addActionListener((_: ActionEvent) => {
+      Platform.runLater {
+        model.stroke() = if (model.stroke() == Color.DarkGray) Color.Black else Color.DarkGray
       }
     })
 
