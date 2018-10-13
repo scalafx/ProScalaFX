@@ -3,7 +3,6 @@ package proscalafx.ch08.CodeMonkeyToDo
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.event.ActionEvent
 import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Hyperlink, Label, Slider}
@@ -103,7 +102,7 @@ object CodeMonkeyToDo extends JFXApp {
     }
     val link = new Hyperlink {
       text = "About Code Monkey..."
-      onAction = (_: ActionEvent) => {
+      onAction = () => {
         val webView = new WebView {
           engine.load("http://www.jonathancoulton.com/2006/04/14/" + "thing-a-week-29-code-monkey/")
         }
@@ -129,8 +128,6 @@ object CodeMonkeyToDo extends JFXApp {
   }
 
   /** Returns a function that can be assigned to `oAction` */
-  private def play(audioClip: AudioClip) =
-    (_: ActionEvent) => {
+  private def play(audioClip: AudioClip) = () =>
       audioClip.play(volumeSlider.value(), balanceSlider.value(), rateSlider.value(), 0.0, 0)
-    }
 }

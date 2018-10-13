@@ -4,7 +4,6 @@ import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
 import scalafx.beans.property.ObjectProperty
-import scalafx.event.ActionEvent
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.Button
@@ -14,8 +13,8 @@ import scalafx.scene.shape.Rectangle
 
 
 /**
- * @author Jarek Sacha
- */
+  * @author Jarek Sacha
+  */
 object ResponsiveUIExample extends JFXApp {
 
   hookupEvents()
@@ -27,35 +26,31 @@ object ResponsiveUIExample extends JFXApp {
 
 
   def hookupEvents() {
-    View.changeFillButton.onAction = {
-      (ae: ActionEvent) => {
-        val fillPaint = Model.fillPaint()
-        Model.fillPaint() = if (Color.LightGray == fillPaint) Color.Gray else Color.LightGray
+    View.changeFillButton.onAction = () => {
+      val fillPaint = Model.fillPaint()
+      Model.fillPaint() = if (Color.LightGray == fillPaint) Color.Gray else Color.LightGray
 
-        val task = new Runnable {
-          def run() {
-            try {
-              Thread.sleep(3000)
-              Platform.runLater {
-                val rect = View.rectangle
-                val newArcSize = if (rect.arcHeight() < 20) 30 else 0
-                rect.arcWidth() = newArcSize
-                rect.arcHeight() = newArcSize
-              }
-            } catch {
-              case e: InterruptedException => /* Properly handle exception */
+      val task = new Runnable {
+        def run() {
+          try {
+            Thread.sleep(3000)
+            Platform.runLater {
+              val rect = View.rectangle
+              val newArcSize = if (rect.arcHeight() < 20) 30 else 0
+              rect.arcWidth() = newArcSize
+              rect.arcHeight() = newArcSize
             }
+          } catch {
+            case e: InterruptedException => /* Properly handle exception */
           }
         }
-        new Thread(task).start()
       }
+      new Thread(task).start()
     }
 
-    View.changeStrokeButton.onAction = {
-      (ae: ActionEvent) => {
-        val strokePaint = Model.strokePaint()
-        Model.strokePaint() = if (strokePaint == Color.DarkGray) Color.Black else Color.DarkGray
-      }
+    View.changeStrokeButton.onAction = () => {
+      val strokePaint = Model.strokePaint()
+      Model.strokePaint() = if (strokePaint == Color.DarkGray) Color.Black else Color.DarkGray
     }
   }
 

@@ -1,7 +1,6 @@
 package proscalafx.ch02.metronometransition
 
 import javafx.animation.Animation.Status
-
 import scalafx.Includes._
 import scalafx.animation.{Interpolator, Timeline, TranslateTransition}
 import scalafx.application.JFXApp
@@ -46,22 +45,22 @@ object MetronomeTransitionMain extends JFXApp {
           children = List(
             new Button {
               text = "Start"
-              onAction = handle {anim.playFromStart()}
+              onAction = () => anim.playFromStart()
               disable <== anim.status.isNotEqualTo(Status.STOPPED)
             },
             new Button {
               text = "Pause"
-              onAction = handle {anim.pause()}
+              onAction = () => anim.pause()
               disable <== anim.status.isNotEqualTo(Status.RUNNING)
             },
             new Button {
               text = "Resume"
-              onAction = handle {anim.play()}
+              onAction = () => anim.play()
               disable <== anim.status.isNotEqualTo(Status.PAUSED)
             },
             new Button {
               text = "Stop"
-              onAction = handle {anim.stop()}
+              onAction = () => anim.stop()
               disable <== anim.status.isEqualTo(Status.STOPPED)
             }
           )

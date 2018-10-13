@@ -1,6 +1,5 @@
 package proscalafx.ch06
 
-import scala.collection.JavaConverters
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -9,6 +8,8 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, ListView, TextArea}
 import scalafx.scene.layout.VBox
+
+import scala.collection.JavaConverters
 
 
 /** ScalaFX version of `JavaFXThreadsExample` from "Pro JavaFX 2" book.
@@ -27,9 +28,7 @@ object JavaFXThreadsExample extends JFXApp {
 
 
   private def hookupEvents() {
-    view.updateButton.onAction = handle {
-      model.update()
-    }
+    view.updateButton.onAction = () => model.update()
     view.threadNames.selectionModel().selectedItem.onChange {
       val index = view.threadNames.selectionModel().getSelectedIndex
       if (index >= 0) {

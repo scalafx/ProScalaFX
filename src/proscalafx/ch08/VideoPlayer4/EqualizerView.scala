@@ -42,7 +42,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
   }
 
 
-  override def onNextPageAction(nextHandler: (ActionEvent => Unit)) {
+  override def onNextPageAction(nextHandler: ActionEvent => Unit) {
     backButton.onAction = nextHandler
   }
 

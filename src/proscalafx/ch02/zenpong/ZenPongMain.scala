@@ -1,19 +1,18 @@
 package proscalafx.ch02.zenpong
 
 import javafx.animation.Animation.Status
-
-import scala.language.postfixOps
 import scalafx.Includes._
 import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.{BooleanProperty, DoubleProperty}
-import scalafx.event.ActionEvent
 import scalafx.scene.control.Button
-import scalafx.scene.input.{KeyCode, KeyEvent, MouseEvent}
+import scalafx.scene.input.KeyCode
 import scalafx.scene.paint.{Color, CycleMethod, LinearGradient, Stop}
 import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.scene.{Cursor, Group, Scene}
+
+import scala.language.postfixOps
 
 object ZenPongMain extends JFXApp {
 
@@ -57,11 +56,11 @@ object ZenPongMain extends JFXApp {
     fill = Color.LightBlue
     cursor = Cursor.Hand
     translateY <== leftPaddleY
-    onMousePressed = (me: MouseEvent) => {
+    onMousePressed = me => {
       initLeftPaddleTranslateY = leftPaddle.translateY()
       leftPaddleDragAnchorY = me.sceneY
     }
-    onMouseDragged = (me: MouseEvent) => {
+    onMouseDragged = me => {
       val dragY = me.sceneY - leftPaddleDragAnchorY
       leftPaddleY() = initLeftPaddleTranslateY + dragY
     }
@@ -73,11 +72,11 @@ object ZenPongMain extends JFXApp {
     fill = Color.LightBlue
     cursor = Cursor.Hand
     translateY <== rightPaddleY
-    onMousePressed = (me: MouseEvent) => {
+    onMousePressed = me => {
       initRightPaddleTranslateY = rightPaddle.getTranslateY
       rightPaddleDragAnchorY = me.getSceneY
     }
-    onMouseDragged = (me: MouseEvent) => {
+    onMouseDragged = me => {
       val dragY = me.sceneY - rightPaddleDragAnchorY
       rightPaddleY() = initRightPaddleTranslateY + dragY
     }
@@ -110,19 +109,19 @@ object ZenPongMain extends JFXApp {
   }
 
   /**
-   * Controls whether the startButton is visible
-   */
+    * Controls whether the startButton is visible
+    */
   val startVisible = BooleanProperty(true)
 
   /** The animation of the ball */
-  val keyFrame = KeyFrame(10 ms, onFinished = {
-    event: ActionEvent =>
-      checkForCollision()
-      val horzPixels = if (movingRight) 1 else -1
-      val vertPixels = if (movingDown) 1 else -1
-      centerBallX() = centerBallX.value + horzPixels
-      centerBallY() = centerBallY.value + vertPixels
-  })
+  val keyFrame = KeyFrame(10 ms, onFinished = () => {
+    checkForCollision()
+    val horzPixels = if (movingRight) 1 else -1
+    val vertPixels = if (movingDown) 1 else -1
+    centerBallX() = centerBallX.value + horzPixels
+    centerBallY() = centerBallY.value + vertPixels
+  }
+  )
   val pongAnimation = new Timeline {
     keyFrames = Seq(keyFrame)
     cycleCount = Timeline.Indefinite
@@ -133,18 +132,18 @@ object ZenPongMain extends JFXApp {
     layoutY() = 470
     text = "Start!"
     visible <== startVisible
-    onAction = {
-      event: ActionEvent =>
+    onAction =
+      () => {
         startVisible() = false
         pongAnimation.playFromStart()
         pongComponents.requestFocus()
-    }
+      }
   }
 
   /** The Group containing all of the walls, paddles, and ball. This also allows
     * us to requestFocus for KeyEvents on the Group
     */
-  var pongComponents: Group = new Group {
+  val pongComponents: Group = new Group {
     focusTraversable = true
     children = List(
       ball,
@@ -156,9 +155,9 @@ object ZenPongMain extends JFXApp {
       rightPaddle,
       startButton
     )
-    onKeyPressed = (k: KeyEvent) => k.code match {
+    onKeyPressed = k => k.code match {
       case KeyCode.Space if pongAnimation.status() == Status.STOPPED =>
-      rightPaddleY() = rightPaddleY.value - 6
+        rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.L if !rightPaddle.boundsInParent().intersects(topWall.boundsInLocal()) =>
         rightPaddleY() = rightPaddleY.value - 6
       case KeyCode.Comma if !rightPaddle.boundsInParent().intersects(bottomWall.boundsInLocal()) =>

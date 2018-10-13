@@ -2,13 +2,11 @@ package proscalafx.ch02.onthescene
 
 import javafx.scene.{control => jfxsc, text => jfxst}
 import javafx.{scene => jfxs}
-
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.beans.property.{DoubleProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
-import scalafx.event.ActionEvent
 import scalafx.geometry.{HPos, Insets, Orientation, VPos}
 import scalafx.scene.control._
 import scalafx.scene.layout.{FlowPane, HBox}
@@ -107,7 +105,7 @@ object OnTheSceneMain extends JFXApp {
       textSceneH,
       new Hyperlink {
         text = "lookup()"
-        onAction = (ae: ActionEvent) => {
+        onAction = () => {
           println("sceneRef:" + stage.scene())
           val textRef = stage.scene().lookup("#sceneHeightText").asInstanceOf[jfxst.Text]
           println(textRef.text())

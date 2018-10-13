@@ -1,11 +1,10 @@
 package proscalafx.ch06
 
-import java.awt.event.{ActionEvent, ActionListener}
+import java.awt.event.ActionEvent
 import java.awt.{BorderLayout, Dimension, FlowLayout}
-import javafx.embed.{swing => jfxes}
-import javafx.scene.{paint => jfxsp}
-import javax.swing.{JButton, JFrame, JPanel}
 
+import javafx.embed.{swing => jfxes}
+import javax.swing.{JButton, JFrame, JPanel, WindowConstants}
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.Scene
@@ -65,25 +64,21 @@ object JavaFXSceneInSwingExample extends App {
     buttonPanel.add(changeStrokeButton)
     frame.add(canvasPanel, BorderLayout.CENTER)
     frame.add(buttonPanel, BorderLayout.SOUTH)
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
     frame.setLocationByPlatform(true)
     frame.pack()
   }
 
 
   private class Controller(model: Model, view: View) {
-    view.changeFillButton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent) {
-        Platform.runLater {
-          model.fill() = if (model.fill() == Color.LightGray) Color.Gray else Color.LightGray
-        }
+    view.changeFillButton.addActionListener((_: ActionEvent) => {
+      Platform.runLater {
+        model.fill() = if (model.fill() == Color.LightGray) Color.Gray else Color.LightGray
       }
     })
-    view.changeStrokeButton.addActionListener(new ActionListener {
-      def actionPerformed(e: ActionEvent) {
-        Platform.runLater {
-          model.stroke() = if (model.stroke() == Color.DarkGray) Color.Black else Color.DarkGray
-        }
+    view.changeStrokeButton.addActionListener((_: ActionEvent) => {
+      Platform.runLater {
+        model.stroke() = if (model.stroke() == Color.DarkGray) Color.Black else Color.DarkGray
       }
     })
 

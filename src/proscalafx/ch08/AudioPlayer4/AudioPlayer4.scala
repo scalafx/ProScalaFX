@@ -2,12 +2,10 @@
 package proscalafx.ch08.AudioPlayer4
 
 import com.sun.javafx.{runtime => csjfxr}
-
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.event.ActionEvent
-import scalafx.scene.input.{DragEvent, TransferMode}
+import scalafx.scene.input.TransferMode
 import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.scene.{Node, Scene}
 
@@ -42,7 +40,7 @@ object AudioPlayer4 extends JFXApp {
   private def createPageOne(): Node = {
     metaDataView = new MetadataView(songModel)
     playerControlsView = new PlayerControlsView(songModel)
-    playerControlsView.onNextPageAction { (ae: ActionEvent) => rootNode.children = page2}
+    playerControlsView.onNextPageAction { _ => rootNode.children = page2 }
     new BorderPane {
       center = metaDataView.viewNode
       bottom = playerControlsView.viewNode
@@ -52,8 +50,7 @@ object AudioPlayer4 extends JFXApp {
 
   private def createPageTwo(): Node = {
     equalizerView = new EqualizerView(songModel)
-    equalizerView.onNextPageAction {
-      (ae: ActionEvent) =>
+    equalizerView.onNextPageAction { _ =>
         println("Got back button click")
         rootNode.children = page1
     }
@@ -62,7 +59,7 @@ object AudioPlayer4 extends JFXApp {
 
 
   private def initSceneDragAndDrop(scene: Scene) {
-    scene.onDragOver = (event: DragEvent) => {
+    scene.onDragOver = event => {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {
         // NOTE: We need to pass in `TransferMode` as Java vararg, since we use `javafx.scene.input.DragEvent`
@@ -71,7 +68,7 @@ object AudioPlayer4 extends JFXApp {
       event.consume()
     }
 
-    scene.onDragDropped = (event: DragEvent) => {
+    scene.onDragDropped = event => {
       val db = event.dragboard
       val url = if (db.hasFiles) {
         db.getFiles.get(0).toURI.toString
