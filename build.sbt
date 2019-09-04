@@ -2,7 +2,7 @@
 name := "ProScalaFX"
 
 // Current version
-version := "12.0.1-R17"
+version := "12.0.2-R18-SNAPSHOT"
 
 // Version of scala to use
 scalaVersion := "2.12.9"
