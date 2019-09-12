@@ -19,8 +19,8 @@ object ObservableBufferExample extends App {
   println( """Calling insert(0, "Zeroth"): """)
   strings.insert(0, "Zeroth")
 
-  println( """"Calling +=("Second", "Third"): """)
-  strings +=("Second", "Third")
+  println(""""Calling ++= Seq("Second", "Third"): """)
+  strings ++= Seq("Second", "Third")
 
   println( """Calling (1) = "New First"): """)
   strings(1) = "New First"
@@ -38,6 +38,6 @@ object ObservableBufferExample extends App {
   println( """Remove elements that contain letter "t"""")
   strings --= strings.filter(_.contains("t"))
 
-  println( """Calling -=("Third", "Fourth"): """)
-  strings -=("Third", "Fourth")
+  println("""Calling --= Seq("Third", "Fourth"): """)
+  strings --= Seq("Third", "Fourth")
 }

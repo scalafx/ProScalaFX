@@ -50,7 +50,7 @@ class MetadataView(songModel: SongModel) extends AbstractView(songModel) {
       add(artist, 1, 1)
       add(album, 1, 2)
       add(year, 1, 3)
-      columnConstraints +=(
+      columnConstraints ++= Seq(
         new ColumnConstraints(),
         // NOTE: the call to delegate to avoid compilation error.
         // Should `scalafx.scene.layout.GridPane.columnConstraints_=()` be fixed to work without call to delegate?
@@ -61,7 +61,7 @@ class MetadataView(songModel: SongModel) extends AbstractView(songModel) {
       val r0 = new RowConstraints {
         valignment = VPos.Top
       }
-      rowConstraints +=(r0, r0, r0, r0)
+      rowConstraints ++= Seq(r0, r0, r0, r0)
     }
   }
 }

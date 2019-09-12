@@ -233,7 +233,7 @@ object StarterAppMain extends JFXApp {
 
     // Create table
     val table = new TableView[Person](model.getTeamMembers) {
-      columns += (firstNameColumn, lastNameColumn, phoneColumn)
+      columns ++= Seq(firstNameColumn, lastNameColumn, phoneColumn)
     }
 
     // Listen to row selection, and print values of the selected row
@@ -440,7 +440,7 @@ object StarterAppMain extends JFXApp {
     }
 
     val sampleContextMenu = new ContextMenu {
-      items += (
+      items ++= Seq(
         new MenuItem("MenuItemA") {
           onAction = e => println(e.eventType + " occurred on Menu Item A")
         },

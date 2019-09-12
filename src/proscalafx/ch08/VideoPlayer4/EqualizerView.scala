@@ -53,7 +53,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     new GridPane {
       padding = Insets(10)
       hgap = 20
-      rowConstraints +=(outside, middle, outside)
+      rowConstraints ++= Seq(outside, middle, outside)
     }
   }
 
@@ -105,7 +105,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
 
       val label = new Label {
         text = formatFrequency(band.getCenterFrequency)
-        styleClass +=("mediaText", "eqLabel")
+        styleClass ++= Seq("mediaText", "eqLabel")
       }
 
       GridPane.setHalignment(label, HPos.Center)

@@ -50,7 +50,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     new GridPane {
       padding = Insets(10)
       hgap = 20
-      rowConstraints +=(outside, middle, outside)
+      rowConstraints ++= Seq(outside, middle, outside)
     }
   }
 
@@ -87,7 +87,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
       val slider = createEQSlider(band, min, max)
       val label = new Label {
         text = formatFrequency(band.getCenterFrequency)
-        styleClass +=("mediaText", "eqLabel")
+        styleClass ++= Seq("mediaText", "eqLabel")
       }
       GridPane.setHalignment(label, HPos.Center)
       GridPane.setHalignment(slider, HPos.Center)
