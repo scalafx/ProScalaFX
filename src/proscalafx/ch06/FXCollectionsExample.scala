@@ -6,7 +6,7 @@ import javafx.{collections => jfxc}
 import scalafx.collections.ObservableBuffer
 import scalafx.collections.ObservableBuffer._
 
-import scala.collection.JavaConverters
+import scala.jdk.CollectionConverters._
 
 
 /** ScalaFX version of `FXCollectionsExample` from "Pro JavaFX 2" book.
@@ -36,7 +36,7 @@ object FXCollectionsExample extends App {
   strings.addAll("Zero", "One", "Two", "Three")
 
   println("Calling copy: ")
-  jfxc.FXCollections.copy(strings, JavaConverters.seqAsJavaList(List("Four", "Five")))
+  jfxc.FXCollections.copy(strings, List("Four", "Five").asJava)
 
   println("Calling replaceAll: ")
   strings.replaceAll("Two", "Two_1")
@@ -74,7 +74,7 @@ object FXCollectionsExample extends App {
         println("\t\tRemoved size  : " + removed.size)
         println("\t\tRemoved       : " + mkString(removed))
       case Reorder(start, end, permutation) =>
-        val permutations = for (i <- start until end) yield i + "->" + permutation(i)
+        val permutations = for (i <- start until end) yield s"$i -> ${permutation(i)}"
         println("\t\tKind of change: permuted")
         println("\t\tPermutation   : " + mkString(permutations))
       case Update(from, to) =>
@@ -86,6 +86,6 @@ object FXCollectionsExample extends App {
   }
 
 
-  def mkString[T](seq: TraversableOnce[T]): String = if (seq.isEmpty) "[]" else seq.mkString("[", ", ", "]")
+  def mkString[T](seq: IterableOnce[T]): String = if (seq.iterator.isEmpty) "[]" else seq.iterator.mkString("[", ", ", "]")
 
 }

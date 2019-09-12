@@ -9,7 +9,7 @@ import scalafx.scene.Scene
 import scalafx.scene.control.{Button, ListView, TextArea}
 import scalafx.scene.layout.VBox
 
-import scala.collection.JavaConverters
+import scala.jdk.CollectionConverters._
 
 
 /** ScalaFX version of `JavaFXThreadsExample` from "Pro JavaFX 2" book.
@@ -47,7 +47,7 @@ object JavaFXThreadsExample extends JFXApp {
     def update(): Unit = {
       threadNames.clear()
       stackTraces.clear()
-      val map = JavaConverters.mapAsScalaMap(Thread.getAllStackTraces)
+      val map = Thread.getAllStackTraces.asScala
       for ((k, v) <- map) {
         threadNames += "\"" + k.getName + "\""
         stackTraces += formatStackTrace(v)

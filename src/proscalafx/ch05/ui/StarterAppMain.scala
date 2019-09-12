@@ -49,7 +49,7 @@ object StarterAppMain extends JFXApp {
           new MenuItem("New...") {
             graphic = new ImageView(new Image(this, "images/paper.png"))
             accelerator = KeyCombination.keyCombination("Ctrl +N")
-            onAction = e => println(e.eventType + " occurred on MenuItem New")
+            onAction = e => println(s"${e.eventType} occurred on MenuItem New")
           },
           new MenuItem("Save")
         )
@@ -100,7 +100,7 @@ object StarterAppMain extends JFXApp {
           }
           onAction = e => {
               val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
-              print(e.eventType + " occurred on ToggleButton " + tb.id)
+            print(s"${e.eventType} occurred on ToggleButton ${tb.id}")
               print(", and selectedProperty is: ")
               println(tb.selectedProperty.value)
           }
@@ -113,7 +113,7 @@ object StarterAppMain extends JFXApp {
           }
           onAction = e => {
               val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
-              print(e.eventType + " occurred on ToggleButton " + tb.id)
+            print(s"${e.eventType} occurred on ToggleButton ${tb.id}")
               print(", and selectedProperty is: ")
               println(tb.selectedProperty.value)
           }
@@ -238,7 +238,7 @@ object StarterAppMain extends JFXApp {
 
     // Listen to row selection, and print values of the selected row
     table.selectionModel().selectedItem.onChange(
-      (_, _, newValue) => println(newValue + " chosen in TableView")
+      (_, _, newValue) => println(s"$newValue chosen in TableView")
     )
 
     table
@@ -336,12 +336,12 @@ object StarterAppMain extends JFXApp {
       spacing = 20
       children = List(
         new Button("Button") {
-          onAction = e => println(e.eventType + " occurred on Button")
+          onAction = e => println(s"${e.eventType} occurred on Button")
         },
         new CheckBox("CheckBox") {
           inner =>
           onAction = e =>
-              println(e.eventType + " occurred on CheckBox, and `selected` property is: " + inner.selected())
+            println(s"${e.eventType} occurred on CheckBox, and `selected` property is: ${inner.selected()}")
         },
         new HBox {
           spacing = 10
@@ -355,28 +355,28 @@ object StarterAppMain extends JFXApp {
           )
         },
         new Hyperlink("Hyperlink") {
-          onAction = e => println(e.eventType + " occurred on Hyperlink")
+          onAction = e => println(s"${e.eventType} occurred on Hyperlink")
         },
         new ChoiceBox(model.choiceBoxItems) {
           selectionModel().selectFirst()
           selectionModel().selectedItem.onChange(
-            (_, _, newValue) => println(newValue + " chosen in ChoiceBox")
+            (_, _, newValue) => println(s"$newValue chosen in ChoiceBox")
           )
         },
         new MenuButton("MenuButton") {
           items = List(
             new MenuItem("MenuItem A") {
-              onAction = ae => println(ae.eventType + " occurred on Menu Item A")
+              onAction = ae => println(s"${ae.eventType} occurred on Menu Item A")
             },
             new MenuItem("MenuItem B")
           )
         },
         new SplitMenuButton {
           text = "SplitMenuButton"
-          onAction = ae => println(ae.eventType + " occurred on SplitMenuButton")
+          onAction = ae => println(s"${ae.eventType} occurred on SplitMenuButton")
           items = List(
             new MenuItem("MenuItem A") {
-              onAction = ae => println(ae.eventType + " occurred on Menu Item A")
+              onAction = ae => println(s"${ae.eventType} occurred on Menu Item A")
             },
             new MenuItem("MenuItem B")
           )
@@ -442,10 +442,10 @@ object StarterAppMain extends JFXApp {
     val sampleContextMenu = new ContextMenu {
       items ++= Seq(
         new MenuItem("MenuItemA") {
-          onAction = e => println(e.eventType + " occurred on Menu Item A")
+          onAction = e => println(s"${e.eventType} occurred on Menu Item A")
         },
         new MenuItem("MenuItemB") {
-          onAction = e => println(e.eventType + " occurred on Menu Item B")
+          onAction = e => println(s"${e.eventType} occurred on Menu Item B")
         })
     }
 

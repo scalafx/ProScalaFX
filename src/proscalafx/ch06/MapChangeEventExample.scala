@@ -17,21 +17,21 @@ object MapChangeEventExample extends App {
     println(prettyChange(change))
   })
 
-  println( """Calling map("First") = 1: """)
+  println("""Calling map("First") = 1: """)
   map("First") = 1
 
-  println( """Calling map(First") = 100: """)
+  println("""Calling map(First") = 100: """)
   map("First") = 100
 
   val anotherMap = Map("Second" -> 2, "Third" -> 3)
-  println( """Calling map ++= anotherMap: """)
+  println("""Calling map ++= anotherMap: """)
   map ++= anotherMap
 
-  println( """Removing by key: Calling map -= "Second"""")
+  println("""Removing by key: Calling map -= "Second"""")
   map -= "Second"
 
   println("Removing by value: Calling map retain({case (k, v) => v != 3})")
-  map retain {case (k, v) => v != 3}
+  map filterInPlace { case (_, v) => v != 3 }
 
 
   def prettyChange(change: Change[_, _]): String = {
