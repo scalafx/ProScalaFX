@@ -35,7 +35,7 @@ class AudioConfigModel {
   /** Adds a change listener to the selection model of the ChoiceBox, and contains
     * code that executes when the selection in the ChoiceBox changes.
     */
-  def addListenerToGenreSelectionModel() {
+  def addListenerToGenreSelectionModel(): Unit = {
     this.genreSelectionModel.selectedIndex.onChange {
       selectedDBs.value = this.genreSelectionModel.selectedIndex() match {
         case 0 => 80

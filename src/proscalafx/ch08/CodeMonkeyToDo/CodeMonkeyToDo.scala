@@ -79,7 +79,7 @@ object CodeMonkeyToDo extends JFXApp {
     (volumeSlider, rateSlider, balanceSlider)
   }
 
-  private def createClipList(grid: GridPane) {
+  private def createClipList(grid: GridPane): Unit = {
 
     val clipLabel = new Label {
       text = "Code Monkey To-Do List:"

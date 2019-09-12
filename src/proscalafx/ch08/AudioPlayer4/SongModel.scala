@@ -2,7 +2,7 @@ package proscalafx.ch08.AudioPlayer4
 
 import javafx.scene.{image => jfxsi}
 import scalafx.Includes._
-import scalafx.beans.property.{ReadOnlyObjectWrapper, ObjectProperty, StringProperty}
+import scalafx.beans.property.{ObjectProperty, ReadOnlyObjectWrapper, StringProperty}
 import scalafx.collections.ObservableMap.Add
 import scalafx.scene.image.Image
 import scalafx.scene.media.{Media, MediaPlayer}
@@ -29,13 +29,13 @@ class SongModel {
 
   def url: String = if (mediaPlayer() != null) mediaPlayer().media.source else null
 
-  def url_=(url: String) {
+  def url_=(url: String): Unit = {
     if (mediaPlayer() != null) mediaPlayer().stop()
 
     initializeMedia(url)
   }
 
-  private def resetProperties() {
+  private def resetProperties(): Unit = {
     artist() = ""
     album() = ""
     title() = ""
@@ -44,7 +44,7 @@ class SongModel {
   }
 
 
-  private def initializeMedia(url: String) {
+  private def initializeMedia(url: String): Unit = {
     resetProperties()
 
     try {
@@ -71,7 +71,7 @@ class SongModel {
   }
 
 
-  private def handleMetadata(key: String, value: AnyRef) {
+  private def handleMetadata(key: String, value: AnyRef): Unit = {
     key match {
       case "album" => album() = value.toString
       case "artist" => artist() = value.toString

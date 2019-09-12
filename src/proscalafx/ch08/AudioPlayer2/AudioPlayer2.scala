@@ -62,7 +62,7 @@ object AudioPlayer2 extends JFXApp {
   }
 
 
-  private def createControls() {
+  private def createControls(): Unit = {
     artist = new Label {
       id = "artist"
     }
@@ -88,7 +88,7 @@ object AudioPlayer2 extends JFXApp {
   }
 
 
-  private def createMedia() {
+  private def createMedia(): Unit = {
     try {
       media = new Media("http://traffic.libsyn.com/dickwall/JavaPosse373.mp3") {
         metadata.onChange((_, change) => {
@@ -114,7 +114,7 @@ object AudioPlayer2 extends JFXApp {
   }
 
 
-  private def handleMetadata(key: String, value: AnyRef) {
+  private def handleMetadata(key: String, value: AnyRef): Unit = {
     key match {
       case "album" => album.text = value.toString
       case "artist" => artist.text = value.toString

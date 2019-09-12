@@ -27,7 +27,7 @@ object JavaFXThreadsExample extends JFXApp {
   }
 
 
-  private def hookupEvents() {
+  private def hookupEvents(): Unit = {
     view.updateButton.onAction = () => model.update()
     view.threadNames.selectionModel().selectedItem.onChange {
       val index = view.threadNames.selectionModel().getSelectedIndex
@@ -44,7 +44,7 @@ object JavaFXThreadsExample extends JFXApp {
     update()
 
 
-    def update() {
+    def update(): Unit = {
       threadNames.clear()
       stackTraces.clear()
       val map = JavaConverters.mapAsScalaMap(Thread.getAllStackTraces)

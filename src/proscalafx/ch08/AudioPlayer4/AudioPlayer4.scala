@@ -58,7 +58,7 @@ object AudioPlayer4 extends JFXApp {
   }
 
 
-  private def initSceneDragAndDrop(scene: Scene) {
+  private def initSceneDragAndDrop(scene: Scene): Unit = {
     scene.onDragOver = event => {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {

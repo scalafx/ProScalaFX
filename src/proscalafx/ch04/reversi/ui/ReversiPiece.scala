@@ -1,8 +1,6 @@
 package proscalafx.ch04.reversi.ui
 
-import proscalafx.ch04.reversi.model.NONE
-import proscalafx.ch04.reversi.model.Owner
-import proscalafx.ch04.reversi.model.White
+import proscalafx.ch04.reversi.model.{NONE, Owner, White}
 import scalafx.Includes._
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.effect.Reflection
@@ -23,7 +21,7 @@ class ReversiPiece(_owner: Owner = NONE) extends Region {
 
   val owner = new ObjectProperty[Owner](this, "owner", _owner)
 
-  def owner_=(value: Owner) {
+  def owner_=(value: Owner): Unit = {
     owner() = value
   }
 

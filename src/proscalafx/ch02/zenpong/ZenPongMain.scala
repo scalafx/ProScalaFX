@@ -171,7 +171,7 @@ object ZenPongMain extends JFXApp {
   }
 
   /** Sets the initial starting positions of the ball and paddles */
-  def initialize() {
+  def initialize(): Unit = {
     centerBallX() = 250
     centerBallY() = 250
     leftPaddleY() = 235.0
@@ -184,7 +184,7 @@ object ZenPongMain extends JFXApp {
     * topWall, or bottomWall.  If the ball hits the wall behind the paddles,
     * the game is over.
     */
-  def checkForCollision() {
+  def checkForCollision(): Unit = {
     if (ball.intersects(rightWall.boundsInLocal()) || ball.intersects(leftWall.boundsInLocal())) {
       pongAnimation.stop()
       initialize()

@@ -25,7 +25,7 @@ object UnresponsiveUIExample extends JFXApp {
   }
 
 
-  def hookupEvents() {
+  def hookupEvents(): Unit = {
     View.changeFillButton.onAction = () => {
         val fillPaint = Model.fillPaint()
         Model.fillPaint() = if (fillPaint == Color.LightGray) Color.Gray else Color.LightGray

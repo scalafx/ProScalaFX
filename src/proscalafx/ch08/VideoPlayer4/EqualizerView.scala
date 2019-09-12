@@ -42,7 +42,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
   }
 
 
-  override def onNextPageAction(nextHandler: ActionEvent => Unit) {
+  override def onNextPageAction(nextHandler: ActionEvent => Unit): Unit = {
     backButton.onAction = nextHandler
   }
 
@@ -58,7 +58,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
   }
 
 
-  private def createEQInterface() {
+  private def createEQInterface(): Unit = {
     val gridPane = viewNode
     val mediaPlayer = mediaModel.mediaPlayer()
 
@@ -73,7 +73,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
   }
 
 
-  private def createEQBands(gp: GridPane, mp: MediaPlayer) {
+  private def createEQBands(gp: GridPane, mp: MediaPlayer): Unit = {
     val bands = mp.getAudioEqualizer.getBands
 
     bands.clear()
@@ -129,7 +129,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
   }
 
 
-  private def createSpectrumBars(gridPane: GridPane) {
+  private def createSpectrumBars(gridPane: GridPane): Unit = {
     spectrumBars = new Array[SpectrumBar](BandCount)
 
     for (i <- spectrumBars.indices) {
@@ -149,7 +149,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     }
 
 
-  private def clearGridPane() {
+  private def clearGridPane(): Unit = {
     viewNode.children.foreach(GridPane.clearConstraints)
     viewNode.children.clear()
   }

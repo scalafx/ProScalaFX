@@ -1,11 +1,12 @@
 package proscalafx.ch06
 
 import java.{util => ju}
-import javafx.{collections => jfxc}
 
-import scala.collection.JavaConverters
+import javafx.{collections => jfxc}
 import scalafx.collections.ObservableBuffer
 import scalafx.collections.ObservableBuffer._
+
+import scala.collection.JavaConverters
 
 
 /** ScalaFX version of `FXCollectionsExample` from "Pro JavaFX 2" book.
@@ -62,7 +63,7 @@ object FXCollectionsExample extends App {
   ObservableBuffer.fillAll(strings, "Ten")
 
 
-  def prettyPrint(change: Change[String]) {
+  def prettyPrint(change: Change[String]): Unit = {
     change match {
       case Add(_, added) =>
         println("\t\tKind of change: added")

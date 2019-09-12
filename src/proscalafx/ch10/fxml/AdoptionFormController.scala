@@ -2,10 +2,9 @@ package proscalafx.ch10.fxml
 
 import java.net.URL
 import java.util
-import javafx.scene.{control => jfxsc}
-import javafx.scene.{layout => jfxsl}
-import javafx.{event => jfxe}
-import javafx.{fxml => jfxf}
+
+import javafx.scene.{control => jfxsc, layout => jfxsl}
+import javafx.{event => jfxe, fxml => jfxf}
 import scalafx.Includes._
 import scalafx.scene.layout.GridPane
 
@@ -51,19 +50,19 @@ class AdoptionFormController extends jfxf.Initializable {
 
 
   @jfxf.FXML
-  private def handleSubmit(event: jfxe.ActionEvent) {
+  private def handleSubmit(event: jfxe.ActionEvent): Unit = {
     grid.gridLinesVisible() = !grid.gridLinesVisible()
   }
 
   @jfxf.FXML
-  private def handleClear(event: jfxe.ActionEvent) {
+  private def handleClear(event: jfxe.ActionEvent): Unit = {
     sizeTextField.text = ""
     breedTextField.text = ""
     sexChoiceBox.selectionModel().clearSelection()
     additionalInfoTextArea.text = ""
   }
 
-  def initialize(url: URL, rb: util.ResourceBundle) {
+  def initialize(url: URL, rb: util.ResourceBundle): Unit = {
     grid = new GridPane(gridDelegate)
   }
 }

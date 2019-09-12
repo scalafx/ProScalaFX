@@ -40,7 +40,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
       mp.audioSpectrumListener = if (newValue != null) spectrumListener else null
   }
 
-  override def onNextPageAction(nextHandler: ActionEvent => Unit) {
+  override def onNextPageAction(nextHandler: ActionEvent => Unit): Unit = {
     backButton.onAction = nextHandler
   }
 
@@ -54,7 +54,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     }
   }
 
-  private def createEQInterface() {
+  private def createEQInterface(): Unit = {
     val gridPane = viewNode
     val mediaPlayer = songModel.mediaPlayer()
     createEQBands(gridPane, mediaPlayer)
@@ -66,7 +66,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     gridPane.add(backButton, 0, 3)
   }
 
-  private def createEQBands(gp: GridPane, mp: MediaPlayer) {
+  private def createEQBands(gp: GridPane, mp: MediaPlayer): Unit = {
     val bands = mp.getAudioEqualizer.getBands
     bands.clear()
     val min = EqualizerBand.MIN_GAIN
@@ -108,7 +108,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
   }
 
 
-  private def createSpectrumBars(gridPane: GridPane) {
+  private def createSpectrumBars(gridPane: GridPane): Unit = {
     spectrumBars = new Array[SpectrumBar](BandCount)
     for (i <- spectrumBars.indices) {
       spectrumBars(i) = new SpectrumBar(100, 20)
@@ -125,7 +125,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
       "%.1f kHz".format(centerFrequency / 1000)
     }
 
-  private def clearGridPane() {
+  private def clearGridPane(): Unit = {
     viewNode.children.foreach(GridPane.clearConstraints)
     viewNode.children.clear()
   }

@@ -27,7 +27,7 @@ object ServiceExample extends JFXApp {
   }
 
 
-  private def hookupEvents() {
+  private def hookupEvents(): Unit = {
     View.startButton.onAction = () => {
         Model.shouldThrow.set(false)
         Model.Worker.restart()

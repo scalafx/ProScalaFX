@@ -25,13 +25,13 @@ object ResponsiveUIExample extends JFXApp {
   }
 
 
-  def hookupEvents() {
+  def hookupEvents(): Unit = {
     View.changeFillButton.onAction = () => {
       val fillPaint = Model.fillPaint()
       Model.fillPaint() = if (Color.LightGray == fillPaint) Color.Gray else Color.LightGray
 
       val task = new Runnable {
-        def run() {
+        def run(): Unit = {
           try {
             Thread.sleep(3000)
             Platform.runLater {
