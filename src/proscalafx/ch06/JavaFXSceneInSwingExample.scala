@@ -82,7 +82,7 @@ object JavaFXSceneInSwingExample extends App {
       }
     })
 
-    def mainLoop() {
+    def mainLoop(): Unit = {
       view.frame.setVisible(true)
     }
   }

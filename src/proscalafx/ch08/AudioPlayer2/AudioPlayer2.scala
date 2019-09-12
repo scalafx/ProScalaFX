@@ -47,7 +47,7 @@ object AudioPlayer2 extends JFXApp {
     add(artist, 1, 1)
     add(album, 1, 2)
     add(year, 1, 3)
-    columnConstraints +=(
+    columnConstraints ++= Seq(
       new ColumnConstraints(),
       // NOTE: the call to delegate to avoid compilation error.
       // Should `scalafx.scene.layout.GridPane.columnConstraints_=()` be fixed to work without call to delegate?
@@ -58,11 +58,11 @@ object AudioPlayer2 extends JFXApp {
     val r0 = new RowConstraints {
       valignment = VPos.Top
     }
-    rowConstraints +=(r0, r0, r0, r0)
+    rowConstraints ++= Seq(r0, r0, r0, r0)
   }
 
 
-  private def createControls() {
+  private def createControls(): Unit = {
     artist = new Label {
       id = "artist"
     }
@@ -88,7 +88,7 @@ object AudioPlayer2 extends JFXApp {
   }
 
 
-  private def createMedia() {
+  private def createMedia(): Unit = {
     try {
       media = new Media("http://traffic.libsyn.com/dickwall/JavaPosse373.mp3") {
         metadata.onChange((_, change) => {
@@ -114,7 +114,7 @@ object AudioPlayer2 extends JFXApp {
   }
 
 
-  private def handleMetadata(key: String, value: AnyRef) {
+  private def handleMetadata(key: String, value: AnyRef): Unit = {
     key match {
       case "album" => album.text = value.toString
       case "artist" => artist.text = value.toString

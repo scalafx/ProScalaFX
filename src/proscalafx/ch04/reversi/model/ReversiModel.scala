@@ -1,8 +1,7 @@
 package proscalafx.ch04.reversi.model
 
 import javafx.beans.{binding => jfxbb}
-import scalafx.Includes._
-import scalafx.Includes.when
+import scalafx.Includes.{when, _}
 import scalafx.beans.binding._
 import scalafx.beans.property.ObjectProperty
 
@@ -18,7 +17,7 @@ object ReversiModel {
   initBoard()
 
 
-  private def initBoard() {
+  private def initBoard(): Unit = {
     val center1 = BOARD_SIZE / 2 - 1
     val center2 = BOARD_SIZE / 2
     board(center1)(center1)() = White
@@ -28,7 +27,7 @@ object ReversiModel {
   }
 
 
-  def restart() {
+  def restart(): Unit = {
     board.flatten.foreach(_() = NONE)
 
     initBoard()
@@ -96,7 +95,7 @@ object ReversiModel {
   }
 
 
-  def play(cellX: Int, cellY: Int) {
+  def play(cellX: Int, cellY: Int): Unit = {
     if (legalMove(cellX, cellY).get) {
       board(cellX)(cellY)() = turn()
       flip(cellX, cellY, 0, -1, turn)
@@ -112,7 +111,7 @@ object ReversiModel {
   }
 
 
-  def flip(cellX: Int, cellY: Int, directionX: Int, directionY: Int, turn: ObjectProperty[Owner]) {
+  def flip(cellX: Int, cellY: Int, directionX: Int, directionY: Int, turn: ObjectProperty[Owner]): Unit = {
     if (canFlip(cellX, cellY, directionX, directionY, turn).get) {
       var x = cellX + directionX
       var y = cellY + directionY

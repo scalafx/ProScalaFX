@@ -26,7 +26,7 @@ object WorkerAndTaskExample extends JFXApp {
   }
 
 
-  private def hookupEvents() {
+  private def hookupEvents(): Unit = {
     View.startButton.onAction = () => new Thread(Model.Worker).start()
     View.cancelButton.onAction = () => Model.Worker.cancel
     View.exceptionButton.onAction = () => Model.shouldThrow.set(true)

@@ -22,8 +22,8 @@ object BufferChangeEventExample extends App {
     println(log)
   })
 
-  println( """Calling strings += ("Zero", "One", "Two", "Three"): """)
-  strings +=("Zero", "One", "Two", "Three")
+  println("""Calling strings ++= Seq("Zero", "One", "Two", "Three"): """)
+  strings ++= Seq("Zero", "One", "Two", "Three")
 
   println("Calling strings.sort: ")
   strings.sort
@@ -34,8 +34,8 @@ object BufferChangeEventExample extends App {
   println( """Calling strings.setAll("One_1", "Three_1", "Two_1", "Zero_1"): """)
   strings.setAll("One_1", "Three_1", "Two_1", "Zero_1")
 
-  println( """Calling strings -= ("One_1", "Two_1", "Zero_1"): """)
-  strings -=("One_1", "Two_1", "Zero_1")
+  println("""Calling strings --= Seq("One_1", "Two_1", "Zero_1"): """)
+  strings --= Seq("One_1", "Two_1", "Zero_1")
 
 
   private def prettyPrint(index: Int, change: Change[String]): String = {

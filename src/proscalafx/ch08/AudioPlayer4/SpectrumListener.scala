@@ -15,7 +15,7 @@ class SpectrumListener(startFreq: Double, mp: MediaPlayer, bars: Array[SpectrumB
   def spectrumDataUpdate(timestamp: Double,
                          duration: Double,
                          magnitudes: Array[Float],
-                         phases: Array[Float]) {
+                         phases: Array[Float]): Unit = {
     var index = 0
     var bucketIndex = 0
     var currentBucketCount = 0

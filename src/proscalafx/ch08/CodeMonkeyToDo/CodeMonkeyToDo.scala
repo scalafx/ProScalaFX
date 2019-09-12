@@ -79,7 +79,7 @@ object CodeMonkeyToDo extends JFXApp {
     (volumeSlider, rateSlider, balanceSlider)
   }
 
-  private def createClipList(grid: GridPane) {
+  private def createClipList(grid: GridPane): Unit = {
 
     val clipLabel = new Label {
       text = "Code Monkey To-Do List:"
@@ -117,7 +117,7 @@ object CodeMonkeyToDo extends JFXApp {
     val vbox = new VBox {
       spacing = 30
       alignment = Pos.TopCenter
-      children +=(clipLabel, getUpButton, goToJobButton, meetingButton, link)
+      children ++= Seq(clipLabel, getUpButton, goToJobButton, meetingButton, link)
     }
 
     GridPane.setHalignment(vbox, HPos.Center)

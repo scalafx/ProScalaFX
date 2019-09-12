@@ -100,7 +100,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     gp
   }
 
-  override def onNextPageAction(nextHandler: ActionEvent => Unit) {
+  override def onNextPageAction(nextHandler: ActionEvent => Unit): Unit = {
     eqButton.onAction = nextHandler
   }
 
@@ -186,7 +186,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
   }
 
 
-  private def updatePositionSlider(currentTime: Duration) {
+  private def updatePositionSlider(currentTime: Duration): Unit = {
     if (positionSlider.isValueChanging) return
 
     val mediaPlayer = songModel.mediaPlayer()
@@ -200,7 +200,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
   }
 
 
-  private def seekAndUpdatePosition(duration: Duration) {
+  private def seekAndUpdatePosition(duration: Duration): Unit = {
     val mediaPlayer = songModel.mediaPlayer()
     if (mediaPlayer.status() == jffxsm.MediaPlayer.Status.STOPPED) mediaPlayer.pause()
 
@@ -216,7 +216,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     "%02d:%02d".format(minutes, seconds)
   }
 
-  def updateStatus(newStatus: jffxsm.MediaPlayer.Status) {
+  def updateStatus(newStatus: jffxsm.MediaPlayer.Status): Unit = {
     if (newStatus == jffxsm.MediaPlayer.Status.UNKNOWN || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
@@ -230,7 +230,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
   }
 
 
-  private def addListenersAndBindings(mp: MediaPlayer) {
+  private def addListenersAndBindings(mp: MediaPlayer): Unit = {
     statusInvalidationSubscription = mp.status.onInvalidate {
       Platform.runLater {
         updateStatus(songModel.mediaPlayer().status())
@@ -258,7 +258,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
   }
 
 
-  private def removeListenersAndBinding(mp: MediaPlayer) {
+  private def removeListenersAndBinding(mp: MediaPlayer): Unit = {
     volumeSlider.value.unbind()
     statusInvalidationSubscription.cancel()
     currentTimeSubscription.cancel()

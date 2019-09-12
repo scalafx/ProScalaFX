@@ -183,7 +183,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  private def updatePositionSlider(currentTime: Duration) {
+  private def updatePositionSlider(currentTime: Duration): Unit = {
     if (positionSlider.isValueChanging) return
 
     val mediaPlayer = songModel.mediaPlayer()
@@ -197,7 +197,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  private def seekAndUpdatePosition(duration: Duration) {
+  private def seekAndUpdatePosition(duration: Duration): Unit = {
     val mediaPlayer = songModel.mediaPlayer()
     if (Status.Stopped == mediaPlayer.status) mediaPlayer.pause()
 
@@ -213,7 +213,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     "%02d:%02d".format(minutes, seconds)
   }
 
-  private def updateStatus(newStatus: Status) {
+  private def updateStatus(newStatus: Status): Unit = {
     if (Status.Unknown == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
@@ -227,7 +227,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
 
-  private def addListenersAndBindings(mp: MediaPlayer) {
+  private def addListenersAndBindings(mp: MediaPlayer): Unit = {
     statusInvalidationSubscription = mp.status.onInvalidate {
       Platform.runLater {
         updateStatus(songModel.mediaPlayer().status())
@@ -254,7 +254,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     volumeSlider.value <==> mp.volume
   }
 
-  private def removeListenersAndBinding(mp: MediaPlayer) {
+  private def removeListenersAndBinding(mp: MediaPlayer): Unit = {
     volumeSlider.value.unbind()
     statusInvalidationSubscription.cancel()
     currentTimeSubscription.cancel()

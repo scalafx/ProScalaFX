@@ -7,7 +7,7 @@ object MotivatingExample extends App {
   var intProperty: IntegerProperty = _
 
 
-  def createProperty() {
+  def createProperty(): Unit = {
     println()
     intProperty = IntegerProperty(1024)
     println("intProperty = " + intProperty)
@@ -17,7 +17,7 @@ object MotivatingExample extends App {
   }
 
 
-  def addAndRemoveInvalidationListener() {
+  def addAndRemoveInvalidationListener(): Unit = {
     println()
     val subscription = intProperty.onInvalidate {
       observable => println("The observable has been invalidated: " + observable + ".")
@@ -39,7 +39,7 @@ object MotivatingExample extends App {
   }
 
 
-  def addAndRemoveChangeListener() {
+  def addAndRemoveChangeListener(): Unit = {
     println()
     val subscription = intProperty.onChange {
       (_, oldValue, newValue) =>
@@ -58,7 +58,7 @@ object MotivatingExample extends App {
   }
 
 
-  def bindAndUnbindOnePropertyToAnother() {
+  def bindAndUnbindOnePropertyToAnother(): Unit = {
     println()
     val otherProperty = IntegerProperty(0)
     println("otherProperty() = " + otherProperty())

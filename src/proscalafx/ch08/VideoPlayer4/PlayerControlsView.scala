@@ -107,7 +107,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
   }
 
 
-  override def onNextPageAction(nextHandler: ActionEvent => Unit) {
+  override def onNextPageAction(nextHandler: ActionEvent => Unit): Unit = {
     eqButton.onAction = nextHandler
   }
 
@@ -197,7 +197,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
   }
 
 
-  private def updatePositionSlider(currentTime: Duration) {
+  private def updatePositionSlider(currentTime: Duration): Unit = {
     if (positionSlider.isValueChanging) return
 
     val mediaPlayer = mediaModel.mediaPlayer()
@@ -211,7 +211,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
   }
 
 
-  private def seekAndUpdatePosition(duration: Duration) {
+  private def seekAndUpdatePosition(duration: Duration): Unit = {
     val mediaPlayer = mediaModel.mediaPlayer()
     if (Status.Stopped == mediaPlayer.status) mediaPlayer.pause()
 
@@ -229,7 +229,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
   }
 
 
-  def updateStatus(newStatus: Status) {
+  def updateStatus(newStatus: Status): Unit = {
     if (MediaPlayer.Status.Unknown == newStatus || newStatus == null) {
       controlPanel.disable = true
       positionSlider.disable = true
@@ -243,7 +243,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
   }
 
 
-  private def addListenersAndBindings(mp: MediaPlayer) {
+  private def addListenersAndBindings(mp: MediaPlayer): Unit = {
     statusInvalidationSubscription = mp.status.onInvalidate {
       Platform.runLater {
         updateStatus(mediaModel.mediaPlayer().status())
@@ -271,7 +271,7 @@ class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](
   }
 
 
-  private def removeListenersAndBinding(mp: MediaPlayer) {
+  private def removeListenersAndBinding(mp: MediaPlayer): Unit = {
     volumeSlider.value.unbind()
     statusInvalidationSubscription.cancel()
     currentTimeSubscription.cancel()

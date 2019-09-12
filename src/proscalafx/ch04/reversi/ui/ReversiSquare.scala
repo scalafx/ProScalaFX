@@ -19,7 +19,7 @@ class ReversiSquare(val x: Int, val y: Int) extends Region {
   override val delegate: jfxsl.Region = new jfxsl.Region {
     getChildren.add(highlight)
 
-    protected override def layoutChildren() {
+    protected override def layoutChildren(): Unit = {
       layoutInArea(highlight, 0, 0, getWidth, getHeight, getBaselineOffset, HPos.Center, VPos.Center)
     }
   }

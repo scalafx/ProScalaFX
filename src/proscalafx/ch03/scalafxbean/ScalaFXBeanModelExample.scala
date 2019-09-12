@@ -7,19 +7,19 @@ class ScalaFXBeanModelExample {
 
   val i = new IntegerProperty(this, "i", 0)
 
-  def i_=(value: Int) {
+  def i_=(value: Int): Unit = {
     i() = value
   }
 
   val str = new StringProperty(this, "str", "Hello")
 
-  def str_=(value: String) {
+  def str_=(value: String): Unit = {
     str() = value
   }
 
   val color = new ObjectProperty[Color](this, "color", Color.Black)
 
-  def color_=(value: Color) {
+  def color_=(value: Color): Unit = {
     color() = value
   }
 

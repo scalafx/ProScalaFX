@@ -20,7 +20,7 @@ object SetChangeEventExample extends App {
     sb.toString
   }
 
-  def onChange[T](set: ObservableSet[T], change: Change[T]) {
+  def onChange[T](set: ObservableSet[T], change: Change[T]): Unit = {
     println("\tset = " + set)
     println(prettyChange(change))
   }
@@ -31,13 +31,13 @@ object SetChangeEventExample extends App {
   println("Calling set += \"First\": ")
   set += "First"
 
-  println("Calling set += (\"Second\", \"Third\"): ")
-  set +=("Second", "Third")
+  println("Calling set ++= Seq(\"Second\", \"Third\"): ")
+  set ++= Seq("Second", "Third")
 
   println("Calling set -= \"Second\": ")
   set -= "Second"
 
-  println("Calling set -= (\"First\", \"Third\"): ")
-  set -=("First", "Third")
+  println("Calling set --= Seq(\"First\", \"Third\"): ")
+  set --= Seq("First", "Third")
 
 }

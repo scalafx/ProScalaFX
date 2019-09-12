@@ -8,7 +8,7 @@ object TriangleAreaExample extends App {
   def printResult(x1: IntegerProperty, y1: IntegerProperty,
                   x2: IntegerProperty, y2: IntegerProperty,
                   x3: IntegerProperty, y3: IntegerProperty,
-                  area: NumberBinding) {
+                  area: NumberBinding): Unit = {
     println("For A(%d,%d), B(%d,%d), C(%d,%d), the area of triangle ABC is %1.1f".format(
       x1(), y1(), x2(), y2(), x3(), y3(), area()))
   }

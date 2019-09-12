@@ -2,7 +2,6 @@
 package proscalafx.ch08.AudioPlayer4
 
 import javafx.scene.{layout => jfxsl}
-
 import scalafx.Includes._
 import scalafx.geometry.Pos
 import scalafx.scene.shape.Rectangle
@@ -43,7 +42,7 @@ class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
 
   protected override def computePrefWidth(height: Double) = computeWidthForHeight(5)
 
-  def setValue(value: Double) {
+  def setValue(value: Double): Unit = {
     val barsLit = math.min(barCount, math.round(value / maxValue * barCount).toInt)
     val childList = getChildren
     for (i <- 0 until childList.size) {
@@ -51,7 +50,7 @@ class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
     }
   }
 
-  protected override def layoutChildren() {
+  protected override def layoutChildren(): Unit = {
     if (lastWidth != getWidth || lastHeight != getHeight) {
       val spacing = SPACING * (barCount - 1)
       val barHeight = (getHeight - getVerticalPadding - spacing) / barCount
