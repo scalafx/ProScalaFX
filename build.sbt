@@ -5,7 +5,7 @@ name := "ProScalaFX"
 version := "12.0.2-R18"
 
 // Version of scala to use
-scalaVersion := "2.13.0"
+scalaVersion := "2.13.1"
 
 // Set the main Scala source directory to be <base>/src
 scalaSource in Compile := baseDirectory(_ / "src").value
