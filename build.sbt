@@ -2,7 +2,7 @@
 name := "ProScalaFX"
 
 // Current version
-version := "12.0.2-R18"
+version := "14-R19"
 
 // Version of scala to use
 scalaVersion := "2.13.1"
@@ -21,7 +21,7 @@ resolvers += Opts.resolver.sonatypeSnapshots
 //resolvers += Opts.resolver.sonatypeStaging
 
 // Add ScalaFX dependency, exclude JavaFX transitive dependencies, may not mach this OS
-libraryDependencies += "org.scalafx" %% "scalafx" % "12.0.2-R18"
+libraryDependencies += "org.scalafx" %% "scalafx" % "14-R19"
 
 // Add OS specific JavaFX dependencies
 val javafxModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
@@ -31,7 +31,7 @@ val osName = System.getProperty("os.name") match {
   case n if n.startsWith("Windows") => "win"
   case _ => throw new Exception("Unknown platform!")
 }
-libraryDependencies ++= javafxModules.map(m => "org.openjfx" % s"javafx-$m" % "12.0.2" classifier osName)
+libraryDependencies ++= javafxModules.map(m => "org.openjfx" % s"javafx-$m" % "14.0.1" classifier osName)
 
 // Set the prompt (for this build) to include the project id.
 shellPrompt := { state => System.getProperty("user.name") + ":" + Project.extract(state).currentRef.project + "> " }
