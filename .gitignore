@@ -130,3 +130,4 @@ pip-log.txt
 /target/
 /.idea_modules/
 target
+/.bsp/
