@@ -8,9 +8,9 @@ version := "15.0.1-R21"
 scalaVersion := "2.13.4"
 
 // Set the main Scala source directory to be <base>/src
-scalaSource in Compile := baseDirectory(_ / "src").value
+Compile / scalaSource := baseDirectory(_ / "src").value
 
-resourceDirectory in Compile := baseDirectory(_ / "src").value
+Compile / resourceDirectory := baseDirectory(_ / "src").value
 
 // Append -deprecation to the options passed to the Scala compiler
 scalacOptions ++= Seq("-deprecation", "-feature")
@@ -32,9 +32,6 @@ val osName = System.getProperty("os.name") match {
   case _ => throw new Exception("Unknown platform!")
 }
 libraryDependencies ++= javafxModules.map(m => "org.openjfx" % s"javafx-$m" % "15.0.1" classifier osName)
-
-// Set the prompt (for this build) to include the project id.
-shellPrompt := { state => System.getProperty("user.name") + ":" + Project.extract(state).currentRef.project + "> " }
 
 // Fork a new JVM for 'run' and 'test:run'
 fork := true
