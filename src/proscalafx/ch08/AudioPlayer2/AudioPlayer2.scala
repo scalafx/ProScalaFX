@@ -31,7 +31,8 @@ object AudioPlayer2 extends JFXApp {
   createMedia()
 
   stage = new PrimaryStage {
-    title = "Audio Player 2"
+    self =>
+    self.title = "Audio Player 2"
     scene = new Scene(createGridPane(), 800, 400) {
       val stylesheet = getClass.getResource("media.css")
       stylesheets += stylesheet.toString
@@ -90,7 +91,7 @@ object AudioPlayer2 extends JFXApp {
 
   private def createMedia(): Unit = {
     try {
-      media = new Media("http://traffic.libsyn.com/dickwall/JavaPosse373.mp3") {
+      media = new Media("https://traffic.libsyn.com/dickwall/JavaPosse373.mp3") {
         metadata.onChange((_, change) => {
           change match {
             case Add(key, added) => handleMetadata(key, added)
@@ -100,8 +101,9 @@ object AudioPlayer2 extends JFXApp {
       }
 
       mediaPlayer = new MediaPlayer(media) {
+        self =>
         onError = {
-          val errorMessage: String = media.getError.getMessage
+          val errorMessage: String = self.media.getError.getMessage
           System.out.println("MediaPlayer Error: " + errorMessage)
         }
       }

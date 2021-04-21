@@ -16,7 +16,9 @@ import scalafx.scene.{Node, Scene}
 object AudioPlayer4 extends JFXApp {
   println("JavaFX version: " + csjfxr.VersionInfo.getRuntimeVersion)
 
-  private val songModel = new SongModel() {url = "http://traffic.libsyn.com/dickwall/JavaPosse373.mp3"}
+  private val songModel = new SongModel() {
+    url = "https://traffic.libsyn.com/dickwall/JavaPosse373.mp3"
+  }
   private var playerControlsView: PlayerControlsView = _
   private var metaDataView: MetadataView = _
   private var equalizerView: EqualizerView = _

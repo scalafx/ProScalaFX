@@ -26,7 +26,7 @@ object BufferChangeEventExample extends App {
   strings ++= Seq("Zero", "One", "Two", "Three")
 
   println("Calling strings.sort: ")
-  strings.sort
+  strings.sort()
 
   println( """Calling strings(1) = "Three_1": """)
   strings(1) = "Three_1"

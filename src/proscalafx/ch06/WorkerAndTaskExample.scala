@@ -1,7 +1,5 @@
 package proscalafx.ch06
 
-import java.util.concurrent.atomic.AtomicBoolean
-
 import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
 import scalafx.Includes._
@@ -13,10 +11,12 @@ import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label, ProgressBar}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
 
+import java.util.concurrent.atomic.AtomicBoolean
+
 
 /**
- * @author Jarek Sacha
- */
+  * @author Jarek Sacha
+  */
 object WorkerAndTaskExample extends JFXApp {
 
   hookupEvents()
@@ -72,8 +72,9 @@ object WorkerAndTaskExample extends JFXApp {
     val stateProperty = Model.Worker.state
 
     val progressBar = new ProgressBar() {
+      self =>
       minWidth = 250
-      progress <== Model.Worker.progress
+      self.progress <== Model.Worker.progress
     }
     val title = new Label {
       text <== Model.Worker.title

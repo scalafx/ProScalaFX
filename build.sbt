@@ -5,7 +5,11 @@ name := "ProScalaFX"
 version := "15.0.1-R22-SNAPSHOT"
 
 // Version of scala to use
-scalaVersion := "2.13.5"
+val scala2Version = "2.13.5"
+val scala3Version = "3.0.0-RC2"
+// To cross compile with Scala 2 and Scala 3
+crossScalaVersions := Seq(scala2Version, scala3Version)
+scalaVersion := scala2Version
 
 // Set the main Scala source directory to be <base>/src
 Compile / scalaSource := baseDirectory(_ / "src").value

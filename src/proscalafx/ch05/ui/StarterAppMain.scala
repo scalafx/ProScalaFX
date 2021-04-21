@@ -99,10 +99,10 @@ object StarterAppMain extends JFXApp {
             radius = 8
           }
           onAction = e => {
-              val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
+            val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
             print(s"${e.eventType} occurred on ToggleButton ${tb.id}")
-              print(", and selectedProperty is: ")
-              println(tb.selectedProperty.value)
+            print(", and selectedProperty is: ")
+            println(tb.selectedProperty.value)
           }
         },
         new ToggleButton {
@@ -112,10 +112,10 @@ object StarterAppMain extends JFXApp {
             radius = 8
           }
           onAction = e => {
-              val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
+            val tb = e.getTarget.asInstanceOf[javafx.scene.control.ToggleButton]
             print(s"${e.eventType} occurred on ToggleButton ${tb.id}")
-              print(", and selectedProperty is: ")
-              println(tb.selectedProperty.value)
+            print(", and selectedProperty is: ")
+            println(tb.selectedProperty.value)
           }
         },
         new Separator {

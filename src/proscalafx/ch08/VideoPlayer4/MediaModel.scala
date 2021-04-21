@@ -65,9 +65,10 @@ class MediaModel {
       }
 
       _mediaPlayer() = new MediaPlayer(media) {
+        self =>
         // Handle errors during playback
         onError = {
-          val errorMessage = media.error().getMessage
+          val errorMessage = self.media.error().getMessage
           println("MediaPlayer Error: " + errorMessage)
         }
       }.delegate

@@ -1,7 +1,6 @@
 package proscalafx.ch08.AudioPlayer3
 
 import javafx.scene.{image => jfxsi}
-import scalafx.Includes._
 import scalafx.beans.property.{ObjectProperty, ReadOnlyObjectWrapper, StringProperty}
 import scalafx.collections.ObservableMap.Add
 import scalafx.scene.image.Image
@@ -58,9 +57,10 @@ class SongModel {
       }
 
       _mediaPlayer() = new MediaPlayer(media) {
+        self =>
         // Handle errors during playback
         onError = {
-          val errorMessage = media.error().getMessage
+          val errorMessage = self.media.error().getMessage
           println("MediaPlayer Error: " + errorMessage)
         }
       }
