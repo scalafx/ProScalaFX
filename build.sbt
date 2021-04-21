@@ -2,10 +2,10 @@
 name := "ProScalaFX"
 
 // Current version
-version := "15.0.1-R21"
+version := "15.0.1-R22-SNAPSHOT"
 
 // Version of scala to use
-scalaVersion := "2.13.4"
+scalaVersion := "2.13.5"
 
 // Set the main Scala source directory to be <base>/src
 Compile / scalaSource := baseDirectory(_ / "src").value
@@ -21,7 +21,7 @@ resolvers += Opts.resolver.sonatypeSnapshots
 //resolvers += Opts.resolver.sonatypeStaging
 
 // Add ScalaFX dependency, exclude JavaFX transitive dependencies, may not mach this OS
-libraryDependencies += "org.scalafx" %% "scalafx" % "15.0.1-R21"
+libraryDependencies += "org.scalafx" %% "scalafx" % "15.0.1-R22-SNAPSHOT"
 
 // Add OS specific JavaFX dependencies
 val javafxModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")

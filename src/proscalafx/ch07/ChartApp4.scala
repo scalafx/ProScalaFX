@@ -49,9 +49,9 @@ object ChartApp4 extends JFXApp {
     val cppData = years zip cppTrend map {case (y, d) => XYChart.Data[Number, Number](y, d)}
 
     ObservableBuffer(
-      XYChart.Series[Number, Number](name = "Java", data = ObservableBuffer(javaData)),
-      XYChart.Series[Number, Number](name = "C", data = ObservableBuffer(cData)),
-      XYChart.Series[Number, Number](name = "C++", data = ObservableBuffer(cppData))
+      XYChart.Series[Number, Number](name = "Java", data = ObservableBuffer.from(javaData)),
+      XYChart.Series[Number, Number](name = "C", data = ObservableBuffer.from(cData)),
+      XYChart.Series[Number, Number](name = "C++", data = ObservableBuffer.from(cppData))
     )
   }
 }
