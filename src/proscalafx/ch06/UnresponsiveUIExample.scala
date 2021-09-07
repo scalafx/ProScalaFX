@@ -1,8 +1,8 @@
 package proscalafx.ch06
 
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.beans.property.ObjectProperty
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Scene
@@ -13,22 +13,24 @@ import scalafx.scene.shape.Rectangle
 
 
 /**
- * @author Jarek Sacha
- */
-object UnresponsiveUIExample extends JFXApp {
+  * @author Jarek Sacha
+  */
+object UnresponsiveUIExample extends JFXApp3 {
 
-  hookupEvents()
+  override def start(): Unit = {
 
-  stage = new PrimaryStage {
-    title = "Unresponsive UI Example"
-    scene = View.scene
+    hookupEvents()
+
+    stage = new PrimaryStage {
+      title = "Unresponsive UI Example"
+      scene = View.scene
+    }
   }
-
 
   def hookupEvents(): Unit = {
     View.changeFillButton.onAction = () => {
         val fillPaint = Model.fillPaint()
-        Model.fillPaint() = if (fillPaint == Color.LightGray) Color.Gray else Color.LightGray
+      Model.fillPaint() = if (fillPaint == Color.LightGray.delegate) Color.Gray else Color.LightGray
         // Bad code that will cause the UI to be unresponsive
         try {
           Thread.sleep(Long.MaxValue)
@@ -39,7 +41,7 @@ object UnresponsiveUIExample extends JFXApp {
 
     View.changeStrokeButton.onAction = () => {
         val strokePaint = Model.strokePaint()
-        Model.strokePaint() = if (strokePaint == Color.DarkGray) Color.Black else Color.DarkGray
+      Model.strokePaint() = if (strokePaint == Color.DarkGray.delegate) Color.Black else Color.DarkGray
       }
   }
 

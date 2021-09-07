@@ -1,8 +1,8 @@
 package proscalafx.ch08.CodeMonkeyToDo
 
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Hyperlink, Label, Slider}
@@ -10,30 +10,31 @@ import scalafx.scene.layout.{GridPane, Priority, VBox}
 import scalafx.scene.media.AudioClip
 import scalafx.scene.web.WebView
 
-
 /**
- * Controlling the playback parameters of an AudioClip.
- *
- * @author Jarek Sacha 
- */
-object CodeMonkeyToDo extends JFXApp {
-  val coffeeClip = new AudioClip(clipResourceString("resources/coffee.mp3"))
-  val jobClip = new AudioClip(clipResourceString("resources/job.mp3"))
-  val meetingClip = new AudioClip(clipResourceString("resources/meeting.mp3"))
+  * Controlling the playback parameters of an AudioClip.
+  *
+  * @author Jarek Sacha
+  */
+object CodeMonkeyToDo extends JFXApp3 {
 
-  val grid = new GridPane {
-    padding = Insets(10)
-    hgap = 10
-    vgap = 5
-  }
+  override def start(): Unit = {
+    val coffeeClip = new AudioClip(clipResourceString("resources/coffee.mp3"))
+    val jobClip = new AudioClip(clipResourceString("resources/job.mp3"))
+    val meetingClip = new AudioClip(clipResourceString("resources/meeting.mp3"))
 
-  val (volumeSlider, rateSlider, balanceSlider) = createControls(grid)
-  createClipList(grid)
+    val grid = new GridPane {
+      padding = Insets(10)
+      hgap = 10
+      vgap = 5
+    }
 
-  stage = new PrimaryStage {
-    scene = new Scene(grid, 640, 380) {
-      title = "AudioClip Example"
-      stylesheets += getClass.getResource("media.css").toString
+    createClipList(grid, coffeeClip, jobClip, meetingClip)
+
+    stage = new PrimaryStage {
+      scene = new Scene(grid, 640, 380) {
+        title = "AudioClip Example"
+        stylesheets += getClass.getResource("media.css").toString
+      }
     }
   }
 
@@ -42,9 +43,15 @@ object CodeMonkeyToDo extends JFXApp {
   }
 
   private def createControls(grid: GridPane): (Slider, Slider, Slider) = {
-    val volumeLabel = new Label {text = "Volume"}
-    val rateLabel = new Label {text = "Rate"}
-    val balanceLabel = new Label {text = "Balance"}
+    val volumeLabel = new Label {
+      text = "Volume"
+    }
+    val rateLabel = new Label {
+      text = "Rate"
+    }
+    val balanceLabel = new Label {
+      text = "Balance"
+    }
 
     GridPane.setHalignment(volumeLabel, HPos.Center)
     GridPane.setHalignment(rateLabel, HPos.Center)
@@ -79,7 +86,14 @@ object CodeMonkeyToDo extends JFXApp {
     (volumeSlider, rateSlider, balanceSlider)
   }
 
-  private def createClipList(grid: GridPane): Unit = {
+  private def createClipList(
+                              grid: GridPane,
+                              coffeeClip: AudioClip,
+                              jobClip: AudioClip,
+                              meetingClip: AudioClip
+                            ): Unit = {
+
+    val (volumeSlider, rateSlider, balanceSlider) = createControls(grid)
 
     val clipLabel = new Label {
       text = "Code Monkey To-Do List:"
@@ -88,17 +102,17 @@ object CodeMonkeyToDo extends JFXApp {
     val getUpButton = new Button {
       text = "Get Up, Get Coffee"
       prefWidth = 300
-      onAction = play(coffeeClip)
+      onAction = play(coffeeClip, volumeSlider, rateSlider, balanceSlider)
     }
     val goToJobButton: Button = new Button {
       text = "Go to Job"
       prefWidth = 300
-      onAction = play(jobClip)
+      onAction = play(jobClip, volumeSlider, rateSlider, balanceSlider)
     }
     val meetingButton: Button = new Button {
       text = "Have Boring Meeting"
       prefWidth = 300
-      onAction = play(meetingClip)
+      onAction = play(meetingClip, volumeSlider, rateSlider, balanceSlider)
     }
     val link = new Hyperlink {
       text = "About Code Monkey..."
@@ -128,6 +142,6 @@ object CodeMonkeyToDo extends JFXApp {
   }
 
   /** Returns a function that can be assigned to `oAction` */
-  private def play(audioClip: AudioClip) = () =>
-      audioClip.play(volumeSlider.value(), balanceSlider.value(), rateSlider.value(), 0.0, 0)
+  private def play(audioClip: AudioClip, volumeSlider: Slider, rateSlider: Slider, balanceSlider: Slider): () => Unit =
+    () => audioClip.play(volumeSlider.value(), balanceSlider.value(), rateSlider.value(), 0.0, 0)
 }

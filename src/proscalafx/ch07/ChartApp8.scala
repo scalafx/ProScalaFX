@@ -1,36 +1,37 @@
 package proscalafx.ch07
 
 import javafx.scene.{chart => jfxsc}
-
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.scene.chart._
 import scalafx.scene.layout.StackPane
 
-
 /**
- * @author Jarek Sacha
- */
-object ChartApp8 extends JFXApp {
-  val xAxis = new CategoryAxis()
-  val yAxis = new NumberAxis()
-  val barChart = BarChart(xAxis, yAxis)
-  barChart.title = "Speculations"
-  barChart.data = createChartData()
-  barChart.barGap = 1
+  * @author Jarek Sacha
+  */
+object ChartApp8 extends JFXApp3 {
 
-  stage = new PrimaryStage {
-    title = "BarChart example"
-    scene = new Scene(400, 250) {
-      root = new StackPane {
-        children = barChart
+  override def start(): Unit = {
+
+    val xAxis = new CategoryAxis()
+    val yAxis = new NumberAxis()
+    val barChart = BarChart(xAxis, yAxis)
+    barChart.title = "Speculations"
+    barChart.data = createChartData()
+    barChart.barGap = 1
+
+    stage = new PrimaryStage {
+      title = "BarChart example"
+      scene = new Scene(400, 250) {
+        root = new StackPane {
+          children = barChart
+        }
       }
     }
   }
-
 
   // NOTE: explicit type signature using Number instead Int and Double
   // NOTE: use of jfxsc.XYChart.Series as type for ObservableBuffer, this the same as
@@ -51,13 +52,13 @@ object ChartApp8 extends JFXApp {
     }
     for (i <- 2011 to 2016) {
       java.data() += XYChart.Data[String, Number](i.toString, javaValue)
-      javaValue += math.random - .5
+      javaValue += math.random() - .5
 
       c.data() += XYChart.Data[String, Number](i.toString, cValue)
-      cValue += math.random - .5
+      cValue += math.random() - .5
 
       cpp.data() += XYChart.Data[String, Number](i.toString, cppValue)
-      cppValue += math.random - .5
+      cppValue += math.random() - .5
     }
     answer.addAll(java, c, cpp)
     answer

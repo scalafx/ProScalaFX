@@ -3,8 +3,8 @@ package proscalafx.ch06
 import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.concurrent.Task
 import scalafx.geometry.{HPos, Insets, Pos}
 import scalafx.scene.Scene
@@ -17,14 +17,16 @@ import java.util.concurrent.atomic.AtomicBoolean
 /**
   * @author Jarek Sacha
   */
-object WorkerAndTaskExample extends JFXApp {
+object WorkerAndTaskExample extends JFXApp3 {
 
-  hookupEvents()
-  stage = new PrimaryStage {
-    title = "Worker and Task Example"
-    scene = View.scene
+  override def start(): Unit = {
+
+    hookupEvents()
+    stage = new PrimaryStage {
+      title = "Worker and Task Example"
+      scene = View.scene
+    }
   }
-
 
   private def hookupEvents(): Unit = {
     View.startButton.onAction = () => new Thread(Model.Worker).start()

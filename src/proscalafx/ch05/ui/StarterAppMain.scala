@@ -2,8 +2,8 @@ package proscalafx.ch05.ui
 
 import proscalafx.ch05.model.{Person, StarterAppModel}
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.geometry.{Insets, Orientation, Pos}
 import scalafx.scene.control.MenuItem._
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
@@ -17,30 +17,32 @@ import scalafx.scene.web.{HTMLEditor, WebView}
 import scalafx.scene.{Node, Scene}
 import scalafx.stage.Popup
 
-
 /**
   * @author Jarek Sacha
   */
-object StarterAppMain extends JFXApp {
+object StarterAppMain extends JFXApp3 {
 
   private val model = new StarterAppModel()
 
-  stage = new PrimaryStage {
-    scene = new Scene(800, 600) {
-      stylesheets = List(getClass.getResource("starterApp.css").toExternalForm)
-      root = new BorderPane {
-        top = new VBox {
-          children = List(
-            createMenus(),
-            createToolBar()
-          )
-          center = createTabs()
+  override def start(): Unit = {
+
+    stage = new PrimaryStage {
+      scene = new Scene(800, 600) {
+        stylesheets = List(getClass.getResource("starterApp.css").toExternalForm)
+        root = new BorderPane {
+          top = new VBox {
+            children = List(
+              createMenus(),
+              createToolBar()
+            )
+            center = createTabs()
+          }
         }
       }
+      title = "ScalaFX Starter App"
     }
-    title = "ScalaFX Starter App"
-  }
 
+  }
 
   private def createMenus() = new MenuBar {
     menus = List(
@@ -63,7 +65,6 @@ object StarterAppMain extends JFXApp {
       }
     )
   }
-
 
   private def createToolBar(): ToolBar = {
     val alignToggleGroup = new ToggleGroup()
@@ -157,7 +158,6 @@ object StarterAppMain extends JFXApp {
     toolBar
   }
 
-
   private def createTabs(): TabPane = {
     new TabPane {
       tabs = List(
@@ -206,7 +206,6 @@ object StarterAppMain extends JFXApp {
     }
   }
 
-
   private def createTableDemoNode(): Node = {
     // Create columns
     val firstNameColumn = new TableColumn[Person, String] {
@@ -237,13 +236,10 @@ object StarterAppMain extends JFXApp {
     }
 
     // Listen to row selection, and print values of the selected row
-    table.selectionModel().selectedItem.onChange(
-      (_, _, newValue) => println(s"$newValue chosen in TableView")
-    )
+    table.selectionModel().selectedItem.onChange((_, _, newValue) => println(s"$newValue chosen in TableView"))
 
     table
   }
-
 
   private def createAccordionTitledDemoNode(): Node = new Accordion {
     panes = List(
@@ -269,7 +265,6 @@ object StarterAppMain extends JFXApp {
 
     expandedPane = panes.head
   }
-
 
   private def createSplitTreeListDemoNode(): Node = {
     val treeView = new TreeView[String] {
@@ -309,16 +304,14 @@ object StarterAppMain extends JFXApp {
     }
 
     treeView.selectionModel().selectionMode = SelectionMode.Single
-    treeView.selectionModel().selectedItem.onChange(
-      (_, _, newTreeItem) => {
-        if (newTreeItem != null && newTreeItem.isLeaf) {
-          model.listViewItems.clear()
-          for (i <- 1 to 10000) {
-            model.listViewItems += newTreeItem.getValue + " " + i
-          }
+    treeView.selectionModel().selectedItem.onChange((_, _, newTreeItem) => {
+      if (newTreeItem != null && newTreeItem.isLeaf) {
+        model.listViewItems.clear()
+        for (i <- 1 to 10000) {
+          model.listViewItems += newTreeItem.getValue + " " + i
         }
       }
-    )
+    })
 
     new SplitPane {
       items ++= List(
@@ -327,7 +320,6 @@ object StarterAppMain extends JFXApp {
       )
     }
   }
-
 
   private def createScrollMiscDemoNode(): Node = {
     val radioToggleGroup = new ToggleGroup()
@@ -340,8 +332,8 @@ object StarterAppMain extends JFXApp {
         },
         new CheckBox("CheckBox") {
           inner =>
-          onAction = e =>
-            println(s"${e.eventType} occurred on CheckBox, and `selected` property is: ${inner.selected()}")
+          onAction =
+            e => println(s"${e.eventType} occurred on CheckBox, and `selected` property is: ${inner.selected()}")
         },
         new HBox {
           spacing = 10
@@ -359,9 +351,7 @@ object StarterAppMain extends JFXApp {
         },
         new ChoiceBox(model.choiceBoxItems) {
           selectionModel().selectFirst()
-          selectionModel().selectedItem.onChange(
-            (_, _, newValue) => println(s"$newValue chosen in ChoiceBox")
-          )
+          selectionModel().selectedItem.onChange((_, _, newValue) => println(s"$newValue chosen in ChoiceBox"))
         },
         new MenuButton("MenuButton") {
           items = List(
@@ -446,7 +436,8 @@ object StarterAppMain extends JFXApp {
         },
         new MenuItem("MenuItemB") {
           onAction = e => println(s"${e.eventType} occurred on Menu Item B")
-        })
+        }
+      )
     }
 
     new ScrollPane {
@@ -457,7 +448,6 @@ object StarterAppMain extends JFXApp {
     }
   }
 
-
   private def createHtmlEditorDemoNode(): Node = {
 
     val htmlEditor = new HTMLEditor {
@@ -467,9 +457,11 @@ object StarterAppMain extends JFXApp {
     val viewHTMLButton = new Button("View HTML") {
       onAction = () => {
         val alertPopup = createAlertPopup(htmlEditor.htmlText)
-        alertPopup.show(stage,
+        alertPopup.show(
+          stage,
           (stage.width() - alertPopup.width()) / 2.0 + stage.x(),
-          (stage.height() - alertPopup.height()) / 2.0 + stage.y())
+          (stage.height() - alertPopup.height()) / 2.0 + stage.y()
+        )
       }
       alignmentInParent = Pos.Center
       margin = Insets(10, 0, 10, 0)
@@ -480,7 +472,6 @@ object StarterAppMain extends JFXApp {
       bottom = viewHTMLButton
     }
   }
-
 
   private def createAlertPopup(popupText: String) = new Popup {
     inner =>
@@ -509,10 +500,7 @@ object StarterAppMain extends JFXApp {
           }
         }
       )
-    }.delegate
-    )
+    }.delegate)
   }
 
 }
-
-

@@ -41,7 +41,7 @@ class StarterAppModel {
       "http://google.com"
     )
 
-    val randomIdx = (math.random * webSites.length).toInt
+    val randomIdx = (math.random() * webSites.length).toInt
     webSites(randomIdx)
   }
 

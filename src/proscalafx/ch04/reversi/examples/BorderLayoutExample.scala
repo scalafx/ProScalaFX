@@ -1,38 +1,37 @@
 package proscalafx.ch04.reversi.examples
 
 import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
-
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.geometry.Pos
-import scalafx.scene.{Node, Scene}
 import scalafx.scene.effect.{DropShadow, InnerShadow}
-import scalafx.scene.layout.{BorderPane, FlowPane, Region, StackPane, TilePane, VBox}
+import scalafx.scene.layout._
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{Font, FontWeight, Text}
+import scalafx.scene.{Node, Scene}
 
+object BorderLayoutExample extends JFXApp3 {
 
-object BorderLayoutExample extends JFXApp {
+  override def start(): Unit = {
 
-  val borderPane = new BorderPane {
-    top = createTitle
-    center = createBackground
-    bottom = createScoreBoxes
-  }
+    val borderPane = new BorderPane {
+      top = createTitle
+      center = createBackground
+      bottom = createScoreBoxes
+    }
 
-  stage = new PrimaryStage {
-    scene = new Scene(600, 400) {
-      // Assign borderPane directly to `root` to avoid layout issues.
-      // If assigned to `content` there will be `Group` node at root that interferes with automatic rescaling.
-      root = borderPane
+    stage = new PrimaryStage {
+      scene = new Scene(600, 400) {
+        // Assign borderPane directly to `root` to avoid layout issues.
+        // If assigned to `content` there will be `Group` node at root that interferes with automatic rescaling.
+        root = borderPane
+      }
     }
   }
 
-
   //---------------------------------------------------------------------------
-
 
   private def createTitle = new TilePane {
     snapToPixel = false
@@ -48,16 +47,15 @@ object BorderLayoutExample extends JFXApp {
       new Text("Reversi") {
         font = Font.font(null, FontWeight.Bold, 18)
         alignmentInParent = Pos.CenterLeft
-      })
+      }
+    )
     prefTileHeight = 40
     prefTileWidth <== parent.selectDouble("width") / 2
   }
 
-
   private def createBackground = new Region {
     style = "-fx-background-color: radial-gradient(radius 100%, white, gray)"
   }
-
 
   private def createScoreBoxes = new TilePane {
     snapToPixel = false
@@ -68,7 +66,6 @@ object BorderLayoutExample extends JFXApp {
     )
     prefTileWidth <== parent.selectDouble("width") / 2
   }
-
 
   private def createScore(owner: Owner): Node = {
 
@@ -123,7 +120,8 @@ object BorderLayoutExample extends JFXApp {
               spacing = 10
               children = List(
                 piece,
-                remaining)
+                remaining
+              )
             }
           )
         }

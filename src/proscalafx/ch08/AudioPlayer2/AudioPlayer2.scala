@@ -1,8 +1,8 @@
 package proscalafx.ch08.AudioPlayer2
 
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableMap.Add
 import scalafx.geometry.{Insets, VPos}
 import scalafx.scene.Scene
@@ -12,13 +12,13 @@ import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, RowConstraints}
 import scalafx.scene.media.{Media, MediaPlayer}
 
-
 /**
- * Displaying the metadata information in the scene graph.
- *
- * @author Jarek Sacha
- */
-object AudioPlayer2 extends JFXApp {
+  * Displaying the metadata information in the scene graph.
+  *
+  * @author Jarek Sacha
+  */
+object AudioPlayer2 extends JFXApp3 {
+
   private var media: Media = _
   private var mediaPlayer: MediaPlayer = _
   private var artist: Label = _
@@ -27,18 +27,20 @@ object AudioPlayer2 extends JFXApp {
   private var year: Label = _
   private var albumCover: ImageView = _
 
-  createControls()
-  createMedia()
+  override def start(): Unit = {
 
-  stage = new PrimaryStage {
-    self =>
-    self.title = "Audio Player 2"
-    scene = new Scene(createGridPane(), 800, 400) {
-      val stylesheet = getClass.getResource("media.css")
-      stylesheets += stylesheet.toString
+    createControls()
+    createMedia()
+
+    stage = new PrimaryStage {
+      self =>
+      self.title = "Audio Player 2"
+      scene = new Scene(createGridPane(), 800, 400) {
+        val stylesheet = getClass.getResource("media.css")
+        stylesheets += stylesheet.toString
+      }
     }
   }
-
 
   private def createGridPane(): GridPane = new GridPane {
     padding = Insets(10)
@@ -55,13 +57,12 @@ object AudioPlayer2 extends JFXApp {
       new ColumnConstraints {
         hgrow = Priority.Always
       }.delegate
-      )
+    )
     val r0 = new RowConstraints {
       valignment = VPos.Top
     }
     rowConstraints ++= Seq(r0, r0, r0, r0)
   }
-
 
   private def createControls(): Unit = {
     artist = new Label {
@@ -88,7 +89,6 @@ object AudioPlayer2 extends JFXApp {
     }
   }
 
-
   private def createMedia(): Unit = {
     try {
       media = new Media("https://traffic.libsyn.com/dickwall/JavaPosse373.mp3") {
@@ -114,7 +114,6 @@ object AudioPlayer2 extends JFXApp {
       case re: RuntimeException => println("Caught Exception: " + re.getMessage)
     }
   }
-
 
   private def handleMetadata(key: String, value: AnyRef): Unit = {
     key match {

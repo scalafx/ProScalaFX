@@ -2,28 +2,25 @@ package proscalafx.ch04.reversi.ui
 
 import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
+import scalafx.scene.Node
 import scalafx.scene.control.Button
 import scalafx.scene.effect.{DropShadow, InnerShadow}
 import scalafx.scene.layout._
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{Font, FontWeight, Text}
-import scalafx.scene.{Node, Scene}
 
-
-object Reversi extends JFXApp {
+class Reversi {
 
   private val model = ReversiModel
 
-  val restart = new Button() {
+  val restart: Button = new Button() {
     text = "Restart"
     onAction = () => ReversiModel.restart()
   }
 
-  val game = new BorderPane() {
+  val game: BorderPane = new BorderPane() {
     top = createTitle()
     center = new StackPane() {
       children = List(
@@ -33,35 +30,6 @@ object Reversi extends JFXApp {
     }
     bottom = createScoreBoxes()
   }
-
-  stage = new PrimaryStage() {
-    scene = new Scene(600, 400) {
-      root = new AnchorPane() {
-        children = List(
-          game,
-          restart
-        )
-      }
-    }
-  }
-
-  AnchorPane.setTopAnchor(game, 0d)
-  AnchorPane.setBottomAnchor(game, 0d)
-  AnchorPane.setLeftAnchor(game, 0d)
-  AnchorPane.setRightAnchor(game, 0d)
-  AnchorPane.setRightAnchor(restart, 10d)
-  AnchorPane.setTopAnchor(restart, 10d)
-
-  // Code commended below was only used in the first edition of the book
-  //  if (Platform.isSupported(ConditionalFeature.Scene3D)) {
-  //    stage.scene().camera = new PerspectiveCamera() {
-  //      fieldOfView = 60
-  //    }.delegate
-  //  }
-
-
-  //---------------------------------------------------------------------------
-
 
   private def createTitle() = new TilePane {
     snapToPixel = false
@@ -79,11 +47,11 @@ object Reversi extends JFXApp {
         text = "Reversi"
         font = Font.font(null, FontWeight.Bold, 18)
         alignmentInParent = Pos.CenterLeft
-      })
+      }
+    )
     prefTileHeight = 40
     prefTileWidth <== parent.selectDouble("width") / 2
   }
-
 
   private def createBackground() = new Region {
     style = "-fx-background-color: radial-gradient(radius 100%, white, gray)"
@@ -135,21 +103,23 @@ object Reversi extends JFXApp {
   //    board
   //  }
 
-
   private def tiles(): Node = {
     val board = new GridPane()
     for (i <- 0 until ReversiModel.BOARD_SIZE; j <- 0 until ReversiModel.BOARD_SIZE) {
       val square = new ReversiSquare(i, j)
       val piece = new ReversiPiece()
       piece.owner <== model.board(i)(j)
-      board.add(new StackPane {
-        children = Seq(square, piece)
-      }, i, j)
+      board.add(
+        new StackPane {
+          children = Seq(square, piece)
+        },
+        i,
+        j
+      )
 
     }
     board
   }
-
 
   private def createScoreBoxes() = new TilePane() {
     snapToPixel = false
@@ -160,7 +130,6 @@ object Reversi extends JFXApp {
     )
     prefTileWidth <== parent.selectDouble("width") / 2
   }
-
 
   private def createScore(owner: Owner): StackPane = {
 

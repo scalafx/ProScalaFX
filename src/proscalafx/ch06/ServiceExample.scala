@@ -3,8 +3,8 @@ package proscalafx.ch06
 import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.beans.property.IntegerProperty
 import scalafx.concurrent.Service
 import scalafx.geometry.{HPos, Insets, Pos}
@@ -18,12 +18,15 @@ import java.util.concurrent.atomic.AtomicBoolean
 /**
   * @author Jarek Sacha
   */
-object ServiceExample extends JFXApp {
+object ServiceExample extends JFXApp3 {
 
-  hookupEvents()
-  stage = new PrimaryStage {
-    title = "Service Example"
-    scene = View.scene
+  override def start(): Unit = {
+
+    hookupEvents()
+    stage = new PrimaryStage {
+      title = "Service Example"
+      scene = View.scene
+    }
   }
 
 

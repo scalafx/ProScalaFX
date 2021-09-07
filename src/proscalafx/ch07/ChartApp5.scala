@@ -1,40 +1,41 @@
 package proscalafx.ch07
 
 import javafx.scene.{chart => jfxsc}
-
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.scene.chart.{NumberAxis, ScatterChart, XYChart}
 import scalafx.scene.layout.StackPane
 
-
 /**
- * @author Jarek Sacha
- */
-object ChartApp5 extends JFXApp {
+  * @author Jarek Sacha
+  */
+object ChartApp5 extends JFXApp3 {
 
-  val xAxis = new NumberAxis {
-    autoRanging = false
-    lowerBound = 2011
-    upperBound = 2021
-  }
-  val yAxis = new NumberAxis()
-  val scatterChart = ScatterChart(xAxis, yAxis)
-  scatterChart.title = "Speculations"
-  scatterChart.data = createChartData()
+  override def start(): Unit = {
 
-  stage = new PrimaryStage {
-    title = "ScatterChart example"
-    scene = new Scene(400, 250) {
-      root = new StackPane {
-        children = scatterChart
+    val xAxis = new NumberAxis {
+      autoRanging = false
+      lowerBound = 2011
+      upperBound = 2021
+    }
+    val yAxis = new NumberAxis()
+
+    val scatterChart = ScatterChart(xAxis, yAxis)
+    scatterChart.title = "Speculations"
+    scatterChart.data = createChartData()
+
+    stage = new PrimaryStage {
+      title = "ScatterChart example"
+      scene = new Scene(400, 250) {
+        root = new StackPane {
+          children = scatterChart
+        }
       }
     }
   }
-
 
   // NOTE: explicit type signature using Number instead Int and Double
   // NOTE: use of jfxsc.XYChart.Series as type for ObservableBuffer, this the same as
@@ -55,13 +56,13 @@ object ChartApp5 extends JFXApp {
     }
     for (i <- 2011 to 2021) {
       java.data() += XYChart.Data[Number, Number](i, javaValue)
-      javaValue += math.random - .5
+      javaValue += math.random() - .5
 
       c.data() += XYChart.Data[Number, Number](i, cValue)
-      cValue += math.random - .5
+      cValue += math.random() - .5
 
       cpp.data() += XYChart.Data[Number, Number](i, cppValue)
-      cppValue += math.random - .5
+      cppValue += math.random() - .5
     }
     answer.addAll(java, c, cpp)
     answer

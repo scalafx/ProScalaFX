@@ -1,8 +1,8 @@
 package proscalafx.ch06
 
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
@@ -11,38 +11,17 @@ import scalafx.scene.layout.VBox
 
 import scala.jdk.CollectionConverters._
 
-
-/** ScalaFX version of `JavaFXThreadsExample` from "Pro JavaFX 2" book.
+/**
+  * ScalaFX version of `JavaFXThreadsExample` from "Pro JavaFX 2" book.
   *
   * @author Jarek Sacha
   */
-object JavaFXThreadsExample extends JFXApp {
+object JavaFXThreadsExample extends JFXApp3 {
 
-  private val model = new Model()
-  private val view = new View(model)
-  hookupEvents()
-  stage = new PrimaryStage {
-    title = "JavaFX Threads Information"
-    scene = view.scene
-  }
-
-
-  private def hookupEvents(): Unit = {
-    view.updateButton.onAction = () => model.update()
-    view.threadNames.selectionModel().selectedItem.onChange {
-      val index = view.threadNames.selectionModel().getSelectedIndex
-      if (index >= 0) {
-        view.stackTrace.text = model.stackTraces(index)
-      }
-    }
-  }
-
-
-  private class Model {
+  class Model {
     val threadNames = new ObservableBuffer[String]()
     val stackTraces = new ObservableBuffer[String]()
     update()
-
 
     def update(): Unit = {
       threadNames.clear()
@@ -54,7 +33,6 @@ object JavaFXThreadsExample extends JFXApp {
       }
     }
 
-
     private def formatStackTrace(v: Array[StackTraceElement]): String = {
       val sb = new StringBuilder("StackTrace: \n")
       for (stackTraceElement <- v) {
@@ -64,8 +42,7 @@ object JavaFXThreadsExample extends JFXApp {
     }
   }
 
-
-  private class View(model: Model) {
+  class View(model: Model) {
     val threadNames = new ListView(model.threadNames)
     val stackTrace = new TextArea()
     val updateButton = new Button("Update")
@@ -82,4 +59,25 @@ object JavaFXThreadsExample extends JFXApp {
     }
   }
 
+  override def start(): Unit = {
+
+    val model = new Model()
+    val view = new View(model)
+
+    hookupEvents()
+    stage = new PrimaryStage {
+      title = "JavaFX Threads Information"
+      scene = view.scene
+    }
+
+    def hookupEvents(): Unit = {
+      view.updateButton.onAction = () => model.update()
+      view.threadNames.selectionModel().selectedItem.onChange {
+        val index = view.threadNames.selectionModel().getSelectedIndex
+        if (index >= 0) {
+          view.stackTrace.text = model.stackTraces(index)
+        }
+      }
+    }
+  }
 }

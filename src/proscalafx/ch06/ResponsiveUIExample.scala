@@ -1,8 +1,8 @@
 package proscalafx.ch06
 
 import scalafx.Includes._
-import scalafx.application.JFXApp.PrimaryStage
-import scalafx.application.{JFXApp, Platform}
+import scalafx.application.JFXApp3.PrimaryStage
+import scalafx.application.{JFXApp3, Platform}
 import scalafx.beans.property.ObjectProperty
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Scene
@@ -11,24 +11,25 @@ import scalafx.scene.layout.{BorderPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
-
 /**
   * @author Jarek Sacha
   */
-object ResponsiveUIExample extends JFXApp {
+object ResponsiveUIExample extends JFXApp3 {
 
-  hookupEvents()
+  override def start(): Unit = {
 
-  stage = new PrimaryStage {
-    title = "Unresponsive UI Example"
-    scene = View.scene
+    hookupEvents()
+
+    stage = new PrimaryStage {
+      title = "Unresponsive UI Example"
+      scene = View.scene
+    }
   }
-
 
   def hookupEvents(): Unit = {
     View.changeFillButton.onAction = () => {
       val fillPaint = Model.fillPaint()
-      Model.fillPaint() = if (Color.LightGray == fillPaint) Color.Gray else Color.LightGray
+      Model.fillPaint() = if (Color.LightGray.delegate == fillPaint) Color.Gray else Color.LightGray
 
       val task = new Runnable {
         def run(): Unit = {
@@ -50,10 +51,9 @@ object ResponsiveUIExample extends JFXApp {
 
     View.changeStrokeButton.onAction = () => {
       val strokePaint = Model.strokePaint()
-      Model.strokePaint() = if (strokePaint == Color.DarkGray) Color.Black else Color.DarkGray
+      Model.strokePaint() = if (strokePaint == Color.DarkGray.delegate) Color.Black else Color.DarkGray
     }
   }
-
 
   private object Model {
     // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
@@ -61,7 +61,6 @@ object ResponsiveUIExample extends JFXApp {
     val fillPaint = ObjectProperty(this, "fillPaint", Color.LightGray)
     val strokePaint = ObjectProperty(this, "strokePaint", Color.DarkGray)
   }
-
 
   private object View {
     val rectangle = new Rectangle {
@@ -93,5 +92,4 @@ object ResponsiveUIExample extends JFXApp {
       }
     }
   }
-
 }

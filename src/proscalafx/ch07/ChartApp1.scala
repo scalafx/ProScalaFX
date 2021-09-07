@@ -1,29 +1,30 @@
 package proscalafx.ch07
 
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.scene.chart.PieChart
 import scalafx.scene.layout.StackPane
 
-
 /**
- * @author Jarek Sacha
- */
-object ChartApp1 extends JFXApp {
+  * @author Jarek Sacha
+  */
+object ChartApp1 extends JFXApp3 {
 
-  stage = new PrimaryStage {
-    title = "PieChart"
-    scene = new Scene(400, 250) {
-      root = new StackPane {
-        children = new PieChart() {
-          data = chartData()
+  override def start(): Unit = {
+
+    stage = new PrimaryStage {
+      title = "PieChart"
+      scene = new Scene(400, 250) {
+        root = new StackPane {
+          children = new PieChart() {
+            data = chartData()
+          }
         }
       }
     }
   }
-
 
   private def chartData() = ObservableBuffer(
     PieChart.Data("java", 17.56),

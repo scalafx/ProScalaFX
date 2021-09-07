@@ -1,10 +1,9 @@
 package proscalafx.ch04.reversi.examples
 
 import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
-
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.JFXApp3
+import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.Scene
 import scalafx.scene.effect.{DropShadow, InnerShadow}
@@ -13,29 +12,29 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{Font, FontWeight, Text}
 
+object PlayerScoreExample extends JFXApp3 {
 
-object PlayerScoreExample extends JFXApp {
+  override def start(): Unit = {
 
-  val tiles = new TilePane() {
-    snapToPixel = false
-    children = List(
-      createScore(Black),
-      createScore(White)
-    )
-  }
-
-  stage = new PrimaryStage() {
-    scene = new Scene(600, 140) {
-      content = tiles
+    val tiles = new TilePane() {
+      snapToPixel = false
+      children = List(
+        createScore(Black),
+        createScore(White)
+      )
     }
+
+    stage = new PrimaryStage() {
+      scene = new Scene(600, 140) {
+        content = tiles
+      }
+    }
+
+    tiles.prefTileWidth <== stage.scene().width / 2
+    tiles.prefTileHeight <== stage.scene().height
   }
-
-  tiles.prefTileWidth <== stage.scene().width / 2
-  tiles.prefTileHeight <== stage.scene().height
-
 
   //---------------------------------------------------------------------------
-
 
   private def createScore(owner: Owner): StackPane = {
 

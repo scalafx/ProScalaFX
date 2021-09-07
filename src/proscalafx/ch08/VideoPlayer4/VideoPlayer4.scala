@@ -1,41 +1,28 @@
-
 package proscalafx.ch08.VideoPlayer4
 
-import com.sun.javafx.{runtime => csjfxr}
 import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.input.TransferMode
 import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.scene.{Node, Scene}
 
-
 /**
- * @author Jarek Sacha 
- */
-object VideoPlayer4 extends JFXApp {
-  println("JavaFX version: " + csjfxr.VersionInfo.getRuntimeVersion)
+  * @author Jarek Sacha
+  */
+class VideoPlayer4 {
 
-  private val mediaModel = new MediaModel() {url = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv"}
   private var playerControlsView: PlayerControlsView = _
   private var videoView: VideoView = _
   private var equalizerView: EqualizerView = _
 
-  private val page1 = createPageOne()
-  private val page2 = createPageTwo()
-  private val rootNode = new StackPane {children = page1}
-
-  stage = new PrimaryStage {
-    title = "Video Player 4"
-    scene = new Scene(rootNode, 1024, 680) {
-      val stylesheet = getClass.getResource("media.css")
-      stylesheets += stylesheet.toString
-    }
-    initSceneDragAndDrop(scene())
+  val mediaModel: MediaModel = new MediaModel() {
+    url = "https://download.oracle.com/otndocs/products/javafx/oow2010-2.mp4"
   }
 
-  mediaModel.mediaPlayer().play()
-
+  private val page1 = createPageOne()
+  private val page2 = createPageTwo()
+  val rootNode: StackPane = new StackPane {
+    children = page1
+  }
 
   private def createPageOne(): Node = {
     videoView = new VideoView(mediaModel)
@@ -47,15 +34,13 @@ object VideoPlayer4 extends JFXApp {
     }
   }
 
-
   private def createPageTwo(): Node = {
     equalizerView = new EqualizerView(mediaModel)
     equalizerView.onNextPageAction { _ => rootNode.children = page1 }
     equalizerView.viewNode
   }
 
-
-  private def initSceneDragAndDrop(scene: Scene): Unit = {
+  def initSceneDragAndDrop(scene: Scene): Unit = {
     scene.onDragOver = event => {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {
@@ -67,13 +52,14 @@ object VideoPlayer4 extends JFXApp {
 
     scene.onDragDropped = event => {
       val db = event.dragboard
-      val url = if (db.hasFiles) {
-        db.getFiles.get(0).toURI.toString
-      } else if (db.hasUrl) {
-        db.getUrl
-      } else {
-        null
-      }
+      val url =
+        if (db.hasFiles) {
+          db.getFiles.get(0).toURI.toString
+        } else if (db.hasUrl) {
+          db.getUrl
+        } else {
+          null
+        }
 
       if (url != null) {
         mediaModel.url = url
