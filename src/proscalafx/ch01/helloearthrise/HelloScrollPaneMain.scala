@@ -12,6 +12,8 @@ import scalafx.scene.paint.Color
 import scalafx.scene.text.{Font, FontWeight, Text, TextAlignment}
 import scalafx.util.Duration
 
+import java.io.File
+
 object HelloScrollPaneMain extends JFXApp3 {
 
   override def start(): Unit = {
@@ -45,7 +47,7 @@ you on the good Earth." """.replace("\n", "")
       title = "Hello Earthrise"
       scene = new Scene(516, 387) {
         content = List(
-          new ImageView(new Image("http://projavafx.com/images/earthrise.jpg")),
+          new ImageView(new Image(new File("media/earthrise.jpg").toURI.toString)),
           new ScrollPane {
             layoutX = 50
             layoutY = 180

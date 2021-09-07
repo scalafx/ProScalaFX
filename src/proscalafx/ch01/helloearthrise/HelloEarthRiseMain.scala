@@ -11,6 +11,8 @@ import scalafx.scene.text.{Font, FontWeight, Text, TextAlignment}
 import scalafx.scene.{Group, Scene}
 import scalafx.util.Duration
 
+import java.io.File
+
 /** Main class for the "Hello World" style example. */
 object HelloEarthRiseMain extends JFXApp3 {
 
@@ -46,7 +48,7 @@ object HelloEarthRiseMain extends JFXApp3 {
       title = "Hello Earthrise"
       scene = new Scene(516, 387) {
         content = List(
-          new ImageView(image = new Image("http://projavafx.com/images/earthrise.jpg")),
+          new ImageView(image = new Image(new File("media/earthrise.jpg").toURI.toString)),
           new Group {
             layoutX = 50
             layoutY = 180
