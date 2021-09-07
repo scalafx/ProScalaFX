@@ -16,7 +16,7 @@ object FullScreenVideoPlayer extends JFXApp3 {
 
   override def start(): Unit = {
 
-    val file = new File("media/omgrobots.flv")
+    val file = new File("media/omgrobots.mp4")
     val media = new Media(file.toURI.toString)
     val mediaPlayer = new MediaPlayer(media)
     val mediaView = new MediaView(mediaPlayer) {

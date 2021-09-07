@@ -28,7 +28,7 @@ object VideoPlayer3 extends JFXApp3 {
       visible = false
     }
 
-    val file = new File("media/omgrobots.flv")
+    val file = new File("media/omgrobots.mp4")
     val media = new Media(file.toURI.toString) {
       markers ++= Map(
         "Split" -> (3000 ms),

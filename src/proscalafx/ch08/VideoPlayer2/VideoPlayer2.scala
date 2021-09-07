@@ -26,7 +26,7 @@ object VideoPlayer2 extends JFXApp3 {
       alignmentInParent = Pos.TopCenter
     }
 
-    val file = new File("media/omgrobots.flv")
+    val file = new File("media/omgrobots.mp4")
     val media = new Media(file.toURI.toString) {
       markers ++= Map(
         "Robot Finds Wall" -> (3100 ms),
