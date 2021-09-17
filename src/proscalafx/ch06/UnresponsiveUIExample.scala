@@ -11,7 +11,6 @@ import scalafx.scene.layout.{BorderPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
-
 /**
   * @author Jarek Sacha
   */
@@ -29,22 +28,21 @@ object UnresponsiveUIExample extends JFXApp3 {
 
   def hookupEvents(): Unit = {
     View.changeFillButton.onAction = () => {
-        val fillPaint = Model.fillPaint()
+      val fillPaint = Model.fillPaint()
       Model.fillPaint() = if (fillPaint == Color.LightGray.delegate) Color.Gray else Color.LightGray
-        // Bad code that will cause the UI to be unresponsive
-        try {
-          Thread.sleep(Long.MaxValue)
-        } catch {
-          case _: InterruptedException => /* Properly handle exception */
-        }
+      // Bad code that will cause the UI to be unresponsive
+      try {
+        Thread.sleep(Long.MaxValue)
+      } catch {
+        case _: InterruptedException => /* Properly handle exception */
       }
+    }
 
     View.changeStrokeButton.onAction = () => {
-        val strokePaint = Model.strokePaint()
+      val strokePaint = Model.strokePaint()
       Model.strokePaint() = if (strokePaint == Color.DarkGray.delegate) Color.Black else Color.DarkGray
-      }
+    }
   }
-
 
   private object Model {
     // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
@@ -52,7 +50,6 @@ object UnresponsiveUIExample extends JFXApp3 {
     val fillPaint = ObjectProperty(this, "fillPaint", Color.LightGray)
     val strokePaint = ObjectProperty(this, "strokePaint", Color.DarkGray)
   }
-
 
   private object View {
     val rectangle = new Rectangle {
