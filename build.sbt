@@ -2,7 +2,7 @@
 name := "ProScalaFX"
 
 // Current version
-version := "16.0.0-R25-SNAPSHOT"
+version := "16.0.0-R25"
 
 // Version of scala to use
 val scala2Version = "2.13.6"
@@ -25,7 +25,7 @@ resolvers += Opts.resolver.sonatypeSnapshots
 //resolvers += Opts.resolver.sonatypeStaging
 
 // Add ScalaFX dependency, exclude JavaFX transitive dependencies, may not mach this OS
-libraryDependencies += "org.scalafx" %% "scalafx" % "16.0.0-R25-SNAPSHOT"
+libraryDependencies += "org.scalafx" %% "scalafx" % "16.0.0-R25"
 
 // Add OS specific JavaFX dependencies
 val javafxModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
