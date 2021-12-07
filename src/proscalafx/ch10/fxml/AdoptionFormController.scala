@@ -1,14 +1,15 @@
 package proscalafx.ch10.fxml
 
-import java.net.URL
-import java.util
-
 import javafx.scene.{control => jfxsc, layout => jfxsl}
 import javafx.{event => jfxe, fxml => jfxf}
 import scalafx.Includes._
 import scalafx.scene.layout.GridPane
 
-/** Example of a controlled initialized through FXML.
+import java.net.URL
+import java.util
+
+/**
+  * Example of a controlled initialized through FXML.
   *
   * When working with FXML, due to the nature of JavaFX FXMLLoader, we need to expose variables and methods that
   * FXMLLoader will be using with JavaFX signatures.
@@ -48,7 +49,6 @@ class AdoptionFormController extends jfxf.Initializable {
   private var gridDelegate: jfxsl.GridPane = _
   private var grid: GridPane = _
 
-
   @jfxf.FXML
   private def handleSubmit(event: jfxe.ActionEvent): Unit = {
     grid.gridLinesVisible() = !grid.gridLinesVisible()
@@ -62,7 +62,7 @@ class AdoptionFormController extends jfxf.Initializable {
     additionalInfoTextArea.text = ""
   }
 
-  def initialize(url: URL, rb: util.ResourceBundle): Unit = {
+  override def initialize(url: URL, rb: util.ResourceBundle): Unit = {
     grid = new GridPane(gridDelegate)
   }
 }
