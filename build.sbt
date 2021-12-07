@@ -5,8 +5,8 @@ name := "ProScalaFX"
 version := "16.0.0-R25"
 
 // Version of scala to use
-val scala2Version = "2.13.6"
-val scala3Version = "3.0.2"
+val scala2Version = "2.13.7"
+val scala3Version = "3.1.0"
 // To cross compile with Scala 2 and Scala 3
 crossScalaVersions := Seq(scala2Version, scala3Version)
 scalaVersion := scala2Version
@@ -39,4 +39,3 @@ libraryDependencies ++= javafxModules.map(m => "org.openjfx" % s"javafx-$m" % "1
 
 // Fork a new JVM for 'run' and 'test:run'
 fork := true
-
