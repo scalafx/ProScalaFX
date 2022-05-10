@@ -28,7 +28,10 @@ object StarterAppMain extends JFXApp3 {
 
     stage = new PrimaryStage {
       scene = new Scene(800, 600) {
-        stylesheets = List(getClass.getResource("starterApp.css").toExternalForm)
+        Option(getClass.getResource("starterApp.css")) match {
+          case Some(url) => stylesheets = List(url.toExternalForm)
+          case None => println("Cannot load resource for a stylesheet: starterApp.css")
+        }
         root = new BorderPane {
           top = new VBox {
             children = List(
