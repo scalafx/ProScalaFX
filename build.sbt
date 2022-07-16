@@ -20,7 +20,7 @@ Compile / resourceDirectory := baseDirectory(_ / "src").value
 scalacOptions ++= Seq("-deprecation", "-feature")
 
 // Point to location of a snapshot repository for ScalaFX
-resolvers += Opts.resolver.sonatypeSnapshots
+resolvers ++= Opts.resolver.sonatypeOssSnapshots
 
 //resolvers += Opts.resolver.sonatypeStaging
 
