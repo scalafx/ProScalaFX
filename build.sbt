@@ -5,8 +5,8 @@ name := "ProScalaFX"
 version := "18.0.1-R28"
 
 // Version of scala to use
-val scala2Version = "2.13.8"
-val scala3Version = "3.1.3"
+val scala2Version = "2.13.9"
+val scala3Version = "3.2.0"
 // To cross compile with Scala 2 and Scala 3
 crossScalaVersions := Seq(scala2Version, scala3Version)
 scalaVersion := scala2Version
