@@ -1,6 +1,5 @@
 package proscalafx.ch06
 
-import javafx.beans.{binding => jfxbb}
 import javafx.{concurrent => jfxc}
 import scalafx.Includes._
 import scalafx.application.JFXApp3
@@ -95,8 +94,7 @@ object ServiceExample extends JFXApp3 {
       text <== Model.Worker.running.asString()
     }
     val state = new Label {
-      // NOTE: we need to use delegate to get proper binding, without it the value of text will not change.
-      text <== jfxbb.Bindings.format("%s", stateProperty.delegate)
+      text <== stateProperty.map(_.toString)
     }
     val totalWork = new Label {
       text <== Model.Worker.totalWork.asString()
@@ -111,13 +109,10 @@ object ServiceExample extends JFXApp3 {
       text <== Model.Worker.value
     }
     val exception = new Label {
-      text <== new jfxbb.StringBinding {
-        super.bind(Model.Worker.exceptionProperty)
-
-        protected def computeValue(): String = {
-          val e = Model.Worker.exception()
-          if (e == null) "" else e.getMessage
-        }
+      text <== Model.Worker.exceptionProperty.map { ex =>
+        Option(ex)
+          .map(_.getMessage)
+          .getOrElse("")
       }
     }
 
@@ -125,19 +120,12 @@ object ServiceExample extends JFXApp3 {
       maxWidth = 40
     }
 
-    Model.numberOfItems <== new jfxbb.IntegerBinding {
-      bind(numberOfItems.text)
-
-      def computeValue(): Int = {
-        val text = numberOfItems.text()
-        var n = 250
-        try {
-          n = Integer.parseInt(text)
-        }
-        catch {
-          case _: NumberFormatException =>
-        }
-        n
+    Model.numberOfItems <== numberOfItems.text.map[Number] { text =>
+      try {
+        Integer.parseInt(text)
+      } catch {
+        case _: NumberFormatException =>
+          250
       }
     }
 

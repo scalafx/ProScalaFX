@@ -1,7 +1,7 @@
 package proscalafx.ch03
 
-import javafx.beans.{binding => jfxbb}
-import scalafx.beans.binding.NumberBinding
+import scalafx.Includes._
+import scalafx.beans.binding.Bindings
 import scalafx.beans.property.DoubleProperty
 
 object HeronsFormulaDirectExtensionExample extends App {
@@ -9,11 +9,8 @@ object HeronsFormulaDirectExtensionExample extends App {
   val b = DoubleProperty(0)
   val c = DoubleProperty(0)
 
-  val area = new NumberBinding(new jfxbb.DoubleBinding {
-
-    super.bind(a, b, c)
-
-    override def computeValue: Double = {
+  val area = Bindings.createDoubleBinding(
+    () => {
       val a0 = a()
       val b0 = b()
       val c0 = c()
@@ -24,8 +21,7 @@ object HeronsFormulaDirectExtensionExample extends App {
       } else {
         0
       }
-    }
-  })
+    }, a, b, c)
 
   // Use braces "()" to access values hold by properties, bindings, like `area`, and numeric expressions.
   a() = 3

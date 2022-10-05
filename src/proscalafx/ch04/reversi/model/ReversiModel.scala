@@ -1,9 +1,11 @@
 package proscalafx.ch04.reversi.model
 
-import javafx.beans.{binding => jfxbb}
 import scalafx.Includes.{when, _}
+import scalafx.beans.Observable
 import scalafx.beans.binding._
 import scalafx.beans.property.ObjectProperty
+
+import scala.collection.mutable.ListBuffer
 
 
 object ReversiModel {
@@ -61,37 +63,39 @@ object ReversiModel {
   }
 
 
-  private def canFlip(cellX: Int, cellY: Int, directionX: Int, directionY: Int, turn: ObjectProperty[Owner]) = {
-    new BooleanBinding(new jfxbb.BooleanBinding {
+  private def canFlip(cellX: Int, cellY: Int, directionX: Int, directionY: Int, turn: ObjectProperty[Owner]): BooleanBinding = {
+    // Build list of dependencies for binding
+    val dependencies = ListBuffer.empty[Observable]
+    var x = cellX + directionX
+    var y = cellY + directionY
+    while (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+      dependencies += board(x)(y)
+      x += directionX
+      y += directionY
+    }
+    dependencies += turn
 
-      bind(turn)
-      var x = cellX + directionX
-      var y = cellY + directionY
-      while (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
-        bind(board(x)(y))
-        x += directionX
-        y += directionY
-      }
-
-      override protected def computeValue: Boolean = {
-
+    Bindings.createBooleanBinding(
+      // Flip evaluation
+      () => {
         val turnVal = turn.get
         var x = cellX + directionX
         var y = cellY + directionY
         var first = true
-
-        while (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE && board(x)(y).get != NONE) {
+        var result: Option[Boolean] = None
+        while (result.isEmpty &&
+          x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE && board(x)(y).get != NONE) {
           if (board(x)(y).get == turnVal) {
-            return !first
+            result = Option(!first)
           }
           first = false
           x += directionX
           y += directionY
         }
-
-        false
-      }
-    })
+        result.getOrElse(false)
+      },
+      dependencies.toSeq: _*
+    )
   }
 
 

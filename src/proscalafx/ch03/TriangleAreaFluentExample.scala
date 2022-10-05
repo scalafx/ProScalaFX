@@ -1,7 +1,6 @@
 package proscalafx.ch03
 
-import javafx.beans.{binding => jfxbb}
-import scalafx.Includes._
+import scalafx.beans.binding.Bindings
 import scalafx.beans.property.IntegerProperty
 
 object TriangleAreaFluentExample extends App {
@@ -14,10 +13,9 @@ object TriangleAreaFluentExample extends App {
 
   val area = ((x1 * y2) + (x2 * y3) + (x3 * y1) - (x1 * y3) - (x2 * y1) - (x3 * y2)) / 2.0
 
-  // NOTE: we need to use delegate to get proper binding, without it we would get IllegalFormatConversionException
-  val output = jfxbb.Bindings.format(
-    "For A(%d,%d), B(%d,%d), C(%d,%d), the area of triangle ABC is %.1f",
-    x1.delegate, y1.delegate, x2.delegate, y2.delegate, x3.delegate, y3.delegate, area.delegate)
+  val output = Bindings.createStringBinding(
+    () => f"For A(${x1()},${y1()}), B(${x2()},${y2()}), C(${x3()},${y3()}), the area of triangle ABC is ${area().doubleValue()}%.1f",
+    x1, y1, x2, y2, x3, y3, area)
 
   x1() = 0
   y1() = 0
