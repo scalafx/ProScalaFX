@@ -1,8 +1,8 @@
 package proscalafx.ch04.reversi.ui
 
-import javafx.scene.{layout => jfxsl}
+import javafx.scene.layout as jfxsl
 import proscalafx.ch04.reversi.model.ReversiModel
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.animation.FadeTransition
 import scalafx.geometry.{HPos, VPos}
 import scalafx.scene.effect.{Light, Lighting}

@@ -1,4 +1,1 @@
 scalacOptions ++= Seq("-unchecked", "-deprecation")
-
-
-

@@ -2,27 +2,27 @@ package proscalafx.ch06
 
 import scalafx.collections.ObservableBuffer
 
-
-/** This example corresponds to JavaFX example `ObservableListExample`.
-  *
-  * In ScalaFX `ObservableBuffer` is a wrapper for JavaFX `ObservableList`.
-  */
+/**
+ * This example corresponds to JavaFX example `ObservableListExample`.
+ *
+ * In ScalaFX `ObservableBuffer` is a wrapper for JavaFX `ObservableList`.
+ */
 object ObservableBufferExample extends App {
 
   val strings = new ObservableBuffer[String]()
   strings.onInvalidate(println("\tlist invalidated"))
   strings.onChange((source, change) => println("\tstrings = " + source.mkString("[", ", ", "]")))
 
-  println( """Calling += "First": """)
+  println("""Calling += "First": """)
   strings += "First"
 
-  println( """Calling insert(0, "Zeroth"): """)
+  println("""Calling insert(0, "Zeroth"): """)
   strings.insert(0, "Zeroth")
 
   println(""""Calling ++= Seq("Second", "Third"): """)
   strings ++= Seq("Second", "Third")
 
-  println( """Calling (1) = "New First"): """)
+  println("""Calling (1) = "New First"): """)
   strings(1) = "New First"
 
   val list = List("Second_1", "Second_2")
@@ -35,7 +35,7 @@ object ObservableBufferExample extends App {
   println("Calling removeRange(2, 4): ")
   strings.removeRange(2, 4)
 
-  println( """Remove elements that contain letter "t"""")
+  println("""Remove elements that contain letter "t"""")
   strings --= strings.filter(_.contains("t"))
 
   println("""Calling --= Seq("Third", "Fourth"): """)

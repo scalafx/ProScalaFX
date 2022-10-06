@@ -1,6 +1,6 @@
 package proscalafx.ch08.BasicAudioClip
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.geometry.Insets
@@ -9,17 +9,16 @@ import scalafx.scene.control.Button
 import scalafx.scene.layout.StackPane
 import scalafx.scene.media.AudioClip
 
-
 /**
-  * Playing an audio clip.
-  *
-  * @author Jarek Sacha
-  */
+ * Playing an audio clip.
+ *
+ * @author Jarek Sacha
+ */
 object BasicAudioClip extends JFXApp3 {
 
   override def start(): Unit = {
 
-    val resource = getClass.getResource("resources/beep.wav")
+    val resource  = getClass.getResource("resources/beep.wav")
     val audioClip = new AudioClip(resource.toString)
     val stackPane = new StackPane {
       padding = Insets(10)

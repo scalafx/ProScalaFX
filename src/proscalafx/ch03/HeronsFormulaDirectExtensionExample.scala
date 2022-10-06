@@ -1,6 +1,6 @@
 package proscalafx.ch03
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.beans.binding.Bindings
 import scalafx.beans.property.DoubleProperty
 
@@ -16,24 +16,40 @@ object HeronsFormulaDirectExtensionExample extends App {
       val c0 = c()
 
       if ((a0 + b0 > c0) && (b0 + c0 > a0) && (c0 + a0 > b0)) {
-        val s = (a0 + b0 + c0) / 2.0D
+        val s = (a0 + b0 + c0) / 2.0d
         math.sqrt(s * (s - a0) * (s - b0) * (s - c0))
       } else {
         0
       }
-    }, a, b, c)
+    },
+    a,
+    b,
+    c
+  )
 
   // Use braces "()" to access values hold by properties, bindings, like `area`, and numeric expressions.
   a() = 3
   b() = 4
   c() = 5
-  printf("Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
-    " the area of the triangle is %3.2f\n", a(), b(), c(), area())
+  printf(
+    "Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
+      " the area of the triangle is %3.2f\n",
+    a(),
+    b(),
+    c(),
+    area()
+  )
 
   a() = 2
   b() = 2
   c() = 2
-  printf("Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
-    " the area of the triangle is %3.2f\n", a(), b(), c(), area())
+  printf(
+    "Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
+      " the area of the triangle is %3.2f\n",
+    a(),
+    b(),
+    c(),
+    area()
+  )
 
 }

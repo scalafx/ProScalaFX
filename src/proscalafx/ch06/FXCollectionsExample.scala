@@ -1,38 +1,34 @@
 package proscalafx.ch06
 
-import java.{util => ju}
-
-import javafx.{collections => jfxc}
+import javafx.collections as jfxc
 import scalafx.collections.ObservableBuffer
-import scalafx.collections.ObservableBuffer._
+import scalafx.collections.ObservableBuffer.*
 
-import scala.jdk.CollectionConverters._
+import java.util as ju
+import scala.jdk.CollectionConverters.*
 
-
-/** ScalaFX version of `FXCollectionsExample` from "Pro JavaFX 2" book.
-  *
-  * ScalaFX does not have a direct equivalent of JavaFX `FXCollections`.
-  * Some of static methods from `FXCollections` are members of relevant observable collection in ScalaFX,
-  * for instance `replaceAll`. Some are in companion objects, for instance, `shuffle`.
-  * Some are not implemented and require use of `FXCollections`.
-  *
-  * @author Jarek Sacha
-  */
+/**
+ * ScalaFX version of `FXCollectionsExample` from "Pro JavaFX 2" book.
+ *
+ * ScalaFX does not have a direct equivalent of JavaFX `FXCollections`.
+ * Some of static methods from `FXCollections` are members of relevant observable collection in ScalaFX,
+ * for instance `replaceAll`. Some are in companion objects, for instance, `shuffle`.
+ * Some are not implemented and require use of `FXCollections`.
+ *
+ * @author Jarek Sacha
+ */
 object FXCollectionsExample extends App {
 
   // `println` statements show JavaFX API, for easier comparison to ScalaFX API used in the code.
 
-
   val strings = new ObservableBuffer[String]()
-  strings.onChange(
-    (source, changes) => {
-      println("\tlist = " + source.mkString("[", ", ", "]"))
-      changes.foreach(prettyPrint)
-      println()
-    }
-  )
+  strings.onChange((source, changes) => {
+    println("\tlist = " + source.mkString("[", ", ", "]"))
+    changes.foreach(prettyPrint)
+    println()
+  })
 
-  println( """Calling addAll("Zero", "One", "Two", "Three"): """)
+  println("""Calling addAll("Zero", "One", "Two", "Three"): """)
   strings.addAll("Zero", "One", "Two", "Three")
 
   println("Calling copy: ")
@@ -59,9 +55,8 @@ object FXCollectionsExample extends App {
   println("Calling sort(strings, c) with custom comparator: ")
   strings.sort((lhs, rhs) => lhs > rhs)
 
-  println( """Calling fill(strings, "Ten"): """)
+  println("""Calling fill(strings, "Ten"): """)
   ObservableBuffer.fillAll(strings, "Ten")
-
 
   def prettyPrint(change: Change[String]): Unit = {
     change match {
@@ -85,7 +80,7 @@ object FXCollectionsExample extends App {
     }
   }
 
-
-  def mkString[T](seq: IterableOnce[T]): String = if (seq.iterator.isEmpty) "[]" else seq.iterator.mkString("[", ", ", "]")
+  def mkString[T](seq: IterableOnce[T]): String =
+    if (seq.iterator.isEmpty) "[]" else seq.iterator.mkString("[", ", ", "]")
 
 }

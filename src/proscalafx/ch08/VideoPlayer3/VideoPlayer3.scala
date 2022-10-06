@@ -1,6 +1,6 @@
 package proscalafx.ch08.VideoPlayer3
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.animation.{ParallelTransition, TranslateTransition}
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.application.{JFXApp3, Platform}
@@ -15,10 +15,9 @@ import java.io.File
 import java.net.URL
 import scala.language.postfixOps
 
-
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object VideoPlayer3 extends JFXApp3 {
 
   override def start(): Unit = {
@@ -32,7 +31,7 @@ object VideoPlayer3 extends JFXApp3 {
     val media = new Media(file.toURI.toString) {
       markers ++= Map(
         "Split" -> (3000 ms),
-        "Join" -> (9000 ms)
+        "Join"  -> (9000 ms)
       )
     }
 
@@ -64,18 +63,18 @@ object VideoPlayer3 extends JFXApp3 {
       }
     }
 
-    mediaPlayer.onMarker = event => Platform.runLater {
-      event.marker.getKey match {
-        case "Split" =>
-          message.visible = true
-          buildSplitTransition(mediaView1, mediaView2).play()
-        case _ => buildJoinTransition(mediaView1, mediaView2).play()
+    mediaPlayer.onMarker = event =>
+      Platform.runLater {
+        event.marker.getKey match {
+          case "Split" =>
+            message.visible = true
+            buildSplitTransition(mediaView1, mediaView2).play()
+          case _ => buildJoinTransition(mediaView1, mediaView2).play()
+        }
       }
-    }
 
     mediaPlayer.play()
   }
-
 
   private def buildJoinTransition(one: Node, two: Node) = new ParallelTransition {
     children = List(
@@ -91,7 +90,6 @@ object VideoPlayer3 extends JFXApp3 {
       }
     )
   }
-
 
   private def buildSplitTransition(one: Node, two: Node) = new ParallelTransition {
     children = List(

@@ -1,6 +1,6 @@
 package proscalafx.ch08.AudioPlayer2
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableMap.Add
@@ -13,19 +13,19 @@ import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, RowConstrain
 import scalafx.scene.media.{Media, MediaPlayer}
 
 /**
-  * Displaying the metadata information in the scene graph.
-  *
-  * @author Jarek Sacha
-  */
+ * Displaying the metadata information in the scene graph.
+ *
+ * @author Jarek Sacha
+ */
 object AudioPlayer2 extends JFXApp3 {
 
-  private var media: Media = _
+  private var media: Media             = _
   private var mediaPlayer: MediaPlayer = _
-  private var artist: Label = _
-  private var album: Label = _
-  private var title: Label = _
-  private var year: Label = _
-  private var albumCover: ImageView = _
+  private var artist: Label            = _
+  private var album: Label             = _
+  private var title: Label             = _
+  private var year: Label              = _
+  private var albumCover: ImageView    = _
 
   override def start(): Unit = {
 
@@ -95,7 +95,7 @@ object AudioPlayer2 extends JFXApp3 {
         metadata.onChange((_, change) => {
           change match {
             case Add(key, added) => handleMetadata(key, added)
-            case _ =>
+            case _               =>
           }
         })
       }
@@ -117,12 +117,12 @@ object AudioPlayer2 extends JFXApp3 {
 
   private def handleMetadata(key: String, value: AnyRef): Unit = {
     key match {
-      case "album" => album.text = value.toString
+      case "album"  => album.text = value.toString
       case "artist" => artist.text = value.toString
-      case "title" => title.text = value.toString
-      case "year" => year.text = value.toString
-      case "image" => albumCover.image = value.asInstanceOf[javafx.scene.image.Image]
-      case _ => println("Unhandled metadata key: " + key + ", value: " + value)
+      case "title"  => title.text = value.toString
+      case "year"   => year.text = value.toString
+      case "image"  => albumCover.image = value.asInstanceOf[javafx.scene.image.Image]
+      case _        => println("Unhandled metadata key: " + key + ", value: " + value)
     }
   }
 }

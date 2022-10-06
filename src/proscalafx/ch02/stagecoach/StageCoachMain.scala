@@ -1,6 +1,6 @@
 package proscalafx.ch02.stagecoach
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.beans.property.StringProperty
@@ -14,16 +14,16 @@ import scalafx.scene.{Group, Scene}
 import scalafx.stage.{Screen, StageStyle}
 
 /**
-  * Stage property example.
-  *
-  * Can be run with various command line parameters to control stage style:
-  * decorated - a solid white background and platform decorations (default).
-  * transparent - transparent background and no decorations.
-  * undecorated - a solid white background and no decorations.
-  * utility - a solid white background and minimal platform decorations used for a utility window.
-  *
-  * @author Rafael
-  */
+ * Stage property example.
+ *
+ * Can be run with various command line parameters to control stage style:
+ * decorated - a solid white background and platform decorations (default).
+ * transparent - transparent background and no decorations.
+ * undecorated - a solid white background and no decorations.
+ * utility - a solid white background and minimal platform decorations used for a utility window.
+ *
+ * @author Rafael
+ */
 object StageCoachMain extends JFXApp3 {
 
   override def start(): Unit = {
@@ -34,8 +34,8 @@ object StageCoachMain extends JFXApp3 {
     val stageStyle = parameters.unnamed match {
       case Seq("transparent") => StageStyle.Transparent
       case Seq("undecorated") => StageStyle.Undecorated
-      case Seq("utility") => StageStyle.Utility
-      case _ => StageStyle.Decorated
+      case Seq("utility")     => StageStyle.Utility
+      case _                  => StageStyle.Decorated
     }
 
     val textStageX = new Text {
@@ -116,8 +116,8 @@ object StageCoachMain extends JFXApp3 {
       }
     }
 
-    //when mouse button is pressed, save the initial position of screen
-    val rootGroup = stage.scene().content(0)
+    // when mouse button is pressed, save the initial position of screen
+    val rootGroup   = stage.scene().content(0)
     var dragAnchorX = 0.0
     var dragAnchorY = 0.0
     rootGroup.onMousePressed = me => {

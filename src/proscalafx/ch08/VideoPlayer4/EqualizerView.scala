@@ -1,6 +1,6 @@
 package proscalafx.ch08.VideoPlayer4
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.event.ActionEvent
 import scalafx.geometry.{HPos, Insets, Orientation, VPos}
 import scalafx.scene.control.{Button, Label, Slider}
@@ -8,13 +8,13 @@ import scalafx.scene.layout.{GridPane, Priority, RowConstraints}
 import scalafx.scene.media.{EqualizerBand, MediaPlayer}
 
 /**
- * @author Jarek Sacha 
+ * @author Jarek Sacha
  */
 class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](mediaModel) {
 
-  private final val StartFrequency: Double = 250.0
-  private final val BandCount: Int = 7
-  private var spectrumBars: Array[SpectrumBar] = _
+  private final val StartFrequency: Double       = 250.0
+  private final val BandCount: Int               = 7
+  private var spectrumBars: Array[SpectrumBar]   = _
   private var spectrumListener: SpectrumListener = _
   private val backButton = new Button {
     text = "Back"
@@ -41,15 +41,15 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
       mp.audioSpectrumListener = if (newValue != null) spectrumListener else null
   }
 
-
   override def onNextPageAction(nextHandler: ActionEvent => Unit): Unit = {
     backButton.onAction = nextHandler
   }
 
-
   protected def initView(): GridPane = {
     val middle = new RowConstraints()
-    val outside = new RowConstraints() {vgrow = Priority.Always}
+    val outside = new RowConstraints() {
+      vgrow = Priority.Always
+    }
     new GridPane {
       padding = Insets(10)
       hgap = 20
@@ -57,9 +57,8 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     }
   }
 
-
   private def createEQInterface(): Unit = {
-    val gridPane = viewNode
+    val gridPane    = viewNode
     val mediaPlayer = mediaModel.mediaPlayer()
 
     createEQBands(gridPane, mediaPlayer)
@@ -72,15 +71,14 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     gridPane.add(backButton, 0, 3)
   }
 
-
   private def createEQBands(gp: GridPane, mp: MediaPlayer): Unit = {
     val bands = mp.getAudioEqualizer.getBands
 
     bands.clear()
 
-    val min = EqualizerBand.MIN_GAIN
-    val max = EqualizerBand.MAX_GAIN
-    val mid = (max - min) / 2
+    val min  = EqualizerBand.MIN_GAIN
+    val max  = EqualizerBand.MAX_GAIN
+    val mid  = (max - min) / 2
     var freq = StartFrequency
 
     // Create the equalizer bands with the gains preset to
@@ -100,7 +98,7 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     }
 
     for (i <- 0 until bands.size) {
-      val band = bands.get(i)
+      val band   = bands.get(i)
       val slider = createEQSlider(band, min, max)
 
       val label = new Label {
@@ -117,7 +115,6 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     }
   }
 
-
   private def createEQSlider(eb: EqualizerBand, minValue: Double, maxValue: Double) = new Slider {
     min = minValue
     max = maxValue
@@ -127,7 +124,6 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     value <==> eb.gain
     prefWidth = 44
   }
-
 
   private def createSpectrumBars(gridPane: GridPane): Unit = {
     spectrumBars = new Array[SpectrumBar](BandCount)
@@ -140,14 +136,12 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
     }
   }
 
-
   private def formatFrequency(centerFrequency: Double): String =
     if (centerFrequency < 1000) {
       "%.0f Hz".format(centerFrequency)
     } else {
       "%.1f kHz".format(centerFrequency / 1000)
     }
-
 
   private def clearGridPane(): Unit = {
     viewNode.children.foreach(GridPane.clearConstraints)

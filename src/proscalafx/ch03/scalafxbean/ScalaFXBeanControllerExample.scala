@@ -2,8 +2,7 @@ package proscalafx.ch03.scalafxbean
 
 import scalafx.scene.paint.Color
 
-class ScalaFXBeanControllerExample(model: ScalaFXBeanModelExample,
-                                   view: ScalaFXBeanViewExample) {
+class ScalaFXBeanControllerExample(model: ScalaFXBeanModelExample, view: ScalaFXBeanViewExample) {
 
   def incrementIPropertyOnModel(): Unit = {
     model.i() = model.i() + 1

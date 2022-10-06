@@ -1,18 +1,18 @@
 package proscalafx.ch08.VideoPlayer4
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.scene.input.TransferMode
 import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.scene.{Node, Scene}
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 class VideoPlayer4 {
 
   private var playerControlsView: PlayerControlsView = _
-  private var videoView: VideoView = _
-  private var equalizerView: EqualizerView = _
+  private var videoView: VideoView                   = _
+  private var equalizerView: EqualizerView           = _
 
   val mediaModel: MediaModel = new MediaModel() {
     url = "https://download.oracle.com/otndocs/products/javafx/oow2010-2.mp4"

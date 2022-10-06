@@ -8,8 +8,8 @@ import scalafx.scene.chart.{NumberAxis, ScatterChart, XYChart}
 import scalafx.scene.layout.StackPane
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object ChartApp4 extends JFXApp3 {
 
   override def start(): Unit = {
@@ -19,7 +19,7 @@ object ChartApp4 extends JFXApp3 {
       lowerBound = 2011
       upperBound = 2021
     }
-    val yAxis = new NumberAxis()
+    val yAxis        = new NumberAxis()
     val scatterChart = ScatterChart[Number, Number](xAxis, yAxis, createChartData())
 
     stage = new PrimaryStage {
@@ -40,15 +40,15 @@ object ChartApp4 extends JFXApp3 {
     def generateTrend(startValue: Double) = years.map(_ => math.random() - .5).scanLeft(startValue)(_ + _)
 
     val javaTrend = generateTrend(17.56)
-    val cTrend = generateTrend(17.06)
-    val cppTrend = generateTrend(8.25)
+    val cTrend    = generateTrend(17.06)
+    val cppTrend  = generateTrend(8.25)
 
     // NOTE: explicit type signature using Number instead Int and Double
     // We are deliberately using here factory methods, instead of "new", to create instances of
     // javafx.scene.chart.* types.
     val javaData = years zip javaTrend map { case (y, d) => XYChart.Data[Number, Number](y, d) }
-    val cData = years zip cTrend map { case (y, d) => XYChart.Data[Number, Number](y, d) }
-    val cppData = years zip cppTrend map { case (y, d) => XYChart.Data[Number, Number](y, d) }
+    val cData    = years zip cTrend map { case (y, d) => XYChart.Data[Number, Number](y, d) }
+    val cppData  = years zip cppTrend map { case (y, d) => XYChart.Data[Number, Number](y, d) }
 
     ObservableBuffer(
       XYChart.Series[Number, Number](name = "Java", data = ObservableBuffer.from(javaData)),

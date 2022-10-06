@@ -1,14 +1,14 @@
 package proscalafx.ch06
 
 import scalafx.collections.ObservableMap
-import scalafx.collections.ObservableMap._
+import scalafx.collections.ObservableMap.*
 
-
-/** Example of processing of "change" notifications from ScalaFX `ObservableMap`, wrapper for JavaFX `ObservableMap`.
-  *
-  * ScalaFX used a different way of passing information about modification to `ObservableMap`.
-  * Each modification is represented by a [[scalafx.collections.ObservableMap.Change]] object.
-  */
+/**
+ * Example of processing of "change" notifications from ScalaFX `ObservableMap`, wrapper for JavaFX `ObservableMap`.
+ *
+ * ScalaFX used a different way of passing information about modification to `ObservableMap`.
+ * Each modification is represented by a [[scalafx.collections.ObservableMap.Change]] object.
+ */
 object MapChangeEventExample extends App {
 
   val map = ObservableMap.empty[String, Int]
@@ -32,7 +32,6 @@ object MapChangeEventExample extends App {
 
   println("Removing by value: Calling map retain({case (k, v) => v != 3})")
   map filterInPlace { case (_, v) => v != 3 }
-
 
   def prettyChange(change: Change[_, _]): String = {
     val sb = new StringBuffer("\tChange event data:\n")

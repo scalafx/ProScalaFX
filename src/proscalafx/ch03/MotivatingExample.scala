@@ -6,7 +6,6 @@ object MotivatingExample extends App {
 
   var intProperty: IntegerProperty = _
 
-
   def createProperty(): Unit = {
     println()
     intProperty = IntegerProperty(1024)
@@ -15,7 +14,6 @@ object MotivatingExample extends App {
     println("intProperty.value = " + intProperty.value)
     println("intProperty() = " + intProperty())
   }
-
 
   def addAndRemoveInvalidationListener(): Unit = {
     println()
@@ -38,7 +36,6 @@ object MotivatingExample extends App {
     intProperty() = 4096
   }
 
-
   def addAndRemoveChangeListener(): Unit = {
     println()
     val subscription = intProperty.onChange {
@@ -56,7 +53,6 @@ object MotivatingExample extends App {
     println("Calling intProperty.set(6144).")
     intProperty() = 6144
   }
-
 
   def bindAndUnbindOnePropertyToAnother(): Unit = {
     println()
@@ -79,7 +75,6 @@ object MotivatingExample extends App {
     intProperty() = 8192
     println("otherProperty() = " + otherProperty())
   }
-
 
   createProperty()
   addAndRemoveInvalidationListener()

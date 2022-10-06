@@ -8,8 +8,8 @@ import scalafx.scene.chart.PieChart
 import scalafx.scene.layout.StackPane
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object ChartApp1 extends JFXApp3 {
 
   override def start(): Unit = {

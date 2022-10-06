@@ -1,26 +1,26 @@
 package proscalafx.ch07
 
-import javafx.scene.{chart => jfxsc}
-import scalafx.Includes._
+import javafx.scene.chart as jfxsc
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
-import scalafx.scene.chart._
+import scalafx.scene.chart.*
 import scalafx.scene.layout.StackPane
 import scalafx.util.StringConverter
 
 /**
-  * We use here the version of the example that is described in the book, it scales axis so bubbles appear as spheres
-  * rather than ellipses (in the downloadable Java code).
-  *
-  * @author Jarek Sacha
-  */
+ * We use here the version of the example that is described in the book, it scales axis so bubbles appear as spheres
+ * rather than ellipses (in the downloadable Java code).
+ *
+ * @author Jarek Sacha
+ */
 object ChartApp10 extends JFXApp3 {
 
   private val xStep = 10
-  private val xMin = 2010 * xStep
-  private val xMax = 2016 * xStep
+  private val xMin  = 2010 * xStep
+  private val xMax  = 2016 * xStep
 
   override def start(): Unit = {
 
@@ -38,7 +38,7 @@ object ChartApp10 extends JFXApp3 {
         def toString(t: Number): String = (t.intValue() / xStep).toString
       }
     }
-    val yAxis = new NumberAxis()
+    val yAxis       = new NumberAxis()
     val bubbleChart = BubbleChart(xAxis, yAxis)
     bubbleChart.title = "Speculations"
     bubbleChart.data = createChartData()
@@ -58,10 +58,10 @@ object ChartApp10 extends JFXApp3 {
   // signature for scalafx.scene.chart.XYChart.data used above.
   private def createChartData(): ObservableBuffer[jfxsc.XYChart.Series[Number, Number]] = {
     var javaValue = 17.56
-    var cValue = 17.06
-    var cppValue = 8.25
-    val scale = 10
-    val answer = new ObservableBuffer[jfxsc.XYChart.Series[Number, Number]]()
+    var cValue    = 17.06
+    var cppValue  = 8.25
+    val scale     = 10
+    val answer    = new ObservableBuffer[jfxsc.XYChart.Series[Number, Number]]()
     val java = new XYChart.Series[Number, Number] {
       name = "Java"
     }

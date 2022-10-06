@@ -1,18 +1,16 @@
 package proscalafx.ch08.AudioPlayer4
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.geometry.{Insets, VPos}
 import scalafx.scene.control.Label
 import scalafx.scene.effect.Reflection
 import scalafx.scene.image.ImageView
 import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, RowConstraints}
 
-
 /**
  * @author Jarek Sacha
  */
 class MetadataView(songModel: SongModel) extends AbstractView[GridPane](songModel) {
-
 
   def initView(): GridPane = {
     val title = new Label {
@@ -56,7 +54,7 @@ class MetadataView(songModel: SongModel) extends AbstractView[GridPane](songMode
         new ColumnConstraints {
           hgrow = Priority.Always
         }.delegate
-        )
+      )
       val r0 = new RowConstraints {
         valignment = VPos.Top
       }

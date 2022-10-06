@@ -1,23 +1,23 @@
 package proscalafx.ch04.reversi.ui
 
 import proscalafx.ch04.reversi.model.{NONE, Owner, White}
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.effect.Reflection
 import scalafx.scene.layout.Region
 
 object ReversiPiece {
 
-  private val nonePieceStyle = "radius: 0; "
+  private val nonePieceStyle  = "radius: 0; "
   private val whitePieceStyle = "-fx-background-color: radial-gradient(radius 100%, white .4, gray .9, darkgray 1); "
   private val blackPieceStyle = "-fx-background-color: radial-gradient(radius 100%, white .0, black .6); "
-  private val tileStyle = "-fx-background-radius: 1000em; -fx-background-insets: 5"
+  private val tileStyle       = "-fx-background-radius: 1000em; -fx-background-insets: 5"
 
 }
 
 class ReversiPiece(_owner: Owner = NONE) extends Region {
 
-  import ReversiPiece._
+  import ReversiPiece.*
 
   val owner = new ObjectProperty[Owner](this, "owner", _owner)
 
@@ -25,11 +25,10 @@ class ReversiPiece(_owner: Owner = NONE) extends Region {
     owner() = value
   }
 
-
   style <== (
     when(owner === NONE) choose nonePieceStyle otherwise
       (when(owner === White) choose whitePieceStyle otherwise blackPieceStyle)
-    ) + tileStyle
+  ) + tileStyle
 
   effect = new Reflection {
     fraction = 1.0

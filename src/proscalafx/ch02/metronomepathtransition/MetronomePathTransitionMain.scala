@@ -1,6 +1,6 @@
 package proscalafx.ch02.metronomepathtransition
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.animation.Animation.Status
 import scalafx.animation.PathTransition.OrientationType
 import scalafx.animation.{Interpolator, PathTransition, Timeline}

@@ -1,6 +1,6 @@
 package proscalafx.ch08.CodeMonkeyToDo
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.geometry.{HPos, Insets, Pos}
@@ -11,15 +11,15 @@ import scalafx.scene.media.AudioClip
 import scalafx.scene.web.WebView
 
 /**
-  * Controlling the playback parameters of an AudioClip.
-  *
-  * @author Jarek Sacha
-  */
+ * Controlling the playback parameters of an AudioClip.
+ *
+ * @author Jarek Sacha
+ */
 object CodeMonkeyToDo extends JFXApp3 {
 
   override def start(): Unit = {
-    val coffeeClip = new AudioClip(clipResourceString("resources/coffee.mp3"))
-    val jobClip = new AudioClip(clipResourceString("resources/job.mp3"))
+    val coffeeClip  = new AudioClip(clipResourceString("resources/coffee.mp3"))
+    val jobClip     = new AudioClip(clipResourceString("resources/job.mp3"))
     val meetingClip = new AudioClip(clipResourceString("resources/meeting.mp3"))
 
     val grid = new GridPane {
@@ -87,11 +87,11 @@ object CodeMonkeyToDo extends JFXApp3 {
   }
 
   private def createClipList(
-                              grid: GridPane,
-                              coffeeClip: AudioClip,
-                              jobClip: AudioClip,
-                              meetingClip: AudioClip
-                            ): Unit = {
+    grid: GridPane,
+    coffeeClip: AudioClip,
+    jobClip: AudioClip,
+    meetingClip: AudioClip
+  ): Unit = {
 
     val (volumeSlider, rateSlider, balanceSlider) = createControls(grid)
 

@@ -2,7 +2,6 @@ package proscalafx.ch03
 
 import scalafx.beans.property.DoubleProperty
 
-
 object RectangleAreaExample extends App {
   println("Constructing x with initial value of 2.0.")
   val x = new DoubleProperty(null, "x", 2.0)

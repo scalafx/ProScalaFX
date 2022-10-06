@@ -1,12 +1,12 @@
 package proscalafx.ch04.reversi.examples
 
 import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.effect.{DropShadow, InnerShadow}
-import scalafx.scene.layout._
+import scalafx.scene.layout.*
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{Font, FontWeight, Text}
@@ -31,7 +31,7 @@ object BorderLayoutExample extends JFXApp3 {
     }
   }
 
-  //---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
 
   private def createTitle = new TilePane {
     snapToPixel = false

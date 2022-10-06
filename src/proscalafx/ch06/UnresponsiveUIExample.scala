@@ -1,6 +1,6 @@
 package proscalafx.ch06
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.beans.property.ObjectProperty
@@ -12,8 +12,8 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object UnresponsiveUIExample extends JFXApp3 {
 
   override def start(): Unit = {
@@ -47,7 +47,7 @@ object UnresponsiveUIExample extends JFXApp3 {
   private object Model {
     // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
     // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
-    val fillPaint = ObjectProperty(this, "fillPaint", Color.LightGray)
+    val fillPaint   = ObjectProperty(this, "fillPaint", Color.LightGray)
     val strokePaint = ObjectProperty(this, "strokePaint", Color.DarkGray)
   }
 
@@ -60,7 +60,7 @@ object UnresponsiveUIExample extends JFXApp3 {
       stroke <== Model.strokePaint
     }
 
-    val changeFillButton = new Button("Change Fill")
+    val changeFillButton   = new Button("Change Fill")
     val changeStrokeButton = new Button("Chang Stroke")
 
     val buttonHBox = new HBox {

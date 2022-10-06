@@ -1,7 +1,7 @@
 package proscalafx.ch08.AudioPlayer4
 
-import javafx.scene.{media => jffxsm}
-import scalafx.Includes._
+import javafx.scene.media as jffxsm
+import scalafx.Includes.*
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
 import scalafx.event.subscriptions.Subscription
@@ -17,24 +17,23 @@ import scalafx.util.Duration
 
 import scala.language.postfixOps
 
-
 /**
- * @author Jarek Sacha 
+ * @author Jarek Sacha
  */
 class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](songModel) {
-  private var pauseImg: Image = _
-  private var playImg: Image = _
+  private var pauseImg: Image          = _
+  private var playImg: Image           = _
   private var playPauseIcon: ImageView = _
   // ScalaFX uses `subscription` to keep track of assigned listeners
   private var statusInvalidationSubscription: Subscription = _
-  private var currentTimeSubscription: Subscription = _
-  private var controlPanel: Node = _
-  private var statusLabel: Label = _
-  private var currentTimeLabel: Label = _
-  private var totalDurationLabel: Label = _
-  private var volumeSlider: Slider = _
-  private var positionSlider: Slider = _
-  private var eqButton: Button = _
+  private var currentTimeSubscription: Subscription        = _
+  private var controlPanel: Node                           = _
+  private var statusLabel: Label                           = _
+  private var currentTimeLabel: Label                      = _
+  private var totalDurationLabel: Label                    = _
+  private var volumeSlider: Slider                         = _
+  private var positionSlider: Slider                       = _
+  private var eqButton: Button                             = _
 
   songModel.mediaPlayer.onChange {
     (_, oldValue, newValue) =>
@@ -43,7 +42,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
   }
 
   addListenersAndBindings(songModel.mediaPlayer())
-
 
   protected def initView(): GridPane = {
     val openButton = createOpenButton()
@@ -58,19 +56,25 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     positionSlider.valueChanging.onChange {
       (_, oldValue, newValue) =>
         if (oldValue && !newValue) {
-          val pos = positionSlider.value()
+          val pos         = positionSlider.value()
           val mediaPlayer = songModel.mediaPlayer()
-          val seekTo = mediaPlayer.totalDuration() * pos
+          val seekTo      = mediaPlayer.totalDuration() * pos
           seekAndUpdatePosition(seekTo)
         }
     }
 
-    val volLow = new ImageView {id = "volumeLow"}
-    val volHigh = new ImageView {id = "volumeHigh"}
+    val volLow = new ImageView {
+      id = "volumeLow"
+    }
+    val volHigh = new ImageView {
+      id = "volumeHigh"
+    }
 
     val buttonCol = new ColumnConstraints(100)
     val spacerCol = new ColumnConstraints(40, 80, 80)
-    val middleCol = new ColumnConstraints {hgrow = Priority.Always}
+    val middleCol = new ColumnConstraints {
+      hgrow = Priority.Always
+    }
 
     val gp = new GridPane {
       hgap = 1
@@ -136,7 +140,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     val seekEndButton = new Button {
       id = "seekEndButton"
       onAction = () => {
-        val mediaPlayer = songModel.mediaPlayer()
+        val mediaPlayer   = songModel.mediaPlayer()
         val totalDuration = mediaPlayer.totalDuration()
         seekAndUpdatePosition(totalDuration - (1 s))
       }
@@ -148,7 +152,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
       children = List(seekStartButton, playPauseButton, seekEndButton)
     }
   }
-
 
   def createPlayPauseButton(): Button = {
     val pauseUrl = getClass.getResource("resources/pause.png")
@@ -166,12 +169,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
           case Status.Playing.delegate => mediaPlayer.pause()
-          case _ => mediaPlayer.play()
+          case _                       => mediaPlayer.play()
         }
       }
     }
   }
-
 
   private def createSlider(sliderId: String) = new Slider {
     min = 0
@@ -185,12 +187,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     styleClass += labelStyleClass
   }
 
-
   private def updatePositionSlider(currentTime: Duration): Unit = {
     if (positionSlider.isValueChanging) return
 
     val mediaPlayer = songModel.mediaPlayer()
-    val total = mediaPlayer.totalDuration()
+    val total       = mediaPlayer.totalDuration()
 
     positionSlider.value = if (total == null || currentTime == null) {
       0d
@@ -198,7 +199,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
       currentTime.toMillis / total.toMillis
     }
   }
-
 
   private def seekAndUpdatePosition(duration: Duration): Unit = {
     val mediaPlayer = songModel.mediaPlayer()
@@ -210,7 +210,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
   }
 
   private def formatDuration(duration: Duration): String = {
-    val millis = duration.toMillis
+    val millis  = duration.toMillis
     val seconds = (millis / 1000).toInt % 60
     val minutes = (millis / (1000 * 60)).toInt
     "%02d:%02d".format(minutes, seconds)
@@ -229,7 +229,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     }
   }
 
-
   private def addListenersAndBindings(mp: MediaPlayer): Unit = {
     statusInvalidationSubscription = mp.status.onInvalidate {
       Platform.runLater {
@@ -247,7 +246,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
     }
 
     mp.totalDuration.onInvalidate {
-      val mediaPlayer = songModel.mediaPlayer()
+      val mediaPlayer   = songModel.mediaPlayer()
       val totalDuration = mediaPlayer.totalDuration()
       totalDurationLabel.text = formatDuration(totalDuration)
     }
@@ -256,7 +255,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView[GridPane](so
 
     volumeSlider.value <==> mp.volume
   }
-
 
   private def removeListenersAndBinding(mp: MediaPlayer): Unit = {
     volumeSlider.value.unbind()

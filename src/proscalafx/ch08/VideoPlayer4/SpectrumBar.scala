@@ -1,15 +1,15 @@
 package proscalafx.ch08.VideoPlayer4
 
-import javafx.scene.{layout => jfxsl}
-import scalafx.Includes._
+import javafx.scene.layout as jfxsl
+import scalafx.Includes.*
 import scalafx.geometry.Pos
 import scalafx.scene.shape.Rectangle
 
-
-/** Custom component for displaying a spectrum bar.
-  *
-  * @author Jarek Sacha
-  */
+/**
+ * Custom component for displaying a spectrum bar.
+ *
+ * @author Jarek Sacha
+ */
 class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
   private val SPACING        = 1.0
   private val ASPECT_RATIO   = 3.0
@@ -33,7 +33,6 @@ class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
     getChildren.add(r)
   }
 
-
   protected override def computeMinHeight(width: Double) = computeHeight(MIN_BAR_HEIGHT)
 
   protected override def computeMinWidth(height: Double) = computeWidthForHeight(MIN_BAR_HEIGHT)
@@ -42,21 +41,19 @@ class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
 
   protected override def computePrefWidth(height: Double) = computeWidthForHeight(5)
 
-
   def setValue(value: Double): Unit = {
-    val barsLit = math.min(barCount, math.round(value / maxValue * barCount).toInt)
+    val barsLit   = math.min(barCount, math.round(value / maxValue * barCount).toInt)
     val childList = getChildren
     for (i <- 0 until childList.size) {
       childList.get(i).visible = (i > barCount - barsLit)
     }
   }
 
-
   protected override def layoutChildren(): Unit = {
     if (lastWidth != getWidth || lastHeight != getHeight) {
-      val spacing = SPACING * (barCount - 1)
+      val spacing   = SPACING * (barCount - 1)
       val barHeight = (getHeight - getVerticalPadding - spacing) / barCount
-      val barWidth = math.min(barHeight * ASPECT_RATIO, getWidth - getHorizontalPadding)
+      val barWidth  = math.min(barHeight * ASPECT_RATIO, getWidth - getHorizontalPadding)
 
       for (node <- getChildren) {
         val r = node.asInstanceOf[javafx.scene.shape.Rectangle]
@@ -71,23 +68,19 @@ class SpectrumBar(maxValue: Int, barCount: Int) extends jfxsl.VBox {
     super.layoutChildren()
   }
 
-
   private def computeWidthForHeight(barHeight: Double) = barHeight * ASPECT_RATIO + getHorizontalPadding
 
-
   private def computeHeight(barHeight: Double): Double = {
-    val vPadding = getVerticalPadding
+    val vPadding   = getVerticalPadding
     val barHeights = barHeight * barCount
-    val spacing = SPACING * (barCount - 1)
+    val spacing    = SPACING * (barCount - 1)
     barHeights + spacing + vPadding
   }
-
 
   private def getVerticalPadding: Double = {
     val padding = getPadding
     padding.top + padding.bottom
   }
-
 
   private def getHorizontalPadding: Double = {
     val padding = getPadding

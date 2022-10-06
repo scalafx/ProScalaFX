@@ -1,7 +1,7 @@
 package proscalafx.ch07
 
-import javafx.scene.{chart => jfxsc}
-import scalafx.Includes._
+import javafx.scene.chart as jfxsc
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
@@ -10,8 +10,8 @@ import scalafx.scene.chart.{NumberAxis, ScatterChart, XYChart}
 import scalafx.scene.layout.StackPane
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object ChartApp5 extends JFXApp3 {
 
   override def start(): Unit = {
@@ -42,9 +42,9 @@ object ChartApp5 extends JFXApp3 {
   // signature for scalafx.scene.chart.XYChart.data used above.
   private def createChartData(): ObservableBuffer[jfxsc.XYChart.Series[Number, Number]] = {
     var javaValue: Double = 17.56
-    var cValue: Double = 17.06
-    var cppValue: Double = 8.25
-    val answer = new ObservableBuffer[jfxsc.XYChart.Series[Number, Number]]()
+    var cValue: Double    = 17.06
+    var cppValue: Double  = 8.25
+    val answer            = new ObservableBuffer[jfxsc.XYChart.Series[Number, Number]]()
     val java = new XYChart.Series[Number, Number] {
       name = "Java"
     }

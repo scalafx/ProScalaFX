@@ -1,7 +1,7 @@
 package proscalafx.ch06
 
 import scalafx.collections.ObservableSet
-import scalafx.collections.ObservableSet._
+import scalafx.collections.ObservableSet.*
 
 object SetChangeEventExample extends App {
 

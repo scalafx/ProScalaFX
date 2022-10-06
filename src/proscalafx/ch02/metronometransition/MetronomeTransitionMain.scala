@@ -1,7 +1,7 @@
 package proscalafx.ch02.metronometransition
 
 import javafx.animation.Animation.Status
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.animation.{Interpolator, Timeline, TranslateTransition}
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage

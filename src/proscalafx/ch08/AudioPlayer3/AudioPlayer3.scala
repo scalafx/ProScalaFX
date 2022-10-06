@@ -1,7 +1,7 @@
 package proscalafx.ch08.AudioPlayer3
 
 import com.sun.javafx.runtime.VersionInfo
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.Scene
@@ -9,8 +9,8 @@ import scalafx.scene.input.TransferMode
 import scalafx.scene.layout.BorderPane
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object AudioPlayer3 extends JFXApp3 {
 
   override def start(): Unit = {
@@ -21,7 +21,7 @@ object AudioPlayer3 extends JFXApp3 {
 
     println("JavaFX version: " + VersionInfo.getRuntimeVersion)
 
-    val metaDataView = new MetadataView(songModel)
+    val metaDataView       = new MetadataView(songModel)
     val playerControlsView = new PlayerControlsView(songModel)
 
     val root = new BorderPane {

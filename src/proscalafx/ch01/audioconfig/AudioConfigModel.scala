@@ -21,20 +21,15 @@ class AudioConfigModel {
   /**
    * List of some musical genres
    */
-  val genres = ObservableBuffer("Chamber",
-    "Country",
-    "Cowbell",
-    "Metal",
-    "Polka",
-    "Rock"
-  )
+  val genres = ObservableBuffer("Chamber", "Country", "Cowbell", "Metal", "Polka", "Rock")
 
   /** A reference to the selection model used by the Slider */
   var genreSelectionModel: SingleSelectionModel[String] = _
 
-  /** Adds a change listener to the selection model of the ChoiceBox, and contains
-    * code that executes when the selection in the ChoiceBox changes.
-    */
+  /**
+   * Adds a change listener to the selection model of the ChoiceBox, and contains
+   * code that executes when the selection in the ChoiceBox changes.
+   */
   def addListenerToGenreSelectionModel(): Unit = {
     this.genreSelectionModel.selectedIndex.onChange {
       selectedDBs.value = this.genreSelectionModel.selectedIndex() match {

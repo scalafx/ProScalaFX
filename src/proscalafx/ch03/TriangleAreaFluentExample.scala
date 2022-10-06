@@ -14,8 +14,16 @@ object TriangleAreaFluentExample extends App {
   val area = ((x1 * y2) + (x2 * y3) + (x3 * y1) - (x1 * y3) - (x2 * y1) - (x3 * y2)) / 2.0
 
   val output = Bindings.createStringBinding(
-    () => f"For A(${x1()},${y1()}), B(${x2()},${y2()}), C(${x3()},${y3()}), the area of triangle ABC is ${area().doubleValue()}%.1f",
-    x1, y1, x2, y2, x3, y3, area)
+    () =>
+      f"For A(${x1()},${y1()}), B(${x2()},${y2()}), C(${x3()},${y3()}), the area of triangle ABC is ${area().doubleValue()}%.1f",
+    x1,
+    y1,
+    x2,
+    y2,
+    x3,
+    y3,
+    area
+  )
 
   x1() = 0
   y1() = 0

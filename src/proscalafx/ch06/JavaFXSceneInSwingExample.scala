@@ -1,10 +1,6 @@
 package proscalafx.ch06
 
-import java.awt.event.ActionEvent
-import java.awt.{BorderLayout, Dimension, FlowLayout}
-
-import javafx.embed.{swing => jfxes}
-import javax.swing.{JButton, JFrame, JPanel, WindowConstants}
+import javafx.embed.swing as jfxes
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.scene.Scene
@@ -12,6 +8,9 @@ import scalafx.scene.layout.VBox
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
+import java.awt.event.ActionEvent
+import java.awt.{BorderLayout, Dimension, FlowLayout}
+import javax.swing.{JButton, JFrame, JPanel, WindowConstants}
 
 /**
  * @author Jarek Sacha
@@ -21,14 +20,12 @@ object JavaFXSceneInSwingExample extends App {
   private val model = new Model()
   new Controller(model, new View(model)).mainLoop()
 
-
   private class Model {
     // `fill` and `stroke` are created using ObjectProperty factory method to ensure proper type parameter
     // to ObjectProperty. We use here, implicitly, JavaFX Paint as the  type for `ObjectProperty`.
-    val fill = ObjectProperty(this, "fillPaint", Color.LightGray)
+    val fill   = ObjectProperty(this, "fillPaint", Color.LightGray)
     val stroke = ObjectProperty(this, "strokePaint", Color.DarkGray)
   }
-
 
   private class View(model: Model) {
     val frame = new JFrame("ScalaFX in Swing Example")
@@ -54,12 +51,12 @@ object JavaFXSceneInSwingExample extends App {
     }
 
     val canvasPanelLayout = new FlowLayout(FlowLayout.CENTER, 10, 10)
-    val canvasPanel = new JPanel(canvasPanelLayout)
+    val canvasPanel       = new JPanel(canvasPanelLayout)
     canvasPanel.add(canvas)
-    val changeFillButton = new JButton("Change Fill")
+    val changeFillButton   = new JButton("Change Fill")
     val changeStrokeButton = new JButton("Change Stroke")
-    val buttonPanelLayout = new FlowLayout(FlowLayout.CENTER, 10, 10)
-    val buttonPanel = new JPanel(buttonPanelLayout)
+    val buttonPanelLayout  = new FlowLayout(FlowLayout.CENTER, 10, 10)
+    val buttonPanel        = new JPanel(buttonPanelLayout)
     buttonPanel.add(changeFillButton)
     buttonPanel.add(changeStrokeButton)
     frame.add(canvasPanel, BorderLayout.CENTER)
@@ -68,7 +65,6 @@ object JavaFXSceneInSwingExample extends App {
     frame.setLocationByPlatform(true)
     frame.pack()
   }
-
 
   private class Controller(model: Model, view: View) {
     view.changeFillButton.addActionListener((_: ActionEvent) => {

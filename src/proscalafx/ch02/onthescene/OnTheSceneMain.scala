@@ -1,22 +1,22 @@
 package proscalafx.ch02.onthescene
 
-import javafx.scene.{control => jfxsc, text => jfxst}
-import javafx.{scene => jfxs}
-import scalafx.Includes._
+import javafx.scene as jfxs
+import javafx.scene.{control as jfxsc, text as jfxst}
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.beans.property.{DoubleProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.{HPos, Insets, Orientation, VPos}
-import scalafx.scene.control._
+import scalafx.scene.control.*
 import scalafx.scene.layout.{FlowPane, HBox}
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{Font, FontWeight, Text}
 import scalafx.scene.{Cursor, Scene}
 
 /**
-  * @author Rafael
-  */
+ * @author Rafael
+ */
 object OnTheSceneMain extends JFXApp3 {
 
   override def start(): Unit = {
@@ -54,7 +54,7 @@ object OnTheSceneMain extends JFXApp3 {
     val choiceRef = new ChoiceBox[jfxs.Cursor] {
       items = cursors
       // XXX: String converter used to remove "[SFX]" in begin of toString.
-      //However in selected item the prefix "[SFX]" appears.
+      // However in selected item the prefix "[SFX]" appears.
       //    converter = StringConverter.toStringConverter((cursor: Cursor) => cursor.delegate.toString)
     }
 

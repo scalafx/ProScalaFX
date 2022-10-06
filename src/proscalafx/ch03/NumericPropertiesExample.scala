@@ -5,7 +5,7 @@ import scalafx.beans.property.{DoubleProperty, FloatProperty, IntegerProperty, L
 object NumericPropertiesExample extends App {
   val i = new IntegerProperty(null, "i", 1024)
   val l = new LongProperty(null, "l", 0L)
-  val f = new FloatProperty(null, "f", 0.0F)
+  val f = new FloatProperty(null, "f", 0.0f)
   val d = new DoubleProperty(null, "d", 0.0)
   println("Constructed numerical properties i, l, f, d.")
 

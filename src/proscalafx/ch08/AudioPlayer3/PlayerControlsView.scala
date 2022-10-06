@@ -1,6 +1,6 @@
 package proscalafx.ch08.AudioPlayer3
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.Platform
 import scalafx.event.subscriptions.Subscription
 import scalafx.geometry.{HPos, Insets, Pos, VPos}
@@ -16,29 +16,26 @@ import scalafx.util.Duration
 import scala.language.postfixOps
 
 /**
- * @author Jarek Sacha 
+ * @author Jarek Sacha
  */
 class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
-  private var pauseImg: Image = _
-  private var playImg: Image = _
+  private var pauseImg: Image          = _
+  private var playImg: Image           = _
   private var playPauseIcon: ImageView = _
   // ScalaFX uses `subscription` to keep track of assigned listeners
   private var statusInvalidationSubscription: Subscription = _
-  private var currentTimeSubscription: Subscription = _
-  private var controlPanel: Node = _
-  private var statusLabel: Label = _
-  private var currentTimeLabel: Label = _
-  private var totalDurationLabel: Label = _
-  private var volumeSlider: Slider = _
-  private var positionSlider: Slider = _
+  private var currentTimeSubscription: Subscription        = _
+  private var controlPanel: Node                           = _
+  private var statusLabel: Label                           = _
+  private var currentTimeLabel: Label                      = _
+  private var totalDurationLabel: Label                    = _
+  private var volumeSlider: Slider                         = _
+  private var positionSlider: Slider                       = _
 
-
-  songModel.mediaPlayer.onChange(
-    (_, oldValue, newValue) => {
-      if (oldValue != null) removeListenersAndBinding(oldValue)
-      addListenersAndBindings(newValue)
-    }
-  )
+  songModel.mediaPlayer.onChange((_, oldValue, newValue) => {
+    if (oldValue != null) removeListenersAndBinding(oldValue)
+    addListenersAndBindings(newValue)
+  })
 
   addListenersAndBindings(songModel.mediaPlayer())
 
@@ -52,14 +49,13 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     totalDurationLabel = createLabel("00:00", "mediaText")
     currentTimeLabel = createLabel("00:00", "mediaText")
 
-    positionSlider.valueChanging.onChange(
-      (_, oldValue, newValue) =>
-        if (oldValue && !newValue) {
-          val pos = positionSlider.value()
-          val mediaPlayer = songModel.mediaPlayer()
-          val seekTo = mediaPlayer.totalDuration() * pos
-          seekAndUpdatePosition(seekTo)
-        }
+    positionSlider.valueChanging.onChange((_, oldValue, newValue) =>
+      if (oldValue && !newValue) {
+        val pos         = positionSlider.value()
+        val mediaPlayer = songModel.mediaPlayer()
+        val seekTo      = mediaPlayer.totalDuration() * pos
+        seekAndUpdatePosition(seekTo)
+      }
     )
 
     val volLow = new ImageView {
@@ -102,7 +98,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     gp
   }
 
-
   private def createOpenButton() = new Button {
     id = "openButton"
     onAction = () => {
@@ -120,7 +115,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     prefHeight = 32
   }
 
-
   private def createControlPanel(): Node = {
     val playPauseButton = createPlayPauseButton()
     val seekStartButton = new Button {
@@ -130,7 +124,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     val seekEndButton = new Button {
       id = "seekEndButton"
       onAction = () => {
-        val mediaPlayer = songModel.mediaPlayer()
+        val mediaPlayer   = songModel.mediaPlayer()
         val totalDuration = mediaPlayer.totalDuration()
         // Duration of 1 second is constructed using suffix `s`
         seekAndUpdatePosition(totalDuration - (1 s))
@@ -143,7 +137,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       children = List(seekStartButton, playPauseButton, seekEndButton)
     }
   }
-
 
   private def createPlayPauseButton(): Button = {
     val pauseUrl = getClass.getResource("resources/pause.png")
@@ -163,12 +156,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
         val mediaPlayer = songModel.mediaPlayer()
         mediaPlayer.status() match {
           case Status.Playing.delegate => mediaPlayer.pause()
-          case _ => mediaPlayer.play()
+          case _                       => mediaPlayer.play()
         }
       }
     }
   }
-
 
   private def createSlider(sliderId: String): Slider = new Slider {
     min = 0
@@ -182,12 +174,11 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     styleClass += labelStyleClass
   }
 
-
   private def updatePositionSlider(currentTime: Duration): Unit = {
     if (positionSlider.isValueChanging) return
 
     val mediaPlayer = songModel.mediaPlayer()
-    val total = mediaPlayer.totalDuration()
+    val total       = mediaPlayer.totalDuration()
 
     positionSlider.value = if (total == null || currentTime == null) {
       0d
@@ -195,7 +186,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
       currentTime.toMillis / total.toMillis
     }
   }
-
 
   private def seekAndUpdatePosition(duration: Duration): Unit = {
     val mediaPlayer = songModel.mediaPlayer()
@@ -207,7 +197,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
   }
 
   private def formatDuration(duration: Duration): String = {
-    val millis = duration.toMillis
+    val millis  = duration.toMillis
     val seconds = (millis / 1000).toInt % 60
     val minutes = (millis / (1000 * 60)).toInt
     "%02d:%02d".format(minutes, seconds)
@@ -226,7 +216,6 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     }
   }
 
-
   private def addListenersAndBindings(mp: MediaPlayer): Unit = {
     statusInvalidationSubscription = mp.status.onInvalidate {
       Platform.runLater {
@@ -244,7 +233,7 @@ class PlayerControlsView(songModel: SongModel) extends AbstractView(songModel) {
     }
 
     mp.totalDuration.onInvalidate {
-      val mediaPlayer = songModel.mediaPlayer()
+      val mediaPlayer   = songModel.mediaPlayer()
       val totalDuration = mediaPlayer.totalDuration()
       totalDurationLabel.text = formatDuration(totalDuration)
     }

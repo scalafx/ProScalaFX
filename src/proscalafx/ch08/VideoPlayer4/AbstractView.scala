@@ -3,9 +3,8 @@ package proscalafx.ch08.VideoPlayer4
 import scalafx.event.ActionEvent
 import scalafx.scene.Node
 
-
 /**
- * @author Jarek Sacha 
+ * @author Jarek Sacha
  */
 abstract class AbstractView[T <: Node](protected val mediaModel: MediaModel) {
 

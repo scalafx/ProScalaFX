@@ -1,6 +1,6 @@
 package proscalafx.ch02.zenpong
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.animation.Animation.Status
 import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.beans.property.{BooleanProperty, DoubleProperty}
@@ -25,7 +25,7 @@ class ZenPong {
   val rightPaddleY = new DoubleProperty
 
   /** The drag anchor for left and right paddles */
-  var leftPaddleDragAnchorY: Double = _
+  var leftPaddleDragAnchorY: Double  = _
   var rightPaddleDragAnchorY: Double = _
 
   /** Controls whether the ball is moving right */
@@ -35,7 +35,7 @@ class ZenPong {
   var movingDown = true
 
   /** The initial translateY property for the left and right paddles */
-  var initLeftPaddleTranslateY: Double = _
+  var initLeftPaddleTranslateY: Double  = _
   var initRightPaddleTranslateY: Double = _
 
   /** The moving ball */
@@ -107,8 +107,8 @@ class ZenPong {
   }
 
   /**
-    * Controls whether the startButton is visible
-    */
+   * Controls whether the startButton is visible
+   */
   val startVisible = BooleanProperty(true)
 
   /** The animation of the ball */
@@ -141,9 +141,9 @@ class ZenPong {
   }
 
   /**
-    * The Group containing all of the walls, paddles, and ball. This also allows
-    * us to requestFocus for KeyEvents on the Group
-    */
+   * The Group containing all of the walls, paddles, and ball. This also allows
+   * us to requestFocus for KeyEvents on the Group
+   */
   val pongComponents: Group = new Group {
     focusTraversable = true
     children = List(
@@ -183,17 +183,17 @@ class ZenPong {
   }
 
   /**
-    * Checks whether or not the ball has collided with either the paddles,
-    * topWall, or bottomWall.  If the ball hits the wall behind the paddles,
-    * the game is over.
-    */
+   * Checks whether or not the ball has collided with either the paddles,
+   * topWall, or bottomWall.  If the ball hits the wall behind the paddles,
+   * the game is over.
+   */
   def checkForCollision(): Unit = {
     if (ball.intersects(rightWall.boundsInLocal()) || ball.intersects(leftWall.boundsInLocal())) {
       pongAnimation.stop()
       initialize()
     } else if (
       ball.intersects(bottomWall.boundsInLocal()) ||
-        ball.intersects(topWall.boundsInLocal())
+      ball.intersects(topWall.boundsInLocal())
     ) {
       movingDown = !movingDown
     } else if (ball.intersects(leftPaddle.boundsInParent()) && !movingRight) {

@@ -1,14 +1,14 @@
 package proscalafx.ch08.VideoPlayer4
 
-import com.sun.javafx.{runtime => csjfxr}
-import scalafx.Includes._
+import com.sun.javafx.runtime as csjfxr
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.Scene
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object VideoPlayer4App extends JFXApp3 {
 
   override def start(): Unit = {

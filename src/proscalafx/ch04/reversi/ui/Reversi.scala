@@ -1,12 +1,12 @@
 package proscalafx.ch04.reversi.ui
 
 import proscalafx.ch04.reversi.model.{Black, Owner, ReversiModel, White}
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.geometry.Pos
 import scalafx.scene.Node
 import scalafx.scene.control.Button
 import scalafx.scene.effect.{DropShadow, InnerShadow}
-import scalafx.scene.layout._
+import scalafx.scene.layout.*
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{Font, FontWeight, Text}
@@ -107,7 +107,7 @@ class Reversi {
     val board = new GridPane()
     for (i <- 0 until ReversiModel.BOARD_SIZE; j <- 0 until ReversiModel.BOARD_SIZE) {
       val square = new ReversiSquare(i, j)
-      val piece = new ReversiPiece()
+      val piece  = new ReversiPiece()
       piece.owner <== model.board(i)(j)
       board.add(
         new StackPane {

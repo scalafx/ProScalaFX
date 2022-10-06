@@ -1,6 +1,6 @@
 package proscalafx.ch08.AudioPlayer4
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.event.ActionEvent
 import scalafx.geometry.{HPos, Insets, Orientation, VPos}
 import scalafx.scene.control.{Button, Label, Slider}
@@ -8,12 +8,12 @@ import scalafx.scene.layout.{GridPane, Priority, RowConstraints}
 import scalafx.scene.media.{EqualizerBand, MediaPlayer}
 
 /**
- * @author Jarek Sacha 
+ * @author Jarek Sacha
  */
 class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songModel) {
-  private final val StartFreq: Double = 250.0
-  private final val BandCount: Int = 7
-  private var spectrumBars: Array[SpectrumBar] = _
+  private final val StartFreq: Double            = 250.0
+  private final val BandCount: Int               = 7
+  private var spectrumBars: Array[SpectrumBar]   = _
   private var spectrumListener: SpectrumListener = _
   private val backButton = new Button {
     text = "Back"
@@ -46,7 +46,9 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
 
   protected def initView(): GridPane = {
     val middle = new RowConstraints()
-    val outside = new RowConstraints() {vgrow = Priority.Always}
+    val outside = new RowConstraints() {
+      vgrow = Priority.Always
+    }
     new GridPane {
       padding = Insets(10)
       hgap = 20
@@ -55,7 +57,7 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
   }
 
   private def createEQInterface(): Unit = {
-    val gridPane = viewNode
+    val gridPane    = viewNode
     val mediaPlayer = songModel.mediaPlayer()
     createEQBands(gridPane, mediaPlayer)
     createSpectrumBars(gridPane)
@@ -69,21 +71,21 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
   private def createEQBands(gp: GridPane, mp: MediaPlayer): Unit = {
     val bands = mp.getAudioEqualizer.getBands
     bands.clear()
-    val min = EqualizerBand.MIN_GAIN
-    val max = EqualizerBand.MAX_GAIN
-    val mid = (max - min) / 2
+    val min  = EqualizerBand.MIN_GAIN
+    val max  = EqualizerBand.MAX_GAIN
+    val mid  = (max - min) / 2
     var freq = StartFreq
 
     for (j <- 0 until BandCount) {
       val theta = j.toDouble / (BandCount - 1).toDouble * (2 * math.Pi)
       val scale = 0.4 * (1 + math.cos(theta))
-      val gain = min + mid + (mid * scale)
+      val gain  = min + mid + (mid * scale)
       bands.add(new EqualizerBand(freq, freq / 2, gain))
       freq *= 2
     }
 
     for (i <- 0 until bands.size) {
-      val band = bands.get(i)
+      val band   = bands.get(i)
       val slider = createEQSlider(band, min, max)
       val label = new Label {
         text = formatFrequency(band.getCenterFrequency)
@@ -106,7 +108,6 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
     value <==> eb.gain
     prefWidth = 44
   }
-
 
   private def createSpectrumBars(gridPane: GridPane): Unit = {
     spectrumBars = new Array[SpectrumBar](BandCount)

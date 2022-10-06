@@ -1,6 +1,6 @@
 package proscalafx.ch03
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.beans.property.DoubleProperty
 
 object HeronsFormulaExample extends App {
@@ -17,15 +17,25 @@ object HeronsFormulaExample extends App {
   b() = 4
   c() = 5
 
-  printf("Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
-    " the area of the triangle is %3.2f\n", a(), b(), c(),
-    math.sqrt(areaSquared.get))
+  printf(
+    "Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
+      " the area of the triangle is %3.2f\n",
+    a(),
+    b(),
+    c(),
+    math.sqrt(areaSquared.get)
+  )
 
   a() = 2
   b() = 2
   c() = 2
 
-  printf("Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
-    " the area of the triangle is %3.2f\n", a(), b(), c(),
-    math.sqrt(areaSquared.get))
+  printf(
+    "Given sides a = %1.0f, b = %1.0f, and c = %1.0f," +
+      " the area of the triangle is %3.2f\n",
+    a(),
+    b(),
+    c(),
+    math.sqrt(areaSquared.get)
+  )
 }

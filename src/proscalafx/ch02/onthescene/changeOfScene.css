@@ -34,20 +34,20 @@
  */
 
 #stageX, #stageY {
-  -fx-padding: 3;
-  -fx-border-color: blue;
-  -fx-stroke-dash-array: 12 2 4 2;
-  -fx-border-width: 4;
-  -fx-border-radius: 5;
+    -fx-padding: 3;
+    -fx-border-color: blue;
+    -fx-stroke-dash-array: 12 2 4 2;
+    -fx-border-width: 4;
+    -fx-border-radius: 5;
 }
 
 .emphasized-text {
-  -fx-font-size: 14pt;
-  -fx-font-weight: bold;
-  -fx-font-style: normal;
+    -fx-font-size: 14pt;
+    -fx-font-weight: bold;
+    -fx-font-style: normal;
 }
 
-.radio-button *.radio  {
+.radio-button *.radio {
     -fx-padding: 10;
     -fx-background-color: red, yellow;
     -fx-background-insets: 0, 5;

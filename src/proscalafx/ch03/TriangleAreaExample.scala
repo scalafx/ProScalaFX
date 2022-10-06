@@ -5,12 +5,24 @@ import scalafx.beans.property.IntegerProperty
 
 object TriangleAreaExample extends App {
 
-  def printResult(x1: IntegerProperty, y1: IntegerProperty,
-                  x2: IntegerProperty, y2: IntegerProperty,
-                  x3: IntegerProperty, y3: IntegerProperty,
-                  area: NumberBinding): Unit = {
+  def printResult(
+    x1: IntegerProperty,
+    y1: IntegerProperty,
+    x2: IntegerProperty,
+    y2: IntegerProperty,
+    x3: IntegerProperty,
+    y3: IntegerProperty,
+    area: NumberBinding
+  ): Unit = {
     println("For A(%d,%d), B(%d,%d), C(%d,%d), the area of triangle ABC is %1.1f".format(
-      x1(), y1(), x2(), y2(), x3(), y3(), area()))
+      x1(),
+      y1(),
+      x2(),
+      y2(),
+      x3(),
+      y3(),
+      area()
+    ))
   }
 
   val x1 = IntegerProperty(0)
@@ -27,13 +39,13 @@ object TriangleAreaExample extends App {
   val x2y1 = x2 * y1
   val x3y2 = x3 * y2
 
-  val sum1 = x1y2 + x2y3
-  val sum2 = sum1 + x3y1
-  val sum3 = sum2 + x3y1
-  val diff1 = sum3 - x1y3
-  val diff2 = diff1 - x2y1
+  val sum1        = x1y2 + x2y3
+  val sum2        = sum1 + x3y1
+  val sum3        = sum2 + x3y1
+  val diff1       = sum3 - x1y3
+  val diff2       = diff1 - x2y1
   val determinant = diff2 - x3y2
-  val area = determinant / 2.0D
+  val area        = determinant / 2.0d
 
   x1() = 0
   y1() = 0

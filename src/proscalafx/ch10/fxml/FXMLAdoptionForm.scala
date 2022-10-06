@@ -1,21 +1,21 @@
 package proscalafx.ch10.fxml
 
-import javafx.{fxml => jfxf, scene => jfxs}
-import scalafx.Includes._
+import javafx.{fxml as jfxf, scene as jfxs}
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.Scene
 
 import java.io.IOException
 
-/** Example of using FXMLLoader from ScalaFX.
-  *
-  * @author Jarek Sacha
-  */
+/**
+ * Example of using FXMLLoader from ScalaFX.
+ *
+ * @author Jarek Sacha
+ */
 object FXMLAdoptionForm extends JFXApp3 {
 
   def start(): Unit = {
-
 
     val resource = getClass.getResource("AdoptionForm.fxml")
     if (resource == null) {
@@ -33,6 +33,5 @@ object FXMLAdoptionForm extends JFXApp3 {
       scene = new Scene(root)
     }
   }
-
 
 }

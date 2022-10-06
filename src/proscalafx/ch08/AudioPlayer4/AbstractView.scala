@@ -3,9 +3,8 @@ package proscalafx.ch08.AudioPlayer4
 import scalafx.event.ActionEvent
 import scalafx.scene.Node
 
-
 /**
- * @author Jarek Sacha 
+ * @author Jarek Sacha
  */
 abstract class AbstractView[T <: Node](protected val songMadel: SongModel) {
 

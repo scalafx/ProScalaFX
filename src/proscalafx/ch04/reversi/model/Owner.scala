@@ -7,7 +7,7 @@ sealed case class Owner(color: Color, colorStyle: String) {
   def opposite: Owner = this match {
     case White => Black
     case Black => White
-    case _ => NONE
+    case _     => NONE
   }
 
 }
@@ -17,4 +17,3 @@ object NONE extends Owner(Color.Transparent, "")
 object White extends Owner(Color.White, "white")
 
 object Black extends Owner(Color.Black, "black")
-

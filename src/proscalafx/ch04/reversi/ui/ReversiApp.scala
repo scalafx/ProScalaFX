@@ -3,7 +3,7 @@ package proscalafx.ch04.reversi.ui
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.Scene
-import scalafx.scene.layout._
+import scalafx.scene.layout.*
 
 object ReversiApp extends JFXApp3 {
 

@@ -18,7 +18,7 @@ object BidirectionalBindingExample extends App {
   println("prop2.get returned:")
   println(prop2())
 
-  println( """Calling prop2.set(prop2.get + "\nprop2 says: Bye!")""")
+  println("""Calling prop2.set(prop2.get + "\nprop2 says: Bye!")""")
   prop2() = prop2() + "\nprop2 says: Bye!"
   println("prop1.get returned:")
   println(prop1())

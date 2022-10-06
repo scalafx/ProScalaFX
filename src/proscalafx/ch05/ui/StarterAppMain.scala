@@ -1,13 +1,13 @@
 package proscalafx.ch05.ui
 
 import proscalafx.ch05.model.{Person, StarterAppModel}
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.geometry.{Insets, Orientation, Pos}
-import scalafx.scene.control.MenuItem._
+import scalafx.scene.control.*
+import scalafx.scene.control.MenuItem.*
 import scalafx.scene.control.ScrollPane.ScrollBarPolicy
-import scalafx.scene.control._
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.KeyCombination
 import scalafx.scene.layout.{BorderPane, HBox, StackPane, VBox}
@@ -18,8 +18,8 @@ import scalafx.scene.{Node, Scene}
 import scalafx.stage.Popup
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object StarterAppMain extends JFXApp3 {
 
   private val model = new StarterAppModel()
@@ -30,7 +30,7 @@ object StarterAppMain extends JFXApp3 {
       scene = new Scene(800, 600) {
         Option(getClass.getResource("starterApp.css")) match {
           case Some(url) => stylesheets = List(url.toExternalForm)
-          case None => println("Cannot load resource for a stylesheet: starterApp.css")
+          case None      => println("Cannot load resource for a stylesheet: starterApp.css")
         }
         root = new BorderPane {
           top = new VBox {

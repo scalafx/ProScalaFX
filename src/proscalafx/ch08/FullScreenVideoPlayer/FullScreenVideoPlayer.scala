@@ -8,16 +8,15 @@ import scalafx.scene.media.{Media, MediaPlayer, MediaView}
 
 import java.io.File
 
-
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object FullScreenVideoPlayer extends JFXApp3 {
 
   override def start(): Unit = {
 
-    val file = new File("media/omgrobots.mp4")
-    val media = new Media(file.toURI.toString)
+    val file        = new File("media/omgrobots.mp4")
+    val media       = new Media(file.toURI.toString)
     val mediaPlayer = new MediaPlayer(media)
     val mediaView = new MediaView(mediaPlayer) {
       fitWidth <== scene.selectDouble("width")

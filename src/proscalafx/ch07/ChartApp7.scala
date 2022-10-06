@@ -1,23 +1,23 @@
 package proscalafx.ch07
 
-import javafx.scene.{chart => jfxsc}
-import scalafx.Includes._
+import javafx.scene.chart as jfxsc
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
-import scalafx.scene.chart._
+import scalafx.scene.chart.*
 import scalafx.scene.layout.StackPane
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object ChartApp7 extends JFXApp3 {
 
   override def start(): Unit = {
 
-    val xAxis = new CategoryAxis()
-    val yAxis = new NumberAxis()
+    val xAxis     = new CategoryAxis()
+    val yAxis     = new NumberAxis()
     val lineChart = LineChart(xAxis, yAxis)
     lineChart.title = "Speculations"
     lineChart.data = createChartData()
@@ -37,9 +37,9 @@ object ChartApp7 extends JFXApp3 {
   // signature for scalafx.scene.chart.XYChart.data used above.
   private def createChartData(): ObservableBuffer[jfxsc.XYChart.Series[String, Number]] = {
     var javaValue = 17.56
-    var cValue = 17.06
-    var cppValue = 8.25
-    val answer = new ObservableBuffer[jfxsc.XYChart.Series[String, Number]]()
+    var cValue    = 17.06
+    var cppValue  = 8.25
+    val answer    = new ObservableBuffer[jfxsc.XYChart.Series[String, Number]]()
     val java = new XYChart.Series[String, Number] {
       name = "Java"
     }

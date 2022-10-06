@@ -1,7 +1,7 @@
 package proscalafx.ch06
 
-import javafx.{concurrent => jfxc}
-import scalafx.Includes._
+import javafx.concurrent as jfxc
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.beans.property.IntegerProperty
@@ -13,10 +13,9 @@ import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
 
 import java.util.concurrent.atomic.AtomicBoolean
 
-
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object ServiceExample extends JFXApp3 {
 
   override def start(): Unit = {
@@ -28,19 +27,17 @@ object ServiceExample extends JFXApp3 {
     }
   }
 
-
   private def hookupEvents(): Unit = {
     View.startButton.onAction = () => {
-        Model.shouldThrow.set(false)
-        Model.Worker.restart()
+      Model.shouldThrow.set(false)
+      Model.Worker.restart()
     }
     View.cancelButton.onAction = () => Model.Worker.cancel
     View.exceptionButton.onAction = () => Model.shouldThrow.set(true)
   }
 
-
   private object Model {
-    val shouldThrow = new AtomicBoolean(false)
+    val shouldThrow   = new AtomicBoolean(false)
     val numberOfItems = new IntegerProperty(this, "numberOfItems", 250)
 
     // NOTE: Object worker is created by extending `Service`.
@@ -49,30 +46,30 @@ object ServiceExample extends JFXApp3 {
     // delegate parameter (ScalaFX `Service` has no default constructor).
     object Worker extends Service(new jfxc.Service[String]() {
 
-      protected def createTask(): jfxc.Task[String] = new jfxc.Task[String] {
-        protected def call(): String = {
-          updateTitle("Example Task")
-          updateMessage("Starting...")
-          val total: Int = numberOfItems()
-          updateProgress(0, total)
-          for (i <- 1 to total) {
-            try {
-              Thread.sleep(20)
-            } catch {
-              case _: InterruptedException => return "Canceled at " + System.currentTimeMillis
-            }
-            if (shouldThrow.get) {
-              throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
-            }
-            updateTitle("Example Service (" + i + ")")
-            updateMessage("Processed " + i + " of " + total + " items.")
-            updateProgress(i, total)
-          }
+          protected def createTask(): jfxc.Task[String] = new jfxc.Task[String] {
+            protected def call(): String = {
+              updateTitle("Example Task")
+              updateMessage("Starting...")
+              val total: Int = numberOfItems()
+              updateProgress(0, total)
+              for (i <- 1 to total) {
+                try {
+                  Thread.sleep(20)
+                } catch {
+                  case _: InterruptedException => return "Canceled at " + System.currentTimeMillis
+                }
+                if (shouldThrow.get) {
+                  throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
+                }
+                updateTitle("Example Service (" + i + ")")
+                updateMessage("Processed " + i + " of " + total + " items.")
+                updateProgress(i, total)
+              }
 
-          "Completed at " + System.currentTimeMillis
-        }
-      }
-    })
+              "Completed at " + System.currentTimeMillis
+            }
+          }
+        })
 
   }
 
@@ -129,7 +126,6 @@ object ServiceExample extends JFXApp3 {
       }
     }
 
-
     val startButton = new Button("Start") {
       disable <== stateProperty === jfxc.Worker.State.RUNNING
     }
@@ -139,7 +135,6 @@ object ServiceExample extends JFXApp3 {
     val exceptionButton = new Button("Exception") {
       disable <== stateProperty =!= jfxc.Worker.State.RUNNING
     }
-
 
     val topPane = new HBox() {
       padding = Insets(10)
@@ -152,10 +147,11 @@ object ServiceExample extends JFXApp3 {
       hgap = 10
       vgap = 10
       padding = Insets(10)
-      columnConstraints = List(new ColumnConstraints {
-        halignment = HPos.Right
-        minWidth = 65
-      },
+      columnConstraints = List(
+        new ColumnConstraints {
+          halignment = HPos.Right
+          minWidth = 65
+        },
         new ColumnConstraints {
           halignment = HPos.Left
           minWidth = 200

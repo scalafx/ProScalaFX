@@ -34,17 +34,17 @@
  */
 
 #stageX, #stageY {
-  -fx-padding: 1;
-  -fx-border-color: black;
-  -fx-border-style: dashed;
-  -fx-border-width: 2;
-  -fx-border-radius: 5;
+    -fx-padding: 1;
+    -fx-border-color: black;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
 }
 
 .emphasized-text {
-  -fx-font-size: 14pt;
-  -fx-font-weight: normal;
-  -fx-font-style: italic;
+    -fx-font-size: 14pt;
+    -fx-font-weight: normal;
+    -fx-font-style: italic;
 }
 
 .choice-box:hover {
@@ -52,17 +52,17 @@
     -fx-scale-y: 1.1;
 }
 
-.radio-button .radio  {
-   -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, 
-                         -fx-inner-border, -fx-body-color;
-   -fx-background-insets: 0 0 -1 0,  0,  1,  2;
-   -fx-background-radius: 1.0em;
-   -fx-padding: 0.333333em;
+.radio-button .radio {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border,
+    -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 1.0em;
+    -fx-padding: 0.333333em;
 }
 
 .radio-button:focused .radio {
-    -fx-background-color: -fx-focus-color, -fx-outer-border, 
-                          -fx-inner-border, -fx-body-color;
+    -fx-background-color: -fx-focus-color, -fx-outer-border,
+    -fx-inner-border, -fx-body-color;
     -fx-background-radius: 1.0em;
     -fx-background-insets: -1.4, 0, 1, 2;
 }

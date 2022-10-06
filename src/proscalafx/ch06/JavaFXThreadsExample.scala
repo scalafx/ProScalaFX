@@ -1,6 +1,6 @@
 package proscalafx.ch06
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
@@ -9,13 +9,13 @@ import scalafx.scene.Scene
 import scalafx.scene.control.{Button, ListView, TextArea}
 import scalafx.scene.layout.VBox
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 /**
-  * ScalaFX version of `JavaFXThreadsExample` from "Pro JavaFX 2" book.
-  *
-  * @author Jarek Sacha
-  */
+ * ScalaFX version of `JavaFXThreadsExample` from "Pro JavaFX 2" book.
+ *
+ * @author Jarek Sacha
+ */
 object JavaFXThreadsExample extends JFXApp3 {
 
   class Model {
@@ -43,8 +43,8 @@ object JavaFXThreadsExample extends JFXApp3 {
   }
 
   class View(model: Model) {
-    val threadNames = new ListView(model.threadNames)
-    val stackTrace = new TextArea()
+    val threadNames  = new ListView(model.threadNames)
+    val stackTrace   = new TextArea()
     val updateButton = new Button("Update")
     val scene = new Scene(440, 640) {
       root = new VBox {
@@ -62,7 +62,7 @@ object JavaFXThreadsExample extends JFXApp3 {
   override def start(): Unit = {
 
     val model = new Model()
-    val view = new View(model)
+    val view  = new View(model)
 
     hookupEvents()
     stage = new PrimaryStage {

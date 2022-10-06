@@ -8,18 +8,17 @@ import scalafx.scene.media.{Media, MediaPlayer, MediaView}
 
 import java.io.File
 
-
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object VideoPlayer1 extends JFXApp3 {
 
   override def start(): Unit = {
     val file = new File("media/omgrobots.mp4")
 
-    val media = new Media(file.toURI.toString)
+    val media       = new Media(file.toURI.toString)
     val mediaPlayer = new MediaPlayer(media)
-    val mediaView = new MediaView(mediaPlayer)
+    val mediaView   = new MediaView(mediaPlayer)
     val root = new StackPane {
       children = mediaView
     }

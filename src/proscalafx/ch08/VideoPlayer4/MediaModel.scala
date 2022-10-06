@@ -1,23 +1,23 @@
 package proscalafx.ch08.VideoPlayer4
 
-import javafx.scene.{image => jfxsi, media => jfxsm}
-import scalafx.Includes._
+import javafx.scene.{image as jfxsi, media as jfxsm}
+import scalafx.Includes.*
 import scalafx.beans.property.{ObjectProperty, ReadOnlyObjectWrapper, StringProperty}
 import scalafx.collections.ObservableMap.Add
 import scalafx.scene.image.Image
 import scalafx.scene.media.{Media, MediaPlayer}
 
 /**
- * @author Jarek Sacha 
+ * @author Jarek Sacha
  */
 class MediaModel {
-  private val DefaultImageURL = classOf[MediaModel].getResource("resources/defaultAlbum.png").toString
+  private val DefaultImageURL   = classOf[MediaModel].getResource("resources/defaultAlbum.png").toString
   private val DefaultImageCover = new Image(DefaultImageURL)
 
-  val album = new StringProperty(this, "album")
+  val album  = new StringProperty(this, "album")
   val artist = new StringProperty(this, "artist")
-  val title = new StringProperty(this, "title")
-  val year = new StringProperty(this, "year")
+  val title  = new StringProperty(this, "title")
+  val year   = new StringProperty(this, "year")
 
   // NOTE: use of `javafx.scene.image.Image` instead of `scalafx.scene.image.Image`, this is required for binding in
   // MetadataView to compile.
@@ -29,9 +29,7 @@ class MediaModel {
 
   resetProperties()
 
-
   def mediaPlayer = _mediaPlayer.readOnlyProperty
-
 
   def url: String = if (mediaPlayer() != null) mediaPlayer().media.source else null
 
@@ -41,7 +39,6 @@ class MediaModel {
     initializeMedia(url)
   }
 
-
   private def resetProperties(): Unit = {
     artist() = ""
     album() = ""
@@ -49,7 +46,6 @@ class MediaModel {
     year() = ""
     albumCover() = DefaultImageCover
   }
-
 
   private def initializeMedia(url: String): Unit = {
     resetProperties()
@@ -59,7 +55,7 @@ class MediaModel {
         metadata.onChange((_, change) => {
           change match {
             case Add(key, added) => handleMetadata(key, added)
-            case _ =>
+            case _               =>
           }
         })
       }
@@ -78,15 +74,14 @@ class MediaModel {
     }
   }
 
-
   private def handleMetadata(key: String, value: AnyRef): Unit = {
     key match {
-      case "album" => album() = value.toString
+      case "album"  => album() = value.toString
       case "artist" => artist() = value.toString
-      case "title" => title() = value.toString
-      case "year" => year() = value.toString
-      case "image" => albumCover() = value.asInstanceOf[javafx.scene.image.Image]
-      case _ => println("Unhandled metadata key: " + key + ", value: " + value)
+      case "title"  => title() = value.toString
+      case "year"   => year() = value.toString
+      case "image"  => albumCover() = value.asInstanceOf[javafx.scene.image.Image]
+      case _        => println("Unhandled metadata key: " + key + ", value: " + value)
     }
   }
 }

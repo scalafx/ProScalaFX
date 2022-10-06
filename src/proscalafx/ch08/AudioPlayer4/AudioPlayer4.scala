@@ -1,7 +1,7 @@
 package proscalafx.ch08.AudioPlayer4
 
-import com.sun.javafx.{runtime => csjfxr}
-import scalafx.Includes._
+import com.sun.javafx.runtime as csjfxr
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.input.TransferMode
@@ -9,18 +9,18 @@ import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.scene.{Node, Scene}
 
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object AudioPlayer4 extends JFXApp3 {
   println("JavaFX version: " + csjfxr.VersionInfo.getRuntimeVersion)
 
-  private var songModel: SongModel = _
+  private var songModel: SongModel                   = _
   private var playerControlsView: PlayerControlsView = _
-  private var metaDataView: MetadataView = _
-  private var equalizerView: EqualizerView = _
-  private var page1: Node = _
-  private var page2: Node = _
-  private var rootNode: StackPane = _
+  private var metaDataView: MetadataView             = _
+  private var equalizerView: EqualizerView           = _
+  private var page1: Node                            = _
+  private var page2: Node                            = _
+  private var rootNode: StackPane                    = _
 
   override def start(): Unit = {
 

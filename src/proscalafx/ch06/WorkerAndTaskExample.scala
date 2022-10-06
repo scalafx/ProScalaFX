@@ -1,7 +1,7 @@
 package proscalafx.ch06
 
-import javafx.{concurrent => jfxc}
-import scalafx.Includes._
+import javafx.concurrent as jfxc
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.concurrent.Task
@@ -12,10 +12,9 @@ import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
 
 import java.util.concurrent.atomic.AtomicBoolean
 
-
 /**
-  * @author Jarek Sacha
-  */
+ * @author Jarek Sacha
+ */
 object WorkerAndTaskExample extends JFXApp3 {
 
   override def start(): Unit = {
@@ -33,7 +32,6 @@ object WorkerAndTaskExample extends JFXApp3 {
     View.exceptionButton.onAction = () => Model.shouldThrow.set(true)
   }
 
-
   private object Model {
     val shouldThrow = new AtomicBoolean(false)
 
@@ -43,29 +41,29 @@ object WorkerAndTaskExample extends JFXApp3 {
     // delegate parameter (ScalaFX `Task` has no default constructor).
     object Worker extends Task(new jfxc.Task[String] {
 
-      protected def call(): String = {
-        updateTitle("Example Task")
-        updateMessage("Starting...")
-        val total = 250
-        updateProgress(0, total)
-        for (i <- 1 to total) {
-          try {
-            Thread.sleep(20)
-          } catch {
-            case _: InterruptedException => return "Canceled at " + System.currentTimeMillis
-          }
-          if (shouldThrow.get) {
-            throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
-          }
-          updateTitle("Example Task (" + i + ")")
-          updateMessage("Processed " + i + " of " + total + " items.")
-          updateProgress(i, total)
-        }
+          protected def call(): String = {
+            updateTitle("Example Task")
+            updateMessage("Starting...")
+            val total = 250
+            updateProgress(0, total)
+            for (i <- 1 to total) {
+              try {
+                Thread.sleep(20)
+              } catch {
+                case _: InterruptedException => return "Canceled at " + System.currentTimeMillis
+              }
+              if (shouldThrow.get) {
+                throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
+              }
+              updateTitle("Example Task (" + i + ")")
+              updateMessage("Processed " + i + " of " + total + " items.")
+              updateProgress(i, total)
+            }
 
-        "Completed at " + System.currentTimeMillis
-      }
+            "Completed at " + System.currentTimeMillis
+          }
 
-    })
+        })
 
   }
 
@@ -119,7 +117,6 @@ object WorkerAndTaskExample extends JFXApp3 {
       disable <== stateProperty =!= jfxc.Worker.State.RUNNING
     }
 
-
     val topPane = new HBox() {
       padding = Insets(10)
       spacing = 10
@@ -131,10 +128,11 @@ object WorkerAndTaskExample extends JFXApp3 {
       hgap = 10
       vgap = 10
       padding = Insets(10)
-      columnConstraints = List(new ColumnConstraints {
-        halignment = HPos.Right
-        minWidth = 65
-      },
+      columnConstraints = List(
+        new ColumnConstraints {
+          halignment = HPos.Right
+          minWidth = 65
+        },
         new ColumnConstraints {
           halignment = HPos.Left
           minWidth = 200

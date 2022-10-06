@@ -1,12 +1,11 @@
 package proscalafx.ch04.reversi.model
 
-import scalafx.Includes.{when, _}
+import scalafx.Includes.{when, *}
 import scalafx.beans.Observable
-import scalafx.beans.binding._
+import scalafx.beans.binding.*
 import scalafx.beans.property.ObjectProperty
 
 import scala.collection.mutable.ListBuffer
-
 
 object ReversiModel {
 
@@ -18,7 +17,6 @@ object ReversiModel {
 
   initBoard()
 
-
   private def initBoard(): Unit = {
     val center1 = BOARD_SIZE / 2 - 1
     val center2 = BOARD_SIZE / 2
@@ -28,7 +26,6 @@ object ReversiModel {
     board(center2)(center2)() = White
   }
 
-
   def restart(): Unit = {
     board.flatten.foreach(_() = NONE)
 
@@ -36,18 +33,15 @@ object ReversiModel {
     turn() = Black
   }
 
-
   def score(owner: Owner): NumberExpression = {
     board.flatten.map(p => when(p === owner) choose 1 otherwise 0).reduce(_ + _)
   }
-
 
   def turnsRemaining(owner: Owner): NumberBinding = {
     val emptyCellCount = score(NONE)
 
     when(turn === owner) choose ((emptyCellCount + 1) / 2) otherwise (emptyCellCount / 2)
   }
-
 
   def legalMove(x: Int, y: Int): BooleanBinding = {
     (board(x)(y) === NONE) && (
@@ -59,15 +53,20 @@ object ReversiModel {
         canFlip(x, y, 1, 1, turn) ||
         canFlip(x, y, 1, 0, turn) ||
         canFlip(x, y, 1, -1, turn)
-      )
+    )
   }
 
-
-  private def canFlip(cellX: Int, cellY: Int, directionX: Int, directionY: Int, turn: ObjectProperty[Owner]): BooleanBinding = {
+  private def canFlip(
+    cellX: Int,
+    cellY: Int,
+    directionX: Int,
+    directionY: Int,
+    turn: ObjectProperty[Owner]
+  ): BooleanBinding = {
     // Build list of dependencies for binding
     val dependencies = ListBuffer.empty[Observable]
-    var x = cellX + directionX
-    var y = cellY + directionY
+    var x            = cellX + directionX
+    var y            = cellY + directionY
     while (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
       dependencies += board(x)(y)
       x += directionX
@@ -78,13 +77,15 @@ object ReversiModel {
     Bindings.createBooleanBinding(
       // Flip evaluation
       () => {
-        val turnVal = turn.get
-        var x = cellX + directionX
-        var y = cellY + directionY
-        var first = true
+        val turnVal                 = turn.get
+        var x                       = cellX + directionX
+        var y                       = cellY + directionY
+        var first                   = true
         var result: Option[Boolean] = None
-        while (result.isEmpty &&
-          x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE && board(x)(y).get != NONE) {
+        while (
+          result.isEmpty &&
+          x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE && board(x)(y).get != NONE
+        ) {
           if (board(x)(y).get == turnVal) {
             result = Option(!first)
           }
@@ -94,10 +95,9 @@ object ReversiModel {
         }
         result.getOrElse(false)
       },
-      dependencies.toSeq: _*
+      dependencies.toSeq*
     )
   }
-
 
   def play(cellX: Int, cellY: Int): Unit = {
     if (legalMove(cellX, cellY).get) {
@@ -113,7 +113,6 @@ object ReversiModel {
       turn.value = turn.value.opposite
     }
   }
-
 
   def flip(cellX: Int, cellY: Int, directionX: Int, directionY: Int, turn: ObjectProperty[Owner]): Unit = {
     if (canFlip(cellX, cellY, directionX, directionY, turn).get) {
