@@ -3,6 +3,8 @@ package proscalafx.ch05.model
 import scalafx.beans.property.DoubleProperty
 import scalafx.collections.ObservableBuffer
 
+import scala.util.Random
+
 /**
  * @author Jarek Sacha
  */
@@ -29,16 +31,19 @@ class StarterAppModel {
   def randomWebSite(): String = {
 
     val webSites: Array[String] = Array(
-      "http://javafx.com",
+      "https://openjfx.io/",
+      "https://github.com/mhrimaz/AwesomeJavaFX",
       "http://fxexperience.com",
-      "http://steveonjava.com",
-      "http://javafxpert.com",
-      "http://pleasingsoftware.blogspot.com",
-      "http://www.weiqigao.com/blog",
+//      "http://steveonjava.com",
+      "https://javafxpert.com",
+      "https://pleasingsoftware.blogspot.com",
+      "https://www.weiqigao.com/blog",
+      "https://edencoding.com/category/javafx/",
+      "https://codingonthestaircase.wordpress.com/",
       "http://google.com"
     )
 
-    val randomIdx = (math.random() * webSites.length).toInt
+    val randomIdx = new Random().nextInt(webSites.length)
     webSites(randomIdx)
   }
 
