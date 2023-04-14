@@ -2,11 +2,11 @@
 name := "ProScalaFX"
 
 // Current version
-version := "19.0.0-R30"
+version := "20.0.0-R31"
 
 // Version of scala to use
-val scala2Version = "2.13.9"
-val scala3Version = "3.2.0"
+val scala2Version = "2.13.10"
+val scala3Version = "3.2.2"
 // To cross compile with Scala 2 and Scala 3
 crossScalaVersions := Seq(scala2Version, scala3Version)
 scalaVersion       := scala2Version
@@ -32,7 +32,7 @@ resolvers ++= Opts.resolver.sonatypeOssSnapshots
 //resolvers += Opts.resolver.sonatypeStaging
 
 // Add ScalaFX dependency, exclude JavaFX transitive dependencies, may not mach this OS
-libraryDependencies += "org.scalafx" %% "scalafx" % "19.0.0-R30"
+libraryDependencies += "org.scalafx" %% "scalafx" % "20.0.0-R31"
 
 // Fork a new JVM for 'run' and 'test:run'
 fork := true
