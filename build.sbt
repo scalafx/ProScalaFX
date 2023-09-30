@@ -5,11 +5,11 @@ name := "ProScalaFX"
 version := "20.0.0-R31"
 
 // Version of scala to use
-val scala2Version = "2.13.10"
-val scala3Version = "3.2.2"
+val scala2Version = "2.13.12"
+val scala3Version = "3.3.1"
 // To cross compile with Scala 2 and Scala 3
 crossScalaVersions := Seq(scala2Version, scala3Version)
-scalaVersion       := scala2Version
+scalaVersion       := scala3Version
 
 // Set the main Scala source directory to be <base>/src
 Compile / scalaSource := baseDirectory(_ / "src").value
@@ -21,7 +21,7 @@ scalacOptions ++= Seq("-deprecation", "-feature")
 scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, _)) => Seq("-Xcheckinit", "-Xsource:3")
-    case Some((3, _)) => Seq("-rewrite", "-source:3.2-migration", "-explain", "-explain-types")
+    case Some((3, _)) => Seq("-rewrite", "-source:3.3-migration", "-explain", "-explain-types")
     case _            => Seq.empty[String]
   }
 }
