@@ -2,7 +2,7 @@
 name := "ProScalaFX"
 
 // Current version
-version := "20.0.0-R31"
+version := "21.0.0-R32"
 
 // Version of scala to use
 val scala2Version = "2.13.12"
@@ -32,7 +32,7 @@ resolvers ++= Opts.resolver.sonatypeOssSnapshots
 //resolvers += Opts.resolver.sonatypeStaging
 
 // Add ScalaFX dependency, exclude JavaFX transitive dependencies, may not mach this OS
-libraryDependencies += "org.scalafx" %% "scalafx" % "20.0.0-R31"
+libraryDependencies += "org.scalafx" %% "scalafx" % "21.0.0-R32"
 
 // Fork a new JVM for 'run' and 'test:run'
 fork := true
