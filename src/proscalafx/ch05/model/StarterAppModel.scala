@@ -31,16 +31,17 @@ class StarterAppModel {
   def randomWebSite(): String = {
 
     val webSites: Array[String] = Array(
+      "https://www.jfx-central.com/",
       "https://openjfx.io/",
       "https://github.com/mhrimaz/AwesomeJavaFX",
       "http://fxexperience.com",
 //      "http://steveonjava.com",
-      "https://javafxpert.com",
+//      "https://javafxpert.com",
       "https://pleasingsoftware.blogspot.com",
       "https://www.weiqigao.com/blog",
-      "https://edencoding.com/category/javafx/",
+//      "https://edencoding.com/category/javafx/",
       "https://codingonthestaircase.wordpress.com/",
-      "http://google.com"
+      "https://www.google.com/"
     )
 
     val randomIdx = new Random().nextInt(webSites.length)
