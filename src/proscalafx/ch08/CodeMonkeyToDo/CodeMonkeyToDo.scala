@@ -118,7 +118,7 @@ object CodeMonkeyToDo extends JFXApp3 {
       text = "About Code Monkey..."
       onAction = () => {
         val webView = new WebView {
-          engine.load("http://www.jonathancoulton.com/2006/04/14/" + "thing-a-week-29-code-monkey/")
+          engine.load("https://www.jonathancoulton.com/2006/04/14/" + "thing-a-week-29-code-monkey/")
         }
         val stage = new PrimaryStage {
           title = "Code Monkey"
