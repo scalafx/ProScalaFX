@@ -76,8 +76,8 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
 
     bands.clear()
 
-    val min  = EqualizerBand.MIN_GAIN
-    val max  = EqualizerBand.MAX_GAIN
+    val min  = EqualizerBand.MinGain
+    val max  = EqualizerBand.MaxGain
     val mid  = (max - min) / 2
     var freq = StartFrequency
 

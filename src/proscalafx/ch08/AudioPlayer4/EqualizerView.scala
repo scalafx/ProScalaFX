@@ -71,8 +71,8 @@ class EqualizerView(songModel: SongModel) extends AbstractView[GridPane](songMod
   private def createEQBands(gp: GridPane, mp: MediaPlayer): Unit = {
     val bands = mp.getAudioEqualizer.getBands
     bands.clear()
-    val min  = EqualizerBand.MIN_GAIN
-    val max  = EqualizerBand.MAX_GAIN
+    val min  = EqualizerBand.MinGain
+    val max  = EqualizerBand.MaxGain
     val mid  = (max - min) / 2
     var freq = StartFreq
 
