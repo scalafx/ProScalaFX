@@ -6,7 +6,7 @@ version := "24.0.0-R35"
 
 // Version of scala to use
 val scala2Version = "2.13.16"
-val scala3Version = "3.3.5"
+val scala3Version = "3.3.6"
 // To cross-compile with Scala 2 and Scala 3
 crossScalaVersions := Seq(scala2Version, scala3Version)
 scalaVersion       := scala3Version
