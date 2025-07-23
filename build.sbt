@@ -27,9 +27,8 @@ scalacOptions ++= {
 }
 
 // Point to location of a snapshot repository for ScalaFX
-resolvers ++= Opts.resolver.sonatypeOssSnapshots
-
-//resolvers += Opts.resolver.sonatypeStaging
+resolvers += Resolver.sonatypeCentralSnapshots
+resolvers += Resolver.mavenLocal
 
 // Add ScalaFX dependency, exclude JavaFX transitive dependencies, may not match this OS
 libraryDependencies += "org.scalafx" %% "scalafx" % "24.0.0-R35"
