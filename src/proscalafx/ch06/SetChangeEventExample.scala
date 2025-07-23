@@ -5,7 +5,7 @@ import scalafx.collections.ObservableSet.*
 
 object SetChangeEventExample extends App {
 
-  def prettyChange(change: Change[_]): String = {
+  def prettyChange(change: Change[?]): String = {
     val sb = new StringBuffer("\tChange event data:\n")
 
     change match {

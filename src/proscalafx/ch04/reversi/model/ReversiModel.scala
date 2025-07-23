@@ -1,6 +1,6 @@
 package proscalafx.ch04.reversi.model
 
-import scalafx.Includes.{when, *}
+import scalafx.Includes.when
 import scalafx.beans.Observable
 import scalafx.beans.binding.*
 import scalafx.beans.property.ObjectProperty

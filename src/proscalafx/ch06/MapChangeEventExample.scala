@@ -33,7 +33,7 @@ object MapChangeEventExample extends App {
   println("Removing by value: Calling map retain({case (k, v) => v != 3})")
   map filterInPlace { case (_, v) => v != 3 }
 
-  def prettyChange(change: Change[_, _]): String = {
+  def prettyChange(change: Change[?, ?]): String = {
     val sb = new StringBuffer("\tChange event data:\n")
 
     change match {

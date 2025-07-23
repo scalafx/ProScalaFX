@@ -70,7 +70,7 @@ object AudioPlayer4 extends JFXApp3 {
       val db = event.dragboard
       if (db.hasFiles || db.hasUrl) {
         // NOTE: We need to pass in `TransferMode` as Java vararg, since we use `javafx.scene.input.DragEvent`
-        event.acceptTransferModes(TransferMode.Any: _*)
+        event.acceptTransferModes(TransferMode.Any*)
       }
       event.consume()
     }
