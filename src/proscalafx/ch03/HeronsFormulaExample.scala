@@ -3,7 +3,7 @@ package proscalafx.ch03
 import scalafx.Includes.*
 import scalafx.beans.property.DoubleProperty
 
-object HeronsFormulaExample extends App {
+object HeronsFormulaExample extends App:
   val a = DoubleProperty(0.0)
   val b = DoubleProperty(0)
   val c = DoubleProperty(0)
@@ -38,4 +38,3 @@ object HeronsFormulaExample extends App {
     c(),
     math.sqrt(areaSquared.get)
   )
-}

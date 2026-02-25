@@ -14,13 +14,13 @@ import scalafx.scene.shape.Line
 
 import scala.language.postfixOps
 
-object Metronome1Main extends JFXApp3 {
+object Metronome1Main extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val startXVal = DoubleProperty(100.0)
 
-    val anim = new Timeline {
+    val anim = new Timeline:
       autoReverse = true
       keyFrames = Seq(
         at(0 s) {
@@ -31,11 +31,10 @@ object Metronome1Main extends JFXApp3 {
         }
       )
       cycleCount = Timeline.Indefinite
-    }
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "Metronome 1"
-      scene = new Scene(400, 500) {
+      scene = new Scene(400, 500):
         content = List(
           new Line {
             startX <== startXVal
@@ -73,7 +72,3 @@ object Metronome1Main extends JFXApp3 {
             )
           }
         )
-      }
-    }
-  }
-}

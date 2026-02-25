@@ -11,36 +11,30 @@ import scalafx.scene.layout.{ColumnConstraints, GridPane, Priority, RowConstrain
 /**
  * @author Jarek Sacha
  */
-class MetadataView(songModel: SongModel) extends AbstractView(songModel) {
+class MetadataView(songModel: SongModel) extends AbstractView(songModel):
 
-  def initView(): Node = {
-    val title = new Label {
+  def initView(): Node =
+    val title = new Label:
       text <== songModel.title
       id = "title"
-    }
-    val artist = new Label {
+    val artist = new Label:
       text <== songModel.artist
       id = "artist"
-    }
-    val album = new Label {
+    val album = new Label:
       text <== songModel.album
       id = "album"
-    }
-    val year = new Label {
+    val year = new Label:
       text <== songModel.year
       id = "year"
-    }
-    val albumCover = new ImageView {
+    val albumCover = new ImageView:
       image <== songModel.albumCover
       fitWidth = 240
       preserveRatio = true
       smooth = true
-      effect = new Reflection {
+      effect = new Reflection:
         fraction = 0.2
-      }
-    }
 
-    new GridPane {
+    new GridPane:
       padding = Insets(10)
       hgap = 20
       add(albumCover, 0, 0, 1, GridPane.Remaining)
@@ -56,10 +50,6 @@ class MetadataView(songModel: SongModel) extends AbstractView(songModel) {
           hgrow = Priority.Always
         }.delegate
       )
-      val r0 = new RowConstraints {
+      val r0 = new RowConstraints:
         valignment = VPos.Top
-      }
       rowConstraints ++= Seq(r0, r0, r0, r0)
-    }
-  }
-}

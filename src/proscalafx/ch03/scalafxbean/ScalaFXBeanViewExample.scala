@@ -1,6 +1,6 @@
 package proscalafx.ch03.scalafxbean
 
-class ScalaFXBeanViewExample(val model: ScalaFXBeanModelExample) {
+class ScalaFXBeanViewExample(val model: ScalaFXBeanModelExample):
 
   model.i.onChange((_, oldValue, newValue) => {
     println("Property i changed: old value = " + oldValue + ", new value = " + newValue)
@@ -13,5 +13,3 @@ class ScalaFXBeanViewExample(val model: ScalaFXBeanModelExample) {
   model.color.onChange((_, oldValue, newValue) => {
     println("Property color changed: old value = " + oldValue + ", new value = " + newValue)
   })
-
-}

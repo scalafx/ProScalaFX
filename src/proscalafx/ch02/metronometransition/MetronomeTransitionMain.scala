@@ -12,17 +12,16 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.Circle
 import scalafx.util.Duration
 
-object MetronomeTransitionMain extends JFXApp3 {
-  override def start(): Unit = {
+object MetronomeTransitionMain extends JFXApp3:
+  override def start(): Unit =
 
-    val circle = new Circle {
+    val circle = new Circle:
       centerX = 100
       centerY = 50
       radius = 4
       fill = Color.Blue
-    }
 
-    val anim = new TranslateTransition {
+    val anim = new TranslateTransition:
       duration = Duration(1000.0)
       node = circle
       fromX = 0
@@ -30,13 +29,12 @@ object MetronomeTransitionMain extends JFXApp3 {
       interpolator = Interpolator.Linear
       autoReverse = true
       cycleCount = Timeline.Indefinite
-    }
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       width = 400
       height = 500
       title = "Metronome using TranslateTransition"
-      scene = new Scene(400, 500) {
+      scene = new Scene(400, 500):
         content = List(
           circle,
           new HBox {
@@ -67,7 +65,3 @@ object MetronomeTransitionMain extends JFXApp3 {
             )
           }
         )
-      }
-    }
-  }
-}

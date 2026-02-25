@@ -2,24 +2,22 @@ package proscalafx.ch03
 
 import scalafx.beans.property.IntegerProperty
 
-object MotivatingExample extends App {
+object MotivatingExample extends App:
 
-  var intProperty: IntegerProperty = _
+  var intProperty: IntegerProperty = scala.compiletime.uninitialized
 
-  def createProperty(): Unit = {
+  def createProperty(): Unit =
     println()
     intProperty = IntegerProperty(1024)
     println("intProperty = " + intProperty)
     println("intProperty.get = " + intProperty.get)
     println("intProperty.value = " + intProperty.value)
     println("intProperty() = " + intProperty())
-  }
 
-  def addAndRemoveInvalidationListener(): Unit = {
+  def addAndRemoveInvalidationListener(): Unit =
     println()
-    val subscription = intProperty.onInvalidate {
-      observable => println("The observable has been invalidated: " + observable + ".")
-    }
+    val subscription = intProperty.onInvalidate: observable =>
+      println("The observable has been invalidated: " + observable + ".")
 
     println("Added invalidation listener.")
 
@@ -34,14 +32,11 @@ object MotivatingExample extends App {
 
     println("Calling intProperty.set(4096).")
     intProperty() = 4096
-  }
 
-  def addAndRemoveChangeListener(): Unit = {
+  def addAndRemoveChangeListener(): Unit =
     println()
-    val subscription = intProperty.onChange {
-      (_, oldValue, newValue) =>
-        println("The observableValue has changed: oldValue = " + oldValue + ", newValue = " + newValue)
-    }
+    val subscription = intProperty.onChange: (_, oldValue, newValue) =>
+      println("The observableValue has changed: oldValue = " + oldValue + ", newValue = " + newValue)
     println("Added change listener.")
 
     println("Calling intProperty.set(5120).")
@@ -52,9 +47,8 @@ object MotivatingExample extends App {
 
     println("Calling intProperty.set(6144).")
     intProperty() = 6144
-  }
 
-  def bindAndUnbindOnePropertyToAnother(): Unit = {
+  def bindAndUnbindOnePropertyToAnother(): Unit =
     println()
     val otherProperty = IntegerProperty(0)
     println("otherProperty() = " + otherProperty())
@@ -74,11 +68,8 @@ object MotivatingExample extends App {
     println("Calling intProperty.set(8192).")
     intProperty() = 8192
     println("otherProperty() = " + otherProperty())
-  }
 
   createProperty()
   addAndRemoveInvalidationListener()
   addAndRemoveChangeListener()
   bindAndUnbindOnePropertyToAnother()
-
-}

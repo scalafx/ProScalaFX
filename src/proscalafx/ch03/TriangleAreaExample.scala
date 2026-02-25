@@ -3,7 +3,7 @@ package proscalafx.ch03
 import scalafx.beans.binding.NumberBinding
 import scalafx.beans.property.IntegerProperty
 
-object TriangleAreaExample extends App {
+object TriangleAreaExample extends App:
 
   def printResult(
     x1: IntegerProperty,
@@ -13,7 +13,7 @@ object TriangleAreaExample extends App {
     x3: IntegerProperty,
     y3: IntegerProperty,
     area: NumberBinding
-  ): Unit = {
+  ): Unit =
     println("For A(%d,%d), B(%d,%d), C(%d,%d), the area of triangle ABC is %1.1f".format(
       x1(),
       y1(),
@@ -23,7 +23,6 @@ object TriangleAreaExample extends App {
       y3(),
       area()
     ))
-  }
 
   val x1 = IntegerProperty(0)
   val y1 = IntegerProperty(0)
@@ -64,4 +63,3 @@ object TriangleAreaExample extends App {
   y3() = 1
 
   printResult(x1, y1, x2, y2, x3, y3, area)
-}

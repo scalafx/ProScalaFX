@@ -17,9 +17,9 @@ import scalafx.scene.{Cursor, Scene}
 /**
  * @author Rafael
  */
-object OnTheSceneMain extends JFXApp3 {
+object OnTheSceneMain extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val fillVals = DoubleProperty(255.0)
 
@@ -44,50 +44,42 @@ object OnTheSceneMain extends JFXApp3 {
       Cursor.None
     )
 
-    val sliderRef = new Slider {
+    val sliderRef = new Slider:
       min = 0
       max = 255
       value = 255
       orientation = Orientation.Vertical
-    }
 
-    val choiceRef = new ChoiceBox[jfxs.Cursor] {
+    val choiceRef = new ChoiceBox[jfxs.Cursor]:
       items = cursors
       // XXX: String converter used to remove "[SFX]" in begin of toString.
       // However in selected item the prefix "[SFX]" appears.
       //    converter = StringConverter.toStringConverter((cursor: Cursor) => cursor.delegate.toString)
-    }
 
-    val textSceneX = new Text {
+    val textSceneX = new Text:
       styleClass = List("emphasized-text")
-    }
 
-    val textSceneY = new Text {
+    val textSceneY = new Text:
       styleClass = List("emphasized-text")
-    }
 
-    val textSceneW = new Text {
+    val textSceneW = new Text:
       styleClass = List("emphasized-text")
-    }
 
-    val textSceneH = new Text {
+    val textSceneH = new Text:
       styleClass = List("emphasized-text")
       id = "sceneHeightText"
-    }
-    val labelStageX = new Label {
+    val labelStageX = new Label:
       id = "stageX"
-    }
 
-    val labelStageY = new Label {
+    val labelStageY = new Label:
       id = "stageY"
-    }
 
     val labelStageW = new Label()
     val labelStageH = new Label()
 
     val toggleGrp = new ToggleGroup()
 
-    val sceneRoot = new FlowPane {
+    val sceneRoot = new FlowPane:
       layoutX = 20
       layoutY = 40
       padding = Insets(0, 20, 40, 0)
@@ -126,17 +118,14 @@ object OnTheSceneMain extends JFXApp3 {
         labelStageW,
         labelStageH
       )
-    }
 
-    val sceneRef = new Scene(600, 250) {
+    val sceneRef = new Scene(600, 250):
       root = sceneRoot
       stylesheets = List(this.getClass.getResource("onTheScene.css").toExternalForm)
-    }
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "On the Scene"
       scene = sceneRef
-    }
 
     choiceRef.selectionModel().selectFirst()
 
@@ -159,13 +148,12 @@ object OnTheSceneMain extends JFXApp3 {
     })
 
     // When the selected radio button changes, set the appropriate stylesheet
-    toggleGrp.selectedToggle.onChange {
+    toggleGrp.selectedToggle.onChange:
       val radioButtonText = toggleGrp.selectedToggle().asInstanceOf[jfxsc.RadioButton].text()
       sceneRef.stylesheets = List(this.getClass.getResource(radioButtonText).toExternalForm)
-    }
 
     // Define an unmanaged node that will display Text
-    val addedTextRef = new Text {
+    val addedTextRef = new Text:
       layoutX = 0
       layoutY = -30
       textOrigin = VPos.Top
@@ -173,9 +161,6 @@ object OnTheSceneMain extends JFXApp3 {
       font = Font.font("Sans Serif", FontWeight.Bold, 16)
       managed = false
       text <== new StringProperty("Scene fill: ") + sceneRef.fill.asString()
-    }
 
     // Add to the Text node to the FlowPane.
     sceneRef.content += addedTextRef
-  }
-}

@@ -10,22 +10,21 @@ import scalafx.scene.paint.{Color, LinearGradient, Stop}
 import scalafx.scene.shape.{Line, Rectangle}
 import scalafx.scene.text.{Font, FontWeight, Text}
 
-object AudioConfigMain extends JFXApp3 {
+object AudioConfigMain extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val acModel = new AudioConfigModel()
 
-    val genreChoiceBox = new ChoiceBox[String] {
+    val genreChoiceBox = new ChoiceBox[String]:
       layoutX = 204
       layoutY = 154
       prefWidth = 93
       items = acModel.genres
-    }
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "Audio Configuration"
-      scene = new Scene {
+      scene = new Scene:
         content = List(
           new Rectangle {
             width = 320
@@ -118,11 +117,7 @@ object AudioConfigMain extends JFXApp3 {
           },
           genreChoiceBox
         )
-      }
-    }
 
     acModel.genreSelectionModel = genreChoiceBox.selectionModel()
     acModel.addListenerToGenreSelectionModel()
     acModel.genreSelectionModel.selectFirst()
-  }
-}

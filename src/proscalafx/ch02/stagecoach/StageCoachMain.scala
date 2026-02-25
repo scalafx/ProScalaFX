@@ -24,52 +24,43 @@ import scalafx.stage.{Screen, StageStyle}
  *
  * @author Rafael
  */
-object StageCoachMain extends JFXApp3 {
+object StageCoachMain extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val titleProperty = StringProperty("")
 
     // Process command line parameters
-    val stageStyle = parameters.unnamed match {
+    val stageStyle = parameters.unnamed match
       case Seq("transparent") => StageStyle.Transparent
       case Seq("undecorated") => StageStyle.Undecorated
       case Seq("utility")     => StageStyle.Utility
       case _                  => StageStyle.Decorated
-    }
 
-    val textStageX = new Text {
+    val textStageX = new Text:
       textOrigin = VPos.Top
-    }
-    val textStageY = new Text {
+    val textStageY = new Text:
       textOrigin = VPos.Top
-    }
-    val textStageW = new Text {
+    val textStageW = new Text:
       textOrigin = VPos.Top
-    }
-    val textStageH = new Text {
+    val textStageH = new Text:
       textOrigin = VPos.Top
-    }
-    val textStageF = new Text {
+    val textStageF = new Text:
       textOrigin = VPos.Top
-    }
-    val checkBoxResizable = new CheckBox {
+    val checkBoxResizable = new CheckBox:
       text = "resizable"
       disable = stageStyle == StageStyle.Transparent || stageStyle == StageStyle.Undecorated
-    }
-    val checkBoxFullScreen = new CheckBox {
+    val checkBoxFullScreen = new CheckBox:
       text = "fullScreen"
-    }
-    val titleTextField = new TextField {
+    val titleTextField = new TextField:
       text = "Stage Coach"
-    }
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       resizable = false
       title <== titleProperty
-      scene = new Scene(270, 370) {
+      scene = new Scene(270, 370):
         fill = Color.Transparent
-        content = new Group {
+        content = new Group:
           children = List(
             new Rectangle {
               width = 250
@@ -112,9 +103,6 @@ object StageCoachMain extends JFXApp3 {
               )
             }
           )
-        }
-      }
-    }
 
     // when mouse button is pressed, save the initial position of screen
     val rootGroup   = stage.scene().content(0)
@@ -147,5 +135,3 @@ object StageCoachMain extends JFXApp3 {
     val primScreenBounds = Screen.primary.visualBounds
     stage.x = (primScreenBounds.width - stage.width()) / 2
     stage.y = (primScreenBounds.height - stage.height()) / 2
-  }
-}

@@ -7,9 +7,9 @@ import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.layout.{HBox, Priority, StackPane}
 
-object ReversiPieceTest extends JFXApp3 {
+object ReversiPieceTest extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     // Unlike in many other examples, here content of the scene is assigned using `root` rather
     // than `content` properties.
@@ -17,9 +17,9 @@ object ReversiPieceTest extends JFXApp3 {
     // are added to that group. That may have undesired layout complications. In our case it will prevent automatic
     // resizing of the content.
     // To work around this, we assign to `root` directly.
-    stage = new PrimaryStage() {
-      scene = new Scene() {
-        root = new HBox {
+    stage = new PrimaryStage():
+      scene = new Scene():
+        root = new HBox:
           snapToPixel = false
           children = List(
             new StackPane {
@@ -37,8 +37,3 @@ object ReversiPieceTest extends JFXApp3 {
               hgrow = Priority.Always
             }
           )
-        }
-      }
-    }
-  }
-}

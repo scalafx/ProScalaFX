@@ -14,9 +14,9 @@ import scalafx.util.Duration
 import java.io.File
 
 /** Main class for the "Hello World" style example. */
-object HelloEarthRiseMain extends JFXApp3 {
+object HelloEarthRiseMain extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val message =
       """Earthrise at Christmas:
@@ -34,7 +34,7 @@ object HelloEarthRiseMain extends JFXApp3 {
         |a Merry Christmas, and God bless all of you -- all of
         |you on the good Earth." """.stripMargin
 
-    val textRef = new Text {
+    val textRef = new Text:
       layoutY = 100
       textOrigin = VPos.Top
       textAlignment = TextAlignment.Justify
@@ -42,11 +42,10 @@ object HelloEarthRiseMain extends JFXApp3 {
       text = message
       fill = Color.rgb(187, 195, 107)
       font = Font.font("SansSerif", FontWeight.Bold, 24.0)
-    }
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "Hello Earthrise"
-      scene = new Scene(516, 387) {
+      scene = new Scene(516, 387):
         content = List(
           new ImageView(image = new Image(new File("media/earthrise.jpg").toURI.toString)),
           new Group {
@@ -56,8 +55,6 @@ object HelloEarthRiseMain extends JFXApp3 {
             clip = Rectangle(430, 85)
           }
         )
-      }
-    }
 
     new TranslateTransition {
       cycleCount = Timeline.Indefinite
@@ -66,5 +63,3 @@ object HelloEarthRiseMain extends JFXApp3 {
       toY = -820
       interpolator = Interpolator.Linear
     }.play()
-  }
-}

@@ -2,7 +2,7 @@ package proscalafx.ch03
 
 import scalafx.beans.property.{DoubleProperty, FloatProperty, IntegerProperty, LongProperty}
 
-object NumericPropertiesExample extends App {
+object NumericPropertiesExample extends App:
   val i = new IntegerProperty(null, "i", 1024)
   val l = new LongProperty(null, "l", 0L)
   val f = new FloatProperty(null, "f", 0.0f)
@@ -49,4 +49,3 @@ object NumericPropertiesExample extends App {
   println("f = " + f())
   println("l = " + l())
   println("i = " + i())
-}

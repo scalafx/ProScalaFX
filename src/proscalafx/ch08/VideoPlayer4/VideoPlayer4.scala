@@ -10,16 +10,16 @@ import scalafx.scene.{Node, Scene}
  */
 class VideoPlayer4 {
 
-  private var playerControlsView: PlayerControlsView = _
-  private var videoView: VideoView                   = _
-  private var equalizerView: EqualizerView           = _
+  private var playerControlsView: PlayerControlsView = scala.compiletime.uninitialized
+  private var videoView: VideoView                   = scala.compiletime.uninitialized
+  private var equalizerView: EqualizerView           = scala.compiletime.uninitialized
 
   val mediaModel: MediaModel = new MediaModel() {
     url = "https://download.oracle.com/otndocs/products/javafx/oow2010-2.mp4"
   }
 
-  private val page1 = createPageOne()
-  private val page2 = createPageTwo()
+  private val page1       = createPageOne()
+  private val page2       = createPageTwo()
   val rootNode: StackPane = new StackPane {
     children = page1
   }
@@ -51,7 +51,7 @@ class VideoPlayer4 {
     }
 
     scene.onDragDropped = event => {
-      val db = event.dragboard
+      val db  = event.dragboard
       val url =
         if (db.hasFiles) {
           db.getFiles.get(0).toURI.toString

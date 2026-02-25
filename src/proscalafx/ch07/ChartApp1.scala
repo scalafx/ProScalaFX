@@ -10,21 +10,16 @@ import scalafx.scene.layout.StackPane
 /**
  * @author Jarek Sacha
  */
-object ChartApp1 extends JFXApp3 {
+object ChartApp1 extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "PieChart"
-      scene = new Scene(400, 250) {
-        root = new StackPane {
-          children = new PieChart() {
+      scene = new Scene(400, 250):
+        root = new StackPane:
+          children = new PieChart():
             data = chartData()
-          }
-        }
-      }
-    }
-  }
 
   private def chartData() = ObservableBuffer(
     PieChart.Data("java", 17.56),
@@ -36,4 +31,3 @@ object ChartApp1 extends JFXApp3 {
     PieChart.Data("(Visual)Basic", 4.76),
     PieChart.Data("Other", 31.37)
   )
-}

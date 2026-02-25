@@ -9,9 +9,9 @@ import scalafx.scene.Scene
 /**
  * @author Jarek Sacha
  */
-object VideoPlayer4App extends JFXApp3 {
+object VideoPlayer4App extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     println("JavaFX version: " + csjfxr.VersionInfo.getRuntimeVersion)
 
@@ -19,15 +19,10 @@ object VideoPlayer4App extends JFXApp3 {
 
     val stylesheet = getClass.getResource("media.css")
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "Video Player 4"
-      scene = new Scene(videoPlayer.rootNode, 1024, 680) {
+      scene = new Scene(videoPlayer.rootNode, 1024, 680):
         stylesheets += stylesheet.toString
-      }
       videoPlayer.initSceneDragAndDrop(scene())
-    }
 
     videoPlayer.mediaModel.mediaPlayer().play()
-  }
-
-}

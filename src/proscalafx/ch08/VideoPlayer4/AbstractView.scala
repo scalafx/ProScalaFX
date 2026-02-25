@@ -6,7 +6,7 @@ import scalafx.scene.Node
 /**
  * @author Jarek Sacha
  */
-abstract class AbstractView[T <: Node](protected val mediaModel: MediaModel) {
+abstract class AbstractView[T <: Node](protected val mediaModel: MediaModel):
 
   private val _viewNode: T = initView()
 
@@ -15,4 +15,3 @@ abstract class AbstractView[T <: Node](protected val mediaModel: MediaModel) {
   def onNextPageAction(nextHandler: ActionEvent => Unit): Unit = {}
 
   protected def initView(): T
-}

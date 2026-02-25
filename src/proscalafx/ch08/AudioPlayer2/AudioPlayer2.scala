@@ -17,32 +17,29 @@ import scalafx.scene.media.{Media, MediaPlayer}
  *
  * @author Jarek Sacha
  */
-object AudioPlayer2 extends JFXApp3 {
+object AudioPlayer2 extends JFXApp3:
 
-  private var media: Media             = _
-  private var mediaPlayer: MediaPlayer = _
-  private var artist: Label            = _
-  private var album: Label             = _
-  private var title: Label             = _
-  private var year: Label              = _
-  private var albumCover: ImageView    = _
+  private var media: Media             = scala.compiletime.uninitialized
+  private var mediaPlayer: MediaPlayer = scala.compiletime.uninitialized
+  private var artist: Label            = scala.compiletime.uninitialized
+  private var album: Label             = scala.compiletime.uninitialized
+  private var title: Label             = scala.compiletime.uninitialized
+  private var year: Label              = scala.compiletime.uninitialized
+  private var albumCover: ImageView    = scala.compiletime.uninitialized
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     createControls()
     createMedia()
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       self =>
       self.title = "Audio Player 2"
-      scene = new Scene(createGridPane(), 800, 400) {
+      scene = new Scene(createGridPane(), 800, 400):
         val stylesheet = getClass.getResource("media.css")
         stylesheets += stylesheet.toString
-      }
-    }
-  }
 
-  private def createGridPane(): GridPane = new GridPane {
+  private def createGridPane(): GridPane = new GridPane:
     padding = Insets(10)
     hgap = 20
     add(albumCover, 0, 0, 1, GridPane.Remaining)
@@ -58,71 +55,54 @@ object AudioPlayer2 extends JFXApp3 {
         hgrow = Priority.Always
       }.delegate
     )
-    val r0 = new RowConstraints {
+    val r0 = new RowConstraints:
       valignment = VPos.Top
-    }
     rowConstraints ++= Seq(r0, r0, r0, r0)
-  }
 
-  private def createControls(): Unit = {
-    artist = new Label {
+  private def createControls(): Unit =
+    artist = new Label:
       id = "artist"
-    }
-    album = new Label {
+    album = new Label:
       id = "album"
-    }
-    title = new Label {
+    title = new Label:
       id = "title"
-    }
-    year = new Label {
+    year = new Label:
       id = "year"
-    }
     val url = getClass.getResource("resources/defaultAlbum.png")
-    albumCover = new ImageView {
+    albumCover = new ImageView:
       image = new Image(url.toString)
       fitWidth = 240
       preserveRatio = true
       smooth = true
-      effect = new Reflection {
+      effect = new Reflection:
         fraction = 0.2
-      }
-    }
-  }
 
-  private def createMedia(): Unit = {
-    try {
-      media = new Media("https://traffic.libsyn.com/dickwall/JavaPosse373.mp3") {
+  private def createMedia(): Unit =
+    try
+      media = new Media("https://traffic.libsyn.com/dickwall/JavaPosse373.mp3"):
         metadata.onChange((_, change) => {
           change match {
             case Add(key, added) => handleMetadata(key, added)
             case _               =>
           }
         })
-      }
 
-      mediaPlayer = new MediaPlayer(media) {
+      mediaPlayer = new MediaPlayer(media):
         self =>
-        onError = {
+        onError =
           val errorMessage: String = self.media.getError.getMessage
           System.out.println("MediaPlayer Error: " + errorMessage)
-        }
-      }
 
       mediaPlayer.play()
-    } catch {
+    catch
       // Handle construction errors
       case re: RuntimeException => println("Caught Exception: " + re.getMessage)
-    }
-  }
 
-  private def handleMetadata(key: String, value: AnyRef): Unit = {
-    key match {
+  private def handleMetadata(key: String, value: AnyRef): Unit =
+    key match
       case "album"  => album.text = value.toString
       case "artist" => artist.text = value.toString
       case "title"  => title.text = value.toString
       case "year"   => year.text = value.toString
       case "image"  => albumCover.image = value.asInstanceOf[javafx.scene.image.Image]
       case _        => println("Unhandled metadata key: " + key + ", value: " + value)
-    }
-  }
-}

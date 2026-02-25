@@ -14,25 +14,19 @@ import scalafx.scene.media.AudioClip
  *
  * @author Jarek Sacha
  */
-object BasicAudioClip extends JFXApp3 {
+object BasicAudioClip extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val resource  = getClass.getResource("resources/beep.wav")
     val audioClip = new AudioClip(resource.toString)
-    val stackPane = new StackPane {
+    val stackPane = new StackPane:
       padding = Insets(10)
-      children = new Button {
+      children = new Button:
         text = "Bing Zzzzt!"
         onAction = () => audioClip.play(1.0)
-      }
-    }
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "Basic AudioClip Example"
-      scene = new Scene(stackPane, 200, 200) {
+      scene = new Scene(stackPane, 200, 200):
         stylesheets += getClass.getResource("media.css").toString
-      }
-    }
-  }
-}

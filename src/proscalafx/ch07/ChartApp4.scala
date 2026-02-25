@@ -10,29 +10,24 @@ import scalafx.scene.layout.StackPane
 /**
  * @author Jarek Sacha
  */
-object ChartApp4 extends JFXApp3 {
+object ChartApp4 extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
-    val xAxis = new NumberAxis {
+    val xAxis = new NumberAxis:
       autoRanging = false
       lowerBound = 2011
       upperBound = 2021
-    }
     val yAxis        = new NumberAxis()
     val scatterChart = ScatterChart[Number, Number](xAxis, yAxis, createChartData())
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "Chart App 4"
-      scene = new Scene(400, 250) {
-        root = new StackPane {
+      scene = new Scene(400, 250):
+        root = new StackPane:
           children = scatterChart
-        }
-      }
-    }
-  }
 
-  private def createChartData() = {
+  private def createChartData() =
 
     val years = 2011 to 2020
 
@@ -55,5 +50,3 @@ object ChartApp4 extends JFXApp3 {
       XYChart.Series[Number, Number](name = "C", data = ObservableBuffer.from(cData)),
       XYChart.Series[Number, Number](name = "C++", data = ObservableBuffer.from(cppData))
     )
-  }
-}

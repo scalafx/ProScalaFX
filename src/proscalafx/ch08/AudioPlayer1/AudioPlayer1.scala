@@ -10,18 +10,15 @@ import scalafx.scene.media.{Media, MediaPlayer}
  *
  * @author Jarek Sacha
  */
-object AudioPlayer1 extends JFXApp3 {
+object AudioPlayer1 extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val resource    = getClass.getResource("resources/keeper.mp3")
     val media       = new Media(resource.toString)
     val mediaPlayer = new MediaPlayer(media)
     mediaPlayer.play()
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "Audio Player 1"
       scene = new Scene(200, 200)
-    }
-  }
-}

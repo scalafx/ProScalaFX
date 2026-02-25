@@ -2,15 +2,12 @@ package proscalafx.ch04.reversi.model
 
 import scalafx.scene.paint.Color
 
-sealed case class Owner(color: Color, colorStyle: String) {
+sealed case class Owner(color: Color, colorStyle: String):
 
-  def opposite: Owner = this match {
+  def opposite: Owner = this match
     case White => Black
     case Black => White
     case _     => NONE
-  }
-
-}
 
 object NONE extends Owner(Color.Transparent, "")
 

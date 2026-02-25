@@ -14,13 +14,13 @@ import scalafx.scene.{Node, Scene}
 object AudioPlayer4 extends JFXApp3 {
   println("JavaFX version: " + csjfxr.VersionInfo.getRuntimeVersion)
 
-  private var songModel: SongModel                   = _
-  private var playerControlsView: PlayerControlsView = _
-  private var metaDataView: MetadataView             = _
-  private var equalizerView: EqualizerView           = _
-  private var page1: Node                            = _
-  private var page2: Node                            = _
-  private var rootNode: StackPane                    = _
+  private var songModel: SongModel                   = scala.compiletime.uninitialized
+  private var playerControlsView: PlayerControlsView = scala.compiletime.uninitialized
+  private var metaDataView: MetadataView             = scala.compiletime.uninitialized
+  private var equalizerView: EqualizerView           = scala.compiletime.uninitialized
+  private var page1: Node                            = scala.compiletime.uninitialized
+  private var page2: Node                            = scala.compiletime.uninitialized
+  private var rootNode: StackPane                    = scala.compiletime.uninitialized
 
   override def start(): Unit = {
 

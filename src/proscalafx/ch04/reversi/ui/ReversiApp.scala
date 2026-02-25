@@ -5,22 +5,19 @@ import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.layout.*
 
-object ReversiApp extends JFXApp3 {
+object ReversiApp extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val reversi = new Reversi()
 
-    stage = new PrimaryStage() {
-      scene = new Scene(400, 600) {
-        root = new AnchorPane() {
+    stage = new PrimaryStage():
+      scene = new Scene(400, 600):
+        root = new AnchorPane():
           children = List(
             reversi.game,
             reversi.restart
           )
-        }
-      }
-    }
 
     AnchorPane.setTopAnchor(reversi.game, 0d)
     AnchorPane.setBottomAnchor(reversi.game, 0d)
@@ -35,5 +32,3 @@ object ReversiApp extends JFXApp3 {
     //      fieldOfView = 60
     //    }.delegate
     //  }
-  }
-}

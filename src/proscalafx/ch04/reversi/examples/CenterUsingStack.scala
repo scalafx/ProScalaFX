@@ -9,15 +9,15 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.Ellipse
 import scalafx.scene.text.{Font, FontWeight, Text}
 
-object CenterUsingStack extends JFXApp3 {
+object CenterUsingStack extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val ellipse = new Ellipse
 
-    stage = new PrimaryStage {
-      scene = new Scene(400, 100) {
-        content = new StackPane {
+    stage = new PrimaryStage:
+      scene = new Scene(400, 100):
+        content = new StackPane:
           children = List(
             ellipse,
             new Text("ScalaFX Reversi") {
@@ -25,11 +25,6 @@ object CenterUsingStack extends JFXApp3 {
               fill = Color.White
             }
           )
-        }
-      }
-    }
 
     ellipse.radiusX <== stage.scene().width / 2
     ellipse.radiusY <== stage.scene().height / 2
-  }
-}

@@ -14,9 +14,9 @@ import scalafx.util.Duration
 
 import java.io.File
 
-object HelloScrollPaneMain extends JFXApp3 {
+object HelloScrollPaneMain extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
     val message =
       """Earthrise at Christmas: 
 [Forty] years ago this Christmas, a turbulent world 
@@ -33,7 +33,7 @@ Commander Borman: "We close with good night, good luck,
 a Merry Christmas, and God bless all of you -- all of 
 you on the good Earth." """.replace("\n", "")
 
-    val textRef = new Text {
+    val textRef = new Text:
       layoutY = 100
       textOrigin = VPos.Top
       textAlignment = TextAlignment.Justify
@@ -41,11 +41,10 @@ you on the good Earth." """.replace("\n", "")
       text = message
       fill = Color.rgb(187, 195, 107)
       font = Font.font("SansSerif", FontWeight.Bold, 24.0)
-    }
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "Hello Earthrise"
-      scene = new Scene(516, 387) {
+      scene = new Scene(516, 387):
         content = List(
           new ImageView(new Image(new File("media/earthrise.jpg").toURI.toString)),
           new ScrollPane {
@@ -60,8 +59,6 @@ you on the good Earth." """.replace("\n", "")
             style = "-fx-background-color: transparent;"
           }
         )
-      }
-    }
 
     new TranslateTransition {
       cycleCount = Timeline.Indefinite
@@ -70,5 +67,3 @@ you on the good Earth." """.replace("\n", "")
       toY = -820
       interpolator = Interpolator.Linear
     }.play()
-  }
-}

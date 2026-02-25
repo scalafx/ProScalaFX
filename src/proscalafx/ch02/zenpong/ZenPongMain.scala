@@ -7,15 +7,15 @@ import scalafx.scene.paint.{Color, CycleMethod, LinearGradient, Stop}
 
 import scala.language.postfixOps
 
-object ZenPongMain extends JFXApp3 {
+object ZenPongMain extends JFXApp3:
 
-  override def start(): Unit = {
+  override def start(): Unit =
 
     val zenPong = new ZenPong()
 
-    stage = new PrimaryStage {
+    stage = new PrimaryStage:
       title = "ZenPong Example"
-      scene = new Scene(500, 500) {
+      scene = new Scene(500, 500):
         fill = LinearGradient(
           startX = 0.0,
           startY = 0.0,
@@ -26,9 +26,5 @@ object ZenPongMain extends JFXApp3 {
           stops = List(Stop(0.0, Color.Black), Stop(0.0, Color.Gray))
         )
         content = zenPong.pongComponents
-      }
-    }
 
     zenPong.initialize()
-  }
-}

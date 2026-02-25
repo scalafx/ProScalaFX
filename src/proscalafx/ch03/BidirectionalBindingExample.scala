@@ -2,7 +2,7 @@ package proscalafx.ch03
 
 import scalafx.beans.property.StringProperty
 
-object BidirectionalBindingExample extends App {
+object BidirectionalBindingExample extends App:
   println("Constructing two StringProperty objects.")
   val prop1 = new StringProperty("")
   val prop2 = new StringProperty("")
@@ -22,4 +22,3 @@ object BidirectionalBindingExample extends App {
   prop2() = prop2() + "\nprop2 says: Bye!"
   println("prop1.get returned:")
   println(prop1())
-}

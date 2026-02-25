@@ -20,21 +20,21 @@ import scala.language.postfixOps
  * @author Jarek Sacha
  */
 class PlayerControlsView(mediaModel: MediaModel) extends AbstractView[GridPane](mediaModel) {
-  private var pauseImg: Image          = _
-  private var playImg: Image           = _
-  private var playPauseIcon: ImageView = _
+  private var pauseImg: Image          = scala.compiletime.uninitialized
+  private var playImg: Image           = scala.compiletime.uninitialized
+  private var playPauseIcon: ImageView = scala.compiletime.uninitialized
 
   // ScalaFX uses `subscription` to keep track of assigned listeners
-  private var statusInvalidationSubscription: Subscription = _
-  private var currentTimeSubscription: Subscription        = _
+  private var statusInvalidationSubscription: Subscription = scala.compiletime.uninitialized
+  private var currentTimeSubscription: Subscription        = scala.compiletime.uninitialized
 
-  private var controlPanel: Node        = _
-  private var statusLabel: Label        = _
-  private var currentTimeLabel: Label   = _
-  private var totalDurationLabel: Label = _
-  private var volumeSlider: Slider      = _
-  private var positionSlider: Slider    = _
-  private var eqButton: Button          = _
+  private var controlPanel: Node        = scala.compiletime.uninitialized
+  private var statusLabel: Label        = scala.compiletime.uninitialized
+  private var currentTimeLabel: Label   = scala.compiletime.uninitialized
+  private var totalDurationLabel: Label = scala.compiletime.uninitialized
+  private var volumeSlider: Slider      = scala.compiletime.uninitialized
+  private var positionSlider: Slider    = scala.compiletime.uninitialized
+  private var eqButton: Button          = scala.compiletime.uninitialized
 
   mediaModel.mediaPlayer.onChange {
     (_, oldValue, newValue) =>

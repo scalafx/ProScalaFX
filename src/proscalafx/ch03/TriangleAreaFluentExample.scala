@@ -3,7 +3,7 @@ package proscalafx.ch03
 import scalafx.beans.binding.Bindings
 import scalafx.beans.property.IntegerProperty
 
-object TriangleAreaFluentExample extends App {
+object TriangleAreaFluentExample extends App:
   val x1 = IntegerProperty(0)
   val y1 = IntegerProperty(0)
   val x2 = IntegerProperty(0)
@@ -11,7 +11,13 @@ object TriangleAreaFluentExample extends App {
   val x3 = IntegerProperty(0)
   val y3 = IntegerProperty(0)
 
-  val area = ((x1 * y2) + (x2 * y3) + (x3 * y1) - (x1 * y3) - (x2 * y1) - (x3 * y2)) / 2.0
+  val area =
+    ((x1 * y2) +
+      (x2 * y3) +
+      (x3 * y1) -
+      (x1 * y3) -
+      (x2 * y1) -
+      (x3 * y2)) / 2.0
 
   val output = Bindings.createStringBinding(
     () =>
@@ -42,4 +48,3 @@ object TriangleAreaFluentExample extends App {
   y3() = 1
 
   println(output())
-}

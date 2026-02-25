@@ -7,7 +7,7 @@ import scalafx.collections.ObservableBuffer
  *
  * In ScalaFX `ObservableBuffer` is a wrapper for JavaFX `ObservableList`.
  */
-object ObservableBufferExample extends App {
+object ObservableBufferExample extends App:
 
   val strings = new ObservableBuffer[String]()
   strings.onInvalidate(println("\tlist invalidated"))
@@ -40,4 +40,3 @@ object ObservableBufferExample extends App {
 
   println("""Calling --= Seq("Third", "Fourth"): """)
   strings --= Seq("Third", "Fourth")
-}

@@ -11,7 +11,7 @@ import scalafx.collections.ObservableBuffer.*
  * ScalaFX is using a different way of passing information about modification to `ObservableBuffer`.
  * Each modification is represented by a [[scalafx.collections.ObservableBuffer.Change]] object.
  */
-object BufferChangeEventExample extends App {
+object BufferChangeEventExample extends App:
 
   val strings = new ObservableBuffer[String]
   strings.onChange((buffer, changes) => {
@@ -37,11 +37,11 @@ object BufferChangeEventExample extends App {
   println("""Calling strings --= Seq("One_1", "Two_1", "Zero_1"): """)
   strings --= Seq("One_1", "Two_1", "Zero_1")
 
-  private def prettyPrint(index: Int, change: Change[String]): String = {
+  private def prettyPrint(index: Int, change: Change[String]): String =
     val sb = new StringBuffer("\t\tcursor = " + index + "\n")
     sb.append("\t\tKind of change: ")
 
-    change match {
+    change match
       case Add(position, added) =>
         sb.append("added\n")
         sb.append("\t\tPosition: " + position + "\n")
@@ -61,8 +61,5 @@ object BufferChangeEventExample extends App {
         sb.append("updated\n")
         sb.append("\t\tfrom: " + from + "\n")
         sb.append("\t\tto  : " + to + "\n")
-    }
 
     sb.toString
-  }
-}

@@ -25,8 +25,8 @@ class ZenPong {
   val rightPaddleY = new DoubleProperty
 
   /** The drag anchor for left and right paddles */
-  var leftPaddleDragAnchorY: Double  = _
-  var rightPaddleDragAnchorY: Double = _
+  var leftPaddleDragAnchorY: Double  = scala.compiletime.uninitialized
+  var rightPaddleDragAnchorY: Double = scala.compiletime.uninitialized
 
   /** Controls whether the ball is moving right */
   var movingRight = true
@@ -35,8 +35,8 @@ class ZenPong {
   var movingDown = true
 
   /** The initial translateY property for the left and right paddles */
-  var initLeftPaddleTranslateY: Double  = _
-  var initRightPaddleTranslateY: Double = _
+  var initLeftPaddleTranslateY: Double  = scala.compiletime.uninitialized
+  var initRightPaddleTranslateY: Double = scala.compiletime.uninitialized
 
   /** The moving ball */
   val ball = new Circle {

@@ -34,35 +34,31 @@ import java.util
  *
  * @author Jarek Sacha
  */
-class AdoptionFormController extends jfxf.Initializable {
+class AdoptionFormController extends jfxf.Initializable:
 
   @jfxf.FXML
-  private var sizeTextField: jfxsc.TextField = _
+  private var sizeTextField: jfxsc.TextField = scala.compiletime.uninitialized
   @jfxf.FXML
-  private var breedTextField: jfxsc.TextField = _
+  private var breedTextField: jfxsc.TextField = scala.compiletime.uninitialized
   @jfxf.FXML
-  private var sexChoiceBox: jfxsc.ChoiceBox[String] = _
+  private var sexChoiceBox: jfxsc.ChoiceBox[String] = scala.compiletime.uninitialized
   @jfxf.FXML
-  private var additionalInfoTextArea: jfxsc.TextArea = _
+  private var additionalInfoTextArea: jfxsc.TextArea = scala.compiletime.uninitialized
 
   @jfxf.FXML
-  private var gridDelegate: jfxsl.GridPane = _
-  private var grid: GridPane               = _
+  private var gridDelegate: jfxsl.GridPane = scala.compiletime.uninitialized
+  private var grid: GridPane               = scala.compiletime.uninitialized
 
   @jfxf.FXML
-  private def handleSubmit(event: jfxe.ActionEvent): Unit = {
+  private def handleSubmit(event: jfxe.ActionEvent): Unit =
     grid.gridLinesVisible() = !grid.gridLinesVisible()
-  }
 
   @jfxf.FXML
-  private def handleClear(event: jfxe.ActionEvent): Unit = {
+  private def handleClear(event: jfxe.ActionEvent): Unit =
     sizeTextField.text = ""
     breedTextField.text = ""
     sexChoiceBox.selectionModel().clearSelection()
     additionalInfoTextArea.text = ""
-  }
 
-  override def initialize(url: URL, rb: util.ResourceBundle): Unit = {
+  override def initialize(url: URL, rb: util.ResourceBundle): Unit =
     grid = new GridPane(gridDelegate)
-  }
-}

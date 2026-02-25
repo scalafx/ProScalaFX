@@ -14,8 +14,8 @@ class EqualizerView(mediaModel: MediaModel) extends AbstractView[GridPane](media
 
   private final val StartFrequency: Double       = 250.0
   private final val BandCount: Int               = 7
-  private var spectrumBars: Array[SpectrumBar]   = _
-  private var spectrumListener: SpectrumListener = _
+  private var spectrumBars: Array[SpectrumBar]   = scala.compiletime.uninitialized
+  private var spectrumListener: SpectrumListener = scala.compiletime.uninitialized
   private val backButton = new Button {
     text = "Back"
     id = "backButton"
