@@ -2,7 +2,7 @@
 name := "ProScalaFX"
 
 // Current version
-version := "24.0.2-R36"
+version := "25.0.2-R37"
 
 // Scala version
 scalaVersion := "3.8.2"
@@ -15,7 +15,7 @@ Compile / resourceDirectory := baseDirectory(_ / "src").value
 scalacOptions ++= Seq("-deprecation", "-feature", "-rewrite", "-source:3.8-migration", "-explain", "-explain-types")
 
 // Add ScalaFX dependency, exclude JavaFX transitive dependencies, may not match this OS
-libraryDependencies += "org.scalafx" %% "scalafx" % "24.0.2-R36"
+libraryDependencies += "org.scalafx" %% "scalafx" % "25.0.2-R37"
 
 // Fork a new JVM for 'run' and 'test:run'
 fork := true
