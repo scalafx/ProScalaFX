@@ -1,6 +1,6 @@
 package proscalafx.ch03.scalafxbean
 
-object ScalaFXBeanMainExample extends App:
+@main def scalaFXBeanMainExample(): Unit =
   val model      = new ScalaFXBeanModelExample()
   val view       = new ScalaFXBeanViewExample(model)
   val controller = new ScalaFXBeanControllerExample(model, view)

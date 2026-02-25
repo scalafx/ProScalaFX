@@ -3,7 +3,7 @@ package proscalafx.ch03
 import scalafx.Includes.*
 import scalafx.beans.property.DoubleProperty
 
-object HeronsFormulaExample extends App:
+@main def heronsFormulaExample(): Unit =
   val a = DoubleProperty(0.0)
   val b = DoubleProperty(0)
   val c = DoubleProperty(0)

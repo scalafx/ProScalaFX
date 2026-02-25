@@ -17,7 +17,7 @@ import scala.jdk.CollectionConverters.*
  *
  * @author Jarek Sacha
  */
-object FXCollectionsExample extends App {
+@main def fXCollectionsExample(): Unit =
 
   // `println` statements show JavaFX API, for easier comparison to ScalaFX API used in the code.
 
@@ -80,7 +80,5 @@ object FXCollectionsExample extends App {
     }
   }
 
-  def mkString[T](seq: IterableOnce[T]): String =
-    if (seq.iterator.isEmpty) "[]" else seq.iterator.mkString("[", ", ", "]")
-
-}
+def mkString[T](seq: IterableOnce[T]): String =
+  if (seq.iterator.isEmpty) "[]" else seq.iterator.mkString("[", ", ", "]")

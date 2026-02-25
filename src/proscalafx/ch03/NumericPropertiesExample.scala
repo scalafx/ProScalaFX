@@ -2,7 +2,7 @@ package proscalafx.ch03
 
 import scalafx.beans.property.{DoubleProperty, FloatProperty, IntegerProperty, LongProperty}
 
-object NumericPropertiesExample extends App:
+@main def numericPropertiesExample(): Unit =
   val i = new IntegerProperty(null, "i", 1024)
   val l = new LongProperty(null, "l", 0L)
   val f = new FloatProperty(null, "f", 0.0f)

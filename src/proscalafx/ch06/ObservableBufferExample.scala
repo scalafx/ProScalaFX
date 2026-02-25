@@ -7,7 +7,7 @@ import scalafx.collections.ObservableBuffer
  *
  * In ScalaFX `ObservableBuffer` is a wrapper for JavaFX `ObservableList`.
  */
-object ObservableBufferExample extends App:
+@main def observableBufferExample(): Unit =
 
   val strings = new ObservableBuffer[String]()
   strings.onInvalidate(println("\tlist invalidated"))

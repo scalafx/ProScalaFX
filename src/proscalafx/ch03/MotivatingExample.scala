@@ -2,9 +2,9 @@ package proscalafx.ch03
 
 import scalafx.beans.property.IntegerProperty
 
-object MotivatingExample extends App:
+@main def motivatingExample(): Unit =
 
-  var intProperty: IntegerProperty = scala.compiletime.uninitialized
+  var intProperty: IntegerProperty = null
 
   def createProperty(): Unit =
     println()

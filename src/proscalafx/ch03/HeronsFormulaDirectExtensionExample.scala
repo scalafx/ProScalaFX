@@ -4,7 +4,7 @@ import scalafx.Includes.*
 import scalafx.beans.binding.Bindings
 import scalafx.beans.property.DoubleProperty
 
-object HeronsFormulaDirectExtensionExample extends App {
+@main def heronsFormulaDirectExtensionExample(): Unit =
   val a = DoubleProperty(0)
   val b = DoubleProperty(0)
   val c = DoubleProperty(0)
@@ -51,5 +51,3 @@ object HeronsFormulaDirectExtensionExample extends App {
     c(),
     area()
   )
-
-}

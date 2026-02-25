@@ -3,7 +3,7 @@ package proscalafx.ch06
 import scalafx.collections.ObservableSet
 import scalafx.collections.ObservableSet.*
 
-object SetChangeEventExample extends App:
+@main def setChangeEventExample(): Unit =
 
   def prettyChange(change: Change[?]): String =
     val sb = new StringBuffer("\tChange event data:\n")

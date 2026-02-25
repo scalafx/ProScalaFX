@@ -3,7 +3,7 @@ package proscalafx.ch03
 import scalafx.beans.binding.Bindings
 import scalafx.beans.property.IntegerProperty
 
-object TriangleAreaFluentExample extends App:
+@main def triangleAreaFluentExample(): Unit =
   val x1 = IntegerProperty(0)
   val y1 = IntegerProperty(0)
   val x2 = IntegerProperty(0)

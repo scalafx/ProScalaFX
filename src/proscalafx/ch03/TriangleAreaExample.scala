@@ -3,7 +3,7 @@ package proscalafx.ch03
 import scalafx.beans.binding.NumberBinding
 import scalafx.beans.property.IntegerProperty
 
-object TriangleAreaExample extends App:
+@main def triangleAreaExample(): Unit =
 
   def printResult(
     x1: IntegerProperty,
