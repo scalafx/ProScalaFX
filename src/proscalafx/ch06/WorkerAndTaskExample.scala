@@ -11,6 +11,7 @@ import scalafx.scene.control.{Button, Label, ProgressBar}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
 
 import java.util.concurrent.atomic.AtomicBoolean
+import scala.util.boundary
 
 /**
  * @author Jarek Sacha
@@ -40,8 +41,7 @@ object WorkerAndTaskExample extends JFXApp3 {
     // NOTE: ScalaFX `Task` is created by extending JavaFX `Task` that is passed to ScalaFX `Task` as the
     // delegate parameter (ScalaFX `Task` has no default constructor).
     object Worker extends Task(new jfxc.Task[String] {
-
-          protected def call(): String = {
+          override protected def call(): String = boundary[String] {
             updateTitle("Example Task")
             updateMessage("Starting...")
             val total = 250
@@ -50,7 +50,8 @@ object WorkerAndTaskExample extends JFXApp3 {
               try {
                 Thread.sleep(20)
               } catch {
-                case _: InterruptedException => return "Canceled at " + System.currentTimeMillis
+                case _: InterruptedException =>
+                  boundary.break("Canceled at " + System.currentTimeMillis)
               }
               if (shouldThrow.get) {
                 throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
@@ -62,7 +63,6 @@ object WorkerAndTaskExample extends JFXApp3 {
 
             "Completed at " + System.currentTimeMillis
           }
-
         })
 
   }

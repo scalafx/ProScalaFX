@@ -1,6 +1,7 @@
 package proscalafx.ch06
 
 import javafx.concurrent as jfxc
+import scala.util.control.Breaks.*
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
@@ -52,21 +53,26 @@ object ServiceExample extends JFXApp3 {
               updateMessage("Starting...")
               val total: Int = numberOfItems()
               updateProgress(0, total)
-              for (i <- 1 to total) {
-                try {
-                  Thread.sleep(20)
-                } catch {
-                  case _: InterruptedException => return "Canceled at " + System.currentTimeMillis
+              var result: String = ""
+              breakable {
+                for (i <- 1 to total) {
+                  try {
+                    Thread.sleep(20)
+                  } catch {
+                    case _: InterruptedException =>
+                      result = "Canceled at " + System.currentTimeMillis
+                      break
+                  }
+                  if (shouldThrow.get) {
+                    throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
+                  }
+                  updateTitle("Example Service (" + i + ")")
+                  updateMessage("Processed " + i + " of " + total + " items.")
+                  updateProgress(i, total)
                 }
-                if (shouldThrow.get) {
-                  throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
-                }
-                updateTitle("Example Service (" + i + ")")
-                updateMessage("Processed " + i + " of " + total + " items.")
-                updateProgress(i, total)
+                result = "Completed at " + System.currentTimeMillis
               }
-
-              "Completed at " + System.currentTimeMillis
+              result
             }
           }
         })
