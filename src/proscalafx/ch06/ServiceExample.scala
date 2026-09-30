@@ -1,7 +1,6 @@
 package proscalafx.ch06
 
 import javafx.concurrent as jfxc
-import scala.util.control.Breaks.*
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
@@ -13,6 +12,7 @@ import scalafx.scene.control.{Button, Label, ProgressBar, TextField}
 import scalafx.scene.layout.{BorderPane, ColumnConstraints, GridPane, HBox}
 
 import java.util.concurrent.atomic.AtomicBoolean
+import scala.util.control.Breaks.*
 
 /**
  * @author Jarek Sacha
@@ -61,7 +61,7 @@ object ServiceExample extends JFXApp3 {
                   } catch {
                     case _: InterruptedException =>
                       result = "Canceled at " + System.currentTimeMillis
-                      break
+                      break()
                   }
                   if (shouldThrow.get) {
                     throw new RuntimeException("Exception thrown at " + System.currentTimeMillis)
