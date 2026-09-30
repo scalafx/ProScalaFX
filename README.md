@@ -13,12 +13,12 @@ The original code was created for JavaFX 2.2 (Java 7). Current main branch was u
 
 11. ScalaFX 8 is still available on branch [SFX-8][sfx8]. Code for ScalaFX 2 is on branch [SFX-2][sfx2].
 
-Please use [ScalaFX Users Group][5] to post questions.
+Please use [ScalaFX Discussions][5] to post questions.
 
 
 [1]: http://scalafx.org
 
-[5]: https://groups.google.com/forum/#!forum/scalafx-users
+[5]: (https://github.com/scalafx/scalafx/discussions)
 
 [sfx2]: https://github.com/scalafx/ProScalaFX/tree/SFX-2
 
